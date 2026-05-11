@@ -1,0 +1,1914 @@
+<!DOCTYPE html>
+<!--
+  EZLogs landing page — local preview TEMPLATE.
+
+  This is the source. build-preview.sh inlines every embed slot (an empty
+  `<div data-embed="FILENAME.html"></div>`) with the current contents of
+  embeds/FILENAME.html and writes the result to preview.html.
+
+  DO NOT edit preview.html directly — your edits will be overwritten on the next
+  build. Edit this template (page chrome + section structure) or the embed files
+  under embeds/ (component internals).
+
+  Open in a browser AFTER running build-preview.sh:
+    open marketing/landing-page/preview.html
+  Works over file:// — no local server required.
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EZLogs &mdash; Activity logs your whole team can read</title>
+  <meta name="description" content="EZLogs captures requests, jobs, and database changes from your Rails or Next.js app, then turns them into plain-English actions anyone in your company can follow.">
+
+  <!-- Canonical + theme -->
+  <link rel="canonical" href="https://ezlogs.io/">
+  <meta name="theme-color" content="#0A0A0A">
+  <meta name="color-scheme" content="dark">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/assets/favicon/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon/icon-192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="/assets/favicon/icon-512.png">
+  <link rel="manifest" href="/assets/favicon/site.webmanifest">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="EZLogs">
+  <meta property="og:title" content="Activity logs your whole team can read.">
+  <meta property="og:description" content="Captures every request, job, and DB change. Turns them into one readable action card per customer event. Rails + Next.js. Free during beta.">
+  <meta property="og:url" content="https://ezlogs.io/">
+  <meta property="og:image" content="https://ezlogs.io/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="EZLogs: Activity logs your whole team can read.">
+  <meta property="og:locale" content="en_US">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Activity logs your whole team can read.">
+  <meta name="twitter:description" content="Captures every request, job, and DB change. Turns them into one readable action card per customer event. Rails + Next.js. Free during beta.">
+  <meta name="twitter:image" content="https://ezlogs.io/assets/og-image.png">
+  <meta name="twitter:image:alt" content="EZLogs: Activity logs your whole team can read.">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+
+  <style>
+    :root {
+      --bg-0: #0A0A0A;
+      --bg-1: #0F0F10;
+      --bg-2: #131314;
+      --line: rgba(255, 255, 255, 0.08);
+      --line-strong: rgba(255, 255, 255, 0.14);
+      --text: rgba(255, 255, 255, 0.96);
+      --muted: rgba(255, 255, 255, 0.66);
+      --faint: rgba(255, 255, 255, 0.42);
+      --green: #01E63E;
+      --green-soft: rgba(1, 230, 62, 0.14);
+      --green-faint: rgba(1, 230, 62, 0.05);
+      --font: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --display: "Space Grotesk", var(--font);
+      --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0; padding: 0;
+      background: var(--bg-0);
+      color: var(--text);
+      font-family: var(--font);
+      font-size: 16px;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    /* Nav */
+    .nav {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav__brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--text);
+      font-family: var(--display);
+      font-weight: 600;
+      font-size: 18px;
+      letter-spacing: -0.005em;
+    }
+    .nav__brand img { width: 28px; height: 28px; display: block; }
+    .nav__links {
+      display: flex; align-items: center; gap: 22px;
+      font-size: 14px; color: var(--muted);
+    }
+    .nav__links a { color: inherit; text-decoration: none; transition: color 160ms ease; }
+    .nav__links a:hover { color: var(--text); }
+    .nav__cta {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 8px 14px;
+      border-radius: 8px;
+      background: var(--green);
+      color: #000 !important;
+      font-weight: 600;
+      font-size: 13.5px;
+      transition: filter 160ms ease;
+    }
+    .nav__cta:hover { filter: brightness(1.05); }
+    @media (max-width: 640px) {
+      .nav__links a:not(.nav__cta) { display: none; }
+    }
+
+    /* Section scaffold */
+    .section {
+      padding: 112px 24px;
+      border-top: 1px solid var(--line);
+    }
+    .section:first-of-type { border-top: 0; }
+    .section--alt { background: var(--bg-1); }
+    .section__inner { max-width: 1120px; margin: 0 auto; }
+    .section__head {
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto 64px;
+    }
+
+    /* Eyebrow: small kicker — number prefix + label inside a green-tinted pill. */
+    .section__eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 6px 14px;
+      margin-bottom: 22px;
+      border: 1px solid rgba(1, 230, 62, 0.22);
+      border-radius: 999px;
+      background: rgba(1, 230, 62, 0.06);
+      font-family: var(--font);
+      font-size: 11.5px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(1, 230, 62, 0.92);
+    }
+    .section__eyebrow .num {
+      font-family: var(--mono);
+      font-size: 10.5px;
+      color: rgba(1, 230, 62, 0.55);
+      letter-spacing: 0.04em;
+    }
+    .section__eyebrow .num::after {
+      content: "";
+      display: inline-block;
+      width: 14px;
+      height: 1px;
+      background: rgba(1, 230, 62, 0.35);
+      vertical-align: middle;
+      margin: 0 10px 0 8px;
+    }
+
+    .section__title {
+      margin: 0 auto 18px;
+      font-family: var(--display);
+      font-size: clamp(32px, 4.4vw, 46px);
+      line-height: 1.08;
+      font-weight: 600;
+      letter-spacing: -0.025em;
+      color: var(--text);
+      max-width: 18ch;
+    }
+    .section__title--wide { max-width: 22ch; }
+    .section__title--narrow { max-width: 14ch; }
+    .section__sub {
+      margin: 0 auto;
+      max-width: 540px;
+      font-size: 17px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    .section__caption {
+      margin: 36px auto 0;
+      max-width: 580px;
+      text-align: center;
+      font-size: 14.5px;
+      color: var(--faint);
+      line-height: 1.6;
+    }
+
+    /* Hero */
+    .hero {
+      padding: 60px 24px 96px;
+      text-align: center;
+    }
+    .hero__inner { max-width: 960px; margin: 0 auto; }
+    .hero__title {
+      margin: 0 0 16px;
+      font-family: var(--display);
+      font-size: clamp(36px, 6vw, 64px);
+      line-height: 1.04;
+      font-weight: 600;
+      letter-spacing: -0.025em;
+      background: linear-gradient(180deg, #fff 0%, rgba(255,255,255,0.78) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .hero__sub {
+      margin: 0 auto 40px;
+      max-width: 640px;
+      font-size: clamp(16px, 1.8vw, 18.5px);
+      color: var(--muted);
+      line-height: 1.55;
+    }
+    .hero__ctas {
+      display: flex; gap: 14px; justify-content: center; align-items: center; flex-wrap: wrap;
+      margin-bottom: 56px;
+    }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 13px 22px;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: transform 160ms ease, filter 160ms ease, background 160ms ease;
+      cursor: pointer;
+      border: none;
+    }
+    .btn--primary {
+      background: var(--green);
+      color: #000;
+      box-shadow: 0 0 0 6px rgba(1,230,62,0.10);
+    }
+    .btn--primary:hover { filter: brightness(1.05); transform: translateY(-1px); }
+    .btn--ghost {
+      color: var(--text);
+      background: transparent;
+      border: 1px solid var(--line-strong);
+    }
+    .btn--ghost:hover { background: rgba(255,255,255,0.04); }
+
+    /* 3 pillars */
+    .pillars {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    @media (min-width: 820px) { .pillars { grid-template-columns: repeat(3, 1fr); } }
+    .pillar {
+      padding: 28px 26px;
+      background: var(--bg-0);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+    }
+    .pillar__icon {
+      width: 40px; height: 40px;
+      display: inline-flex; align-items: center; justify-content: center;
+      border-radius: 10px;
+      background: rgba(1,230,62,0.08);
+      border: 1px solid rgba(1,230,62,0.20);
+      color: var(--green);
+      margin-bottom: 18px;
+    }
+    .pillar__icon svg { width: 20px; height: 20px; }
+    .pillar__title {
+      margin: 0 0 8px;
+      font-family: var(--display);
+      font-size: 19px;
+      font-weight: 600;
+      color: var(--green);
+      letter-spacing: -0.005em;
+    }
+    .pillar__body {
+      margin: 0;
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    /* Pricing */
+    .pricing {
+      max-width: 540px;
+      margin: 0 auto;
+      padding: 36px 32px;
+      background: var(--bg-1);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      text-align: center;
+    }
+    .pricing__body {
+      margin: 0 0 24px;
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* Footer */
+    .footer {
+      padding: 56px 24px 40px;
+      border-top: 1px solid var(--line);
+      text-align: center;
+      color: var(--faint);
+      font-size: 13.5px;
+    }
+    .footer__brand {
+      display: inline-flex; align-items: center; gap: 10px;
+      margin-bottom: 12px;
+      font-family: var(--display);
+      font-weight: 600;
+      color: var(--muted);
+    }
+    .footer__brand img { width: 24px; height: 24px; }
+    .footer__tagline {
+      margin: 0 0 20px;
+      color: var(--muted);
+    }
+    .footer__links {
+      display: inline-flex; gap: 14px; flex-wrap: wrap; justify-content: center;
+      margin-bottom: 24px;
+    }
+    .footer__links a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 160ms ease;
+    }
+    .footer__links a:hover { color: var(--green); }
+    .footer__copy { color: var(--faint); font-size: 12px; }
+</style>
+</head>
+<body>
+
+  <nav class="nav">
+    <a class="nav__brand" href="/">
+      <svg width="28" height="28" viewBox="164 160 600 629" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="EZLogs" style="display:block;">
+  <path d="M164 311.523L466.034 160L764 312.58V639.592L466.034 789L164 636.42V311.523Z" fill="white"/>
+  <path d="M399 227.2C413 220.4 433.3 210.7 444 205.5C454.7 200.4 463.6 196.1 463.8 196.1C464 196 473.4 200.5 484.8 206.1C496.2 211.6 513.1 219.8 522.4 224.3L539.3 232.4L579.2 252.1L586.3 255.4C590.3 257.2 610.4 266.9 631 277C651.6 287 682 301.7 698.5 309.7C715 317.7 728.8 324.6 729.3 324.9C730.1 325.7 601 390 487.2 445.5L464.9 456.4L435.9 441.9L406.9 427.5L375.1 412L360.8 405.1C338.1 394.2 309.4 380.2 254 353C225.7 339.1 201.5 327.2 200.3 326.6C199 326 198 325.2 198 324.9C198 324.3 212.5 317.2 291 279.2C352.6 249.4 367.6 242.2 399 227.2Z" fill="#01E63E"/>
+  <path d="M191 484.3V620.7L212.8 631.3C248.9 648.9 286.3 667.2 353.5 700C450.8 747.6 453 748.6 453.5 748.1C453.8 747.9 454 733.6 454 716.5C454 692.7 453.7 685 452.8 684.2C451.5 683.2 400.8 658.8 367 643C345.2 632.8 277.1 600.1 267 595L259 591V570C259 558.4 259.2 549 259.4 549C259.6 549 265.7 551.9 273.1 555.4C280.5 558.9 295.3 565.9 306 571C316.7 576.1 340.1 587.2 358 595.8C375.9 604.3 396.1 613.9 403 617.1L415.5 622.8L415.8 593.2C415.9 577 415.7 563.3 415.3 562.9C414.8 562.4 397.9 554 377.5 544.2C357.2 534.3 322.2 517.2 299.8 506.2L259 486.2V465.1V444.1L270.3 449.4C276.4 452.4 290.1 458.9 300.5 464C311 469.1 329.2 477.8 341 483.5C352.8 489.2 382.7 503.5 407.5 515.4C432.2 527.3 452.8 537 453.2 537C453.7 537 453.9 523 453.8 505.9L453.5 474.8L404.5 451.1C377.6 438 334.8 417.2 309.5 404.8C228.7 365.2 193.2 348 192.1 348C191.3 348 191 386.1 191 484.3Z" fill="black"/>
+  <path d="M476.962 746.549C477.774 746.543 516.68 727.641 628.062 672.95C645.362 664.45 676.862 649.05 698.062 638.75L736.562 619.85L736.861 569.75C736.961 542.15 736.861 519.549 736.661 519.549C735.558 519.551 719.655 527.253 671.661 550.95C643.179 565.041 619.691 576.535 619.462 576.549C619.062 576.549 627.962 564.649 649.062 537.049C653.262 531.549 667.262 513.549 680.062 497.049C727.061 436.75 729.861 432.849 734.361 420.549C736.261 415.449 736.461 412.449 736.861 382.25C737.061 364.25 736.861 349.549 736.361 349.549C735.957 349.551 722.358 356.151 706.161 364.049C690.061 372.049 676.662 378.549 676.562 378.549C676.461 378.55 651.162 390.95 620.462 406.15C558.062 436.95 510.461 460.35 489.861 470.25L476.062 476.85V504.75C476.062 520.036 476.261 532.527 476.361 532.549C476.561 532.549 510.261 515.849 551.361 495.549C592.361 475.149 626.161 458.549 626.562 458.549C627.162 458.549 622.262 465.15 590.562 506.45C580.662 519.35 568.062 535.75 562.562 542.95C552.362 556.35 532.262 582.55 505.462 617.45C497.162 628.25 487.162 641.449 483.262 646.75L476.062 656.45V701.45C476.062 728.35 476.462 746.549 476.962 746.549ZM670.062 620.25L670.161 615.049L682.161 609.65C695.861 603.45 697.661 602.15 698.661 598.35C699.661 593.95 697.261 594.049 686.762 599.049C676.362 603.949 674.562 604.35 671.262 601.95C669.362 600.65 669.062 599.55 669.062 593.65C669.062 587.55 669.461 586.25 672.361 581.95C675.261 577.45 676.762 576.45 691.062 569.35C699.561 565.15 707.16 561.651 707.861 561.65C708.661 561.55 709.062 563.05 709.062 566.15V570.65L696.762 576.549C689.962 579.749 683.663 583.049 682.762 584.049C680.662 586.049 680.462 590.549 682.462 590.549C683.263 590.549 688.362 588.549 693.861 586.049C699.361 583.549 704.761 581.55 705.861 581.549C708.861 581.549 711.061 585.35 711.062 590.549C711.062 603.349 706.562 608.25 685.262 618.25L670.062 625.45V620.25ZM639.762 640.15C625.962 646.95 621.561 647.85 618.661 644.65C617.161 642.95 616.962 640.85 617.262 627.35C617.562 612.15 617.662 611.75 620.462 607.75C622.062 605.45 624.962 602.549 626.962 601.25C630.963 598.749 658.159 585.651 659.361 585.549C659.761 585.549 660.061 587.65 659.861 590.25L659.562 595.049L646.161 601.65C638.762 605.25 631.862 609.249 630.861 610.549C629.361 612.349 629.062 614.55 629.062 623.15C629.062 633.15 629.162 633.549 631.262 633.549C633.962 633.549 648.062 626.65 648.762 624.95C648.962 624.25 649.061 622.35 648.861 620.65L648.562 617.65L644.361 619.549L640.062 621.45V617.049C640.062 614.549 640.462 612.549 641.062 612.549C641.562 612.549 646.161 610.549 651.161 608.049C656.258 605.551 660.456 603.552 660.661 603.549C661.461 603.549 660.961 621.65 660.161 623.85C657.961 629.55 652.661 633.75 639.762 640.15ZM569.762 672.549C563.862 672.549 563.062 670.349 563.062 655.049C563.162 634.95 565.262 631.649 585.062 621.549C598.961 614.349 603.062 613.35 606.262 616.25C607.862 617.65 608.062 619.55 608.062 632.75C608.062 649.75 607.161 652.75 600.161 658.65C594.861 663.25 574.362 672.549 569.762 672.549ZM576.361 660.15C578.362 660.85 592.66 654.05 594.461 651.45C596.561 648.35 596.861 627.552 594.762 627.549C594.062 627.549 589.761 629.35 585.361 631.45C580.861 633.65 576.761 636.35 576.161 637.45C574.561 640.45 574.761 659.45 576.361 660.15ZM521.062 653.85L526.861 650.75L532.562 647.65L533.062 665.049L533.562 682.45L543.962 677.549C549.662 674.749 554.762 672.549 555.262 672.549C555.762 672.55 556.061 674.65 555.861 677.15L555.562 681.85L538.361 690.15L521.062 698.45V653.85Z" fill="black"/>
+</svg>
+      EZLogs
+    </a>
+    <div class="nav__links">
+      <a href="#install">Install</a>
+      <a href="#faq">FAQ</a>
+      <a href="https://github.com/dezsirazvan/ez_logs" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://app.ezlogs.io/sign_up" class="nav__cta" target="_blank" rel="noopener">Get your API key &rarr;</a>
+    </div>
+  </nav>
+
+  <!-- Section 1: Hero -->
+  <section class="hero">
+    <div class="hero__inner">
+      <h1 class="hero__title">Activity logs your whole team can read.</h1>
+      <p class="hero__sub">EZLogs captures requests, jobs, and database changes from your Rails or Next.js app, then turns them into plain-English actions anyone in your company can follow.</p>
+      <div class="hero__ctas">
+        <a class="btn btn--primary" href="https://app.ezlogs.io/sign_up" target="_blank" rel="noopener">Get your API key &rarr;</a>
+        <a class="btn btn--ghost" href="#action">See a real action &darr;</a>
+      </div>
+      <div data-embed="signature-animation.html">
+<!-- INLINED FROM embeds/signature-animation.html -->
+<!--
+  EZLogs — Hero signature animation.
+  An 8-second loop: terminal log spew softens into a single
+  readable EZLogs action card. Tells the entire pitch without copy.
+
+  No JS. Pure CSS. Respects prefers-reduced-motion (static end state).
+  All classes prefixed `ez-sig-` so it can't bleed into Carrd's CSS.
+-->
+<style>
+  .ez-sig {
+    --green: #01E63E;
+    --green-soft: rgba(1, 230, 62, 0.14);
+    --green-faint: rgba(1, 230, 62, 0.04);
+    --text: rgba(255, 255, 255, 0.96);
+    --muted: rgba(255, 255, 255, 0.55);
+    --faint: rgba(255, 255, 255, 0.32);
+    --line: rgba(255, 255, 255, 0.08);
+    --bg: #0F0F10;
+    --font: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
+    display: block;
+    box-sizing: border-box;
+    position: relative;
+    width: 100%;
+    max-width: 640px;
+    height: 360px;
+    margin: 0 auto;
+    color: var(--text);
+    font-family: var(--font);
+    text-align: left;
+  }
+  .ez-sig *, .ez-sig *::before, .ez-sig *::after { box-sizing: border-box; }
+
+  /* === Stage 1: log spew (visible 0s–2.4s, fades out 2.4–3.2s) === */
+  .ez-sig__logs {
+    position: absolute;
+    inset: 0;
+    padding: 24px 22px;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    font-family: var(--mono);
+    font-size: 12.5px;
+    line-height: 1.55;
+    color: var(--faint);
+    overflow: hidden;
+    animation: ez-sig-logs 8s ease-in-out infinite;
+  }
+  .ez-sig__logs::after {
+    /* fade-out gradient at bottom — mimics terminal scroll */
+    content: "";
+    position: absolute;
+    inset: auto 0 0 0;
+    height: 60px;
+    background: linear-gradient(180deg, transparent, var(--bg));
+    pointer-events: none;
+  }
+  .ez-sig__logs span {
+    display: block;
+    opacity: 0;
+    animation: ez-sig-line 8s ease-out infinite;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .ez-sig__logs span:nth-child(1) { animation-delay: 0.00s; }
+  .ez-sig__logs span:nth-child(2) { animation-delay: 0.20s; }
+  .ez-sig__logs span:nth-child(3) { animation-delay: 0.40s; }
+  .ez-sig__logs span:nth-child(4) { animation-delay: 0.60s; }
+  .ez-sig__logs span:nth-child(5) { animation-delay: 0.80s; }
+  .ez-sig__logs span:nth-child(6) { animation-delay: 1.00s; }
+  .ez-sig__logs span:nth-child(7) { animation-delay: 1.20s; }
+  .ez-sig__logs span:nth-child(8) { animation-delay: 1.40s; }
+  .ez-sig__logs i {
+    font-style: normal;
+    color: rgba(255, 255, 255, 0.50);
+  }
+
+  @keyframes ez-sig-line {
+    /* line appears, sits, fades */
+    0%   { opacity: 0; transform: translateY(8px); }
+    8%   { opacity: 0.85; transform: translateY(0); }
+    34%  { opacity: 0.85; }
+    40%  { opacity: 0; }
+    100% { opacity: 0; }
+  }
+  @keyframes ez-sig-logs {
+    0%, 30% { opacity: 1; transform: translateY(0); filter: blur(0); }
+    40%     { opacity: 0; transform: translateY(-18px); filter: blur(4px); }
+    100%    { opacity: 0; transform: translateY(-18px); filter: blur(4px); }
+  }
+
+  /* === Stage 2: card (appears 3.6s, sits, loops at 8s) === */
+  .ez-sig__card {
+    position: absolute;
+    inset: 0;
+    padding: 24px;
+    background: #0F0F10;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.04), 0 0 0 1px rgba(1,230,62,0.06);
+    opacity: 0;
+    transform: translateY(12px) scale(0.985);
+    animation: ez-sig-card 8s ease-in-out infinite;
+  }
+  @keyframes ez-sig-card {
+    0%, 36%  { opacity: 0; transform: translateY(12px) scale(0.985); }
+    44%      { opacity: 1; transform: translateY(0) scale(1); }
+    94%      { opacity: 1; transform: translateY(0) scale(1); }
+    100%     { opacity: 0; transform: translateY(-8px) scale(0.99); }
+  }
+
+  .ez-sig__head {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .ez-sig__dot {
+    flex-shrink: 0;
+    width: 10px;
+    height: 10px;
+    margin-top: 8px;
+    border-radius: 999px;
+    background: var(--green);
+    box-shadow: 0 0 0 4px var(--green-soft);
+    animation: ez-sig-dot 1.4s ease-in-out infinite;
+  }
+  @keyframes ez-sig-dot {
+    0%, 100% { box-shadow: 0 0 0 4px var(--green-soft); }
+    50%      { box-shadow: 0 0 0 8px var(--green-faint); }
+  }
+  .ez-sig__title {
+    margin: 0;
+    font-family: "Space Grotesk", var(--font);
+    font-size: 19px;
+    line-height: 1.25;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .ez-sig__chips {
+    margin-top: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+  .ez-sig__chip {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--line);
+  }
+  .ez-sig__chip i { font-style: normal; color: var(--faint); }
+  .ez-sig__sentence {
+    margin-top: 18px;
+    padding: 14px 16px;
+    border-radius: 10px;
+    background: linear-gradient(180deg, var(--green-faint), transparent 80%);
+    border: 1px solid var(--green-soft);
+    color: var(--text);
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  .ez-sig__meta {
+    margin-top: 16px;
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: var(--faint);
+  }
+  .ez-sig__meta strong {
+    color: var(--text);
+    font-weight: 500;
+  }
+  .ez-sig__success {
+    color: var(--green);
+    font-weight: 600;
+  }
+
+  /* === Reduced motion: skip animation, show end-state card only === */
+  @media (prefers-reduced-motion: reduce) {
+    .ez-sig__logs { display: none; }
+    .ez-sig__card { opacity: 1; transform: none; animation: none; }
+    .ez-sig__dot { animation: none; }
+  }
+
+  /* Mobile */
+  @media (max-width: 480px) {
+    .ez-sig { height: 320px; }
+    .ez-sig__logs { font-size: 11px; padding: 18px 14px; }
+    .ez-sig__card { padding: 18px; }
+    .ez-sig__title { font-size: 17px; }
+  }
+</style>
+
+<div class="ez-sig" role="img" aria-label="Animated: raw server logs transform into one readable EZLogs action card.">
+  <!-- Stage 1: terminal log spew -->
+  <div class="ez-sig__logs" aria-hidden="true">
+    <span><i>14:02:11</i> Started POST "/orders" for 78.96.x.x</span>
+    <span><i>14:02:11</i>   User Load (0.4ms) SELECT "users".* WHERE "id" = $1 LIMIT 1</span>
+    <span><i>14:02:11</i>   Cart Load (0.6ms) SELECT "carts".* WHERE "id" = $1 LIMIT 1</span>
+    <span><i>14:02:11</i>   Order Create (2.3ms) INSERT INTO "orders" ... RETURNING "id"</span>
+    <span><i>14:02:11</i> [ActiveJob] Enqueued ChargeCardJob (jid=7b3...) to Sidekiq</span>
+    <span><i>14:02:11</i> Completed 302 Found in 89ms (ActiveRecord: 9.4ms)</span>
+    <span><i>14:02:12</i> [Sidekiq] ChargeCardJob start jid=7b3...</span>
+    <span><i>14:02:13</i> [Sidekiq] ChargeCardJob done jid=7b3... 1.2s</span>
+  </div>
+
+  <!-- Stage 2: the EZLogs card -->
+  <div class="ez-sig__card" aria-hidden="true">
+    <div class="ez-sig__head">
+      <span class="ez-sig__dot"></span>
+      <div style="flex:1; min-width:0;">
+        <h3 class="ez-sig__title">Maria Chen placed an order for 3 books</h3>
+        <div class="ez-sig__chips">
+          <span class="ez-sig__chip"><i>Order</i> #1247</span>
+          <span class="ez-sig__chip"><i>Payment</i> #884</span>
+          <span class="ez-sig__chip"><i>Cart</i> #92</span>
+        </div>
+      </div>
+    </div>
+
+    <p class="ez-sig__sentence">
+      Charged &euro;47.20, decremented inventory for 3 titles, queued the confirmation email, and notified the warehouse.
+    </p>
+
+    <div class="ez-sig__meta">
+      <span><i>by</i> <strong>Maria Chen</strong></span>
+      <span><i>in</i> <strong>1.34 s</strong></span>
+      <span><i>&middot;</i> <span class="ez-sig__success">&check; Success</span></span>
+    </div>
+  </div>
+</div>
+</div>
+    </div>
+  </section>
+
+  <!-- Section 2: Before / After -->
+  <section class="section section--alt">
+    <div class="section__inner">
+      <div class="section__head">
+        <span class="section__eyebrow"><span class="num">01</span>The problem</span>
+        <h2 class="section__title section__title--wide">One customer action, told two ways.</h2>
+        <p class="section__sub">Same order. Same data. Toggle to see what your server says &mdash; and what your team needs.</p>
+      </div>
+      <div data-embed="before-after-toggle.html">
+<!-- INLINED FROM embeds/before-after-toggle.html -->
+<!--
+  EZLogs — Before/after toggle (Section 2).
+  Same Bookhouse order placement told two ways: raw logs vs. EZLogs.
+
+  Pure CSS. Hidden radio inputs drive the panel swap via :checked
+  + sibling selectors. Zero JS.
+
+  The "After" panel uses a compact variant of the action card
+  (matches embeds/action-card-dark.html visually but trims the
+  collapsible event timeline so the two panels stay the same height).
+-->
+<style>
+  .ez-ba {
+    --bg: #0F0F10;
+    --bg-elev: #161617;
+    --line: rgba(255, 255, 255, 0.08);
+    --text: rgba(255, 255, 255, 0.96);
+    --muted: rgba(255, 255, 255, 0.62);
+    --faint: rgba(255, 255, 255, 0.40);
+    --green: #01E63E;
+    --green-soft: rgba(1, 230, 62, 0.14);
+    --green-faint: rgba(1, 230, 62, 0.04);
+    --font: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
+    box-sizing: border-box;
+    max-width: 960px;
+    margin: 0 auto;
+    color: var(--text);
+    font-family: var(--font);
+    text-align: left;
+  }
+  .ez-ba *, .ez-ba *::before, .ez-ba *::after { box-sizing: border-box; }
+  .ez-ba__radio { position: absolute; opacity: 0; pointer-events: none; }
+
+  /* === Toggle pill === */
+  .ez-ba__toggle {
+    display: inline-flex;
+    margin: 0 auto 22px;
+    padding: 4px;
+    border-radius: 999px;
+    background: var(--bg-elev);
+    border: 1px solid var(--line);
+    gap: 2px;
+  }
+  .ez-ba__toggle-wrap {
+    display: flex;
+    justify-content: center;
+  }
+  .ez-ba__toggle label {
+    cursor: pointer;
+    padding: 7px 16px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--muted);
+    transition: color 160ms ease, background 160ms ease;
+    user-select: none;
+  }
+  .ez-ba__toggle label:hover { color: var(--text); }
+
+  /* === Panel stack === */
+  .ez-ba__panels {
+    position: relative;
+    min-height: 480px;
+  }
+  .ez-ba__panel {
+    opacity: 0;
+    transform: translateY(4px);
+    transition: opacity 220ms ease, transform 220ms ease;
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+  }
+  .ez-ba__panel--visible {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+    position: relative;
+  }
+
+  /* When "after" is checked (default), highlight its label + show panel */
+  #ez-ba-after:checked ~ .ez-ba__toggle-wrap .ez-ba__label--after,
+  #ez-ba-before:checked ~ .ez-ba__toggle-wrap .ez-ba__label--before {
+    background: var(--green);
+    color: #000;
+  }
+  #ez-ba-after:checked ~ .ez-ba__panels .ez-ba__panel--after,
+  #ez-ba-before:checked ~ .ez-ba__panels .ez-ba__panel--before {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+    position: relative;
+  }
+  #ez-ba-after:checked ~ .ez-ba__panels .ez-ba__panel--before,
+  #ez-ba-before:checked ~ .ez-ba__panels .ez-ba__panel--after {
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+  }
+
+  /* === Before panel (terminal logs) === */
+  .ez-ba__logs {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 22px 24px;
+    font-family: var(--mono);
+    font-size: 12.5px;
+    line-height: 1.7;
+    color: var(--faint);
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: pre;
+    min-height: 460px;
+  }
+  .ez-ba__logs .t { color: rgba(255, 255, 255, 0.34); }
+  .ez-ba__logs .k { color: rgba(255, 255, 255, 0.68); }
+  .ez-ba__logs .s { color: rgba(180, 255, 200, 0.55); }
+  .ez-ba__logs .j { color: rgba(180, 220, 255, 0.62); }
+  .ez-ba__logs .n { color: rgba(255, 200, 130, 0.62); }
+
+  /* === After panel (compact action card) === */
+  .ez-ba__card {
+    box-sizing: border-box;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 26px;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    min-height: 460px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .ez-ba__card-head {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .ez-ba__dot {
+    flex-shrink: 0;
+    width: 10px;
+    height: 10px;
+    margin-top: 8px;
+    border-radius: 999px;
+    background: var(--green);
+    box-shadow: 0 0 0 4px var(--green-soft);
+  }
+  .ez-ba__title {
+    margin: 0;
+    font-family: "Space Grotesk", var(--font);
+    font-size: 20px;
+    line-height: 1.25;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .ez-ba__chips {
+    margin-top: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+  .ez-ba__chip {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: var(--muted);
+    padding: 2px 9px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--line);
+  }
+  .ez-ba__chip i { font-style: normal; color: var(--faint); }
+  .ez-ba__ai {
+    padding: 16px;
+    border-radius: 10px;
+    background: linear-gradient(180deg, var(--green-faint), transparent 80%);
+    border: 1px solid var(--green-soft);
+    color: var(--text);
+    font-size: 14px;
+    line-height: 1.65;
+  }
+  .ez-ba__events {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-left: 1px dashed var(--line);
+    margin-left: 4px;
+  }
+  .ez-ba__events li {
+    position: relative;
+    padding: 5px 0 5px 18px;
+    font-size: 13px;
+  }
+  .ez-ba__events li::before {
+    content: "";
+    position: absolute;
+    left: -4px;
+    top: 11px;
+    width: 7px;
+    height: 7px;
+    border-radius: 999px;
+    background: var(--faint);
+  }
+  .ez-ba__events li.db::before  { background: var(--green); }
+  .ez-ba__events li.job::before { background: #6FBFFF; }
+  .ez-ba__events li.http::before { background: #FFD66B; }
+  .ez-ba__events strong { color: var(--text); font-weight: 600; }
+  .ez-ba__events em { font-style: normal; color: var(--muted); }
+  .ez-ba__events time {
+    display: inline-block;
+    width: 72px;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: var(--faint);
+  }
+
+  @media (max-width: 640px) {
+    .ez-ba__panels { min-height: 0; }
+    .ez-ba__panel { position: relative !important; inset: auto; }
+    /* On mobile, stack both panels — toggle still hides the inactive one */
+    #ez-ba-after:checked ~ .ez-ba__panels .ez-ba__panel--before { display: none; }
+    #ez-ba-before:checked ~ .ez-ba__panels .ez-ba__panel--after { display: none; }
+    .ez-ba__logs { font-size: 11px; padding: 18px; min-height: 0; }
+    .ez-ba__card { padding: 20px; min-height: 0; }
+    .ez-ba__title { font-size: 18px; }
+  }
+</style>
+
+<div class="ez-ba">
+  <input type="radio" name="ez-ba-mode" id="ez-ba-before" class="ez-ba__radio">
+  <input type="radio" name="ez-ba-mode" id="ez-ba-after" class="ez-ba__radio" checked>
+
+  <div class="ez-ba__toggle-wrap">
+    <div class="ez-ba__toggle" role="tablist" aria-label="View mode">
+      <label for="ez-ba-before" class="ez-ba__label--before" role="tab">Raw logs</label>
+      <label for="ez-ba-after"  class="ez-ba__label--after"  role="tab">EZLogs</label>
+    </div>
+  </div>
+
+  <div class="ez-ba__panels">
+    <!-- Before: raw logs -->
+    <div class="ez-ba__panel ez-ba__panel--before" role="tabpanel" aria-label="Raw logs">
+<pre class="ez-ba__logs"><span class="t">[2026-05-10 14:02:11]</span> Started <span class="k">POST</span> <span class="s">"/orders"</span> for <span class="n">78.96.x.x</span> at 14:02:11
+<span class="t">[2026-05-10 14:02:11]</span> Processing by <span class="k">OrdersController#create</span> as HTML
+<span class="t">[2026-05-10 14:02:11]</span>   Parameters: {<span class="s">"cart_id"</span>=&gt;<span class="s">"92"</span>, <span class="s">"address_id"</span>=&gt;<span class="s">"341"</span>}
+<span class="t">[2026-05-10 14:02:11]</span>   User Load (0.4ms)  <span class="k">SELECT</span> "users".* WHERE "id" = $1
+<span class="t">[2026-05-10 14:02:11]</span>   Cart Load (0.6ms)  <span class="k">SELECT</span> "carts".* WHERE "id" = $1
+<span class="t">[2026-05-10 14:02:11]</span>    (1.1ms)  <span class="k">BEGIN</span>
+<span class="t">[2026-05-10 14:02:11]</span>   Order Create (2.3ms)  <span class="k">INSERT INTO</span> "orders" (...) RETURNING "id"
+<span class="t">[2026-05-10 14:02:11]</span>   OrderItem Create (1.8ms)  <span class="k">INSERT INTO</span> "order_items" ...
+<span class="t">[2026-05-10 14:02:11]</span>    (4.2ms)  <span class="k">COMMIT</span>
+<span class="t">[2026-05-10 14:02:11]</span> [ActiveJob] Enqueued <span class="j">ChargeCardJob</span> (jid=7b3...) to Sidekiq(default)
+<span class="t">[2026-05-10 14:02:11]</span> Redirected to /orders/1247
+<span class="t">[2026-05-10 14:02:11]</span> Completed <span class="k">302 Found</span> in 89ms (ActiveRecord: 9.4ms)
+<span class="t">[2026-05-10 14:02:12]</span> [Sidekiq] <span class="j">ChargeCardJob</span> start jid=7b3...
+<span class="t">[2026-05-10 14:02:12]</span>   Payment Create (3.1ms)  <span class="k">INSERT INTO</span> "payments" ...
+<span class="t">[2026-05-10 14:02:13]</span>   Order Update (1.4ms)  <span class="k">UPDATE</span> "orders" SET "status" = $1 ...
+<span class="t">[2026-05-10 14:02:13]</span>   Inventory Update (0.9ms &times; 3)  <span class="k">UPDATE</span> "inventories" SET "stock" ...
+<span class="t">[2026-05-10 14:02:13]</span> [ActionMailer] Delivered confirmation_email to maria.chen@example.com
+<span class="t">[2026-05-10 14:02:13]</span> [Sidekiq] <span class="j">ChargeCardJob</span> done jid=7b3... 1.2s</pre>
+    </div>
+
+    <!-- After: compact action card -->
+    <div class="ez-ba__panel ez-ba__panel--after" role="tabpanel" aria-label="EZLogs action card">
+      <article class="ez-ba__card" aria-label="Action card: Maria Chen placed an order for 3 books">
+        <header class="ez-ba__card-head">
+          <span class="ez-ba__dot" aria-hidden="true"></span>
+          <div style="flex:1; min-width:0;">
+            <h3 class="ez-ba__title">Maria Chen placed an order for 3 books</h3>
+            <div class="ez-ba__chips">
+              <span class="ez-ba__chip"><i>Order</i> #1247</span>
+              <span class="ez-ba__chip"><i>Payment</i> #884</span>
+              <span class="ez-ba__chip"><i>Cart</i> #92</span>
+              <span class="ez-ba__chip" style="color:var(--green); border-color: var(--green-soft);">&check; Success &middot; 1.34 s</span>
+            </div>
+          </div>
+        </header>
+
+        <div class="ez-ba__ai">
+          Maria placed an order for 3 books totaling <strong style="font-weight:600;">&euro;47.20</strong>. Payment cleared on the first attempt, inventory was decremented for all three titles, a confirmation email was queued, and the warehouse was notified to begin packing.
+        </div>
+
+        <ol class="ez-ba__events">
+          <li class="http"><time>14:02:11</time> <strong>POST /orders</strong> <em>— 200, 89 ms</em></li>
+          <li class="db"><time>14:02:11</time> <strong>Order #1247</strong> created</li>
+          <li class="db"><time>14:02:11</time> <strong>Order Item &times;3</strong> created</li>
+          <li class="job"><time>14:02:12</time> <strong>ChargeCardJob</strong> started</li>
+          <li class="db"><time>14:02:13</time> <strong>Payment #884</strong> <em>— &euro;47.20, succeeded</em></li>
+          <li class="db"><time>14:02:13</time> <strong>Order #1247</strong> <em>— pending &rarr; paid</em></li>
+          <li class="db"><time>14:02:13</time> <strong>Inventory &times;3</strong> <em>— stock &minus;1 each</em></li>
+          <li class="job"><time>14:02:13</time> <strong>Email queued</strong> + warehouse notified</li>
+        </ol>
+      </article>
+    </div>
+  </div>
+</div>
+</div>
+      <p class="section__caption">Both views describe the exact same order. One is what your server says. The other is what your team actually needs.</p>
+    </div>
+  </section>
+
+  <!-- Section 3: Three pillars -->
+  <section class="section">
+    <div class="section__inner">
+      <div class="section__head">
+        <span class="section__eyebrow"><span class="num">02</span>How it works</span>
+        <h2 class="section__title section__title--wide">Three sources of truth, stitched into one story.</h2>
+        <p class="section__sub">Every customer action lives at the intersection of these three signals. EZLogs captures all three and links them automatically.</p>
+      </div>
+
+      <div class="pillars">
+        <article class="pillar">
+          <span class="pillar__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3.6 9h16.8M3.6 15h16.8M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18M3 12a9 9 0 1 1 18 0 9 9 0 0 1-18 0z"/></svg>
+          </span>
+          <h3 class="pillar__title">Every request</h3>
+          <p class="pillar__body">The intent: who clicked what, from where, with which result.</p>
+        </article>
+
+        <article class="pillar">
+          <span class="pillar__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10.3 4.3c.4-1.7 2.9-1.7 3.3 0a1.7 1.7 0 0 0 2.6 1.1c1.5-.9 3.3.8 2.4 2.4a1.7 1.7 0 0 0 1 2.5c1.8.5 1.8 3 0 3.4a1.7 1.7 0 0 0-1 2.5c.9 1.6-.9 3.3-2.4 2.4a1.7 1.7 0 0 0-2.6 1.1c-.4 1.7-2.9 1.7-3.3 0a1.7 1.7 0 0 0-2.6-1.1c-1.5.9-3.3-.8-2.4-2.4a1.7 1.7 0 0 0-1-2.5c-1.8-.5-1.8-3 0-3.4a1.7 1.7 0 0 0 1-2.5c-.9-1.6.9-3.3 2.4-2.4a1.7 1.7 0 0 0 2.6-1.1zM15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/></svg>
+          </span>
+          <h3 class="pillar__title">Every background job</h3>
+          <p class="pillar__body">The reaction: every charge, email, restock &mdash; linked to the request that started them.</p>
+        </article>
+
+        <article class="pillar">
+          <span class="pillar__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 5v6c0 1.7-4 3-9 3s-9-1.3-9-3V5M21 11v6c0 1.7-4 3-9 3s-9-1.3-9-3v-6"/></svg>
+          </span>
+          <h3 class="pillar__title">Every database change</h3>
+          <p class="pillar__body">The truth: every row your app touched, with before and after values.</p>
+        </article>
+      </div>
+
+      <p class="section__caption">Drop in one gem or one npm package. Zero per-route code.</p>
+    </div>
+  </section>
+
+  <!-- Section 4: A real action, end to end -->
+  <section class="section section--alt" id="action">
+    <div class="section__inner">
+      <div class="section__head">
+        <span class="section__eyebrow"><span class="num">03</span>The product</span>
+        <h2 class="section__title section__title--wide">This is one customer placing an order.</h2>
+        <p class="section__sub">Read it top to bottom. No log files, no grepping, no engineers needed. The live card below is real product UI.</p>
+      </div>
+      <div data-embed="action-card-dark.html">
+<!-- INLINED FROM embeds/action-card-dark.html -->
+<!--
+  EZLogs — Action card (dark)
+  Standalone embed. Drop into Carrd as an "Embed" element.
+  Mirrors the real action card from /actions/:id on app.ezlogs.io,
+  rebuilt for the dark landing page.
+
+  Content: Maria Chen places an order for 3 books (success path,
+  the canonical demo scene from demo_apps/bookhouse).
+
+  Dependencies: none. All CSS scoped under .ez-card to avoid
+  bleeding into Carrd's own styles. Fonts assumed loaded by the
+  page (Inter + JetBrains Mono); falls back to system stack.
+-->
+<style>
+  .ez-card {
+    --ez-bg: #0F0F10;
+    --ez-bg-elev: #161617;
+    --ez-border: rgba(255, 255, 255, 0.08);
+    --ez-border-strong: rgba(255, 255, 255, 0.14);
+    --ez-text: rgba(255, 255, 255, 0.96);
+    --ez-text-muted: rgba(255, 255, 255, 0.62);
+    --ez-text-faint: rgba(255, 255, 255, 0.40);
+    --ez-green: #01E63E;
+    --ez-green-soft: rgba(1, 230, 62, 0.12);
+    --ez-green-faint: rgba(1, 230, 62, 0.06);
+    --ez-chip: rgba(255, 255, 255, 0.04);
+    --ez-radius-lg: 14px;
+    --ez-radius-md: 10px;
+    --ez-radius-sm: 6px;
+    --ez-font: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --ez-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
+    box-sizing: border-box;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 28px;
+    background: var(--ez-bg);
+    border: 1px solid var(--ez-border);
+    border-radius: var(--ez-radius-lg);
+    color: var(--ez-text);
+    font-family: var(--ez-font);
+    font-size: 15px;
+    line-height: 1.5;
+    text-align: left;
+    /* Subtle inner-top glow so the card feels lit on dark backgrounds */
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  }
+  .ez-card *,
+  .ez-card *::before,
+  .ez-card *::after { box-sizing: border-box; }
+
+  .ez-card__header {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .ez-card__dot {
+    flex-shrink: 0;
+    width: 10px;
+    height: 10px;
+    margin-top: 9px;
+    border-radius: 999px;
+    background: var(--ez-green);
+    box-shadow: 0 0 0 4px var(--ez-green-soft);
+    animation: ezPulse 2.6s ease-in-out infinite;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .ez-card__dot { animation: none; }
+  }
+  @keyframes ezPulse {
+    0%, 100% { box-shadow: 0 0 0 4px var(--ez-green-soft); }
+    50%      { box-shadow: 0 0 0 7px var(--ez-green-faint); }
+  }
+
+  .ez-card__heading {
+    margin: 0;
+    font-family: "Space Grotesk", var(--ez-font);
+    font-size: 22px;
+    line-height: 1.25;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--ez-text);
+  }
+
+  .ez-card__chips {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .ez-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 3px 9px;
+    border-radius: 999px;
+    background: var(--ez-chip);
+    border: 1px solid var(--ez-border);
+    color: var(--ez-text-muted);
+    font-family: var(--ez-mono);
+    font-size: 12px;
+    line-height: 1.3;
+  }
+  .ez-chip__label {
+    color: var(--ez-text-faint);
+  }
+  .ez-chip__value {
+    color: var(--ez-text);
+  }
+
+  .ez-card__meta {
+    margin: 22px 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px 24px;
+  }
+  @media (min-width: 640px) {
+    .ez-card__meta { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  }
+  .ez-card__meta > div {
+    /* Each label/value pair stacks; both flush-left within the cell. */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-width: 0;
+  }
+  .ez-meta__label {
+    display: block;
+    margin: 0;
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    color: var(--ez-text-faint);
+    font-weight: 600;
+  }
+  .ez-meta__value {
+    display: block;
+    /* IMPORTANT: <dd> ships with 40px inline-start margin by default.
+       Reset that so the value sits flush with its label. */
+    margin: 6px 0 0;
+    padding: 0;
+    font-size: 14px;
+    color: var(--ez-text);
+    font-weight: 500;
+    line-height: 1.35;
+    text-align: left;
+  }
+  .ez-meta__value--mono {
+    font-family: var(--ez-mono);
+    font-size: 13px;
+    font-weight: 400;
+  }
+  .ez-badge--success {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 8px;
+    border-radius: 6px;
+    background: var(--ez-green-soft);
+    color: var(--ez-green);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+  }
+  .ez-badge--success svg {
+    width: 12px;
+    height: 12px;
+  }
+
+  .ez-section {
+    margin-top: 24px;
+    padding-top: 22px;
+    border-top: 1px solid var(--ez-border);
+  }
+  .ez-section__title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: "Space Grotesk", var(--ez-font);
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ez-text-muted);
+    margin: 0 0 12px;
+  }
+  .ez-section__title svg {
+    width: 14px;
+    height: 14px;
+    color: var(--ez-green);
+  }
+
+  .ez-ai {
+    background: linear-gradient(180deg, var(--ez-green-faint), transparent 80%);
+    border: 1px solid var(--ez-green-soft);
+    border-radius: var(--ez-radius-md);
+    padding: 16px 18px;
+    margin-top: -4px;
+  }
+  .ez-ai__body {
+    margin: 0;
+    color: var(--ez-text);
+    font-size: 14.5px;
+    line-height: 1.65;
+  }
+
+  .ez-entities {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .ez-entity {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 11px;
+    border-radius: var(--ez-radius-sm);
+    background: var(--ez-bg-elev);
+    border: 1px solid var(--ez-border);
+    font-size: 13px;
+    color: var(--ez-text);
+  }
+  .ez-entity__count {
+    color: var(--ez-green);
+    font-family: var(--ez-mono);
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .ez-events {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-left: 1px dashed var(--ez-border);
+    margin-left: 5px;
+  }
+  .ez-events > li {
+    position: relative;
+    padding: 7px 0 7px 22px;
+    font-size: 13.5px;
+    color: var(--ez-text);
+  }
+  .ez-events > li::before {
+    content: "";
+    position: absolute;
+    left: -4px;
+    top: 14px;
+    width: 7px;
+    height: 7px;
+    border-radius: 999px;
+    background: var(--ez-text-faint);
+  }
+  .ez-events > li.is-job::before  { background: #6FBFFF; }
+  .ez-events > li.is-db::before   { background: var(--ez-green); }
+  .ez-events > li.is-http::before { background: #FFD66B; }
+  .ez-events > li.is-mail::before { background: #C99BFF; }
+  .ez-events > li.is-warehouse::before { background: #FF9B6B; }
+
+  .ez-events time {
+    display: inline-block;
+    width: 90px;
+    font-family: var(--ez-mono);
+    font-size: 12px;
+    color: var(--ez-text-faint);
+  }
+  .ez-events strong {
+    font-weight: 600;
+    color: var(--ez-text);
+  }
+  .ez-events em {
+    font-style: normal;
+    color: var(--ez-text-muted);
+  }
+  .ez-events code {
+    font-family: var(--ez-mono);
+    font-size: 12.5px;
+    color: var(--ez-text-muted);
+    background: rgba(255, 255, 255, 0.04);
+    padding: 1px 5px;
+    border-radius: 4px;
+  }
+
+  /* <details> styling — keep summary clickable, hide native marker */
+  .ez-details { margin-top: -4px; }
+  .ez-details > summary {
+    list-style: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--ez-text-muted);
+    font-size: 13px;
+    font-weight: 500;
+    padding: 6px 0;
+    user-select: none;
+    transition: color 120ms ease;
+  }
+  .ez-details > summary::-webkit-details-marker { display: none; }
+  .ez-details > summary:hover { color: var(--ez-text); }
+  .ez-details > summary .ez-chevron {
+    width: 14px;
+    height: 14px;
+    transition: transform 160ms ease;
+  }
+  .ez-details[open] > summary .ez-chevron { transform: rotate(90deg); }
+  .ez-details[open] > summary .ez-details-label-closed,
+  .ez-details:not([open]) > summary .ez-details-label-open { display: none; }
+  .ez-details > .ez-events { margin-top: 10px; }
+
+  /* Mobile tuning */
+  @media (max-width: 480px) {
+    .ez-card { padding: 22px 18px; border-radius: 12px; }
+    .ez-card__heading { font-size: 19px; }
+    .ez-events time { width: 78px; font-size: 11.5px; }
+    .ez-events > li { font-size: 13px; }
+  }
+</style>
+
+<article class="ez-card" aria-label="Action: Maria Chen placed an order for 3 books">
+  <header class="ez-card__header">
+    <span class="ez-card__dot" aria-hidden="true"></span>
+    <div style="flex:1; min-width:0;">
+      <h3 class="ez-card__heading">Maria Chen placed an order for 3 books</h3>
+      <div class="ez-card__chips" aria-label="Resources">
+        <span class="ez-chip"><span class="ez-chip__label">Order</span><span class="ez-chip__value">#1247</span></span>
+        <span class="ez-chip"><span class="ez-chip__label">Payment</span><span class="ez-chip__value">#884</span></span>
+        <span class="ez-chip"><span class="ez-chip__label">Cart</span><span class="ez-chip__value">#92</span></span>
+      </div>
+    </div>
+  </header>
+
+  <dl class="ez-card__meta">
+    <div>
+      <dt class="ez-meta__label">Triggered by</dt>
+      <dd class="ez-meta__value">Maria Chen</dd>
+    </div>
+    <div>
+      <dt class="ez-meta__label">Started</dt>
+      <dd class="ez-meta__value ez-meta__value--mono" style="white-space: nowrap;">Today, 14:02:11</dd>
+    </div>
+    <div>
+      <dt class="ez-meta__label">Duration</dt>
+      <dd class="ez-meta__value ez-meta__value--mono">1.34 s</dd>
+    </div>
+    <div>
+      <dt class="ez-meta__label">Outcome</dt>
+      <dd class="ez-meta__value">
+        <span class="ez-badge--success">
+          <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.7 5.3a1 1 0 0 1 0 1.4l-8 8a1 1 0 0 1-1.4 0l-4-4a1 1 0 0 1 1.4-1.4L8 12.6l7.3-7.3a1 1 0 0 1 1.4 0z" clip-rule="evenodd"/></svg>
+          Success
+        </span>
+      </dd>
+    </div>
+  </dl>
+
+  <section class="ez-section">
+    <h4 class="ez-section__title">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
+      Plain English
+    </h4>
+    <div class="ez-ai">
+      <p class="ez-ai__body">
+        Maria placed an order for 3 books totaling <strong style="color:var(--ez-text); font-weight:600;">&euro;47.20</strong>. Payment cleared on the first attempt, inventory was decremented for all three titles, a confirmation email was queued for her account, and the warehouse was notified to begin packing. Estimated dispatch: tomorrow.
+      </p>
+    </div>
+  </section>
+
+  <section class="ez-section">
+    <h4 class="ez-section__title">Business entities</h4>
+    <div class="ez-entities">
+      <span class="ez-entity">Order <span class="ez-entity__count">&times;1</span></span>
+      <span class="ez-entity">Order Item <span class="ez-entity__count">&times;3</span></span>
+      <span class="ez-entity">Payment <span class="ez-entity__count">&times;1</span></span>
+      <span class="ez-entity">Shipment <span class="ez-entity__count">&times;1</span></span>
+      <span class="ez-entity">Inventory <span class="ez-entity__count">&times;3</span></span>
+    </div>
+  </section>
+
+  <section class="ez-section">
+    <details class="ez-details">
+      <summary>
+        <svg class="ez-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+        <span class="ez-details-label-closed">Show 13 events behind the scenes</span>
+        <span class="ez-details-label-open">Hide events</span>
+      </summary>
+      <ol class="ez-events">
+        <li class="is-http"><time>14:02:11.083</time> <strong>POST /orders</strong> <em>— 200, 89 ms, Maria Chen</em></li>
+        <li class="is-db"><time>14:02:11.087</time> <strong>Order #1247</strong> created <em>— status: <code>pending</code></em></li>
+        <li class="is-db"><time>14:02:11.089</time> <strong>Order Item &times;3</strong> created <em>— Snow Crash, Babel, A Wizard of Earthsea</em></li>
+        <li class="is-db"><time>14:02:11.092</time> <strong>Cart #92</strong> emptied</li>
+        <li class="is-job"><time>14:02:12.011</time> <strong>ChargeCardJob</strong> started</li>
+        <li class="is-db"><time>14:02:13.184</time> <strong>Payment #884</strong> created <em>— amount: <code>&euro;47.20</code>, status: <code>succeeded</code></em></li>
+        <li class="is-db"><time>14:02:13.187</time> <strong>Order #1247</strong> updated <em>— status: <code>pending &rarr; paid</code></em></li>
+        <li class="is-db"><time>14:02:13.190</time> <strong>Inventory &times;3</strong> updated <em>— stock &minus;1 each</em></li>
+        <li class="is-job"><time>14:02:13.201</time> <strong>SendOrderConfirmationJob</strong> enqueued</li>
+        <li class="is-job"><time>14:02:13.204</time> <strong>NotifyWarehouseJob</strong> enqueued</li>
+        <li class="is-mail"><time>14:02:13.418</time> <strong>Email queued</strong> <em>— order_confirmation &rarr; maria.chen@example.com</em></li>
+        <li class="is-db"><time>14:02:13.604</time> <strong>Shipment #311</strong> created <em>— status: <code>pending</code></em></li>
+        <li class="is-warehouse"><time>14:02:13.612</time> <strong>Warehouse notified</strong> <em>— channel: <code>warehouse-east</code></em></li>
+      </ol>
+    </details>
+  </section>
+</article>
+</div>
+    </div>
+  </section>
+
+  <!-- Section 5: Install -->
+  <section class="section" id="install">
+    <div class="section__inner">
+      <div class="section__head">
+        <span class="section__eyebrow"><span class="num">04</span>Install</span>
+        <h2 class="section__title section__title--narrow">Two stacks. One install.</h2>
+        <p class="section__sub">Drop the agent in. Restart. Done. No per-route code, no SDK to learn.</p>
+      </div>
+      <div data-embed="language-tabs.html">
+<!-- INLINED FROM embeds/language-tabs.html -->
+<!--
+  EZLogs — Language tabs (Section 5).
+  Ruby on Rails / Next.js install + config. Tab swap via :checked
+  radio + sibling selectors. No JS. Default = Rails.
+-->
+<style>
+  .ez-tabs {
+    --bg: #0F0F10;
+    --bg-elev: #161617;
+    --line: rgba(255, 255, 255, 0.08);
+    --text: rgba(255, 255, 255, 0.96);
+    --muted: rgba(255, 255, 255, 0.62);
+    --faint: rgba(255, 255, 255, 0.40);
+    --green: #01E63E;
+    --green-soft: rgba(1, 230, 62, 0.14);
+    --font: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
+    box-sizing: border-box;
+    max-width: 760px;
+    margin: 0 auto;
+    color: var(--text);
+    font-family: var(--font);
+    text-align: left;
+  }
+  .ez-tabs *, .ez-tabs *::before, .ez-tabs *::after { box-sizing: border-box; }
+  .ez-tabs__radio { position: absolute; opacity: 0; pointer-events: none; }
+
+  .ez-tabs__bar {
+    display: flex;
+    gap: 4px;
+    padding: 4px;
+    border-radius: 12px;
+    background: var(--bg-elev);
+    border: 1px solid var(--line);
+    margin-bottom: 18px;
+  }
+  .ez-tabs__bar label {
+    flex: 1;
+    text-align: center;
+    cursor: pointer;
+    padding: 9px 14px;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--muted);
+    border-radius: 8px;
+    transition: color 160ms ease, background 160ms ease;
+    user-select: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  .ez-tabs__bar label:hover { color: var(--text); }
+  .ez-tabs__bar svg { width: 16px; height: 16px; }
+
+  /* Active tab highlight */
+  #ez-tab-ruby:checked   ~ .ez-tabs__bar .ez-tab-label-ruby,
+  #ez-tab-nextjs:checked ~ .ez-tabs__bar .ez-tab-label-nextjs {
+    background: var(--green);
+    color: #000;
+  }
+
+  /* Panels: stack, show only active */
+  .ez-tabs__panel { display: none; }
+  #ez-tab-ruby:checked   ~ .ez-tabs__panel--ruby,
+  #ez-tab-nextjs:checked ~ .ez-tabs__panel--nextjs { display: block; }
+
+  .ez-codeblock {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 18px 20px;
+    overflow-x: auto;
+    margin: 0 0 12px;
+  }
+  .ez-codeblock + .ez-codeblock { margin-top: 12px; }
+  .ez-codeblock__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 10px;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: var(--faint);
+  }
+  .ez-codeblock pre {
+    margin: 0;
+    font-family: var(--mono);
+    font-size: 13.5px;
+    line-height: 1.65;
+    color: var(--text);
+    white-space: pre;
+  }
+  .ez-codeblock .c  { color: rgba(255, 255, 255, 0.40); font-style: italic; }
+  .ez-codeblock .k  { color: #FFD66B; }
+  .ez-codeblock .s  { color: #98F0B0; }
+  .ez-codeblock .v  { color: #BCD8FF; }
+  .ez-codeblock .p  { color: var(--text); }
+  .ez-codeblock .g  { color: var(--green); }
+  .ez-codeblock .o  { color: rgba(255, 255, 255, 0.65); }
+
+  .ez-tabs__caption {
+    margin: 14px 2px 0;
+    font-size: 13.5px;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+  .ez-tabs__caption strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+  .ez-tabs__more {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 13px;
+  }
+  .ez-tabs__more a {
+    color: var(--green);
+    text-decoration: none;
+    font-weight: 500;
+    border-bottom: 1px solid transparent;
+    transition: border-color 160ms ease;
+  }
+  .ez-tabs__more a:hover { border-bottom-color: var(--green); }
+
+  @media (max-width: 480px) {
+    .ez-codeblock { padding: 16px; }
+    .ez-codeblock pre { font-size: 12.5px; }
+  }
+</style>
+
+<div class="ez-tabs">
+  <input type="radio" name="ez-tabs-lang" id="ez-tab-ruby"   class="ez-tabs__radio" checked>
+  <input type="radio" name="ez-tabs-lang" id="ez-tab-nextjs" class="ez-tabs__radio">
+
+  <div class="ez-tabs__bar" role="tablist" aria-label="Install language">
+    <label for="ez-tab-ruby" class="ez-tab-label-ruby" role="tab">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.5 13.5l-7 7-7-7 7-7 7 7zM12 2v6.5L17.5 14 12 19.5 6.5 14 12 8.5V2z"/></svg>
+      Ruby on Rails
+    </label>
+    <label for="ez-tab-nextjs" class="ez-tab-label-nextjs" role="tab">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 1 0 5.5 18.4L9 9v8.5H7V7h2l9.6 13.1A10 10 0 0 0 12 2zm4.5 13.2L14 11.7V7h2v7l.5 1.2z"/></svg>
+      Next.js
+    </label>
+  </div>
+
+  <!-- Ruby panel -->
+  <div class="ez-tabs__panel ez-tabs__panel--ruby" role="tabpanel" aria-label="Ruby on Rails install">
+    <div class="ez-codeblock">
+      <div class="ez-codeblock__head"><span>terminal</span><span>1 line</span></div>
+<pre><span class="o">$</span> <span class="k">bundle</span> <span class="p">add</span> <span class="v">ez_logs_agent</span></pre>
+    </div>
+    <div class="ez-codeblock">
+      <div class="ez-codeblock__head"><span>config/initializers/ezlogs.rb</span><span>3 lines</span></div>
+<pre><span class="v">EzLogs</span>.<span class="k">configure</span> <span class="k">do</span> |c|
+  c.api_key = <span class="v">ENV</span>[<span class="s">"EZLOGS_API_KEY"</span>]
+<span class="k">end</span></pre>
+    </div>
+    <p class="ez-tabs__caption">
+      Auto-captures HTTP, <strong>Sidekiq / ActiveJob</strong>, and ActiveRecord changes. Zero per-controller code.
+    </p>
+  </div>
+
+  <!-- Next.js panel -->
+  <div class="ez-tabs__panel ez-tabs__panel--nextjs" role="tabpanel" aria-label="Next.js install">
+    <div class="ez-codeblock">
+      <div class="ez-codeblock__head"><span>terminal</span><span>1 line</span></div>
+<pre><span class="o">$</span> <span class="k">npm</span> <span class="p">install</span> <span class="v">@ezlogs/nextjs</span></pre>
+    </div>
+    <div class="ez-codeblock">
+      <div class="ez-codeblock__head"><span>next.config.ts</span><span>2 lines</span></div>
+<pre><span class="k">import</span> { withEzlogs } <span class="k">from</span> <span class="s">"@ezlogs/nextjs/build"</span>;
+<span class="k">export default</span> <span class="g">withEzlogs</span>({ apiKey: <span class="v">process</span>.env.<span class="v">EZLOGS_API_KEY</span> });</pre>
+    </div>
+    <p class="ez-tabs__caption">
+      Auto-captures <strong>HTTP, Server Actions, and Postgres changes</strong> (via triggers). Works with App Router, Pages Router, Turbopack, Webpack.
+    </p>
+  </div>
+
+  <p class="ez-tabs__more">
+    <a href="https://github.com/dezsirazvan/ez_logs" target="_blank" rel="noopener">Read the full setup guide →</a>
+  </p>
+</div>
+</div>
+    </div>
+  </section>
+
+  <!-- Section 6: Personas -->
+  <section class="section section--alt">
+    <div class="section__inner">
+      <div class="section__head">
+        <span class="section__eyebrow"><span class="num">05</span>Who it&rsquo;s for</span>
+        <h2 class="section__title section__title--wide">Built so anyone in your company can read it.</h2>
+        <p class="section__sub">Engineers ship it. Founders, support, and PMs read it. One shared vocabulary for what the product is doing.</p>
+      </div>
+      <div data-embed="persona-cards.html">
+<!-- INLINED FROM embeds/persona-cards.html -->
+<!--
+  EZLogs — Persona cards (Section 6).
+  Three cards: Founders, Support, Engineers. Static.
+-->
+<style>
+  .ez-personas {
+    --bg: #0F0F10;
+    --bg-elev: #161617;
+    --line: rgba(255, 255, 255, 0.08);
+    --text: rgba(255, 255, 255, 0.96);
+    --muted: rgba(255, 255, 255, 0.62);
+    --faint: rgba(255, 255, 255, 0.40);
+    --green: #01E63E;
+    --font: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+    box-sizing: border-box;
+    max-width: 1100px;
+    margin: 0 auto;
+    color: var(--text);
+    font-family: var(--font);
+    text-align: left;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  @media (min-width: 720px) {
+    .ez-personas { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  }
+  .ez-personas *, .ez-personas *::before, .ez-personas *::after { box-sizing: border-box; }
+
+  .ez-persona {
+    padding: 26px 24px;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    transition: border-color 220ms ease, transform 220ms ease;
+  }
+  .ez-persona:hover {
+    border-color: rgba(1, 230, 62, 0.22);
+    transform: translateY(-2px);
+  }
+  .ez-persona__icon {
+    width: 38px;
+    height: 38px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: rgba(1, 230, 62, 0.10);
+    border: 1px solid rgba(1, 230, 62, 0.22);
+    color: var(--green);
+  }
+  .ez-persona__icon svg { width: 18px; height: 18px; }
+  .ez-persona__label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+    color: var(--green);
+    margin: 0;
+  }
+  .ez-persona__quote {
+    margin: 0;
+    font-size: 17px;
+    line-height: 1.4;
+    color: var(--text);
+    font-weight: 400;
+    letter-spacing: -0.005em;
+  }
+  .ez-persona__quote em {
+    font-style: normal;
+    color: var(--green);
+    font-weight: 500;
+  }
+</style>
+
+<div class="ez-personas">
+  <article class="ez-persona">
+    <span class="ez-persona__icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+    </span>
+    <p class="ez-persona__label">For founders</p>
+    <p class="ez-persona__quote">
+      You can <em>finally see what your product is actually doing</em> without asking an engineer.
+    </p>
+  </article>
+
+  <article class="ez-persona">
+    <span class="ez-persona__icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+    </span>
+    <p class="ez-persona__label">For support</p>
+    <p class="ez-persona__quote">
+      You can <em>finally answer "what happened to this order?"</em> in seconds — not Slack threads.
+    </p>
+  </article>
+
+  <article class="ez-persona">
+    <span class="ez-persona__icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+    </span>
+    <p class="ez-persona__label">For engineers</p>
+    <p class="ez-persona__quote">
+      You can <em>finally point your CEO at a link</em> instead of explaining.
+    </p>
+  </article>
+</div>
+</div>
+      <p class="section__caption">Not a metrics tool. Not a replacement for Datadog. A shared vocabulary for what your software does &mdash; for the people who built it and the people who didn&rsquo;t.</p>
+    </div>
+  </section>
+
+  <!-- Section 7: Pricing -->
+  <section class="section">
+    <div class="section__inner">
+      <div class="section__head">
+        <span class="section__eyebrow"><span class="num">06</span>Pricing</span>
+        <h2 class="section__title section__title--narrow">Free during beta.</h2>
+        <p class="section__sub">Unlimited events, unlimited team members, no card required. Beta accounts keep their free tier when we launch &mdash; forever.</p>
+      </div>
+      <div class="pricing">
+        <a class="btn btn--primary" href="https://app.ezlogs.io/sign_up" target="_blank" rel="noopener">Get your API key &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 8: FAQ -->
+  <section class="section section--alt" id="faq">
+    <div class="section__inner">
+      <div class="section__head">
+        <span class="section__eyebrow"><span class="num">07</span>FAQ</span>
+        <h2 class="section__title section__title--narrow">Questions, answered.</h2>
+        <p class="section__sub">The eight things people actually ask. Click any to expand.</p>
+      </div>
+      <div data-embed="faq-accordion.html">
+<!-- INLINED FROM embeds/faq-accordion.html -->
+<!--
+  EZLogs — FAQ accordion (Section 8).
+  Native <details>/<summary>. No JS. Closed by default.
+  Each answer ≤ 40 words; full copy lives in copy.md §Section 8.
+-->
+<style>
+  .ez-faq {
+    --bg: #0F0F10;
+    --line: rgba(255, 255, 255, 0.08);
+    --line-strong: rgba(255, 255, 255, 0.14);
+    --text: rgba(255, 255, 255, 0.96);
+    --muted: rgba(255, 255, 255, 0.66);
+    --faint: rgba(255, 255, 255, 0.40);
+    --green: #01E63E;
+    --font: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+    box-sizing: border-box;
+    max-width: 760px;
+    margin: 0 auto;
+    color: var(--text);
+    font-family: var(--font);
+    text-align: left;
+  }
+  .ez-faq *, .ez-faq *::before, .ez-faq *::after { box-sizing: border-box; }
+
+  .ez-faq details {
+    border-bottom: 1px solid var(--line);
+    padding: 4px 0;
+  }
+  .ez-faq details:first-child { border-top: 1px solid var(--line); }
+
+  .ez-faq summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 20px 4px;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text);
+    transition: color 160ms ease;
+    user-select: none;
+  }
+  .ez-faq summary::-webkit-details-marker { display: none; }
+  .ez-faq summary:hover { color: var(--green); }
+  .ez-faq summary:focus-visible {
+    outline: 2px solid var(--green);
+    outline-offset: 4px;
+    border-radius: 4px;
+  }
+
+  .ez-faq__plus {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    position: relative;
+    color: var(--faint);
+    transition: color 160ms ease, transform 220ms ease;
+  }
+  .ez-faq__plus::before,
+  .ez-faq__plus::after {
+    content: "";
+    position: absolute;
+    background: currentColor;
+    border-radius: 1px;
+    transition: transform 220ms ease, opacity 220ms ease;
+  }
+  .ez-faq__plus::before { /* horizontal bar */
+    left: 2px; right: 2px; top: 9px; height: 2px;
+  }
+  .ez-faq__plus::after { /* vertical bar */
+    top: 2px; bottom: 2px; left: 9px; width: 2px;
+  }
+  .ez-faq details[open] .ez-faq__plus {
+    color: var(--green);
+    transform: rotate(90deg);
+  }
+  .ez-faq details[open] .ez-faq__plus::after { opacity: 0; }
+
+  .ez-faq__answer {
+    padding: 0 4px 22px;
+    font-size: 14.5px;
+    line-height: 1.65;
+    color: var(--muted);
+    max-width: 64ch;
+  }
+  .ez-faq__answer code {
+    font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-size: 13px;
+    color: var(--text);
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1px 6px;
+    border-radius: 4px;
+  }
+  .ez-faq__answer a {
+    color: var(--green);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(1, 230, 62, 0.3);
+    transition: border-color 160ms ease;
+  }
+  .ez-faq__answer a:hover { border-bottom-color: var(--green); }
+</style>
+
+<div class="ez-faq">
+  <details>
+    <summary>What does EZLogs actually do? <span class="ez-faq__plus" aria-hidden="true"></span></summary>
+    <p class="ez-faq__answer">It records every request, background job, and database change in your app, links them by user action, and turns each chain into one plain-English card — so anyone on your team can read what happened, not just the engineers.</p>
+  </details>
+
+  <details>
+    <summary>Will it slow down my app? <span class="ez-faq__plus" aria-hidden="true"></span></summary>
+    <p class="ez-faq__answer">No. The agent runs out-of-band: events are buffered in memory and shipped to EZLogs over a separate connection. If our service is down, the agent fails open and your app keeps running. Average overhead in benchmarks: under 1 ms per request.</p>
+  </details>
+
+  <details>
+    <summary>What happens if EZLogs is down? <span class="ez-faq__plus" aria-hidden="true"></span></summary>
+    <p class="ez-faq__answer">Your app keeps serving traffic. The agent buffers up to 10,000 events in memory and retries with exponential backoff. If the buffer overflows, it drops the oldest events — never the customer's request.</p>
+  </details>
+
+  <details>
+    <summary>How is this different from Datadog, New Relic, or Honeycomb? <span class="ez-faq__plus" aria-hidden="true"></span></summary>
+    <p class="ez-faq__answer">Those tools are for engineers, and they answer "is the system healthy?" EZLogs is for everyone, and it answers "what happened to my customer?" We don't compete with metrics. We're the layer above them.</p>
+  </details>
+
+  <details>
+    <summary>Do you store my customer data? <span class="ez-faq__plus" aria-hidden="true"></span></summary>
+    <p class="ez-faq__answer">We store the events your app sends us — request paths, job names, table names, and the before/after values you explicitly capture. We do not store request bodies, response bodies, or full database rows unless you opt in. Field-level redaction is on by default for any column matching <code>password</code>, <code>token</code>, <code>secret</code>, <code>key</code>, or <code>*_at</code> timestamps.</p>
+  </details>
+
+  <details>
+    <summary>What languages and frameworks are supported today? <span class="ez-faq__plus" aria-hidden="true"></span></summary>
+    <p class="ez-faq__answer">Ruby on Rails (Sidekiq, ActiveJob, ActiveRecord) and Next.js (App Router, Pages Router, Server Actions, Prisma, Drizzle, supabase-js, BullMQ, Inngest, Trigger.dev, Upstash, Supabase Queues). FastAPI is next.</p>
+  </details>
+
+  <details>
+    <summary>Can I self-host? <span class="ez-faq__plus" aria-hidden="true"></span></summary>
+    <p class="ez-faq__answer">Not yet. Self-host is on the post-launch roadmap. If self-hosting is a hard requirement for you, <a href="mailto:hello@ezlogs.io">email us</a> — we want to talk.</p>
+  </details>
+
+  <details>
+    <summary>Is the AI explanation accurate? <span class="ez-faq__plus" aria-hidden="true"></span></summary>
+    <p class="ez-faq__answer">The AI only writes sentences using the structured events your app actually sent. It never invents data. If it doesn't know, it says so. Every generated explanation is cached and reproducible — re-running the same action produces the same words.</p>
+  </details>
+</div>
+</div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer__brand">
+      <svg width="24" height="24" viewBox="164 160 600 629" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="EZLogs" style="display:block;">
+  <path d="M164 311.523L466.034 160L764 312.58V639.592L466.034 789L164 636.42V311.523Z" fill="white"/>
+  <path d="M399 227.2C413 220.4 433.3 210.7 444 205.5C454.7 200.4 463.6 196.1 463.8 196.1C464 196 473.4 200.5 484.8 206.1C496.2 211.6 513.1 219.8 522.4 224.3L539.3 232.4L579.2 252.1L586.3 255.4C590.3 257.2 610.4 266.9 631 277C651.6 287 682 301.7 698.5 309.7C715 317.7 728.8 324.6 729.3 324.9C730.1 325.7 601 390 487.2 445.5L464.9 456.4L435.9 441.9L406.9 427.5L375.1 412L360.8 405.1C338.1 394.2 309.4 380.2 254 353C225.7 339.1 201.5 327.2 200.3 326.6C199 326 198 325.2 198 324.9C198 324.3 212.5 317.2 291 279.2C352.6 249.4 367.6 242.2 399 227.2Z" fill="#01E63E"/>
+  <path d="M191 484.3V620.7L212.8 631.3C248.9 648.9 286.3 667.2 353.5 700C450.8 747.6 453 748.6 453.5 748.1C453.8 747.9 454 733.6 454 716.5C454 692.7 453.7 685 452.8 684.2C451.5 683.2 400.8 658.8 367 643C345.2 632.8 277.1 600.1 267 595L259 591V570C259 558.4 259.2 549 259.4 549C259.6 549 265.7 551.9 273.1 555.4C280.5 558.9 295.3 565.9 306 571C316.7 576.1 340.1 587.2 358 595.8C375.9 604.3 396.1 613.9 403 617.1L415.5 622.8L415.8 593.2C415.9 577 415.7 563.3 415.3 562.9C414.8 562.4 397.9 554 377.5 544.2C357.2 534.3 322.2 517.2 299.8 506.2L259 486.2V465.1V444.1L270.3 449.4C276.4 452.4 290.1 458.9 300.5 464C311 469.1 329.2 477.8 341 483.5C352.8 489.2 382.7 503.5 407.5 515.4C432.2 527.3 452.8 537 453.2 537C453.7 537 453.9 523 453.8 505.9L453.5 474.8L404.5 451.1C377.6 438 334.8 417.2 309.5 404.8C228.7 365.2 193.2 348 192.1 348C191.3 348 191 386.1 191 484.3Z" fill="black"/>
+  <path d="M476.962 746.549C477.774 746.543 516.68 727.641 628.062 672.95C645.362 664.45 676.862 649.05 698.062 638.75L736.562 619.85L736.861 569.75C736.961 542.15 736.861 519.549 736.661 519.549C735.558 519.551 719.655 527.253 671.661 550.95C643.179 565.041 619.691 576.535 619.462 576.549C619.062 576.549 627.962 564.649 649.062 537.049C653.262 531.549 667.262 513.549 680.062 497.049C727.061 436.75 729.861 432.849 734.361 420.549C736.261 415.449 736.461 412.449 736.861 382.25C737.061 364.25 736.861 349.549 736.361 349.549C735.957 349.551 722.358 356.151 706.161 364.049C690.061 372.049 676.662 378.549 676.562 378.549C676.461 378.55 651.162 390.95 620.462 406.15C558.062 436.95 510.461 460.35 489.861 470.25L476.062 476.85V504.75C476.062 520.036 476.261 532.527 476.361 532.549C476.561 532.549 510.261 515.849 551.361 495.549C592.361 475.149 626.161 458.549 626.562 458.549C627.162 458.549 622.262 465.15 590.562 506.45C580.662 519.35 568.062 535.75 562.562 542.95C552.362 556.35 532.262 582.55 505.462 617.45C497.162 628.25 487.162 641.449 483.262 646.75L476.062 656.45V701.45C476.062 728.35 476.462 746.549 476.962 746.549ZM670.062 620.25L670.161 615.049L682.161 609.65C695.861 603.45 697.661 602.15 698.661 598.35C699.661 593.95 697.261 594.049 686.762 599.049C676.362 603.949 674.562 604.35 671.262 601.95C669.362 600.65 669.062 599.55 669.062 593.65C669.062 587.55 669.461 586.25 672.361 581.95C675.261 577.45 676.762 576.45 691.062 569.35C699.561 565.15 707.16 561.651 707.861 561.65C708.661 561.55 709.062 563.05 709.062 566.15V570.65L696.762 576.549C689.962 579.749 683.663 583.049 682.762 584.049C680.662 586.049 680.462 590.549 682.462 590.549C683.263 590.549 688.362 588.549 693.861 586.049C699.361 583.549 704.761 581.55 705.861 581.549C708.861 581.549 711.061 585.35 711.062 590.549C711.062 603.349 706.562 608.25 685.262 618.25L670.062 625.45V620.25ZM639.762 640.15C625.962 646.95 621.561 647.85 618.661 644.65C617.161 642.95 616.962 640.85 617.262 627.35C617.562 612.15 617.662 611.75 620.462 607.75C622.062 605.45 624.962 602.549 626.962 601.25C630.963 598.749 658.159 585.651 659.361 585.549C659.761 585.549 660.061 587.65 659.861 590.25L659.562 595.049L646.161 601.65C638.762 605.25 631.862 609.249 630.861 610.549C629.361 612.349 629.062 614.55 629.062 623.15C629.062 633.15 629.162 633.549 631.262 633.549C633.962 633.549 648.062 626.65 648.762 624.95C648.962 624.25 649.061 622.35 648.861 620.65L648.562 617.65L644.361 619.549L640.062 621.45V617.049C640.062 614.549 640.462 612.549 641.062 612.549C641.562 612.549 646.161 610.549 651.161 608.049C656.258 605.551 660.456 603.552 660.661 603.549C661.461 603.549 660.961 621.65 660.161 623.85C657.961 629.55 652.661 633.75 639.762 640.15ZM569.762 672.549C563.862 672.549 563.062 670.349 563.062 655.049C563.162 634.95 565.262 631.649 585.062 621.549C598.961 614.349 603.062 613.35 606.262 616.25C607.862 617.65 608.062 619.55 608.062 632.75C608.062 649.75 607.161 652.75 600.161 658.65C594.861 663.25 574.362 672.549 569.762 672.549ZM576.361 660.15C578.362 660.85 592.66 654.05 594.461 651.45C596.561 648.35 596.861 627.552 594.762 627.549C594.062 627.549 589.761 629.35 585.361 631.45C580.861 633.65 576.761 636.35 576.161 637.45C574.561 640.45 574.761 659.45 576.361 660.15ZM521.062 653.85L526.861 650.75L532.562 647.65L533.062 665.049L533.562 682.45L543.962 677.549C549.662 674.749 554.762 672.549 555.262 672.549C555.762 672.55 556.061 674.65 555.861 677.15L555.562 681.85L538.361 690.15L521.062 698.45V653.85Z" fill="black"/>
+</svg>
+      EZLogs
+    </div>
+    <p class="footer__tagline">Activity logs your whole team can read.</p>
+    <div class="footer__links">
+      <a href="https://github.com/dezsirazvan/ez_logs" target="_blank" rel="noopener">GitHub</a>
+      <span style="color:var(--faint);">&middot;</span>
+      <a href="https://app.ezlogs.io" target="_blank" rel="noopener">Sign in</a>
+      <span style="color:var(--faint);">&middot;</span>
+      <a href="mailto:hello@ezlogs.io">Contact</a>
+    </div>
+    <p class="footer__copy">&copy; 2026 EZLogs. Made with care for teams that need to know what their software is doing.</p>
+  </footer>
+
+  
+
+</body>
+</html>

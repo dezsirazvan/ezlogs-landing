@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" font-family="'Inter', system-ui, sans-serif">
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#0A0A0A"/>
+
+  <!-- Subtle radial green glow, top-left -->
+  <defs>
+    <radialGradient id="glow" cx="20%" cy="0%" r="55%">
+      <stop offset="0%" stop-color="#01E63E" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#01E63E" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="headlineFade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0.78"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+
+  <!-- Logo mark + wordmark, top-left -->
+  <g transform="translate(80, 70)">
+    <g transform="scale(0.085) translate(-164, -160)">
+      <path d="M164 311.523L466.034 160L764 312.58V639.592L466.034 789L164 636.42V311.523Z" fill="#FFFFFF"/>
+      <path d="M399 227.2C413 220.4 433.3 210.7 444 205.5C454.7 200.4 463.6 196.1 463.8 196.1C464 196 473.4 200.5 484.8 206.1C496.2 211.6 513.1 219.8 522.4 224.3L539.3 232.4L579.2 252.1L586.3 255.4C590.3 257.2 610.4 266.9 631 277C651.6 287 682 301.7 698.5 309.7C715 317.7 728.8 324.6 729.3 324.9C730.1 325.7 601 390 487.2 445.5L464.9 456.4L435.9 441.9L406.9 427.5L375.1 412L360.8 405.1C338.1 394.2 309.4 380.2 254 353C225.7 339.1 201.5 327.2 200.3 326.6C199 326 198 325.2 198 324.9C198 324.3 212.5 317.2 291 279.2C352.6 249.4 367.6 242.2 399 227.2Z" fill="#01E63E"/>
+      <path d="M191 484.3V620.7L212.8 631.3C248.9 648.9 286.3 667.2 353.5 700C450.8 747.6 453 748.6 453.5 748.1C453.8 747.9 454 733.6 454 716.5C454 692.7 453.7 685 452.8 684.2C451.5 683.2 400.8 658.8 367 643C345.2 632.8 277.1 600.1 267 595L259 591V570C259 558.4 259.2 549 259.4 549C259.6 549 265.7 551.9 273.1 555.4C280.5 558.9 295.3 565.9 306 571C316.7 576.1 340.1 587.2 358 595.8C375.9 604.3 396.1 613.9 403 617.1L415.5 622.8L415.8 593.2C415.9 577 415.7 563.3 415.3 562.9C414.8 562.4 397.9 554 377.5 544.2C357.2 534.3 322.2 517.2 299.8 506.2L259 486.2V465.1V444.1L270.3 449.4C276.4 452.4 290.1 458.9 300.5 464C311 469.1 329.2 477.8 341 483.5C352.8 489.2 382.7 503.5 407.5 515.4C432.2 527.3 452.8 537 453.2 537C453.7 537 453.9 523 453.8 505.9L453.5 474.8L404.5 451.1C377.6 438 334.8 417.2 309.5 404.8C228.7 365.2 193.2 348 192.1 348C191.3 348 191 386.1 191 484.3Z" fill="#000000"/>
+      <path d="M476.962 746.549C477.774 746.543 516.68 727.641 628.062 672.95C645.362 664.45 676.862 649.05 698.062 638.75L736.562 619.85L736.861 569.75C736.961 542.15 736.861 519.549 736.661 519.549C735.558 519.551 719.655 527.253 671.661 550.95C643.179 565.041 619.691 576.535 619.462 576.549C619.062 576.549 627.962 564.649 649.062 537.049C653.262 531.549 667.262 513.549 680.062 497.049C727.061 436.75 729.861 432.849 734.361 420.549C736.261 415.449 736.461 412.449 736.861 382.25C737.061 364.25 736.861 349.549 736.361 349.549C735.957 349.551 722.358 356.151 706.161 364.049C690.061 372.049 676.662 378.549 676.562 378.549C676.461 378.55 651.162 390.95 620.462 406.15C558.062 436.95 510.461 460.35 489.861 470.25L476.062 476.85V504.75C476.062 520.036 476.261 532.527 476.361 532.549C476.561 532.549 510.261 515.849 551.361 495.549C592.361 475.149 626.161 458.549 626.562 458.549C627.162 458.549 622.262 465.15 590.562 506.45C580.662 519.35 568.062 535.75 562.562 542.95C552.362 556.35 532.262 582.55 505.462 617.45C497.162 628.25 487.162 641.449 483.262 646.75L476.062 656.45V701.45C476.062 728.35 476.462 746.549 476.962 746.549Z" fill="#000000"/>
+    </g>
+    <text x="78" y="46" font-family="'Space Grotesk', 'Inter', system-ui, sans-serif" font-size="34" font-weight="600" fill="#FFFFFF" letter-spacing="-0.5">EZLogs</text>
+  </g>
+
+  <!-- Headline -->
+  <text x="80" y="260" font-family="'Space Grotesk', 'Inter', system-ui, sans-serif" font-size="64" font-weight="600" fill="url(#headlineFade)" letter-spacing="-1.8">Activity logs</text>
+  <text x="80" y="338" font-family="'Space Grotesk', 'Inter', system-ui, sans-serif" font-size="64" font-weight="600" fill="url(#headlineFade)" letter-spacing="-1.8">your whole team</text>
+  <text x="80" y="416" font-family="'Space Grotesk', 'Inter', system-ui, sans-serif" font-size="64" font-weight="600" fill="url(#headlineFade)" letter-spacing="-1.8">can read.</text>
+
+  <!-- Sub-line -->
+  <text x="80" y="468" font-family="'Inter', system-ui, sans-serif" font-size="22" font-weight="400" fill="rgba(255,255,255,0.70)">
+    <tspan>Captures requests, jobs, and DB changes.</tspan>
+  </text>
+  <text x="80" y="498" font-family="'Inter', system-ui, sans-serif" font-size="22" font-weight="400" fill="rgba(255,255,255,0.70)">
+    <tspan>One card per customer action. Rails + Next.js.</tspan>
+  </text>
+
+  <!-- Mini action-card preview, lower-right -->
+  <g transform="translate(740, 250)">
+    <rect width="380" height="280" rx="14" fill="#0F0F10" stroke="rgba(255,255,255,0.10)" stroke-width="1"/>
+    <!-- status dot + green halo -->
+    <circle cx="32" cy="36" r="14" fill="#01E63E" fill-opacity="0.10"/>
+    <circle cx="32" cy="36" r="5" fill="#01E63E"/>
+    <!-- title -->
+    <text x="56" y="42" font-family="'Space Grotesk', 'Inter', system-ui, sans-serif" font-size="18" font-weight="600" fill="#FFFFFF" letter-spacing="-0.3">Maria Chen placed an order</text>
+    <!-- chips -->
+    <g transform="translate(56, 60)">
+      <rect width="84" height="22" rx="11" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.10)"/>
+      <text x="12" y="15" font-family="'JetBrains Mono', monospace" font-size="11" fill="rgba(255,255,255,0.78)">Order #1247</text>
+      <rect x="92" width="90" height="22" rx="11" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.10)"/>
+      <text x="104" y="15" font-family="'JetBrains Mono', monospace" font-size="11" fill="rgba(255,255,255,0.78)">Payment #884</text>
+    </g>
+    <!-- AI explanation block -->
+    <rect x="20" y="100" width="340" height="92" rx="10" fill="rgba(1,230,62,0.05)" stroke="rgba(1,230,62,0.14)"/>
+    <text x="32" y="124" font-family="'Inter', system-ui, sans-serif" font-size="13" fill="rgba(255,255,255,0.90)">Charged €47.20, decremented inventory for</text>
+    <text x="32" y="144" font-family="'Inter', system-ui, sans-serif" font-size="13" fill="rgba(255,255,255,0.90)">3 titles, queued the confirmation email,</text>
+    <text x="32" y="164" font-family="'Inter', system-ui, sans-serif" font-size="13" fill="rgba(255,255,255,0.90)">and notified the warehouse.</text>
+    <!-- meta row -->
+    <text x="20" y="218" font-family="'JetBrains Mono', monospace" font-size="11" fill="rgba(255,255,255,0.40)">by</text>
+    <text x="38" y="218" font-family="'JetBrains Mono', monospace" font-size="11" fill="rgba(255,255,255,0.90)">Maria Chen</text>
+    <text x="120" y="218" font-family="'JetBrains Mono', monospace" font-size="11" fill="rgba(255,255,255,0.40)">in</text>
+    <text x="138" y="218" font-family="'JetBrains Mono', monospace" font-size="11" fill="rgba(255,255,255,0.90)">1.34 s</text>
+    <text x="190" y="218" font-family="'JetBrains Mono', monospace" font-size="11" fill="rgba(255,255,255,0.40)">·</text>
+    <text x="206" y="218" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600" fill="#01E63E">✓ Success</text>
+    <!-- mini events -->
+    <line x1="20" y1="234" x2="360" y2="234" stroke="rgba(255,255,255,0.08)"/>
+    <circle cx="26" cy="252" r="3" fill="#01E63E"/>
+    <text x="38" y="256" font-family="'Inter', system-ui, sans-serif" font-size="12" fill="rgba(255,255,255,0.78)">Order created · Payment cleared · 3 events queued</text>
+  </g>
+
+  <!-- Footer band: install lines + URL -->
+  <line x1="80" y1="540" x2="1120" y2="540" stroke="rgba(255,255,255,0.08)"/>
+  <text x="80" y="585" font-family="'JetBrains Mono', monospace" font-size="18" fill="rgba(255,255,255,0.60)">$ </text>
+  <text x="100" y="585" font-family="'JetBrains Mono', monospace" font-size="18" fill="#01E63E">bundle add ez_logs_agent</text>
+  <text x="370" y="585" font-family="'JetBrains Mono', monospace" font-size="18" fill="rgba(255,255,255,0.30)">·</text>
+  <text x="395" y="585" font-family="'JetBrains Mono', monospace" font-size="18" fill="rgba(255,255,255,0.60)">$ </text>
+  <text x="415" y="585" font-family="'JetBrains Mono', monospace" font-size="18" fill="#01E63E">npm install @ezlogs/nextjs</text>
+
+  <text x="1120" y="585" text-anchor="end" font-family="'Inter', system-ui, sans-serif" font-size="18" font-weight="600" fill="rgba(255,255,255,0.78)">ezlogs.io</text>
+</svg>
