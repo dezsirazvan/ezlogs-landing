@@ -14,9 +14,9 @@ favicon/
 └── README.md             (this file)
 ```
 
-## Carrd usage
+## How these are wired
 
-Carrd Pro accepts a custom favicon under **Site Settings → Favicon** — upload `favicon.ico`. Apple touch icon and webmanifest are stitched in via Carrd's `<head>` HTML widget (see `../carrd-build-guide.md`).
+`preview.template.html` already references `assets/favicon/favicon.ico`, `apple-touch-icon.png`, `icon-192.png`, `icon-512.png`, and `site.webmanifest` in `<head>`. The publish pipeline copies `marketing/landing-page/assets/` into `site/assets/` and pushes to the public `ezlogs-landing` repo. No additional wiring needed.
 
 ## Local generation (no internet)
 

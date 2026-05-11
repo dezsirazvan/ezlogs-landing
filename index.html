@@ -383,7 +383,7 @@
   readable EZLogs action card. Tells the entire pitch without copy.
 
   No JS. Pure CSS. Respects prefers-reduced-motion (static end state).
-  All classes prefixed `ez-sig-` so it can't bleed into Carrd's CSS.
+  All classes prefixed `ez-sig-` so it can be inlined without bleeding into the page's CSS.
 -->
 <style>
   .ez-sig {
@@ -982,16 +982,16 @@
 <!-- INLINED FROM embeds/action-card-dark.html -->
 <!--
   EZLogs — Action card (dark)
-  Standalone embed. Drop into Carrd as an "Embed" element.
+  Standalone embed. Inlined into preview.template.html by build-preview.sh.
   Mirrors the real action card from /actions/:id on app.ezlogs.io,
   rebuilt for the dark landing page.
 
   Content: Maria Chen places an order for 3 books (success path,
   the canonical demo scene from demo_apps/bookhouse).
 
-  Dependencies: none. All CSS scoped under .ez-card to avoid
-  bleeding into Carrd's own styles. Fonts assumed loaded by the
-  page (Inter + JetBrains Mono); falls back to system stack.
+  Dependencies: none. All CSS scoped under .ez-card so it can be
+  inlined without bleeding into the page's own styles. Fonts assumed
+  loaded by the page (Inter + JetBrains Mono); falls back to system stack.
 -->
 <style>
   .ez-card {
