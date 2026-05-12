@@ -361,7 +361,8 @@
     <div class="nav__links">
       <a href="#install">Install</a>
       <a href="#faq">FAQ</a>
-      <a href="https://github.com/dezsirazvan/ez_logs" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://github.com/dezsirazvan/ez_logs_agent" target="_blank" rel="noopener" title="Rails agent source">Ruby</a>
+      <a href="https://github.com/dezsirazvan/ez_logs_agent_nextjs" target="_blank" rel="noopener" title="Next.js agent source">Next.js</a>
       <a href="https://app.ezlogs.io/users/sign_up" class="nav__cta" target="_blank" rel="noopener">Get your API key &rarr;</a>
     </div>
   </nav>
@@ -1466,6 +1467,11 @@
   #ez-tab-ruby:checked   ~ .ez-tabs__panel--ruby,
   #ez-tab-nextjs:checked ~ .ez-tabs__panel--nextjs { display: block; }
 
+  /* "Read the full setup guide" link: show only the one matching the active tab */
+  .ez-tabs__more-link { display: none; }
+  #ez-tab-ruby:checked   ~ .ez-tabs__more .ez-tabs__more-link--ruby,
+  #ez-tab-nextjs:checked ~ .ez-tabs__more .ez-tabs__more-link--nextjs { display: inline; }
+
   .ez-codeblock {
     background: var(--bg);
     border: 1px solid var(--line);
@@ -1580,7 +1586,8 @@
   </div>
 
   <p class="ez-tabs__more">
-    <a href="https://github.com/dezsirazvan/ez_logs" target="_blank" rel="noopener">Read the full setup guide →</a>
+    <a class="ez-tabs__more-link ez-tabs__more-link--ruby"   href="https://github.com/dezsirazvan/ez_logs_agent#readme"        target="_blank" rel="noopener">Read the full setup guide →</a>
+    <a class="ez-tabs__more-link ez-tabs__more-link--nextjs" href="https://github.com/dezsirazvan/ez_logs_agent_nextjs#readme" target="_blank" rel="noopener">Read the full setup guide →</a>
   </p>
 </div>
 </div>
@@ -1899,7 +1906,9 @@
     </div>
     <p class="footer__tagline">Activity logs your whole team can read.</p>
     <div class="footer__links">
-      <a href="https://github.com/dezsirazvan/ez_logs" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://github.com/dezsirazvan/ez_logs_agent" target="_blank" rel="noopener">Ruby agent</a>
+      <span style="color:var(--faint);">&middot;</span>
+      <a href="https://github.com/dezsirazvan/ez_logs_agent_nextjs" target="_blank" rel="noopener">Next.js agent</a>
       <span style="color:var(--faint);">&middot;</span>
       <a href="https://app.ezlogs.io" target="_blank" rel="noopener">Sign in</a>
       <span style="color:var(--faint);">&middot;</span>
