@@ -58,7 +58,27 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
 
   <style>
+    /* EZL_TOKENS_INJECT — design tokens are spliced in here at publish
+       time by build-preview.sh from
+       ez_logs_server/app/assets/tailwind/tokens.css (the SHARED block).
+       The fallback :root below mirrors the current shared values so
+       local-file preview (without running build-preview.sh) still
+       renders correctly. */
     :root {
+      /* ---- Brand Colors --------------------------------------------------- */
+      --color-primary: #01E63E;
+      --color-primary-hover: #02C938;
+      --color-primary-light: #E6FFF0;
+      --color-primary-ring: #01E63E;
+
+      /* Dark-surface alias for the same neon green. Lets the landing /
+         Pulse / embed code refer to it as `--green` without rewriting
+         every existing landing rule. */
+      --green: #01E63E;
+      --green-soft: rgba(1, 230, 62, 0.14);
+      --green-faint: rgba(1, 230, 62, 0.05);
+
+      /* ---- Dark-surface Tokens (Pulse, public shares, embeds, landing) --- */
       --bg-0: #0A0A0A;
       --bg-1: #0F0F10;
       --bg-2: #131314;
@@ -67,13 +87,31 @@
       --text: rgba(255, 255, 255, 0.96);
       --muted: rgba(255, 255, 255, 0.66);
       --faint: rgba(255, 255, 255, 0.42);
-      --green: #01E63E;
-      --green-soft: rgba(1, 230, 62, 0.14);
-      --green-faint: rgba(1, 230, 62, 0.05);
+
+      /* ---- Typography ---------------------------------------------------- */
       --font: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
       --display: "Space Grotesk", var(--font);
       --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+      /* ---- Spacing (4px base unit) --------------------------------------- */
+      --space-1: 0.25rem;
+      --space-2: 0.5rem;
+      --space-3: 0.75rem;
+      --space-4: 1rem;
+      --space-6: 1.5rem;
+      --space-8: 2rem;
+
+      /* ---- Border Radius ------------------------------------------------- */
+      --radius-sm: 0.25rem;
+      --radius-md: 0.375rem;
+      --radius-lg: 0.5rem;
+      --radius-full: 9999px;
+
+      /* ---- Transitions --------------------------------------------------- */
+      --transition-fast: 150ms;
+      --transition-normal: 200ms;
     }
+    /* EZL_TOKENS_INJECT_END */
     * { box-sizing: border-box; }
     html, body {
       margin: 0; padding: 0;
@@ -289,6 +327,145 @@
       color: var(--green);
       letter-spacing: -0.005em;
     }
+    /* Two readers (Pulse + MCP/Chat) */
+    .readers {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    @media (min-width: 820px) { .readers { grid-template-columns: 1fr 1fr; } }
+    .reader {
+      padding: 32px 28px;
+      background: var(--bg-0);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .reader__tag {
+      align-self: flex-start;
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--green);
+      background: rgba(1,230,62,0.08);
+      border: 1px solid rgba(1,230,62,0.22);
+      padding: 4px 10px;
+      border-radius: 999px;
+    }
+    .reader__title {
+      margin: 0;
+      font-family: var(--display);
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: -0.01em;
+    }
+    .reader__body {
+      margin: 0;
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+    .reader__quote {
+      margin: 4px 0 0;
+      padding: 10px 12px;
+      border-left: 2px solid rgba(1,230,62,0.30);
+      font-family: var(--mono);
+      font-size: 12.5px;
+      color: var(--text);
+      background: rgba(1,230,62,0.04);
+      border-radius: 4px;
+    }
+    .reader__cite {
+      display: inline-block;
+      padding: 1px 6px;
+      margin: 0 1px;
+      border-radius: 5px;
+      background: rgba(1,230,62,0.08);
+      border: 1px solid rgba(1,230,62,0.22);
+      color: var(--green);
+      font-family: var(--mono);
+      font-size: 11px;
+    }
+    .reader__shot {
+      margin: 0;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--line-strong);
+      background: #0a0a0a;
+      box-shadow: 0 12px 32px rgba(0,0,0,0.45);
+    }
+    .reader__shot img { width: 100%; display: block; height: auto; }
+
+    /* Proof gallery — captions + screenshots from a real ACME-INC tenant.
+       Single column, full-width screenshots with text beside on desktop
+       (alternating sides), stacked on mobile. Keeps the 1280-wide
+       dashboards legible. */
+    .proof {
+      display: flex;
+      flex-direction: column;
+      gap: 56px;
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+    .proof__item {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+      align-items: center;
+    }
+    @media (min-width: 920px) {
+      .proof__item {
+        grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr);
+        gap: 40px;
+      }
+      .proof__item--flip { grid-template-columns: minmax(0, 1fr) minmax(0, 1.7fr); }
+      .proof__item--flip .proof__shot { order: 2; }
+      .proof__item--flip .proof__text { order: 1; }
+    }
+    .proof__shot {
+      margin: 0;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--line-strong);
+      background: #0a0a0a;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.50);
+      transition: transform 200ms ease, box-shadow 200ms ease;
+    }
+    .proof__item:hover .proof__shot {
+      transform: translateY(-2px);
+      box-shadow: 0 22px 52px rgba(0,0,0,0.58);
+    }
+    .proof__shot img { width: 100%; display: block; height: auto; }
+    .proof__text { display: flex; flex-direction: column; gap: 12px; }
+    .proof__caption {
+      font-family: var(--mono);
+      font-size: 11.5px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--green);
+    }
+    .proof__title {
+      margin: 0;
+      font-family: var(--display);
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: -0.01em;
+      line-height: 1.25;
+    }
+    .proof__body {
+      margin: 0;
+      font-size: 14.5px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
     .pillar__body {
       margin: 0;
       font-size: 15px;
@@ -361,9 +538,8 @@
     <div class="nav__links">
       <a href="#install">Install</a>
       <a href="#faq">FAQ</a>
-      <a href="https://github.com/dezsirazvan/ez_logs_agent" target="_blank" rel="noopener" title="Rails agent source">Ruby</a>
-      <a href="https://github.com/dezsirazvan/ez_logs_agent_nextjs" target="_blank" rel="noopener" title="Next.js agent source">Next.js</a>
-      <a href="https://app.ezlogs.io/users/sign_up" class="nav__cta" target="_blank" rel="noopener">Get your API key &rarr;</a>
+      <a href="https://github.com/dezsirazvan/ez_logs" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://app.ezlogs.io/sign_up" class="nav__cta" target="_blank" rel="noopener">Get your API key &rarr;</a>
     </div>
   </nav>
 
@@ -373,7 +549,7 @@
       <h1 class="hero__title">Activity logs your whole team can read.</h1>
       <p class="hero__sub">EZLogs captures requests, jobs, and database changes from your Rails or Next.js app, then turns them into plain-English actions anyone in your company can follow.</p>
       <div class="hero__ctas">
-        <a class="btn btn--primary" href="https://app.ezlogs.io/users/sign_up" target="_blank" rel="noopener">Get your API key &rarr;</a>
+        <a class="btn btn--primary" href="https://app.ezlogs.io/sign_up" target="_blank" rel="noopener">Get your API key &rarr;</a>
         <a class="btn btn--ghost" href="#action">See a real action &darr;</a>
       </div>
       <div data-embed="signature-animation.html">
@@ -971,6 +1147,118 @@
     </div>
   </section>
 
+  <!-- Section 3.5: Two readers — humans + your AI -->
+  <section class="section section--alt">
+    <div class="section__inner">
+      <div class="section__head">
+        <span class="section__eyebrow"><span class="num">02b</span>Two readers, one source</span>
+        <h2 class="section__title section__title--wide">Humans browse it. Your AI queries it. Same source of truth.</h2>
+        <p class="section__sub">By end of 2026, AI agents will do 30&ndash;60% of meaningful work inside production apps. Nobody has a clean way to see that work or explain it to non-technical colleagues. EZLogs is the activity log built for both readers at once.</p>
+      </div>
+
+      <div class="readers">
+        <article class="reader">
+          <span class="reader__tag">For your team</span>
+          <h3 class="reader__title">A live page for everything that matters.</h3>
+          <p class="reader__body">Every customer, every order, every agent &mdash; each one has its own page that reads itself. "Here's what Claude did this week. Here's what happened to Order #4300." Send the link to anyone. No training needed.</p>
+          <figure class="reader__shot">
+            <img src="assets/screenshots/05-pulse-actor-claude.png" alt="Pulse page for the Claude agent: status, recent activity, citations" loading="lazy">
+          </figure>
+        </article>
+
+        <article class="reader">
+          <span class="reader__tag">For your AI</span>
+          <h3 class="reader__title">Your AI can read the same log, and answer in your words.</h3>
+          <p class="reader__body">Ask in the sidebar, or connect Claude / Cursor / ChatGPT to EZLogs and ask them. Same data, same answer, with citations you can click through. Your AI finally has memory of what your app did.</p>
+          <figure class="reader__shot">
+            <img src="assets/screenshots/09-chat-q1-today.png" alt="In-app chat answering 'What happened today and was anything bad?' with citation chips on every action" loading="lazy">
+          </figure>
+        </article>
+      </div>
+
+      <p class="section__caption">No write access, ever. EZLogs explains the work; it never performs it.</p>
+    </div>
+  </section>
+
+  <!-- Section 3.6: Proof — real screenshots from a real tenant -->
+  <section class="section">
+    <div class="section__inner">
+      <div class="section__head">
+        <span class="section__eyebrow"><span class="num">02c</span>Proof</span>
+        <h2 class="section__title section__title--wide">This is what your team sees on day one.</h2>
+        <p class="section__sub">Six real screens from a real company ("ACME-INC") after one week of using EZLogs. No mockups, no marketing edits &mdash; this is the product.</p>
+      </div>
+
+      <div class="proof">
+        <article class="proof__item">
+          <figure class="proof__shot">
+            <img src="assets/screenshots/01-dashboard.png" alt="EZLogs dashboard: today's actions count, issues count, most active users + entities, what's happening feed" loading="lazy">
+          </figure>
+          <div class="proof__text">
+            <span class="proof__caption">01 &middot; Dashboard</span>
+            <h3 class="proof__title">Open it Monday morning. Know how your week's going.</h3>
+            <p class="proof__body">How busy was the app today, what's gone wrong, who did the most work, what got touched the most. It reads like a status update someone wrote for you &mdash; "<em>Created order 'Order #4408'</em>", "<em>Updated ticket 'Ticket T-6954 (Globex Industries)'</em>" &mdash; not a wall of server logs.</p>
+          </div>
+        </article>
+
+        <article class="proof__item proof__item--flip">
+          <figure class="proof__shot">
+            <img src="assets/screenshots/02-timeline.png" alt="Activity timeline with filters: search, user, entity type, entity id, date range, status" loading="lazy">
+          </figure>
+          <div class="proof__text">
+            <span class="proof__caption">02 &middot; Timeline</span>
+            <h3 class="proof__title">Every action, by anyone, on anything &mdash; in one searchable feed.</h3>
+            <p class="proof__body">"What did Sarah do yesterday?" "Who touched order #4408?" "Show me everything that failed this week." Type it, filter it, find it. The same feed your customer support team will live in.</p>
+          </div>
+        </article>
+
+        <article class="proof__item">
+          <figure class="proof__shot">
+            <img src="assets/screenshots/03-action-success.png" alt="Action detail for 'Created order Order #4300': triggered by sarah@acme.com, business entities, behind-the-scenes events" loading="lazy">
+          </figure>
+          <div class="proof__text">
+            <span class="proof__caption">03 &middot; A single action, end to end</span>
+            <h3 class="proof__title">Click anything. See the whole story on one page.</h3>
+            <p class="proof__body">Sarah placed Order #4300. Who, when, how long it took, did it succeed, what got created in the database. No more "let me ask engineering to check the logs" &mdash; the page is the answer.</p>
+          </div>
+        </article>
+
+        <article class="proof__item proof__item--flip">
+          <figure class="proof__shot">
+            <img src="assets/screenshots/04-action-failure.png" alt="Failed order action: Stripe gateway timeout, Order created in pending then flipped to failed, retry job also failed" loading="lazy">
+          </figure>
+          <div class="proof__text">
+            <span class="proof__caption">04 &middot; When things go wrong</span>
+            <h3 class="proof__title">When something breaks, you know what broke and why.</h3>
+            <p class="proof__body">Order #3500 tried to charge a card. Stripe took 30 seconds and timed out. The order sits in <em>pending</em>. One glance and you know it's a payment problem &mdash; not "the website is down", not "the database crashed". You can tell the customer the truth.</p>
+          </div>
+        </article>
+
+        <article class="proof__item">
+          <figure class="proof__shot">
+            <img src="assets/screenshots/06-pulse-entity-order.png" alt="Pulse page for Order #4300: live state, recent activity, who touched it" loading="lazy">
+          </figure>
+          <div class="proof__text">
+            <span class="proof__caption">05 &middot; A live page for every thing in your app</span>
+            <h3 class="proof__title">Every order, every customer, every ticket &mdash; gets its own page.</h3>
+            <p class="proof__body">Type the order number, open the page, send the link to anyone in your company. "Here's the full history of Order #4300." It updates itself as things happen. No screenshots, no Slack threads, no engineer in the loop.</p>
+          </div>
+        </article>
+
+        <article class="proof__item proof__item--flip">
+          <figure class="proof__shot">
+            <img src="assets/screenshots/10-chat-q2-top-user.png" alt="Chat answering 'Who is the most active user this week and what did they do?' with the top_lists tool returning Claude / 19 actions and a per-action citation list" loading="lazy">
+          </figure>
+          <div class="proof__text">
+            <span class="proof__caption">06 &middot; Just ask</span>
+            <h3 class="proof__title">Don't want to click around? Just ask in plain English.</h3>
+            <p class="proof__body">"What happened today and was anything bad?" "Who's our busiest customer this week?" "Why did Order #3500 fail?" The chat answers in a sentence, and every claim links straight to the action that proves it. No SQL, no dashboards to build.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
   <!-- Section 4: A real action, end to end -->
   <section class="section section--alt" id="action">
     <div class="section__inner">
@@ -1467,11 +1755,6 @@
   #ez-tab-ruby:checked   ~ .ez-tabs__panel--ruby,
   #ez-tab-nextjs:checked ~ .ez-tabs__panel--nextjs { display: block; }
 
-  /* "Read the full setup guide" link: show only the one matching the active tab */
-  .ez-tabs__more-link { display: none; }
-  #ez-tab-ruby:checked   ~ .ez-tabs__more .ez-tabs__more-link--ruby,
-  #ez-tab-nextjs:checked ~ .ez-tabs__more .ez-tabs__more-link--nextjs { display: inline; }
-
   .ez-codeblock {
     background: var(--bg);
     border: 1px solid var(--line);
@@ -1573,11 +1856,11 @@
   <div class="ez-tabs__panel ez-tabs__panel--nextjs" role="tabpanel" aria-label="Next.js install">
     <div class="ez-codeblock">
       <div class="ez-codeblock__head"><span>terminal</span><span>1 line</span></div>
-<pre><span class="o">$</span> <span class="k">npm</span> <span class="p">install</span> <span class="v">ezlogs-nextjs</span></pre>
+<pre><span class="o">$</span> <span class="k">npm</span> <span class="p">install</span> <span class="v">@ezlogs/nextjs</span></pre>
     </div>
     <div class="ez-codeblock">
       <div class="ez-codeblock__head"><span>next.config.ts</span><span>2 lines</span></div>
-<pre><span class="k">import</span> { withEzlogs } <span class="k">from</span> <span class="s">"ezlogs-nextjs/build"</span>;
+<pre><span class="k">import</span> { withEzlogs } <span class="k">from</span> <span class="s">"@ezlogs/nextjs/build"</span>;
 <span class="k">export default</span> <span class="g">withEzlogs</span>({ apiKey: <span class="v">process</span>.env.<span class="v">EZLOGS_API_KEY</span> });</pre>
     </div>
     <p class="ez-tabs__caption">
@@ -1586,8 +1869,7 @@
   </div>
 
   <p class="ez-tabs__more">
-    <a class="ez-tabs__more-link ez-tabs__more-link--ruby"   href="https://github.com/dezsirazvan/ez_logs_agent#readme"        target="_blank" rel="noopener">Read the full setup guide →</a>
-    <a class="ez-tabs__more-link ez-tabs__more-link--nextjs" href="https://github.com/dezsirazvan/ez_logs_agent_nextjs#readme" target="_blank" rel="noopener">Read the full setup guide →</a>
+    <a href="https://github.com/dezsirazvan/ez_logs" target="_blank" rel="noopener">Read the full setup guide →</a>
   </p>
 </div>
 </div>
@@ -1728,7 +2010,7 @@
         <p class="section__sub">Unlimited events, unlimited team members, no card required. Beta accounts keep their free tier when we launch &mdash; forever.</p>
       </div>
       <div class="pricing">
-        <a class="btn btn--primary" href="https://app.ezlogs.io/users/sign_up" target="_blank" rel="noopener">Get your API key &rarr;</a>
+        <a class="btn btn--primary" href="https://app.ezlogs.io/sign_up" target="_blank" rel="noopener">Get your API key &rarr;</a>
       </div>
     </div>
   </section>
@@ -1906,9 +2188,7 @@
     </div>
     <p class="footer__tagline">Activity logs your whole team can read.</p>
     <div class="footer__links">
-      <a href="https://github.com/dezsirazvan/ez_logs_agent" target="_blank" rel="noopener">Ruby agent</a>
-      <span style="color:var(--faint);">&middot;</span>
-      <a href="https://github.com/dezsirazvan/ez_logs_agent_nextjs" target="_blank" rel="noopener">Next.js agent</a>
+      <a href="https://github.com/dezsirazvan/ez_logs" target="_blank" rel="noopener">GitHub</a>
       <span style="color:var(--faint);">&middot;</span>
       <a href="https://app.ezlogs.io" target="_blank" rel="noopener">Sign in</a>
       <span style="color:var(--faint);">&middot;</span>
