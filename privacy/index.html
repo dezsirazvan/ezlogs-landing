@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy &mdash; EZLogs</title>
+  <meta name="description" content="How EZLogs collects, processes, and stores customer event data. GDPR-aligned, EU-hosted, read-only by design.">
+  <link rel="canonical" href="https://ezlogs.io/privacy/">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#0A0A0A">
+  <meta name="color-scheme" content="dark">
+  <link rel="icon" type="image/x-icon" href="/assets/favicon/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+  <link rel="manifest" href="/assets/favicon/site.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="/assets/css/subpage.css">
+</head>
+<body>
+
+  <nav class="nav">
+    <a class="nav__brand" href="/">
+      <img src="/assets/EZLogo-mark.svg" alt="" width="28" height="28">
+      EZLogs
+    </a>
+    <div class="nav__links">
+      <a href="/#install">Install</a>
+      <a href="/#faq">FAQ</a>
+      <a href="https://github.com/dezsirazvan/ez_logs_agent" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://app.ezlogs.io/users/sign_up" class="nav__cta" target="_blank" rel="noopener">Start free &mdash; 14 days</a>
+    </div>
+  </nav>
+
+  <main class="doc">
+    <p class="doc__eyebrow">Legal</p>
+    <h1>Privacy Policy</h1>
+    <p class="doc__meta">Effective date: 17 May 2026 &middot; Version 1.0</p>
+
+    <p class="doc__lead">EZLogs is a product that captures activity from your applications and turns it into plain-English logs. This policy explains what data we collect, why we collect it, where we store it, and what rights you have over it.</p>
+
+    <h2>1. Who we are</h2>
+    <p>EZLogs is operated by <strong>Razvan Dezsi</strong>, a sole trader and tax resident in Spain (NIE Y8228368V). For privacy-related questions, contact <a href="mailto:hello@ezlogs.io">hello@ezlogs.io</a>.</p>
+    <p>For the purposes of the EU General Data Protection Regulation (GDPR), Razvan Dezsi is the <strong>data controller</strong> for personal data we collect about you (the EZLogs customer). For the event data your application sends to EZLogs, we act as a <strong>data processor</strong> on your behalf &mdash; see Section 5.</p>
+
+    <h2>2. What data we collect</h2>
+
+    <h3>2.1 Account data</h3>
+    <p>When you sign up for an EZLogs account we collect:</p>
+    <ul>
+      <li><strong>Email address</strong> &mdash; used for authentication, billing receipts, and product communication.</li>
+      <li><strong>Hashed password</strong> &mdash; we never store plaintext passwords; they are hashed with bcrypt before being written to the database.</li>
+      <li><strong>Organization / company name</strong> &mdash; the workspace label you choose.</li>
+      <li><strong>Billing information</strong> &mdash; processed by Stripe; we never see or store your card number. We receive only the last four digits, card brand, country, VAT ID (if you supply one), and billing email.</li>
+    </ul>
+
+    <h3>2.2 Event data sent by your application</h3>
+    <p>The EZLogs agent (Ruby gem <code>ez_logs_agent</code> or npm package <code>@ezlogs/nextjs</code>) sends us structured events about activity inside your application. Each event contains:</p>
+    <ul>
+      <li>HTTP request metadata (path, method, status code, duration, requesting user ID if your app sets one).</li>
+      <li>Background job metadata (job class name, queue, duration, success/failure).</li>
+      <li>Database change metadata (table name, primary key, the operation, and a redacted set of before/after column values).</li>
+    </ul>
+    <p>We do <strong>not</strong> store request bodies, response bodies, or full database rows unless you explicitly opt in. Field-level redaction is on by default for any column or parameter whose name matches <code>password</code>, <code>token</code>, <code>secret</code>, <code>key</code>, or <code>*_at</code> timestamps. You are responsible for any additional redaction needed to comply with your own privacy obligations to your end users.</p>
+
+    <h3>2.3 Technical data</h3>
+    <p>When you use the EZLogs web application, our servers automatically log standard technical information: IP address, browser type, pages visited, timestamps. We use this only to operate and secure the service, and we delete these logs after 90 days.</p>
+
+    <h3>2.4 Cookies and analytics</h3>
+    <p>We use one strictly necessary cookie (your authentication session) and, if you accept analytics, we load Google Analytics 4 to measure aggregate site usage. We do not load Google Analytics unless you accept the cookie banner. See <a href="/privacy/#cookies">Cookies</a> below for the full list.</p>
+
+    <h2>3. Why we use your data (legal bases)</h2>
+    <table>
+      <thead>
+        <tr><th>Purpose</th><th>Data used</th><th>Legal basis (GDPR)</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Provide the EZLogs service to you</td><td>Account data, event data</td><td>Contract (Art. 6(1)(b))</td></tr>
+        <tr><td>Bill you and comply with tax law</td><td>Billing data</td><td>Contract + legal obligation (Art. 6(1)(b), (c))</td></tr>
+        <tr><td>Secure the service against abuse</td><td>Technical data, account data</td><td>Legitimate interest (Art. 6(1)(f))</td></tr>
+        <tr><td>Send product updates and security notices</td><td>Email address</td><td>Legitimate interest (Art. 6(1)(f)); opt-out anytime</td></tr>
+        <tr><td>Measure aggregate website usage</td><td>Analytics cookies</td><td>Consent (Art. 6(1)(a)) &mdash; via the cookie banner</td></tr>
+      </tbody>
+    </table>
+
+    <h2>4. Where your data lives</h2>
+    <p>All EZLogs production data is stored in the European Union, specifically on servers operated by <strong>Hetzner Online GmbH</strong> in Germany. Backups are stored in the same jurisdiction. We do not transfer customer data outside the EU/EEA except where strictly necessary for a feature you have used (see Section 5).</p>
+
+    <h2>5. Third parties (subprocessors)</h2>
+    <p>To run EZLogs we rely on a small number of trusted service providers. Each one only receives the data it needs to perform its function. The current list is published at <a href="/subprocessors/">ezlogs.io/subprocessors</a> and we will notify you of material changes in advance.</p>
+    <p>For the AI-generated explanations feature: when EZLogs renders a plain-English explanation of an action, the structured (already-redacted) event data is sent to a large-language-model provider &mdash; currently <strong>Anthropic, PBC</strong> and/or <strong>OpenAI, L.L.C.</strong> &mdash; for the explanation generation. Both providers contractually agree not to train models on inference inputs. We cache and reuse explanations so the same event is not sent twice.</p>
+
+    <h2 id="cookies">6. Cookies</h2>
+    <table>
+      <thead>
+        <tr><th>Cookie</th><th>Purpose</th><th>Duration</th><th>Type</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>_session</code> (app)</td><td>Keeps you signed in</td><td>Session / 30 days</td><td>Strictly necessary</td></tr>
+        <tr><td><code>ezlogs.cookieConsent</code> (localStorage)</td><td>Remembers your cookie choice</td><td>Persistent</td><td>Strictly necessary</td></tr>
+        <tr><td><code>_ga</code>, <code>_ga_*</code></td><td>Google Analytics 4, aggregate usage</td><td>Up to 13 months</td><td>Analytics (opt-in)</td></tr>
+      </tbody>
+    </table>
+
+    <h2>7. How long we keep your data</h2>
+    <ul>
+      <li><strong>Account data:</strong> for as long as your account is active, plus 30 days after deletion to allow recovery.</li>
+      <li><strong>Event data:</strong> per the retention window of your plan (30, 90, or 365 days). Older events are permanently deleted.</li>
+      <li><strong>Billing records:</strong> 7 years, as required by Spanish and EU tax law.</li>
+      <li><strong>Technical logs:</strong> 90 days.</li>
+    </ul>
+
+    <h2>8. Your rights</h2>
+    <p>Under GDPR you have the right to:</p>
+    <ul>
+      <li>Access the personal data we hold about you.</li>
+      <li>Correct inaccurate data.</li>
+      <li>Delete your account and personal data ("right to be forgotten").</li>
+      <li>Export your account data in a portable format.</li>
+      <li>Object to or restrict certain processing.</li>
+      <li>Withdraw consent (e.g. analytics) at any time.</li>
+      <li>Lodge a complaint with your local data protection authority. In Spain, that is the <a href="https://www.aepd.es/" target="_blank" rel="noopener">Agencia Espa&ntilde;ola de Protecci&oacute;n de Datos</a>.</li>
+    </ul>
+    <p>To exercise any of these rights, email <a href="mailto:hello@ezlogs.io">hello@ezlogs.io</a>. We will respond within 30 days.</p>
+
+    <h2>9. Security</h2>
+    <p>We protect your data with TLS in transit, encrypted backups, hashed credentials, and least-privilege access controls. The architectural foundation is that EZLogs is <strong>read-only by design</strong> &mdash; we never write back into your application. See our <a href="/security/">Security page</a> for full detail.</p>
+
+    <h2>10. Children</h2>
+    <p>EZLogs is a B2B developer tool and is not directed at children under 16. We do not knowingly collect personal data from children.</p>
+
+    <h2>11. Changes to this policy</h2>
+    <p>We may update this policy as the product evolves. The effective date at the top reflects the most recent change. For material changes we will email account owners at least 14 days before they take effect.</p>
+
+    <h2>12. Contact</h2>
+    <p>Privacy questions: <a href="mailto:hello@ezlogs.io">hello@ezlogs.io</a>. Postal address available on request.</p>
+
+    <a class="doc__back" href="/">&larr; Back to home</a>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__brand">
+      <img src="/assets/EZLogo-mark.svg" alt="" width="24" height="24">
+      EZLogs
+    </div>
+    <p class="footer__tagline">Plain-English activity logs for every action in your app.</p>
+    <div class="footer__links">
+      <a href="https://github.com/dezsirazvan/ez_logs_agent" target="_blank" rel="noopener">GitHub</a>
+      <span style="color:var(--faint);">&middot;</span>
+      <a href="https://app.ezlogs.io" target="_blank" rel="noopener">Sign in</a>
+      <span style="color:var(--faint);">&middot;</span>
+      <a href="mailto:hello@ezlogs.io">Contact</a>
+    </div>
+    <div class="footer__legal">
+      <a href="/privacy/">Privacy</a>
+      <a href="/terms/">Terms</a>
+      <a href="/security/">Security</a>
+      <a href="/subprocessors/">Subprocessors</a>
+      <a href="/dpa/">DPA</a>
+    </div>
+    <p class="footer__copy">&copy; 2026 EZLogs. Activity logs everyone can read.</p>
+  </footer>
+
+  <div id="cookie-banner" class="cookie-banner" data-ga-id="">
+    <div class="cookie-banner__text">
+      We use one strictly-necessary cookie to keep you signed in. With your consent we also load <strong>Google Analytics</strong> to measure aggregate site usage. See our <a href="/privacy/#cookies">cookie policy</a>.
+    </div>
+    <div class="cookie-banner__actions">
+      <button type="button" data-action="decline">Decline</button>
+      <button type="button" class="is-primary" data-action="accept">Accept</button>
+    </div>
+  </div>
+  <script src="/assets/js/cookie-banner.js" defer></script>
+</body>
+</html>

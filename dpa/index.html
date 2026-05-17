@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Processing Agreement (DPA) &mdash; EZLogs</title>
+  <meta name="description" content="EZLogs standard Data Processing Agreement for customers processing personal data through the service. GDPR Article 28 compliant.">
+  <link rel="canonical" href="https://ezlogs.io/dpa/">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#0A0A0A">
+  <meta name="color-scheme" content="dark">
+  <link rel="icon" type="image/x-icon" href="/assets/favicon/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+  <link rel="manifest" href="/assets/favicon/site.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="/assets/css/subpage.css">
+</head>
+<body>
+
+  <nav class="nav">
+    <a class="nav__brand" href="/">
+      <img src="/assets/EZLogo-mark.svg" alt="" width="28" height="28">
+      EZLogs
+    </a>
+    <div class="nav__links">
+      <a href="/#install">Install</a>
+      <a href="/#faq">FAQ</a>
+      <a href="https://github.com/dezsirazvan/ez_logs_agent" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://app.ezlogs.io/users/sign_up" class="nav__cta" target="_blank" rel="noopener">Start free &mdash; 14 days</a>
+    </div>
+  </nav>
+
+  <main class="doc">
+    <p class="doc__eyebrow">Legal</p>
+    <h1>Data Processing Agreement</h1>
+    <p class="doc__meta">Effective date: 17 May 2026 &middot; Version 1.0 &middot; GDPR Article 28</p>
+
+    <p class="doc__lead">This Data Processing Agreement ("DPA") governs the processing of personal data by EZLogs on your behalf when you use the service. It is incorporated by reference into our <a href="/terms/">Terms of Service</a> and takes effect automatically when you sign up; no signature is required.</p>
+
+    <div class="doc__callout">
+      <strong>Need a signed copy?</strong> If your procurement process requires a counter-signed PDF, email <a href="mailto:hello@ezlogs.io">hello@ezlogs.io</a> with your legal entity name and we will return a signed copy within 3 business days at no charge.
+    </div>
+
+    <h2>1. Parties and roles</h2>
+    <p><strong>Data Controller:</strong> you (the EZLogs customer), with respect to the personal data you process through the service about your end users.</p>
+    <p><strong>Data Processor:</strong> Razvan Dezsi, sole trader and tax resident in Spain (NIE Y8228368V), trading as EZLogs.</p>
+
+    <h2>2. Subject matter and duration</h2>
+    <p>The Processor will process Personal Data on behalf of the Controller for the duration of the Controller&rsquo;s subscription to the EZLogs service, and for the retention period defined in the Controller&rsquo;s active plan.</p>
+
+    <h2>3. Nature and purpose of processing</h2>
+    <p>The Processor receives structured event data from the Controller&rsquo;s applications via the EZLogs agent (Ruby gem <code>ez_logs_agent</code> and/or npm package <code>@ezlogs/nextjs</code>), stores and correlates those events, renders them as human-readable activity logs, and exposes them to the Controller&rsquo;s users (and, if enabled, to AI agents the Controller authorizes via MCP).</p>
+
+    <h2>4. Types of personal data processed</h2>
+    <ul>
+      <li>End-user identifiers the Controller chooses to send (e.g. user ID, email, name).</li>
+      <li>HTTP request metadata associated with end-user actions (path, method, status, duration, requesting user ID).</li>
+      <li>Background job metadata (class name, queue, success/failure).</li>
+      <li>Database change metadata (table name, primary key, before/after column values that the Controller has not configured for redaction).</li>
+    </ul>
+    <p>The Controller is responsible for configuring agent-side redaction to ensure that special-category data (Art. 9 GDPR) and other sensitive fields are excluded before transmission to the Processor.</p>
+
+    <h2>5. Categories of data subjects</h2>
+    <ul>
+      <li>The Controller&rsquo;s end users (customers, employees, agents).</li>
+      <li>The Controller&rsquo;s internal staff who operate the application.</li>
+      <li>AI agents the Controller has integrated into the application.</li>
+    </ul>
+
+    <h2>6. Obligations of the Processor</h2>
+    <p>The Processor will:</p>
+    <ol>
+      <li>Process Personal Data only on documented instructions from the Controller (the act of sending data through the service constitutes such instruction; written instructions may be issued by email).</li>
+      <li>Ensure persons authorized to process the Personal Data are bound by confidentiality.</li>
+      <li>Implement appropriate technical and organizational measures (Section 9) to protect the data.</li>
+      <li>Engage subprocessors only as set out in Section 7.</li>
+      <li>Assist the Controller in responding to requests from data subjects exercising their GDPR rights.</li>
+      <li>Assist the Controller with security, breach notification, DPIA, and prior consultation obligations under Articles 32&ndash;36 GDPR.</li>
+      <li>On termination, delete or return all Personal Data per Section 8.</li>
+      <li>Make available all information necessary to demonstrate compliance with Article 28 GDPR.</li>
+    </ol>
+
+    <h2>7. Subprocessors</h2>
+    <p>The Controller authorizes the Processor to engage the subprocessors listed at <a href="/subprocessors/">ezlogs.io/subprocessors</a>. The Processor will notify the Controller by email at least 30 days before adding or replacing a subprocessor that processes material Personal Data. The Controller may object to the change in writing within that 30-day window; if a resolution cannot be reached, the Controller may terminate the affected service without penalty.</p>
+    <p>The Processor remains fully liable for the subprocessor&rsquo;s performance of its data-protection obligations.</p>
+
+    <h2>8. Deletion and return of data</h2>
+    <p>On termination of the agreement (or earlier on the Controller&rsquo;s written request), the Processor will, at the Controller&rsquo;s choice:</p>
+    <ul>
+      <li>Return all Personal Data via the in-app audit export feature (machine-readable format), or</li>
+      <li>Delete all Personal Data within 30 days, except where retention is required by EU or member-state law (e.g. billing records retained for 7 years per Spanish tax law).</li>
+    </ul>
+
+    <h2>9. Security measures (Article 32)</h2>
+    <p>The Processor implements:</p>
+    <ul>
+      <li>Encryption of data in transit (TLS 1.2+) and at rest (filesystem encryption on production hosts).</li>
+      <li>Access controls: SSH-key-only access to production, multi-tenant data isolation at the query layer, scoped per-user access for sensitive data (e.g. chat threads).</li>
+      <li>Field-level redaction by default at the agent layer for credentials, tokens, secrets, and sensitive fields.</li>
+      <li>Daily encrypted backups in the EU, retained for 14 days.</li>
+      <li>Rack::Attack rate-limiting and brute-force protection on authentication.</li>
+      <li>Architectural <strong>read-only</strong> design: EZLogs holds no write credentials into the Controller&rsquo;s application.</li>
+    </ul>
+    <p>See our <a href="/security/">Security page</a> for further detail.</p>
+
+    <h2>10. Breach notification</h2>
+    <p>The Processor will notify the Controller without undue delay, and in any event within 48 hours, of becoming aware of a Personal Data breach. The notification will include the categories and approximate number of data subjects and records affected, the likely consequences, and the measures taken or proposed to address it.</p>
+
+    <h2>11. International transfers</h2>
+    <p>Primary processing occurs in the European Union (Hetzner, Germany). Where a subprocessor processes data outside the EU/EEA (notably US-based subprocessors), the transfer is governed by the European Commission&rsquo;s Standard Contractual Clauses ("SCCs"), with supplementary measures as appropriate. The Controller authorizes the Processor to enter into SCCs with subprocessors on the Controller&rsquo;s behalf.</p>
+
+    <h2>12. Audit rights</h2>
+    <p>The Processor will respond to reasonable written requests for information needed for the Controller to demonstrate compliance with Article 28. For on-site audits, the Controller may request a third-party auditor of mutual agreement, no more than once every 12 months, with at least 60 days&rsquo; advance written notice, subject to confidentiality undertakings and at the Controller&rsquo;s expense.</p>
+
+    <h2>13. Liability</h2>
+    <p>Liability under this DPA is subject to the limitation-of-liability provisions in the Terms of Service.</p>
+
+    <h2>14. Governing law</h2>
+    <p>This DPA is governed by Spanish law and forms part of the agreement between the parties. In the event of conflict between this DPA and the Terms of Service with respect to data protection, this DPA prevails.</p>
+
+    <h2>15. Contact</h2>
+    <p>For DPA-related questions or to request a signed PDF copy: <a href="mailto:hello@ezlogs.io">hello@ezlogs.io</a>.</p>
+
+    <a class="doc__back" href="/">&larr; Back to home</a>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__brand">
+      <img src="/assets/EZLogo-mark.svg" alt="" width="24" height="24">
+      EZLogs
+    </div>
+    <p class="footer__tagline">Plain-English activity logs for every action in your app.</p>
+    <div class="footer__links">
+      <a href="https://github.com/dezsirazvan/ez_logs_agent" target="_blank" rel="noopener">GitHub</a>
+      <span style="color:var(--faint);">&middot;</span>
+      <a href="https://app.ezlogs.io" target="_blank" rel="noopener">Sign in</a>
+      <span style="color:var(--faint);">&middot;</span>
+      <a href="mailto:hello@ezlogs.io">Contact</a>
+    </div>
+    <div class="footer__legal">
+      <a href="/privacy/">Privacy</a>
+      <a href="/terms/">Terms</a>
+      <a href="/security/">Security</a>
+      <a href="/subprocessors/">Subprocessors</a>
+      <a href="/dpa/">DPA</a>
+    </div>
+    <p class="footer__copy">&copy; 2026 EZLogs. Activity logs everyone can read.</p>
+  </footer>
+
+  <div id="cookie-banner" class="cookie-banner" data-ga-id="">
+    <div class="cookie-banner__text">
+      We use one strictly-necessary cookie to keep you signed in. With your consent we also load <strong>Google Analytics</strong> to measure aggregate site usage. See our <a href="/privacy/#cookies">cookie policy</a>.
+    </div>
+    <div class="cookie-banner__actions">
+      <button type="button" data-action="decline">Decline</button>
+      <button type="button" class="is-primary" data-action="accept">Accept</button>
+    </div>
+  </div>
+  <script src="/assets/js/cookie-banner.js" defer></script>
+</body>
+</html>

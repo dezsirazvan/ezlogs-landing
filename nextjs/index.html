@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Activity Logs for Next.js &mdash; EZLogs</title>
+  <meta name="description" content="EZLogs is a Next.js activity log that auto-captures HTTP routes, Server Actions, and Postgres changes. Works with App Router, Pages, Prisma, Drizzle, Inngest, Trigger.dev. Plain-English cards your team can read.">
+  <meta name="keywords" content="next.js activity log, next.js audit log, nextjs activity log, ezlogs nextjs, server actions logging, prisma audit log, drizzle audit log, app router activity log">
+  <link rel="canonical" href="https://ezlogs.io/nextjs/">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#0A0A0A">
+  <meta name="color-scheme" content="dark">
+  <link rel="icon" type="image/x-icon" href="/assets/favicon/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+  <link rel="manifest" href="/assets/favicon/site.webmanifest">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="EZLogs">
+  <meta property="og:title" content="Activity logs for Next.js &mdash; App Router, Server Actions, Postgres.">
+  <meta property="og:description" content="Auto-captures HTTP routes, Server Actions, and database changes. Turns each customer or agent action into a plain-English card your whole team can read.">
+  <meta property="og:url" content="https://ezlogs.io/nextjs/">
+  <meta property="og:image" content="https://ezlogs.io/assets/og-image.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="/assets/css/subpage.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "EZLogs for Next.js (@ezlogs/nextjs)",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Web, Linux, macOS",
+    "description": "A Next.js activity log package that auto-captures HTTP routes, Server Actions, and Postgres changes and turns each customer or agent action into a plain-English card.",
+    "url": "https://ezlogs.io/nextjs/",
+    "downloadUrl": "https://www.npmjs.com/package/@ezlogs/nextjs",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "EUR",
+      "description": "14-day free trial. No card required."
+    }
+  }
+  </script>
+</head>
+<body>
+
+  <nav class="nav">
+    <a class="nav__brand" href="/">
+      <img src="/assets/EZLogo-mark.svg" alt="" width="28" height="28">
+      EZLogs
+    </a>
+    <div class="nav__links">
+      <a href="/#install">Install</a>
+      <a href="/#faq">FAQ</a>
+      <a href="https://github.com/dezsirazvan/ez_logs_agent_nextjs" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://app.ezlogs.io/users/sign_up" class="nav__cta" target="_blank" rel="noopener">Start free &mdash; 14 days</a>
+    </div>
+  </nav>
+
+  <main class="doc">
+    <p class="doc__eyebrow">EZLogs for Next.js</p>
+    <h1>Activity logs for Next.js &mdash; App Router, Server Actions, Postgres.</h1>
+    <p class="doc__lead">EZLogs is a Next.js activity log that auto-captures every HTTP route, every Server Action, and every Postgres change, then correlates them into one plain-English card per customer (or agent) action. Anyone on your team can read it &mdash; no log files, no grepping, no engineers needed.</p>
+
+    <h2>What gets captured automatically</h2>
+    <ul>
+      <li><strong>HTTP routes</strong> (App Router + Pages Router) &mdash; method, path, status, duration, requesting user if your app exposes one.</li>
+      <li><strong>Server Actions</strong> &mdash; the action name, arguments, return value, success/failure.</li>
+      <li><strong>Postgres changes</strong> via lightweight database triggers &mdash; table, primary key, operation, redacted before/after column values. Works with Prisma, Drizzle, supabase-js, Kysely, raw SQL.</li>
+      <li><strong>Background jobs</strong> via instrumentation hooks for BullMQ, Inngest, Trigger.dev, Upstash QStash, Supabase Queues.</li>
+    </ul>
+
+    <h2>Install in 60 seconds</h2>
+    <pre><code>npm install @ezlogs/nextjs</code></pre>
+    <pre><code>// next.config.ts
+import { withEzlogs } from "@ezlogs/nextjs/build";
+export default withEzlogs({ apiKey: process.env.EZLOGS_API_KEY });</code></pre>
+    <p>That&rsquo;s it. Restart your dev server, deploy to prod &mdash; HTTP routes, Server Actions, and DB changes start streaming into EZLogs immediately. Works with Turbopack and Webpack, App Router and Pages Router.</p>
+
+    <h2>Works with your stack</h2>
+    <ul>
+      <li><strong>ORMs / DB clients:</strong> Prisma, Drizzle, supabase-js, Kysely, raw <code>pg</code>.</li>
+      <li><strong>Background-job runners:</strong> BullMQ, Inngest, Trigger.dev, Upstash QStash, Supabase Queues.</li>
+      <li><strong>Auth:</strong> NextAuth / Auth.js (we read <code>session.user.id</code>), Clerk, Supabase Auth, custom JWT.</li>
+      <li><strong>Hosting:</strong> Vercel, Netlify, AWS, Cloudflare Workers, self-hosted Node.</li>
+    </ul>
+
+    <h2>How is this different from Sentry or Datadog?</h2>
+    <p>Those tools answer &ldquo;is the system healthy?&rdquo; with errors, traces, and metrics aimed at engineers debugging. EZLogs answers &ldquo;what happened to my customer?&rdquo; with business-level actions aimed at the whole company. They monitor the infrastructure. We explain the work.</p>
+
+    <h2>Performance and safety</h2>
+    <ul>
+      <li><strong>Edge-compatible:</strong> works in Edge runtime + Node runtime.</li>
+      <li><strong>Out-of-band:</strong> events buffered in memory, shipped asynchronously. Average overhead under 1 ms per request.</li>
+      <li><strong>Fails open:</strong> if EZLogs is unreachable, the agent buffers and retries. The agent <em>never</em> throws into your request path.</li>
+      <li><strong>Field-level redaction</strong> on by default for credentials, tokens, and sensitive columns.</li>
+      <li><strong>Open source</strong> at <a href="https://github.com/dezsirazvan/ez_logs_agent_nextjs" target="_blank" rel="noopener">github.com/dezsirazvan/ez_logs_agent_nextjs</a>.</li>
+    </ul>
+
+    <h2>Supported versions</h2>
+    <p>Next.js 13.4+ (App Router + Server Actions), Next.js 12+ (Pages Router). Node 18+. Postgres 13+ for trigger-based DB capture.</p>
+
+    <div class="doc__callout" style="text-align:center;">
+      <a href="https://app.ezlogs.io/users/sign_up" target="_blank" rel="noopener" style="display:inline-block; padding:12px 22px; background:var(--green); color:#000; font-weight:600; border-radius:10px; text-decoration:none;">Start free &mdash; 14 days &rarr;</a>
+      <p style="margin:14px 0 0; font-size:13px; color:var(--faint);">No card required &middot; Read-only by design</p>
+    </div>
+
+    <a class="doc__back" href="/">&larr; Back to home</a>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__brand">
+      <img src="/assets/EZLogo-mark.svg" alt="" width="24" height="24">
+      EZLogs
+    </div>
+    <p class="footer__tagline">Plain-English activity logs for every action in your app.</p>
+    <div class="footer__links">
+      <a href="https://github.com/dezsirazvan/ez_logs_agent" target="_blank" rel="noopener">GitHub</a>
+      <span style="color:var(--faint);">&middot;</span>
+      <a href="https://app.ezlogs.io" target="_blank" rel="noopener">Sign in</a>
+      <span style="color:var(--faint);">&middot;</span>
+      <a href="mailto:hello@ezlogs.io">Contact</a>
+    </div>
+    <div class="footer__legal">
+      <a href="/privacy/">Privacy</a>
+      <a href="/terms/">Terms</a>
+      <a href="/security/">Security</a>
+      <a href="/subprocessors/">Subprocessors</a>
+      <a href="/dpa/">DPA</a>
+    </div>
+    <p class="footer__copy">&copy; 2026 EZLogs. Activity logs everyone can read.</p>
+  </footer>
+
+  <div id="cookie-banner" class="cookie-banner" data-ga-id="">
+    <div class="cookie-banner__text">
+      We use one strictly-necessary cookie to keep you signed in. With your consent we also load <strong>Google Analytics</strong> to measure aggregate site usage. See our <a href="/privacy/#cookies">cookie policy</a>.
+    </div>
+    <div class="cookie-banner__actions">
+      <button type="button" data-action="decline">Decline</button>
+      <button type="button" class="is-primary" data-action="accept">Accept</button>
+    </div>
+  </div>
+  <script src="/assets/js/cookie-banner.js" defer></script>
+</body>
+</html>

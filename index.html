@@ -18,13 +18,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EZLogs &mdash; Activity logs your whole team can read</title>
-  <meta name="description" content="EZLogs captures requests, jobs, and database changes from your Rails or Next.js app, then turns them into plain-English actions anyone in your company can follow.">
+  <title>EZLogs &mdash; Plain-English activity logs for Rails &amp; Next.js apps (and the AI agents in them)</title>
+  <meta name="description" content="EZLogs auto-captures every request, job, and database change in your Rails or Next.js app and turns each action into one plain-English card. Built for your whole team — and your own AI agents. 14-day free trial.">
+  <meta name="keywords" content="activity log, audit log, rails activity log, next.js activity log, ai agent activity log, mcp server, plain english audit log, ezlogs">
 
   <!-- Canonical + theme -->
   <link rel="canonical" href="https://ezlogs.io/">
   <meta name="theme-color" content="#0A0A0A">
   <meta name="color-scheme" content="dark">
+
+  <!-- Google Search Console (URL-prefix property) -->
+  <!-- TODO: paste the content="..." value from GSC HTML-tag verification here -->
+  <!-- <meta name="google-site-verification" content="REPLACE_WITH_GSC_TOKEN"> -->
 
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="/assets/favicon/favicon.ico">
@@ -36,21 +41,180 @@
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="EZLogs">
-  <meta property="og:title" content="Activity logs your whole team can read.">
-  <meta property="og:description" content="Captures every request, job, and DB change. Turns them into one readable action card per customer event. Rails + Next.js. 14-day free trial.">
+  <meta property="og:title" content="Plain-English activity logs for every action in your app — human or AI.">
+  <meta property="og:description" content="EZLogs captures every request, job, and DB change in your Rails or Next.js app. Turns them into readable action cards for your team — and a queryable MCP surface for your AI. 14-day free trial.">
   <meta property="og:url" content="https://ezlogs.io/">
   <meta property="og:image" content="https://ezlogs.io/assets/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="EZLogs: Activity logs your whole team can read.">
+  <meta property="og:image:alt" content="EZLogs: Plain-English activity logs for every action in your app — human or AI.">
   <meta property="og:locale" content="en_US">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Activity logs your whole team can read.">
-  <meta name="twitter:description" content="Captures every request, job, and DB change. Turns them into one readable action card per customer event. Rails + Next.js. 14-day free trial.">
+  <meta name="twitter:title" content="Plain-English activity logs for every action in your app — human or AI.">
+  <meta name="twitter:description" content="EZLogs captures every request, job, and DB change in your Rails or Next.js app. Turns them into readable action cards for your team — and a queryable MCP surface for your AI.">
   <meta name="twitter:image" content="https://ezlogs.io/assets/og-image.png">
-  <meta name="twitter:image:alt" content="EZLogs: Activity logs your whole team can read.">
+  <meta name="twitter:image:alt" content="EZLogs: Plain-English activity logs for every action in your app — human or AI.">
+
+  <!-- Structured data (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "EZLogs",
+    "url": "https://ezlogs.io/",
+    "logo": "https://ezlogs.io/assets/favicon/icon-512.png",
+    "description": "EZLogs is an activity-log product that auto-captures every request, background job, and database change in Rails or Next.js apps and turns each action into a plain-English card readable by humans and queryable by AI agents via MCP.",
+    "foundingDate": "2026",
+    "sameAs": [
+      "https://github.com/dezsirazvan/ez_logs_agent"
+    ],
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "email": "hello@ezlogs.io",
+      "contactType": "customer support"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "EZLogs",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Web, Linux, macOS",
+    "description": "Auto-captures every request, background job, and database change in Rails or Next.js apps and turns each action into a plain-English card readable by humans and queryable by AI agents via MCP.",
+    "url": "https://ezlogs.io/",
+    "image": "https://ezlogs.io/assets/og-image.png",
+    "offers": [
+      {
+        "@type": "Offer",
+        "name": "Free trial",
+        "price": "0",
+        "priceCurrency": "EUR",
+        "description": "14-day free trial. No card required.",
+        "url": "https://app.ezlogs.io/users/sign_up"
+      },
+      {
+        "@type": "Offer",
+        "name": "Solo",
+        "price": "19",
+        "priceCurrency": "EUR",
+        "description": "1 seat. 75,000 actions / month. 30-day retention. 100 chat messages / month.",
+        "url": "https://app.ezlogs.io/users/sign_up"
+      },
+      {
+        "@type": "Offer",
+        "name": "Team",
+        "price": "79",
+        "priceCurrency": "EUR",
+        "description": "10 seats. 750,000 actions / month. 90-day retention. 1,000 chat messages / month.",
+        "url": "https://app.ezlogs.io/users/sign_up"
+      },
+      {
+        "@type": "Offer",
+        "name": "Business",
+        "price": "249",
+        "priceCurrency": "EUR",
+        "description": "Unlimited seats. 7,500,000 actions / month. 365-day retention. 10,000 chat messages / month.",
+        "url": "https://app.ezlogs.io/users/sign_up"
+      }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What does EZLogs actually do?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It records every request, background job, and database change in your app, links them by user action, and turns each chain into one plain-English card — so anyone on your team can read what happened, not just the engineers."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Will it slow down my app?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. The agent runs out-of-band: events are buffered in memory and shipped to EZLogs over a separate connection. If our service is down, the agent fails open and your app keeps running. Average overhead in benchmarks: under 1 ms per request."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What happens if EZLogs is down?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Your app keeps serving traffic. The agent buffers up to 10,000 events in memory and retries with exponential backoff. If the buffer overflows, it drops the oldest events — never the customer's request."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How is this different from Datadog, New Relic, or Honeycomb?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Those tools are for engineers, and they answer 'is the system healthy?' EZLogs is for everyone, and it answers 'what happened to my customer?' We don't compete with metrics. We're the layer above them."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do you store my customer data?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "We store the events your app sends us — request paths, job names, table names, and the before/after values you explicitly capture. We do not store request bodies, response bodies, or full database rows unless you opt in. Field-level redaction is on by default for any column matching password, token, secret, key, or *_at timestamps."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What languages and frameworks are supported today?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Ruby on Rails (Sidekiq, ActiveJob, ActiveRecord) and Next.js (App Router, Pages Router, Server Actions, Prisma, Drizzle, supabase-js, BullMQ, Inngest, Trigger.dev, Upstash, Supabase Queues). FastAPI is next."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I self-host?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Not yet. Self-host is on the post-launch roadmap. If self-hosting is a hard requirement for you, email hello@ezlogs.io — we want to talk."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the AI explanation accurate?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The AI only writes sentences using the structured events your app actually sent. It never invents data. If it doesn't know, it says so. Every generated explanation is cached and reproducible — re-running the same action produces the same words."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What happens when my free trial ends?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Your app keeps running normally — EZLogs just stops accepting new events from it. The data you already collected stays exactly where it is, browseable, shareable, and exportable. Pick a plan any time to resume ingestion; the agent reconnects on its next request, no redeploy needed."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Google Analytics 4 -->
+  <!-- TODO: replace G-XXXXXXXXXX with the GA4 Measurement ID from the user -->
+  <!--
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+  -->
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -268,7 +432,15 @@
     }
     .hero__ctas {
       display: flex; gap: 14px; justify-content: center; align-items: center; flex-wrap: wrap;
-      margin-bottom: 56px;
+      margin-bottom: 18px;
+    }
+    .hero__trust {
+      margin: 0 auto 56px;
+      max-width: 580px;
+      text-align: center;
+      font-size: 13px;
+      color: var(--faint);
+      letter-spacing: 0.01em;
     }
     .btn {
       display: inline-flex; align-items: center; gap: 8px;
@@ -582,8 +754,8 @@
       color: var(--muted);
     }
     .footer__links {
-      display: inline-flex; gap: 14px; flex-wrap: wrap; justify-content: center;
-      margin-bottom: 24px;
+      display: flex; gap: 14px; flex-wrap: wrap; justify-content: center;
+      margin: 0 0 14px;
     }
     .footer__links a {
       color: var(--muted);
@@ -591,7 +763,60 @@
       transition: color 160ms ease;
     }
     .footer__links a:hover { color: var(--green); }
-    .footer__copy { color: var(--faint); font-size: 12px; }
+    .footer__legal {
+      display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;
+      margin: 0 0 18px;
+      font-size: 12.5px;
+    }
+    .footer__legal a { color: var(--faint); text-decoration: none; transition: color 160ms ease; }
+    .footer__legal a:hover { color: var(--muted); }
+    .footer__copy { color: var(--faint); font-size: 12px; margin: 0; }
+
+    /* Cookie banner */
+    .cookie-banner {
+      position: fixed;
+      left: 16px; right: 16px; bottom: 16px;
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 14px 16px;
+      background: rgba(15, 15, 16, 0.96);
+      border: 1px solid var(--line-strong);
+      border-radius: 12px;
+      display: none;
+      align-items: center;
+      gap: 12px;
+      z-index: 1000;
+      font-size: 13.5px;
+      color: var(--muted);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+    }
+    .cookie-banner.is-visible { display: flex; }
+    @media (max-width: 540px) {
+      .cookie-banner { flex-direction: column; align-items: stretch; gap: 10px; }
+    }
+    .cookie-banner__text { flex: 1; }
+    .cookie-banner__text a { color: var(--green); text-decoration: none; }
+    .cookie-banner__actions { display: flex; gap: 8px; flex-shrink: 0; }
+    .cookie-banner button {
+      border: 1px solid var(--line-strong);
+      background: transparent;
+      color: var(--text);
+      border-radius: 8px;
+      padding: 8px 14px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background 160ms ease, filter 160ms ease;
+    }
+    .cookie-banner button:hover { background: rgba(255, 255, 255, 0.04); }
+    .cookie-banner button.is-primary {
+      background: var(--green);
+      color: #000;
+      border-color: var(--green);
+    }
+    .cookie-banner button.is-primary:hover { filter: brightness(1.05); }
 </style>
 </head>
 <body>
@@ -609,20 +834,21 @@
     <div class="nav__links">
       <a href="#install">Install</a>
       <a href="#faq">FAQ</a>
-      <a href="https://github.com/dezsirazvan/ez_logs" target="_blank" rel="noopener">GitHub</a>
-      <a href="https://app.ezlogs.io/users/sign_up" class="nav__cta" target="_blank" rel="noopener">Get your API key &rarr;</a>
+      <a href="https://github.com/dezsirazvan/ez_logs_agent" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://app.ezlogs.io/users/sign_up" class="nav__cta" target="_blank" rel="noopener">Start free &mdash; 14 days</a>
     </div>
   </nav>
 
   <!-- Section 1: Hero -->
   <section class="hero">
     <div class="hero__inner">
-      <h1 class="hero__title">Activity logs your whole team can read.</h1>
-      <p class="hero__sub">EZLogs captures requests, jobs, and database changes from your Rails or Next.js app, then turns them into plain-English actions anyone in your company can follow.</p>
+      <h1 class="hero__title">Plain-English activity logs for every action in your app &mdash; human or AI.</h1>
+      <p class="hero__sub">EZLogs auto-captures every request, background job, and database change in your Rails or Next.js app, then turns each customer or agent action into one plain-English card your whole team &mdash; and your own AI &mdash; can read.</p>
       <div class="hero__ctas">
-        <a class="btn btn--primary" href="https://app.ezlogs.io/users/sign_up" target="_blank" rel="noopener">Get your API key &rarr;</a>
+        <a class="btn btn--primary" href="https://app.ezlogs.io/users/sign_up" target="_blank" rel="noopener">Start free &mdash; 14 days</a>
         <a class="btn btn--ghost" href="#action">See a real action &darr;</a>
       </div>
+      <p class="hero__trust">Drop-in for Rails and Next.js &middot; No card required &middot; Read-only by design</p>
       <div data-embed="signature-animation.html">
 <!-- INLINED FROM embeds/signature-animation.html -->
 <!--
@@ -1940,7 +2166,7 @@
   </div>
 
   <p class="ez-tabs__more">
-    <a href="https://github.com/dezsirazvan/ez_logs" target="_blank" rel="noopener">Read the full setup guide →</a>
+    <a href="https://github.com/dezsirazvan/ez_logs_agent" target="_blank" rel="noopener">Read the full setup guide →</a>
   </p>
 </div>
 </div>
@@ -2313,16 +2539,34 @@
 </svg>
       EZLogs
     </div>
-    <p class="footer__tagline">Activity logs your whole team can read.</p>
+    <p class="footer__tagline">Plain-English activity logs for every action in your app.</p>
     <div class="footer__links">
-      <a href="https://github.com/dezsirazvan/ez_logs" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://github.com/dezsirazvan/ez_logs_agent" target="_blank" rel="noopener">GitHub</a>
       <span style="color:var(--faint);">&middot;</span>
       <a href="https://app.ezlogs.io" target="_blank" rel="noopener">Sign in</a>
       <span style="color:var(--faint);">&middot;</span>
       <a href="mailto:hello@ezlogs.io">Contact</a>
     </div>
-    <p class="footer__copy">&copy; 2026 EZLogs. Made with care for teams that need to know what their software is doing.</p>
+    <div class="footer__legal">
+      <a href="/privacy/">Privacy</a>
+      <a href="/terms/">Terms</a>
+      <a href="/security/">Security</a>
+      <a href="/subprocessors/">Subprocessors</a>
+      <a href="/dpa/">DPA</a>
+    </div>
+    <p class="footer__copy">&copy; 2026 EZLogs. Activity logs everyone can read.</p>
   </footer>
+
+  <div id="cookie-banner" class="cookie-banner" data-ga-id="">
+    <div class="cookie-banner__text">
+      We use one strictly-necessary cookie to keep you signed in. With your consent we also load <strong>Google Analytics</strong> to measure aggregate site usage. See our <a href="/privacy/#cookies">cookie policy</a>.
+    </div>
+    <div class="cookie-banner__actions">
+      <button type="button" data-action="decline">Decline</button>
+      <button type="button" class="is-primary" data-action="accept">Accept</button>
+    </div>
+  </div>
+  <script src="/assets/js/cookie-banner.js" defer></script>
 
   
 

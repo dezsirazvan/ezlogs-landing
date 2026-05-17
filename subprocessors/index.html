@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Subprocessors &mdash; EZLogs</title>
+  <meta name="description" content="The third-party service providers EZLogs uses to operate its service, what each one handles, and where they store the data.">
+  <link rel="canonical" href="https://ezlogs.io/subprocessors/">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#0A0A0A">
+  <meta name="color-scheme" content="dark">
+  <link rel="icon" type="image/x-icon" href="/assets/favicon/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+  <link rel="manifest" href="/assets/favicon/site.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="/assets/css/subpage.css">
+</head>
+<body>
+
+  <nav class="nav">
+    <a class="nav__brand" href="/">
+      <img src="/assets/EZLogo-mark.svg" alt="" width="28" height="28">
+      EZLogs
+    </a>
+    <div class="nav__links">
+      <a href="/#install">Install</a>
+      <a href="/#faq">FAQ</a>
+      <a href="https://github.com/dezsirazvan/ez_logs_agent" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://app.ezlogs.io/users/sign_up" class="nav__cta" target="_blank" rel="noopener">Start free &mdash; 14 days</a>
+    </div>
+  </nav>
+
+  <main class="doc">
+    <p class="doc__eyebrow">Trust</p>
+    <h1>Subprocessors</h1>
+    <p class="doc__meta">Last updated: 17 May 2026</p>
+
+    <p class="doc__lead">A subprocessor is a third party that processes customer data on our behalf. We keep this list short on purpose. We notify account owners by email at least 30 days before adding a new subprocessor.</p>
+
+    <h2>Active subprocessors</h2>
+    <table>
+      <thead>
+        <tr><th>Vendor</th><th>Purpose</th><th>Data handled</th><th>Location</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Hetzner Online GmbH</strong><br><a href="https://www.hetzner.com/legal/privacy-policy/" target="_blank" rel="noopener">Privacy</a></td>
+          <td>Application hosting, database, backups</td>
+          <td>All customer event data, account data, application logs</td>
+          <td>Germany (EU)</td>
+        </tr>
+        <tr>
+          <td><strong>Stripe Payments Europe, Ltd.</strong><br><a href="https://stripe.com/privacy" target="_blank" rel="noopener">Privacy</a> &middot; <a href="https://stripe.com/dpa" target="_blank" rel="noopener">DPA</a></td>
+          <td>Subscription billing, payment processing, tax calculation</td>
+          <td>Billing email, VAT ID (if provided), card metadata (last 4, brand, country) &mdash; we never see full card numbers</td>
+          <td>Ireland (EU), US (with SCCs)</td>
+        </tr>
+        <tr>
+          <td><strong>Resend (Resend Inc.)</strong><br><a href="https://resend.com/legal/privacy-policy" target="_blank" rel="noopener">Privacy</a></td>
+          <td>Transactional email (signup, password reset, billing receipts, security notices)</td>
+          <td>Email address, email body content</td>
+          <td>US (with SCCs)</td>
+        </tr>
+        <tr>
+          <td><strong>Anthropic, PBC</strong><br><a href="https://www.anthropic.com/legal/privacy" target="_blank" rel="noopener">Privacy</a></td>
+          <td>AI-generated action explanations and chat answers (when enabled and routed to Anthropic)</td>
+          <td>Already-redacted structured event data for the actions being explained. Anthropic does not train models on inference inputs.</td>
+          <td>US (with SCCs)</td>
+        </tr>
+        <tr>
+          <td><strong>OpenAI, L.L.C.</strong><br><a href="https://openai.com/policies/privacy-policy" target="_blank" rel="noopener">Privacy</a></td>
+          <td>AI-generated action explanations and chat answers (when enabled and routed to OpenAI)</td>
+          <td>Already-redacted structured event data for the actions being explained. OpenAI does not train models on API inputs.</td>
+          <td>US (with SCCs)</td>
+        </tr>
+        <tr>
+          <td><strong>Google LLC</strong> &mdash; Analytics 4<br><a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Privacy</a></td>
+          <td>Aggregate usage analytics for the marketing site (ezlogs.io). Only loaded with cookie consent.</td>
+          <td>IP address (anonymized), browser type, pages visited. No EZLogs account data, no customer event data.</td>
+          <td>US (with SCCs)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="doc__callout">
+      <strong>Note:</strong> the only subprocessor that touches the bulk of your customer event data is Hetzner (hosting), in the EU. Anthropic and OpenAI receive only the small, already-redacted event payloads needed to generate the specific explanations you (or your users) requested.
+    </div>
+
+    <h2>Changes</h2>
+    <p>We keep the subprocessor list short by design. If we add or replace a subprocessor that processes material customer data, we will email the account owner at least 30 days before the change takes effect, so you have time to object or terminate per Section 13 of our <a href="/terms/">Terms</a> and Section 5 of our <a href="/dpa/">DPA</a>.</p>
+
+    <h2>Questions</h2>
+    <p>Procurement or security teams: contact <a href="mailto:hello@ezlogs.io">hello@ezlogs.io</a> for the vendor-specific DPAs we have in place with each subprocessor above.</p>
+
+    <a class="doc__back" href="/">&larr; Back to home</a>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__brand">
+      <img src="/assets/EZLogo-mark.svg" alt="" width="24" height="24">
+      EZLogs
+    </div>
+    <p class="footer__tagline">Plain-English activity logs for every action in your app.</p>
+    <div class="footer__links">
+      <a href="https://github.com/dezsirazvan/ez_logs_agent" target="_blank" rel="noopener">GitHub</a>
+      <span style="color:var(--faint);">&middot;</span>
+      <a href="https://app.ezlogs.io" target="_blank" rel="noopener">Sign in</a>
+      <span style="color:var(--faint);">&middot;</span>
+      <a href="mailto:hello@ezlogs.io">Contact</a>
+    </div>
+    <div class="footer__legal">
+      <a href="/privacy/">Privacy</a>
+      <a href="/terms/">Terms</a>
+      <a href="/security/">Security</a>
+      <a href="/subprocessors/">Subprocessors</a>
+      <a href="/dpa/">DPA</a>
+    </div>
+    <p class="footer__copy">&copy; 2026 EZLogs. Activity logs everyone can read.</p>
+  </footer>
+
+  <div id="cookie-banner" class="cookie-banner" data-ga-id="">
+    <div class="cookie-banner__text">
+      We use one strictly-necessary cookie to keep you signed in. With your consent we also load <strong>Google Analytics</strong> to measure aggregate site usage. See our <a href="/privacy/#cookies">cookie policy</a>.
+    </div>
+    <div class="cookie-banner__actions">
+      <button type="button" data-action="decline">Decline</button>
+      <button type="button" class="is-primary" data-action="accept">Accept</button>
+    </div>
+  </div>
+  <script src="/assets/js/cookie-banner.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Activity Logs for Rails &mdash; EZLogs</title>
+  <meta name="description" content="EZLogs is a Rails activity log that captures every HTTP request, Sidekiq job, and ActiveRecord change in your app and turns each customer action into a plain-English card. Zero per-controller code.">
+  <meta name="keywords" content="rails activity log, rails activity log gem, rails audit log gem, ezlogs rails, sidekiq activity log, activerecord audit log, paper trail alternative">
+  <link rel="canonical" href="https://ezlogs.io/rails/">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#0A0A0A">
+  <meta name="color-scheme" content="dark">
+  <link rel="icon" type="image/x-icon" href="/assets/favicon/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+  <link rel="manifest" href="/assets/favicon/site.webmanifest">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="EZLogs">
+  <meta property="og:title" content="Activity logs for Rails &mdash; plain English, zero per-controller code.">
+  <meta property="og:description" content="Captures every HTTP request, Sidekiq job, and ActiveRecord change. Turns each customer action into a plain-English card your whole team can read.">
+  <meta property="og:url" content="https://ezlogs.io/rails/">
+  <meta property="og:image" content="https://ezlogs.io/assets/og-image.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="/assets/css/subpage.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "EZLogs for Rails (ez_logs_agent)",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Web, Linux, macOS",
+    "description": "A Rails activity log gem that auto-captures HTTP, Sidekiq/ActiveJob, and ActiveRecord activity and turns each customer action into a plain-English card.",
+    "url": "https://ezlogs.io/rails/",
+    "downloadUrl": "https://rubygems.org/gems/ez_logs_agent",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "EUR",
+      "description": "14-day free trial. No card required."
+    }
+  }
+  </script>
+</head>
+<body>
+
+  <nav class="nav">
+    <a class="nav__brand" href="/">
+      <img src="/assets/EZLogo-mark.svg" alt="" width="28" height="28">
+      EZLogs
+    </a>
+    <div class="nav__links">
+      <a href="/#install">Install</a>
+      <a href="/#faq">FAQ</a>
+      <a href="https://github.com/dezsirazvan/ez_logs_agent" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://app.ezlogs.io/users/sign_up" class="nav__cta" target="_blank" rel="noopener">Start free &mdash; 14 days</a>
+    </div>
+  </nav>
+
+  <main class="doc">
+    <p class="doc__eyebrow">EZLogs for Rails</p>
+    <h1>Activity logs for Rails &mdash; plain English, zero per-controller code.</h1>
+    <p class="doc__lead">EZLogs is a Rails activity log gem that auto-captures every HTTP request, every Sidekiq / ActiveJob run, and every ActiveRecord change, then correlates them into one plain-English card per customer action. Anyone on your team &mdash; engineers, founders, support, PMs &mdash; can read it.</p>
+
+    <h2>What gets captured automatically</h2>
+    <ul>
+      <li><strong>HTTP requests</strong> via Rack middleware &mdash; controller, action, path, status, duration, current_user if your app sets one.</li>
+      <li><strong>Background jobs</strong> via ActiveJob / Sidekiq instrumentation &mdash; class, queue, arguments, result, duration.</li>
+      <li><strong>Database changes</strong> via ActiveRecord callbacks &mdash; table, primary key, operation, redacted before/after column values.</li>
+    </ul>
+    <p>Events are correlated by request ID, current user, and resource ID. Each customer action becomes one card, not a wall of logs.</p>
+
+    <h2>Install in 60 seconds</h2>
+    <pre><code>bundle add ez_logs_agent</code></pre>
+    <pre><code># config/initializers/ezlogs.rb
+EzLogs.configure do |c|
+  c.api_key = ENV["EZLOGS_API_KEY"]
+end</code></pre>
+    <p>That&rsquo;s it. Restart your app. No per-controller code, no model concerns, no per-job wrapper. The gem hooks into Rails&rsquo; existing instrumentation.</p>
+
+    <h2>How is this different from PaperTrail or Audited?</h2>
+    <p>PaperTrail and Audited are model-versioning gems &mdash; they let you go back and inspect a row at a given timestamp. They are great at that and EZLogs does not try to replace them. EZLogs is solving a different problem: <strong>tell me, in plain English, what one customer (or one AI agent) actually did in my app today</strong> &mdash; HTTP + jobs + DB stitched together, summarized in a sentence, readable by anyone in the company. PaperTrail+Audited gives you the rows. EZLogs gives you the story.</p>
+
+    <h2>How is this different from Datadog or New Relic?</h2>
+    <p>Those tools answer &ldquo;is the system healthy?&rdquo; with metrics and traces aimed at engineers debugging. EZLogs answers &ldquo;what happened to my customer?&rdquo; with business-level actions aimed at the whole company. We don&rsquo;t compete with metrics &mdash; we&rsquo;re the layer above them.</p>
+
+    <h2>Performance and safety</h2>
+    <ul>
+      <li><strong>Out-of-band:</strong> events buffered in memory, shipped over a separate connection. Average overhead under 1 ms per request in benchmarks.</li>
+      <li><strong>Fails open:</strong> if EZLogs is unreachable, the agent buffers up to 10,000 events and retries. If the buffer overflows, oldest events drop. The agent <em>never</em> raises into your request path.</li>
+      <li><strong>Field-level redaction</strong> on by default for <code>password</code>, <code>token</code>, <code>secret</code>, <code>key</code>, <code>*_at</code> columns.</li>
+      <li><strong>Open source</strong> at <a href="https://github.com/dezsirazvan/ez_logs_agent" target="_blank" rel="noopener">github.com/dezsirazvan/ez_logs_agent</a>. Pin to a SHA, audit the code.</li>
+    </ul>
+
+    <h2>Supported versions</h2>
+    <p>Rails 6.1+, Ruby 3.1+. Sidekiq 6+, ActiveJob (built-in). ActiveRecord with PostgreSQL or MySQL.</p>
+
+    <div class="doc__callout" style="text-align:center;">
+      <a href="https://app.ezlogs.io/users/sign_up" target="_blank" rel="noopener" style="display:inline-block; padding:12px 22px; background:var(--green); color:#000; font-weight:600; border-radius:10px; text-decoration:none;">Start free &mdash; 14 days &rarr;</a>
+      <p style="margin:14px 0 0; font-size:13px; color:var(--faint);">No card required &middot; Read-only by design</p>
+    </div>
+
+    <a class="doc__back" href="/">&larr; Back to home</a>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__brand">
+      <img src="/assets/EZLogo-mark.svg" alt="" width="24" height="24">
+      EZLogs
+    </div>
+    <p class="footer__tagline">Plain-English activity logs for every action in your app.</p>
+    <div class="footer__links">
+      <a href="https://github.com/dezsirazvan/ez_logs_agent" target="_blank" rel="noopener">GitHub</a>
+      <span style="color:var(--faint);">&middot;</span>
+      <a href="https://app.ezlogs.io" target="_blank" rel="noopener">Sign in</a>
+      <span style="color:var(--faint);">&middot;</span>
+      <a href="mailto:hello@ezlogs.io">Contact</a>
+    </div>
+    <div class="footer__legal">
+      <a href="/privacy/">Privacy</a>
+      <a href="/terms/">Terms</a>
+      <a href="/security/">Security</a>
+      <a href="/subprocessors/">Subprocessors</a>
+      <a href="/dpa/">DPA</a>
+    </div>
+    <p class="footer__copy">&copy; 2026 EZLogs. Activity logs everyone can read.</p>
+  </footer>
+
+  <div id="cookie-banner" class="cookie-banner" data-ga-id="">
+    <div class="cookie-banner__text">
+      We use one strictly-necessary cookie to keep you signed in. With your consent we also load <strong>Google Analytics</strong> to measure aggregate site usage. See our <a href="/privacy/#cookies">cookie policy</a>.
+    </div>
+    <div class="cookie-banner__actions">
+      <button type="button" data-action="decline">Decline</button>
+      <button type="button" class="is-primary" data-action="accept">Accept</button>
+    </div>
+  </div>
+  <script src="/assets/js/cookie-banner.js" defer></script>
+</body>
+</html>
