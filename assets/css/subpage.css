@@ -200,6 +200,20 @@ a:hover { text-decoration: underline; }
 }
 .footer__links a { color: var(--muted); text-decoration: none; transition: color 160ms ease; }
 .footer__links a:hover { color: var(--green); text-decoration: none; }
+.footer__product {
+  display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; align-items: center;
+  margin: 0 0 14px;
+  font-size: 13px;
+}
+.footer__product__label {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+.footer__product a { color: var(--muted); text-decoration: none; transition: color 160ms ease; }
+.footer__product a:hover { color: var(--green); text-decoration: none; }
 .footer__legal {
   display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;
   margin: 0 0 18px;
