@@ -833,8 +833,16 @@
     .pricing-card .btn {
       margin-top: auto;
       width: 100%;
+      justify-content: center;
       text-align: center;
       box-sizing: border-box;
+    }
+    /* Drop the green-glow halo on .btn--primary when it sits inside
+       a pricing card. The halo (box-shadow on the base style) is
+       designed for the hero CTA on a wide black background; inside
+       a narrow card it reads as weird inset padding. */
+    .pricing-card .btn--primary {
+      box-shadow: none;
     }
     .pricing-footnote {
       margin: 32px auto 0;
