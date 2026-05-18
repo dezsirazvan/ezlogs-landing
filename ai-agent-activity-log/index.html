@@ -99,10 +99,10 @@ EzLogs.configure do |c|
 end</code></pre>
 
     <h3>Next.js</h3>
-    <pre><code>npm install @ezlogs/nextjs</code></pre>
+    <pre><code>npm install ezlogs-nextjs</code></pre>
     <pre><code>// next.config.ts
-import { withEzlogs } from "@ezlogs/nextjs/build";
-export default withEzlogs({ apiKey: process.env.EZLOGS_API_KEY });</code></pre>
+import { withEzlogsConfig } from "ezlogs-nextjs/plugin";
+export default withEzlogsConfig({});</code></pre>
 
     <p>Restart. Every HTTP request, every job, every DB change &mdash; including everything your AI agents do &mdash; starts flowing into EZLogs immediately.</p>
 

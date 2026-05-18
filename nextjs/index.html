@@ -30,12 +30,12 @@
   {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    "name": "EZLogs for Next.js (@ezlogs/nextjs)",
+    "name": "EZLogs for Next.js (ezlogs-nextjs)",
     "applicationCategory": "DeveloperApplication",
     "operatingSystem": "Web, Linux, macOS",
     "description": "A Next.js activity log package that auto-captures HTTP routes, Server Actions, and Postgres changes and turns each customer or agent action into a plain-English card.",
     "url": "https://ezlogs.io/nextjs/",
-    "downloadUrl": "https://www.npmjs.com/package/@ezlogs/nextjs",
+    "downloadUrl": "https://www.npmjs.com/package/ezlogs-nextjs",
     "offers": {
       "@type": "Offer",
       "price": "0",
@@ -75,10 +75,10 @@
     </ul>
 
     <h2>Install in 60 seconds</h2>
-    <pre><code>npm install @ezlogs/nextjs</code></pre>
+    <pre><code>npm install ezlogs-nextjs</code></pre>
     <pre><code>// next.config.ts
-import { withEzlogs } from "@ezlogs/nextjs/build";
-export default withEzlogs({ apiKey: process.env.EZLOGS_API_KEY });</code></pre>
+import { withEzlogsConfig } from "ezlogs-nextjs/plugin";
+export default withEzlogsConfig({});</code></pre>
     <p>That&rsquo;s it. Restart your dev server, deploy to prod &mdash; HTTP routes, Server Actions, and DB changes start streaming into EZLogs immediately. Works with Turbopack and Webpack, App Router and Pages Router.</p>
 
     <h2>Works with your stack</h2>

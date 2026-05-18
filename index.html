@@ -2287,12 +2287,12 @@
   <div class="ez-tabs__panel ez-tabs__panel--nextjs" role="tabpanel" aria-label="Next.js install">
     <div class="ez-codeblock">
       <div class="ez-codeblock__head"><span>terminal</span><span>1 line</span></div>
-<pre><span class="o">$</span> <span class="k">npm</span> <span class="p">install</span> <span class="v">@ezlogs/nextjs</span></pre>
+<pre><span class="o">$</span> <span class="k">npm</span> <span class="p">install</span> <span class="v">ezlogs-nextjs</span></pre>
     </div>
     <div class="ez-codeblock">
       <div class="ez-codeblock__head"><span>next.config.ts</span><span>2 lines</span></div>
-<pre><span class="k">import</span> { withEzlogs } <span class="k">from</span> <span class="s">"@ezlogs/nextjs/build"</span>;
-<span class="k">export default</span> <span class="g">withEzlogs</span>({ apiKey: <span class="v">process</span>.env.<span class="v">EZLOGS_API_KEY</span> });</pre>
+<pre><span class="k">import</span> { withEzlogsConfig } <span class="k">from</span> <span class="s">"ezlogs-nextjs/plugin"</span>;
+<span class="k">export default</span> <span class="g">withEzlogsConfig</span>({});</pre>
     </div>
     <p class="ez-tabs__caption">
       Auto-captures <strong>HTTP, Server Actions, and Postgres changes</strong> (via triggers). Works with App Router, Pages Router, Turbopack, Webpack.

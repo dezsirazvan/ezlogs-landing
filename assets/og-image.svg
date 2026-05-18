@@ -78,7 +78,7 @@
   <text x="100" y="585" font-family="'JetBrains Mono', monospace" font-size="18" fill="#01E63E">bundle add ez_logs_agent</text>
   <text x="370" y="585" font-family="'JetBrains Mono', monospace" font-size="18" fill="rgba(255,255,255,0.30)">·</text>
   <text x="395" y="585" font-family="'JetBrains Mono', monospace" font-size="18" fill="rgba(255,255,255,0.60)">$ </text>
-  <text x="415" y="585" font-family="'JetBrains Mono', monospace" font-size="18" fill="#01E63E">npm install @ezlogs/nextjs</text>
+  <text x="415" y="585" font-family="'JetBrains Mono', monospace" font-size="18" fill="#01E63E">npm install ezlogs-nextjs</text>
 
   <text x="1120" y="585" text-anchor="end" font-family="'Inter', system-ui, sans-serif" font-size="18" font-weight="600" fill="rgba(255,255,255,0.78)">ezlogs.io</text>
 </svg>
