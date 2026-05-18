@@ -653,6 +653,13 @@
     }
 
     /* Pricing */
+    /*
+     * Plans v3 layout (2026-05-18): 4-up self-serve ladder
+     * (Solo / Team / Business / Scale) with Free + Enterprise as
+     * compact "edge" rows above/below. Matches the Stripe / Linear /
+     * Vercel pattern where the top-of-funnel hook and the sales
+     * CTA flank the main self-serve grid.
+     */
     .pricing-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -665,6 +672,103 @@
     }
     @media (max-width: 560px) {
       .pricing-grid { grid-template-columns: 1fr; }
+    }
+
+    /* Monthly ↔ annual cadence toggle. Centered above the grid;
+       only renders once per .section. */
+    .cadence-toggle {
+      display: inline-flex;
+      gap: 4px;
+      padding: 4px;
+      margin: 14px auto 0;
+      background: var(--bg-1);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      font-size: 13px;
+    }
+    .cadence-toggle__btn {
+      appearance: none;
+      background: transparent;
+      border: 0;
+      color: var(--muted);
+      padding: 6px 14px;
+      border-radius: 999px;
+      cursor: pointer;
+      font: inherit;
+      transition: background 160ms ease, color 160ms ease;
+    }
+    .cadence-toggle__btn:hover:not(.is-active) { color: var(--text); }
+    .cadence-toggle__btn.is-active {
+      background: rgba(1, 230, 62, 0.16);
+      color: var(--green);
+    }
+    .cadence-toggle__badge {
+      font-size: 11px;
+      margin-left: 4px;
+      color: var(--green);
+      opacity: 0.95;
+    }
+
+    /* Compact edge cards (Free + Enterprise) — banner-shaped, full-width,
+       stacked above and below the main 4-up grid. */
+    .pricing-edge {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      max-width: 1140px;
+      margin: 0 auto 16px;
+      padding: 18px 24px;
+      background: var(--bg-1);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+    }
+    .pricing-edge--bottom {
+      margin: 16px auto 0;
+    }
+    .pricing-edge__head {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .pricing-edge__name {
+      font-family: var(--display);
+      font-weight: 600;
+      font-size: 13px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 0;
+    }
+    .pricing-edge__price {
+      font-family: var(--display);
+      font-weight: 600;
+      font-size: 22px;
+      color: var(--text);
+      margin: 0;
+      letter-spacing: -0.01em;
+    }
+    .pricing-edge__cadence {
+      font-size: 12px;
+      color: var(--faint);
+    }
+    .pricing-edge__pitch {
+      font-size: 13px;
+      color: var(--muted);
+      margin: 0;
+      max-width: 520px;
+      line-height: 1.5;
+    }
+    .pricing-edge__cta {
+      flex-shrink: 0;
+    }
+    @media (max-width: 720px) {
+      .pricing-edge {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
     }
     .pricing-card {
       display: flex;
@@ -2327,27 +2431,33 @@
         <span class="section__eyebrow"><span class="num">06</span>Pricing</span>
         <h2 class="section__title section__title--narrow">Try it free for 14 days.</h2>
         <p class="section__sub">Then pick the plan that fits your team. AI explanations, chat, MCP, public shares, GDPR data export &mdash; every paid tier includes the whole product. The difference is volume.</p>
-        <p class="section__sub" style="margin-top:8px; font-size:14px; color:var(--faint);">Save 17% on annual &mdash; 2 months free.</p>
-      </div>
-      <div class="pricing-grid">
-        <div class="pricing-card">
-          <p class="pricing-card__name">Free</p>
-          <p class="pricing-card__price">&euro;0</p>
-          <p class="pricing-card__cadence">forever</p>
-          <p class="pricing-card__pitch">Try EZLogs on a real project, free forever.</p>
-          <ul class="pricing-card__features">
-            <li>1 seat &middot; 5k actions / month</li>
-            <li>14-day retention</li>
-            <li>25 chat messages / month</li>
-            <li>100 AI explainer calls / month</li>
-            <li>MCP server (unlimited) + GDPR export</li>
-          </ul>
-          <a class="btn btn--secondary" href="https://app.ezlogs.io/users/sign_up" target="_blank" rel="noopener">Get started &rarr;</a>
+
+        <!-- Cadence toggle (Plans v3, 2026-05-18). Monthly is the
+             default; annual saves 17% (2 months free). Vanilla JS
+             swaps prices + cadence labels in-place — no reload. -->
+        <div class="cadence-toggle" data-cadence-toggle role="tablist" aria-label="Billing cadence">
+          <button type="button" class="cadence-toggle__btn is-active" data-cadence="monthly" aria-pressed="true">Monthly</button>
+          <button type="button" class="cadence-toggle__btn" data-cadence="annual" aria-pressed="false">
+            Annual <span class="cadence-toggle__badge">−17%</span>
+          </button>
         </div>
-        <div class="pricing-card pricing-card--featured">
+      </div>
+      <!-- Free edge card (top-of-funnel hook) -->
+      <div class="pricing-edge">
+        <div class="pricing-edge__head">
+          <p class="pricing-edge__name">Free</p>
+          <p class="pricing-edge__price">&euro;0</p>
+          <span class="pricing-edge__cadence">forever &middot; 1 seat &middot; 5k actions / mo &middot; 25 chats &middot; 14-day retention</span>
+        </div>
+        <p class="pricing-edge__pitch">Try EZLogs on a real project, free forever. MCP + GDPR export included.</p>
+        <a class="btn btn--secondary pricing-edge__cta" href="https://app.ezlogs.io/users/sign_up" target="_blank" rel="noopener">Get started &rarr;</a>
+      </div>
+
+      <div class="pricing-grid">
+        <div class="pricing-card pricing-card--featured" data-cadence-card>
           <p class="pricing-card__name">Solo</p>
-          <p class="pricing-card__price">&euro;19</p>
-          <p class="pricing-card__cadence">per month</p>
+          <p class="pricing-card__price" data-price data-price-monthly="&euro;19" data-price-annual="&euro;15">&euro;19</p>
+          <p class="pricing-card__cadence" data-cadence-label data-cadence-monthly="per month" data-cadence-annual="per month, billed annually">per month</p>
           <p class="pricing-card__pitch">Indie SaaS and solo founders.</p>
           <ul class="pricing-card__features">
             <li>2 seats &middot; 250k actions / month</li>
@@ -2358,10 +2468,10 @@
           </ul>
           <a class="btn btn--primary" href="https://app.ezlogs.io/users/sign_up" target="_blank" rel="noopener">Start trial &rarr;</a>
         </div>
-        <div class="pricing-card">
+        <div class="pricing-card" data-cadence-card>
           <p class="pricing-card__name">Team</p>
-          <p class="pricing-card__price">&euro;79</p>
-          <p class="pricing-card__cadence">per month</p>
+          <p class="pricing-card__price" data-price data-price-monthly="&euro;79" data-price-annual="&euro;66">&euro;79</p>
+          <p class="pricing-card__cadence" data-cadence-label data-cadence-monthly="per month" data-cadence-annual="per month, billed annually">per month</p>
           <p class="pricing-card__pitch">Real SaaS teams.</p>
           <ul class="pricing-card__features">
             <li>10 seats &middot; 1.5M actions / month</li>
@@ -2372,10 +2482,10 @@
           </ul>
           <a class="btn btn--secondary" href="https://app.ezlogs.io/users/sign_up" target="_blank" rel="noopener">Start trial &rarr;</a>
         </div>
-        <div class="pricing-card">
+        <div class="pricing-card" data-cadence-card>
           <p class="pricing-card__name">Business</p>
-          <p class="pricing-card__price">&euro;249</p>
-          <p class="pricing-card__cadence">per month</p>
+          <p class="pricing-card__price" data-price data-price-monthly="&euro;249" data-price-annual="&euro;207">&euro;249</p>
+          <p class="pricing-card__cadence" data-cadence-label data-cadence-monthly="per month" data-cadence-annual="per month, billed annually">per month</p>
           <p class="pricing-card__pitch">Growing SaaS with audit needs.</p>
           <ul class="pricing-card__features">
             <li>25 seats &middot; 10M actions / mo</li>
@@ -2386,10 +2496,10 @@
           </ul>
           <a class="btn btn--secondary" href="https://app.ezlogs.io/users/sign_up" target="_blank" rel="noopener">Start trial &rarr;</a>
         </div>
-        <div class="pricing-card">
+        <div class="pricing-card" data-cadence-card>
           <p class="pricing-card__name">Scale</p>
-          <p class="pricing-card__price">&euro;799</p>
-          <p class="pricing-card__cadence">per month</p>
+          <p class="pricing-card__price" data-price data-price-monthly="&euro;799" data-price-annual="&euro;663">&euro;799</p>
+          <p class="pricing-card__cadence" data-cadence-label data-cadence-monthly="per month" data-cadence-annual="per month, billed annually">per month</p>
           <p class="pricing-card__pitch">High-volume products and compliance teams.</p>
           <ul class="pricing-card__features">
             <li>Unlimited seats &middot; 50M actions / mo</li>
@@ -2400,20 +2510,19 @@
           </ul>
           <a class="btn btn--secondary" href="https://app.ezlogs.io/users/sign_up" target="_blank" rel="noopener">Start trial &rarr;</a>
         </div>
-        <div class="pricing-card">
-          <p class="pricing-card__name">Enterprise</p>
-          <p class="pricing-card__price">Custom</p>
-          <p class="pricing-card__cadence">talk to sales</p>
-          <p class="pricing-card__pitch">SSO, audit, SLA, EU residency, on-prem.</p>
-          <ul class="pricing-card__features">
-            <li>Custom seats / actions / chat / explainer</li>
-            <li>SSO/SAML, DPA, SLA</li>
-            <li>EU data residency, optional on-prem</li>
-            <li>Dedicated support</li>
-          </ul>
-          <a class="btn btn--secondary" href="/enterprise/">Talk to sales &rarr;</a>
-        </div>
       </div>
+
+      <!-- Enterprise edge card (sales-driven, below the self-serve grid) -->
+      <div class="pricing-edge pricing-edge--bottom">
+        <div class="pricing-edge__head">
+          <p class="pricing-edge__name">Enterprise</p>
+          <p class="pricing-edge__price">Custom</p>
+          <span class="pricing-edge__cadence">SSO/SAML &middot; DPA &middot; SLA &middot; EU data residency &middot; on-prem option</span>
+        </div>
+        <p class="pricing-edge__pitch">For audit-conscious teams beyond Scale. Custom volume, dedicated support.</p>
+        <a class="btn btn--secondary pricing-edge__cta" href="/enterprise/">Talk to sales &rarr;</a>
+      </div>
+
       <p class="pricing-footnote" style="max-width:780px; margin: 16px auto 0;">
         <strong>MCP access is unlimited on every paid tier</strong> &mdash; chat-message limits do NOT apply to MCP. MCP is consumed by your AI, which spends its own credits to narrate the data it queries. We just deliver the structured rows.
       </p>
@@ -2650,6 +2759,46 @@
     </div>
   </div>
   <script src="/assets/js/cookie-banner.js" defer></script>
+
+  <!-- Plans v3 (2026-05-18): monthly ↔ annual cadence toggle on the
+       pricing grid. Vanilla, no dependencies. Each .pricing-card has
+       data-price-monthly / data-price-annual and the toggle swaps in
+       place; no reload, no analytics tracking (yet). -->
+  <script>
+    (function () {
+      var toggle = document.querySelector("[data-cadence-toggle]");
+      if (!toggle) return;
+      var buttons = toggle.querySelectorAll("[data-cadence]");
+      var cards   = document.querySelectorAll("[data-cadence-card]");
+
+      function apply(cadence) {
+        buttons.forEach(function (b) {
+          var active = b.getAttribute("data-cadence") === cadence;
+          b.classList.toggle("is-active", active);
+          b.setAttribute("aria-pressed", active ? "true" : "false");
+        });
+        cards.forEach(function (card) {
+          var price = card.querySelector("[data-price]");
+          if (price) {
+            var v = price.getAttribute("data-price-" + cadence);
+            if (v) price.innerHTML = v;
+          }
+          var label = card.querySelector("[data-cadence-label]");
+          if (label) {
+            var t = label.getAttribute("data-cadence-" + cadence);
+            if (t) label.textContent = t;
+          }
+        });
+      }
+
+      buttons.forEach(function (b) {
+        b.addEventListener("click", function (e) {
+          e.preventDefault();
+          apply(b.getAttribute("data-cadence"));
+        });
+      });
+    })();
+  </script>
 
   
 
