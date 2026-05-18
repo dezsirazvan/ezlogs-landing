@@ -204,17 +204,9 @@
   }
   </script>
 
-  <!-- Google Analytics 4 -->
-  <!-- TODO: replace G-XXXXXXXXXX with the GA4 Measurement ID from the user -->
-  <!--
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-XXXXXXXXXX');
-  </script>
-  -->
+  <!-- Google Analytics 4 is loaded by assets/js/cookie-banner.js on consent.
+       The Measurement ID lives on the cookie-banner element's
+       data-ga-id attribute (see the markup just before </body>). -->
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -2580,7 +2572,7 @@
     <p class="footer__copy">&copy; 2026 EZLogs. Activity logs everyone can read.</p>
   </footer>
 
-  <div id="cookie-banner" class="cookie-banner" data-ga-id="">
+  <div id="cookie-banner" class="cookie-banner" data-ga-id="G-YJ8DP8VLSS">
     <div class="cookie-banner__text">
       We use one strictly-necessary cookie to keep you signed in. With your consent we also load <strong>Google Analytics</strong> to measure aggregate site usage. See our <a href="/privacy/#cookies">cookie policy</a>.
     </div>
