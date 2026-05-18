@@ -26,27 +26,26 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
   <link rel="stylesheet" href="/assets/css/subpage.css">
 </head>
-<body class="doc">
-  <header class="doc__header">
-    <a class="doc__logo" href="/">
-      <img src="/assets/EZLogo.svg" alt="EZLogs" width="120" height="32">
+<body>
+
+  <nav class="nav">
+    <a class="nav__brand" href="/">
+      <img src="/assets/EZLogo-mark.svg" alt="" width="28" height="28">
+      EZLogs
     </a>
-    <nav class="doc__nav">
-      <a href="/" class="doc__nav__home">Home</a>
+    <div class="nav__links">
+      <a href="/#install">Install</a>
+      <a href="/#faq">FAQ</a>
+      <a href="https://github.com/dezsirazvan/ez_logs_agent" target="_blank" rel="noopener">GitHub</a>
       <a href="https://app.ezlogs.io/users/sign_in" target="_blank" rel="noopener">Sign in</a>
-    </nav>
-  </header>
+      <a href="mailto:enterprise@ezlogs.io?subject=Enterprise%20inquiry" class="nav__cta">Talk to sales</a>
+    </div>
+  </nav>
 
-  <main class="doc__main">
-    <span class="doc__eyebrow">Enterprise</span>
+  <main class="doc">
+    <p class="doc__eyebrow">Enterprise</p>
     <h1>EZLogs for audit-conscious teams.</h1>
-
-    <p class="doc__lead">
-      Custom volume, single sign-on, SLA, DPA, EU data residency, and an
-      optional on-prem deployment. For compliance-driven products that
-      need more than Scale handles &mdash; or that have procurement teams
-      who need a signature.
-    </p>
+    <p class="doc__lead">Custom volume, single sign-on, SLA, DPA, EU data residency, and an optional on-prem deployment. For compliance-driven products that need more than Scale handles &mdash; or that have procurement teams who need a signature.</p>
 
     <h2>What you get</h2>
     <ul>
@@ -54,25 +53,29 @@
       <li><strong>Audit logs.</strong> Every admin action inside EZLogs is itself recorded as a tamper-evident event &mdash; same primitives that power your customer-facing activity log.</li>
       <li><strong>SLA.</strong> Custom uptime + response-time guarantees. Standard offering: 99.9% / 4-hour critical response.</li>
       <li><strong>EU data residency.</strong> Helsinki primary, Frankfurt failover. No data crosses outside the EU.</li>
-      <li><strong>DPA.</strong> Pre-signed, GDPR-Article-28-compliant. We're a thin processor &mdash; you stay the controller.</li>
+      <li><strong>DPA.</strong> Pre-signed, GDPR-Article-28-compliant. We&rsquo;re a thin processor &mdash; you stay the controller.</li>
       <li><strong>On-prem option.</strong> Deploy the EZLogs server in your VPC. Bring your own Postgres. Keep your data on your hardware.</li>
       <li><strong>Custom limits.</strong> Actions, chat, explainer &mdash; sized to your real volume, not a marketing ladder.</li>
       <li><strong>Dedicated support.</strong> Slack channel with the founding team. No tier-1 ticket queue.</li>
     </ul>
 
-    <h2>Read-only by design</h2>
-    <p>
-      EZLogs reads from your app. We never write back into it. There's no
-      "pause agent" button that writes to your stack, no webhooks emitted
-      into your systems, no MCP tools that mutate. The blast radius of
-      an EZLogs compromise is read-only &mdash; valuable to your security
-      reviewer.
-    </p>
+    <h2>How does Enterprise differ from Scale?</h2>
+    <p>Scale (&euro;799/mo, our top self-serve tier) covers 50M actions/mo, unlimited seats, 365-day retention, and 30,000 chat messages &mdash; enough for most high-volume products. Enterprise adds the things you can&rsquo;t self-serve: SSO/SAML, custom volume, DPA, an SLA on response time, EU data residency commitment, and the option to run the server inside your own infrastructure. If procurement is asking for a signature, a security review, or an on-prem deployment, you&rsquo;re an Enterprise customer.</p>
 
-    <h2>Talk to sales</h2>
+    <h2>Read-only by design</h2>
+    <p>EZLogs reads from your app. We never write back into it. There&rsquo;s no &ldquo;pause agent&rdquo; button that writes to your stack, no webhooks emitted into your systems, no MCP tools that mutate. The blast radius of an EZLogs compromise is read-only &mdash; valuable to your security reviewer.</p>
+
+    <h2>How procurement usually goes</h2>
+    <ol>
+      <li><strong>Intro call (30 min).</strong> Tell us what volume you expect, what compliance regime applies, and whether you need on-prem.</li>
+      <li><strong>Trial on Business or Scale.</strong> Trial accounts upgrade cleanly to Enterprise contracts &mdash; no re-onboarding.</li>
+      <li><strong>Security review.</strong> We send our DPA, SOC2 progress note, and signed-audit-bundle spec. Most reviews take a week.</li>
+      <li><strong>Contract.</strong> Standard MSA + DPA, or your paper. Annual billing.</li>
+    </ol>
+
     <div class="doc__callout" style="text-align:center;">
-      <a href="mailto:enterprise@ezlogs.io?subject=Enterprise inquiry" style="display:inline-block; padding:12px 22px; background:var(--green); color:#000; font-weight:600; border-radius:10px; text-decoration:none;">Talk to sales &rarr;</a>
-      <p style="margin:14px 0 0; font-size:13px; color:var(--faint);">Or jump straight in: <a href="https://app.ezlogs.io/users/sign_up" target="_blank" rel="noopener">start a free trial</a> first &mdash; trial accounts upgrade cleanly to Enterprise contracts.</p>
+      <a href="mailto:enterprise@ezlogs.io?subject=Enterprise%20inquiry" style="display:inline-block; padding:12px 22px; background:var(--green); color:#000; font-weight:600; border-radius:10px; text-decoration:none;">Talk to sales &rarr;</a>
+      <p style="margin:14px 0 0; font-size:13px; color:var(--faint);">Or jump straight in: <a href="https://app.ezlogs.io/users/sign_up" target="_blank" rel="noopener">start a free trial</a> &mdash; trial accounts upgrade cleanly to Enterprise contracts.</p>
     </div>
 
     <a class="doc__back" href="/">&larr; Back to home</a>
