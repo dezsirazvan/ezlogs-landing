@@ -128,18 +128,16 @@ rails generate ez_logs_agent:install</code></pre>
 
     <p>I launched EZLogs on Wednesday. r/rails first, then r/ruby, then a Twitter post from a brand-new account, then a Hacker News attempt that the algorithm downweighted because the account was twelve hours old. The Reddit posts landed in the boring way good launches do: a few thousand views, a handful of upvotes, a comment thread that asked the load-bearing question (<em>&ldquo;is this usable without an LLM?&rdquo;</em> &mdash; yes, the core pipeline is deterministic templates).</p>
 
-    <p>Overnight, the first stranger signed up. They&rsquo;d read the r/rails post, clicked through to the landing, started the 14-day trial.</p>
+    <p>Two days in, I went back to read my own install instructions the way a new user would. Run the generator. Open the file it creates. Try to figure out what to put.</p>
 
-    <p>And then they got stuck.</p>
-
-    <p>They emailed me. The install template &mdash; the file <code>rails generate ez_logs_agent:install</code> drops into your app &mdash; had this line:</p>
+    <p>This is what was there:</p>
 
     <pre><code># URL of the EzLogs server (required)
 # config.server_url = "https://your-ezlogs-server.com"</code></pre>
 
     <p>That URL is a placeholder. It was the placeholder from the very first version of the gem, when I wasn&rsquo;t sure whether EZLogs would be a hosted service or self-host-only. By launch day it should have been the real SaaS endpoint. It wasn&rsquo;t.</p>
 
-    <p>Worse: the line was commented out. So the user had to <em>uncomment it and edit it</em> on top of guessing the right value. The natural guess, with a tenant slug visible in their account settings, was that the server URL was tenant-scoped &mdash; something like <code>https://&lt;your-slug&gt;.ezlogs.io</code>. It isn&rsquo;t. The server URL is the same for every customer. The tenant is identified by the API key, not by the URL. That&rsquo;s the kind of thing that&rsquo;s obvious in your head when you build the product and completely opaque to the first person who reads the install file.</p>
+    <p>Worse: the line was commented out. So a new user has to <em>uncomment it and edit it</em> on top of guessing the right value. And the natural guess, with a tenant slug visible in the account settings, is that the server URL is tenant-scoped &mdash; something like <code>https://&lt;your-slug&gt;.ezlogs.io</code>. It isn&rsquo;t. The server URL is the same for every customer. The tenant is identified by the API key, not by the URL. That&rsquo;s the kind of thing that&rsquo;s obvious in your head when you build the product and completely opaque to the first person who reads the install file.</p>
 
     <p>Four hours later I shipped <code>ez_logs_agent</code> 0.1.8 to RubyGems. The install template now pre-fills the SaaS URL, uncommented, and reads the API key from <code>ENV["EZLOGS_API_KEY"]</code>. The only thing a customer has to set is one environment variable.</p>
 
@@ -152,7 +150,7 @@ config.project_token = ENV["EZLOGS_API_KEY"]</code></pre>
 
     <p>I&rsquo;m writing this on day four. Stars on the gem repo are trickling in from people I don&rsquo;t know. Ruby Weekly might pick it up next Thursday. The Hacker News attempt is going to get one more shot once my account is old enough to not be a spam vector.</p>
 
-    <p>If your support team currently pings engineering to translate logs, I&rsquo;d like to hear how they ask, how often, and what about the answer they get back today hurts the most. Reply on Hacker News if this is on the front page when you read it. Email me at <a href="mailto:hello@ezlogs.io">hello@ezlogs.io</a> if it isn&rsquo;t. The next five strangers who sign up shape what ships in 0.2.0, and the next person who installs it should not have to email me about a placeholder URL.</p>
+    <p>If your support team currently pings engineering to translate logs, I&rsquo;d like to hear how they ask, how often, and what about the answer they get back today hurts the most. Reply on Hacker News if this is on the front page when you read it. Email me at <a href="mailto:hello@ezlogs.io">hello@ezlogs.io</a> if it isn&rsquo;t. The next people who try EZLogs shape what ships in 0.2.0, and the next person who installs the gem should not have to figure out which URL goes where.</p>
 
     <div class="doc__callout" style="text-align:center; margin-top:48px;">
       <a href="https://app.ezlogs.io/users/sign_up" target="_blank" rel="noopener" style="display:inline-block; padding:12px 22px; background:var(--green); color:#000; font-weight:600; border-radius:10px; text-decoration:none;">Try EZLogs &mdash; 14 days, no card &rarr;</a>
