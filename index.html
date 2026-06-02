@@ -18,9 +18,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EZLogs &mdash; Plain-English activity logs for Rails &amp; Next.js apps (and the AI agents in them)</title>
-  <meta name="description" content="EZLogs auto-captures every request, job, and database change in your Rails or Next.js app and turns each action into one plain-English card. Built for your whole team — and your own AI agents. 14-day free trial.">
-  <meta name="keywords" content="activity log, audit log, rails activity log, next.js activity log, ai agent activity log, mcp server, plain english audit log, ezlogs">
+  <title>EZLogs &mdash; Plain-English activity logs for Rails &amp; Next.js apps</title>
+  <meta name="description" content="EZLogs auto-captures every request, job, and database change in your Rails or Next.js app and turns each action into one plain-English card your whole team can read. 14-day free trial.">
+  <meta name="keywords" content="activity log, audit log, rails activity log, next.js activity log, mcp server, plain english audit log, ezlogs">
 
   <!-- Canonical + theme -->
   <link rel="canonical" href="https://ezlogs.io/">
@@ -41,21 +41,21 @@
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="EZLogs">
-  <meta property="og:title" content="Plain-English activity logs for every action in your app — human or AI.">
-  <meta property="og:description" content="EZLogs captures every request, job, and DB change in your Rails or Next.js app. Turns them into readable action cards for your team — and a queryable MCP surface for your AI. 14-day free trial.">
+  <meta property="og:title" content="Plain-English activity logs for every action in your app.">
+  <meta property="og:description" content="EZLogs captures every request, job, and DB change in your Rails or Next.js app. Turns them into readable action cards your whole team can read. 14-day free trial.">
   <meta property="og:url" content="https://ezlogs.io/">
   <meta property="og:image" content="https://ezlogs.io/assets/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="EZLogs: Plain-English activity logs for every action in your app — human or AI.">
+  <meta property="og:image:alt" content="EZLogs: Plain-English activity logs for every action in your app.">
   <meta property="og:locale" content="en_US">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Plain-English activity logs for every action in your app — human or AI.">
-  <meta name="twitter:description" content="EZLogs captures every request, job, and DB change in your Rails or Next.js app. Turns them into readable action cards for your team — and a queryable MCP surface for your AI.">
+  <meta name="twitter:title" content="Plain-English activity logs for every action in your app.">
+  <meta name="twitter:description" content="EZLogs captures every request, job, and DB change in your Rails or Next.js app. Turns them into readable action cards your whole team can read.">
   <meta name="twitter:image" content="https://ezlogs.io/assets/og-image.png">
-  <meta name="twitter:image:alt" content="EZLogs: Plain-English activity logs for every action in your app — human or AI.">
+  <meta name="twitter:image:alt" content="EZLogs: Plain-English activity logs for every action in your app.">
 
   <!-- Structured data (JSON-LD) -->
   <script type="application/ld+json">
@@ -976,8 +976,8 @@
   <!-- Section 1: Hero -->
   <section class="hero">
     <div class="hero__inner">
-      <h1 class="hero__title">Plain-English activity logs for every action in your app &mdash; human or AI.</h1>
-      <p class="hero__sub">EZLogs auto-captures every request, background job, and database change in your Rails or Next.js app, then turns each customer or agent action into one plain-English card your whole team &mdash; and your own AI &mdash; can read.</p>
+      <h1 class="hero__title">Plain-English activity logs for every action in your app.</h1>
+      <p class="hero__sub">EZLogs auto-captures every request, background job, and database change in your Rails or Next.js app, then turns each customer or agent action into one plain-English card your whole team can read.</p>
       <div class="hero__ctas">
         <a class="btn btn--primary" href="https://app.ezlogs.io/users/sign_up" target="_blank" rel="noopener">Start free &mdash; 14 days</a>
         <a class="btn btn--ghost" href="#action">See a real action &darr;</a>
@@ -1578,36 +1578,23 @@
     </div>
   </section>
 
-  <!-- Section 3.5: Two readers — humans + your AI -->
+  <!-- Section 3.5: Connect your AI -->
   <section class="section section--alt">
     <div class="section__inner">
       <div class="section__head">
-        <span class="section__eyebrow"><span class="num">02b</span>Two readers, one source</span>
-        <h2 class="section__title section__title--wide">Humans browse it. Your AI queries it. Same source of truth.</h2>
-        <p class="section__sub">By end of 2026, <a href="/ai-agent-activity-log/" style="color: var(--green); text-decoration: none; border-bottom: 1px solid rgba(1,230,62,0.25);">AI agents</a> will do 30&ndash;60% of meaningful work inside production apps. Nobody has a clean way to see that work or explain it to non-technical colleagues. EZLogs is the activity log built for both readers at once.</p>
+        <span class="section__eyebrow"><span class="num">02b</span>Connect your AI</span>
+        <h2 class="section__title section__title--wide">Same activity log. The way each person reads it.</h2>
+        <p class="section__sub">Your team reads the log on a page. Your AI reads it over MCP. One curl command on macOS connects Claude Desktop to the activity log your team already trusts &mdash; same data, same answer, with citations.</p>
       </div>
 
-      <div class="readers">
-        <article class="reader">
-          <span class="reader__tag">For your team</span>
-          <h3 class="reader__title">A live page for everything that matters.</h3>
-          <p class="reader__body">Every customer, every order, every agent &mdash; each one has its own page that reads itself. "Here's what Claude did this week. Here's what happened to Order #4300." Send the link to anyone. No training needed.</p>
-          <figure class="reader__shot">
-            <img src="assets/screenshots/05-pulse-actor-claude.png" alt="Pulse page for the Claude agent: status, recent activity, citations" loading="lazy">
-          </figure>
-        </article>
+      <figure class="reader__shot reader__shot--solo" style="max-width: 640px; margin: 0 auto;">
+        <img src="assets/screenshots/12-mcp-claude-yesterday.png" alt="Claude Desktop answering 'what happened yesterday in ezlogs?' with a Morning/Midday/Afternoon summary, real timestamps, actors and order IDs, ending in 'The main issue to flag is the refund attempt on Order #4302 at the end of the day.'" loading="lazy" style="display: block; width: 100%; height: auto;">
+      </figure>
 
-        <article class="reader">
-          <span class="reader__tag">For your AI</span>
-          <h3 class="reader__title">Your AI can read the same log, and answer in your words.</h3>
-          <p class="reader__body">Ask in the sidebar, or connect Claude / Cursor / ChatGPT to EZLogs and ask them. Same data, same answer, with citations you can click through. Your AI finally has memory of what your app did.</p>
-          <figure class="reader__shot">
-            <img src="assets/screenshots/09-chat-q1-today.png" alt="In-app chat answering 'What happened today and was anything bad?' with citation chips on every action" loading="lazy">
-          </figure>
-        </article>
+      <div class="section__install" style="max-width: 640px; margin: 1.5rem auto 0;">
+        <pre style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); color: #e6edf3; padding: 1rem 1.25rem; border-radius: 8px; overflow-x: auto; font-family: ui-monospace, monospace; font-size: 0.95rem; line-height: 1.5; margin: 0;">curl -fsSL https://app.ezlogs.io/install/claude-desktop.sh | sh</pre>
+        <p class="section__sub" style="margin-top: 0.75rem; text-align: center; font-size: 0.9rem;">One command on macOS. Then quit Claude Desktop, reopen, and ask &ldquo;what happened yesterday?&rdquo;</p>
       </div>
-
-      <p class="section__caption">No write access, ever. EZLogs explains the work; it never performs it.</p>
     </div>
   </section>
 
@@ -1678,7 +1665,7 @@
 
         <article class="proof__item proof__item--flip">
           <figure class="proof__shot">
-            <img src="assets/screenshots/10-chat-q2-top-user.png" alt="Chat answering 'Who is the most active user this week and what did they do?' with the top_lists tool returning Claude / 19 actions and a per-action citation list" loading="lazy">
+            <img src="assets/screenshots/09-chat-q1-today.png" alt="In-app chat answering 'What happened today and was anything bad?' with citation chips on every action mentioned" loading="lazy">
           </figure>
           <div class="proof__text">
             <span class="proof__caption">06 &middot; Just ask</span>
