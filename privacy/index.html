@@ -36,13 +36,14 @@
   <main class="doc">
     <p class="doc__eyebrow">Legal</p>
     <h1>Privacy Policy</h1>
-    <p class="doc__meta">Effective date: 17 May 2026 &middot; Version 1.0</p>
+    <p class="doc__meta">Effective date: 3 June 2026 &middot; Version 1.1</p>
 
     <p class="doc__lead">EZLogs is a product that captures activity from your applications and turns it into plain-English logs. This policy explains what data we collect, why we collect it, where we store it, and what rights you have over it.</p>
 
     <h2>1. Who we are</h2>
     <p>EZLogs is operated by <strong>Razvan Dezsi</strong>, a sole trader and tax resident in Spain (NIE Y8228368V). For privacy-related questions, contact <a href="mailto:hello@ezlogs.io">hello@ezlogs.io</a>.</p>
     <p>For the purposes of the EU General Data Protection Regulation (GDPR), Razvan Dezsi is the <strong>data controller</strong> for personal data we collect about you (the EZLogs customer). For the event data your application sends to EZLogs, we act as a <strong>data processor</strong> on your behalf &mdash; see Section 5.</p>
+    <p>EZLogs has not designated a Data Protection Officer because we fall below the thresholds set out in Article 37 GDPR (we do not carry out large-scale processing of special-category data and our core activities do not require regular and systematic monitoring of data subjects on a large scale). The privacy contact above is your point of contact for all data-protection matters.</p>
 
     <h2>2. What data we collect</h2>
 
@@ -62,7 +63,8 @@
       <li>Background job metadata (job class name, queue, duration, success/failure).</li>
       <li>Database change metadata (table name, primary key, the operation, and a redacted set of before/after column values).</li>
     </ul>
-    <p>We do <strong>not</strong> store request bodies, response bodies, or full database rows unless you explicitly opt in. Field-level redaction is on by default for any column or parameter whose name matches <code>password</code>, <code>token</code>, <code>secret</code>, <code>key</code>, or <code>*_at</code> timestamps. You are responsible for any additional redaction needed to comply with your own privacy obligations to your end users.</p>
+    <p>We do <strong>not</strong> store request bodies, response bodies, or full database rows unless you explicitly opt in. Field-level redaction is on by default at the agent for any column or parameter whose name matches <code>password</code>, <code>token</code>, <code>secret</code>, <code>api_key</code>, <code>credit_card</code>, and additional patterns we widen over time. You are responsible for configuring the agent&rsquo;s sensitive-keys list to cover any further fields that carry personal data your end users would not expect us to see.</p>
+    <p>Because the event data describes actions performed by your end users, it may include personal data about individuals who never interact with EZLogs directly (for example, the email of one of your customers whose action triggered a captured event). For the purposes of Article 14 GDPR, the source of this data is your application, and the lawful basis for its processing is the contract we have with you as the data controller (Section 3). You remain responsible under your own privacy notice for informing your end users that you use EZLogs as a processor.</p>
 
     <h3>2.3 Technical data</h3>
     <p>When you use the EZLogs web application, our servers automatically log standard technical information: IP address, browser type, pages visited, timestamps. We use this only to operate and secure the service, and we delete these logs after 90 days.</p>
@@ -85,11 +87,12 @@
     </table>
 
     <h2>4. Where your data lives</h2>
-    <p>All EZLogs production data is stored in the European Union, specifically on servers operated by <strong>Hetzner Online GmbH</strong> in Germany. Backups are stored in the same jurisdiction. We do not transfer customer data outside the EU/EEA except where strictly necessary for a feature you have used (see Section 5).</p>
+    <p>All EZLogs production data is stored in the European Union, specifically on servers operated by <strong>Hetzner Online GmbH</strong> in Germany. Backups are stored in the same jurisdiction. Some of the subprocessors listed in Section 5 are based in the <strong>United States</strong>; transfers to those subprocessors are governed by the European Commission&rsquo;s <strong>Standard Contractual Clauses</strong> (Decision (EU) 2021/914), with supplementary technical measures (encryption in transit, minimized payloads, contractual no-training terms for AI providers) as described in our <a href="/dpa/">DPA</a>.</p>
 
     <h2>5. Third parties (subprocessors)</h2>
     <p>To run EZLogs we rely on a small number of trusted service providers. Each one only receives the data it needs to perform its function. The current list is published at <a href="/subprocessors/">ezlogs.io/subprocessors</a> and we will notify you of material changes in advance.</p>
-    <p>For the AI-generated explanations feature: when EZLogs renders a plain-English explanation of an action, the structured (already-redacted) event data is sent to a large-language-model provider &mdash; currently <strong>Anthropic, PBC</strong> and/or <strong>OpenAI, L.L.C.</strong> &mdash; for the explanation generation. Both providers contractually agree not to train models on inference inputs. We cache and reuse explanations so the same event is not sent twice.</p>
+    <p>For the AI-generated explanations feature: when EZLogs renders a plain-English explanation of an action, the structured (already-redacted) event data is sent to a large-language-model provider &mdash; currently <strong>Anthropic, PBC</strong> and/or <strong>OpenAI, L.L.C.</strong>, both US-based &mdash; for the explanation generation. We use these providers&rsquo; commercial API tiers, whose terms contractually prohibit training models on inference inputs (Anthropic Commercial Terms; OpenAI Business Terms). We cache and reuse explanations so the same event is not sent twice.</p>
+    <p><strong>We do not sell customer data.</strong> We do not license it, trade it, or share it with any third party for any purpose other than the operation of the service as described above and in our subprocessor list. We do not use customer event data to train our own machine-learning models.</p>
 
     <h2 id="cookies">6. Cookies</h2>
     <table>
@@ -105,10 +108,10 @@
 
     <h2>7. How long we keep your data</h2>
     <ul>
-      <li><strong>Account data:</strong> for as long as your account is active, plus 30 days after deletion to allow recovery.</li>
-      <li><strong>Event data:</strong> per the retention window of your plan (30, 90, or 365 days). Older events are permanently deleted.</li>
-      <li><strong>Billing records:</strong> 7 years, as required by Spanish and EU tax law.</li>
-      <li><strong>Technical logs:</strong> 90 days.</li>
+      <li><strong>Account data:</strong> for as long as your account is active. When you delete your account through Settings &rarr; Profile, or when an admin deletes your company through Settings &rarr; Company, the records are permanently deleted from the live database within minutes; there is no recovery window. Backups age out within 14 days (Section 9).</li>
+      <li><strong>Event data:</strong> per the retention window of your plan &mdash; <strong>14 days</strong> (Free), <strong>30 days</strong> (Solo), <strong>90 days</strong> (Team), <strong>180 days</strong> (Business), or <strong>365 days</strong> (Scale; custom on Enterprise). Older events are automatically deleted by a daily prune job.</li>
+      <li><strong>Billing records:</strong> 7 years, as required by the EU VAT Directive (2006/112/EC, Art. 244&ndash;250) as implemented in Spanish tax law (Ley General Tributaria 58/2003).</li>
+      <li><strong>Technical logs:</strong> rotated automatically; live logs retained no longer than 90 days, backups no longer than 14 days.</li>
     </ul>
 
     <h2>8. Your rights</h2>
@@ -124,17 +127,20 @@
     </ul>
     <p>To exercise any of these rights, email <a href="mailto:hello@ezlogs.io">hello@ezlogs.io</a>. We will respond within 30 days.</p>
 
-    <h2>9. Security</h2>
-    <p>We protect your data with TLS in transit, encrypted backups, hashed credentials, and least-privilege access controls. The architectural foundation is that EZLogs is <strong>read-only by design</strong> &mdash; we never write back into your application. See our <a href="/security/">Security page</a> for full detail.</p>
+    <h2>9. Automated decision-making</h2>
+    <p>EZLogs does <strong>not</strong> make decisions that produce legal effects or similarly significant effects on you using automated processing alone (GDPR Article 22). Our AI features (action explanations, chat answers) are informational narratives generated for human readers; they do not determine outcomes for you or anyone else. Account-level decisions such as suspension or termination are made by humans.</p>
 
-    <h2>10. Children</h2>
-    <p>EZLogs is a B2B developer tool and is not directed at children under 16. We do not knowingly collect personal data from children.</p>
+    <h2>10. Security</h2>
+    <p>We protect your data with TLS 1.2+ in transit, filesystem encryption at rest on our production hosts, bcrypt-hashed credentials, SSH-key-only access to production, multi-tenant isolation enforced at every database query, and rate-limiting against abuse. The architectural foundation is that EZLogs is <strong>read-only by design</strong> &mdash; we never write back into your application. See our <a href="/security/">Security page</a> and our <a href="/dpa/">DPA Section 9</a> for full detail.</p>
 
-    <h2>11. Changes to this policy</h2>
+    <h2>11. Children</h2>
+    <p>EZLogs is a B2B developer tool and is not directed at children under 16. We do not knowingly collect personal data from children. If you become aware that a child has used the service, contact us and we will delete the account.</p>
+
+    <h2>12. Changes to this policy</h2>
     <p>We may update this policy as the product evolves. The effective date at the top reflects the most recent change. For material changes we will email account owners at least 14 days before they take effect.</p>
 
-    <h2>12. Contact</h2>
-    <p>Privacy questions: <a href="mailto:hello@ezlogs.io">hello@ezlogs.io</a>. Postal address available on request.</p>
+    <h2>13. Contact</h2>
+    <p>Privacy questions: <a href="mailto:hello@ezlogs.io">hello@ezlogs.io</a>. Postal address available on request. Spanish data subjects may also lodge complaints with the <a href="https://www.aepd.es/" target="_blank" rel="noopener">Agencia Espa&ntilde;ola de Protecci&oacute;n de Datos</a> (AEPD).</p>
 
     <a class="doc__back" href="/">&larr; Back to home</a>
   </main>

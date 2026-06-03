@@ -36,7 +36,7 @@
   <main class="doc">
     <p class="doc__eyebrow">Legal</p>
     <h1>Terms of Service</h1>
-    <p class="doc__meta">Effective date: 17 May 2026 &middot; Version 1.0</p>
+    <p class="doc__meta">Effective date: 3 June 2026 &middot; Version 1.1</p>
 
     <p class="doc__lead">These terms govern your use of EZLogs. By signing up for an account or using any part of the service, you agree to them. Please read carefully.</p>
 
@@ -57,7 +57,7 @@
     <p>You must be at least 18 years old and able to enter into a binding contract under the law of your jurisdiction.</p>
 
     <h2>4. Free trial</h2>
-    <p>New accounts get 14 days of full-product access at no cost. No credit card is required. At the end of the trial period, ingestion of new events pauses unless you select a paid plan. Your collected data remains viewable on a paused account; we retain it for 30 days after the trial ends, after which it may be deleted.</p>
+    <p>New accounts get 14 days of full-product access at no cost. No credit card is required. At the end of the trial period, ingestion of new events pauses unless you select a paid plan, and your account auto-downgrades to the Free tier. Free-tier event retention is 14 days, so events older than 14 days are automatically deleted by our daily prune job. You may upgrade to a paid plan at any time to resume ingestion and extend retention.</p>
 
     <h2>5. Paid subscriptions</h2>
     <ul>
@@ -81,8 +81,8 @@
     <p>We reserve the right to suspend or terminate accounts that materially breach these rules, with written notice where reasonably possible.</p>
 
     <h2>7. Your data, your ownership</h2>
-    <p>You retain all rights to the event data your application sends us. We process it on your behalf to operate the service. We do not sell your data, we do not train AI models on it, and we do not share it with third parties except as listed in our <a href="/subprocessors/">subprocessor list</a>.</p>
-    <p>You can export your data via the in-app audit export feature, or request a one-time export by emailing <a href="mailto:hello@ezlogs.io">hello@ezlogs.io</a>.</p>
+    <p>You retain all rights to the event data your application sends us. We process it on your behalf to operate the service. <strong>We do not sell, license, or trade your data.</strong> We do not use it to train our own machine-learning models. We do not share it with third parties except as listed in our <a href="/subprocessors/">subprocessor list</a>, and the AI subprocessors we use (Anthropic, OpenAI) operate under their commercial API tiers, which contractually prohibit training on inference inputs.</p>
+    <p>You can export your data via the in-app audit export feature, via the GDPR data export at Settings &rarr; Data export, or by emailing <a href="mailto:hello@ezlogs.io">hello@ezlogs.io</a>.</p>
 
     <h2>8. Our intellectual property</h2>
     <p>The EZLogs name, logo, software, documentation, and the structure of the activity-log format are our intellectual property. The agent packages (<code>ez_logs_agent</code>, <code>ezlogs-nextjs</code>) are open source under their respective licenses; nothing in these terms restricts your rights under those licenses.</p>
@@ -109,21 +109,25 @@
     <p>These terms apply for as long as you have an account. Either party may terminate at any time. On termination:</p>
     <ul>
       <li>You lose access to the service.</li>
-      <li>We delete your account data within 30 days, except where retention is required by law (e.g. billing records).</li>
+      <li>When you delete your account or company through Settings, the records are permanently deleted from the live database within minutes; there is no recovery window. Backups age out per Section 9 of our <a href="/dpa/">DPA</a>. Billing records are retained for 7 years as required by tax law.</li>
+      <li>If termination is at our initiative (e.g. for breach of Section 6), we will give you a reasonable opportunity to export your data first unless the breach makes that impossible.</li>
       <li>Sections that by their nature should survive (ownership, liability, indemnification, governing law) survive termination.</li>
     </ul>
 
-    <h2>14. Changes to these terms</h2>
+    <h2>14. Security incidents</h2>
+    <p>If a personal-data breach affects data we process on your behalf, we will notify you without undue delay and within the timing set out in Section 10 of our <a href="/dpa/">DPA</a> (48 hours of becoming aware). For non-data security events affecting the service, we will keep affected customers informed via email and, where applicable, the status page.</p>
+
+    <h2>15. Changes to these terms</h2>
     <p>We may change these terms as the product evolves. The effective date at the top reflects the most recent change. For material changes we will notify account owners by email at least 30 days in advance. If you do not agree to a change, you may cancel your account before the change takes effect.</p>
 
-    <h2>15. Data processing addendum</h2>
+    <h2>16. Data processing addendum</h2>
     <p>If you process personal data of your end users through EZLogs and need a GDPR-compliant Data Processing Agreement, see our standard <a href="/dpa/">DPA</a>. The DPA is incorporated into these terms by reference when you process personal data through the service.</p>
 
-    <h2>16. Governing law and jurisdiction</h2>
+    <h2>17. Governing law and jurisdiction</h2>
     <p>These terms are governed by Spanish law. Any dispute arising from these terms shall be subject to the exclusive jurisdiction of the courts of Spain, except that we may bring a claim for injunctive relief in any court of competent jurisdiction.</p>
     <p>If you are a consumer (not acting for purposes of a trade, business, profession or craft) you also retain the protections of the mandatory consumer-protection law of your country of residence.</p>
 
-    <h2>17. Contact</h2>
+    <h2>18. Contact</h2>
     <p>Questions about these terms: <a href="mailto:hello@ezlogs.io">hello@ezlogs.io</a>.</p>
 
     <a class="doc__back" href="/">&larr; Back to home</a>

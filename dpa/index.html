@@ -36,7 +36,7 @@
   <main class="doc">
     <p class="doc__eyebrow">Legal</p>
     <h1>Data Processing Agreement</h1>
-    <p class="doc__meta">Effective date: 17 May 2026 &middot; Version 1.0 &middot; GDPR Article 28</p>
+    <p class="doc__meta">Effective date: 3 June 2026 &middot; Version 1.1 &middot; GDPR Article 28</p>
 
     <p class="doc__lead">This Data Processing Agreement ("DPA") governs the processing of personal data by EZLogs on your behalf when you use the service. It is incorporated by reference into our <a href="/terms/">Terms of Service</a> and takes effect automatically when you sign up; no signature is required.</p>
 
@@ -90,27 +90,30 @@
     <h2>8. Deletion and return of data</h2>
     <p>On termination of the agreement (or earlier on the Controller&rsquo;s written request), the Processor will, at the Controller&rsquo;s choice:</p>
     <ul>
-      <li>Return all Personal Data via the in-app audit export feature (machine-readable format), or</li>
-      <li>Delete all Personal Data within 30 days, except where retention is required by EU or member-state law (e.g. billing records retained for 7 years per Spanish tax law).</li>
+      <li>Return all Personal Data via the in-app audit export feature and the GDPR data export at Settings &rarr; Data export (both machine-readable JSON), or</li>
+      <li>Delete all Personal Data. When the Controller deletes its account or company through Settings, the records are permanently deleted from the live database within minutes; encrypted backups age out within 14 days (Section 9). Personal data within billing records is retained for 7 years where required by the EU VAT Directive (2006/112/EC, Art. 244&ndash;250) as implemented in Spanish tax law (Ley General Tributaria 58/2003).</li>
     </ul>
 
     <h2>9. Security measures (Article 32)</h2>
     <p>The Processor implements:</p>
     <ul>
-      <li>Encryption of data in transit (TLS 1.2+) and at rest (filesystem encryption on production hosts).</li>
-      <li>Access controls: SSH-key-only access to production, multi-tenant data isolation at the query layer, scoped per-user access for sensitive data (e.g. chat threads).</li>
-      <li>Field-level redaction by default at the agent layer for credentials, tokens, secrets, and sensitive fields.</li>
-      <li>Daily encrypted backups in the EU, retained for 14 days.</li>
-      <li>Rack::Attack rate-limiting and brute-force protection on authentication.</li>
-      <li>Architectural <strong>read-only</strong> design: EZLogs holds no write credentials into the Controller&rsquo;s application.</li>
+      <li><strong>Encryption in transit:</strong> TLS 1.2 or higher on all customer-facing endpoints (force_ssl enabled in production; Let&rsquo;s Encrypt certificates managed by Kamal proxy with auto-renewal).</li>
+      <li><strong>Encryption at rest:</strong> application-level encryption of sensitive columns (e.g. tenant signing keys) via Rails 7 Active Record Encryption; filesystem-level encryption on the production volumes as provided by our hosting subprocessor (Hetzner Online GmbH).</li>
+      <li><strong>Credentials:</strong> bcrypt password hashing (Devise default, cost 12); OAuth tokens stored as SHA-256 digests, plaintext never persisted.</li>
+      <li><strong>Access controls:</strong> SSH-key-only access to production hosts, multi-tenant data isolation enforced at every database query (per-Company scoping), per-user scoping for sensitive data (e.g. chat threads &mdash; admins cannot read other users&rsquo; chat history).</li>
+      <li><strong>Redaction:</strong> field-level redaction by default at the agent for credentials, tokens, secrets, and patterns we widen over time; the Controller may extend the sensitive-keys list via agent configuration.</li>
+      <li><strong>Backups:</strong> daily encrypted snapshots in the EU, retained for 14 days, managed by our hosting subprocessor.</li>
+      <li><strong>Abuse defense:</strong> Rack::Attack rate-limiting on every sensitive endpoint (sign-in, password reset, registration, API-key creation, data export, MCP ingestion) and an automatic IP block-list after 20 failed sign-in attempts within 10 minutes.</li>
+      <li><strong>Error tracking:</strong> exceptions are reported to Sentry (Functional Software, Inc.) with personally-identifiable information disabled (<code>send_default_pii: false</code>); no customer event data is sent to Sentry.</li>
+      <li><strong>Read-only architecture:</strong> EZLogs holds no write credentials into the Controller&rsquo;s application and exposes no write-shaped APIs into customer systems.</li>
     </ul>
     <p>See our <a href="/security/">Security page</a> for further detail.</p>
 
     <h2>10. Breach notification</h2>
-    <p>The Processor will notify the Controller without undue delay, and in any event within 48 hours, of becoming aware of a Personal Data breach. The notification will include the categories and approximate number of data subjects and records affected, the likely consequences, and the measures taken or proposed to address it.</p>
+    <p>The Processor will notify the Controller without undue delay, and in any event within 48 hours, of becoming aware of a Personal Data breach. Notification will be sent by email to the Controller&rsquo;s account-owner address on file. The notification will include the nature of the breach, the categories and approximate number of data subjects and records affected, the likely consequences, and the measures taken or proposed to address it. The Processor will keep the Controller updated as the investigation progresses. &ldquo;Becoming aware&rdquo; means confirmation by an EZLogs engineer that the incident is more likely than not a Personal Data breach; preliminary unverified alerts do not start the 48-hour clock.</p>
 
     <h2>11. International transfers</h2>
-    <p>Primary processing occurs in the European Union (Hetzner, Germany). Where a subprocessor processes data outside the EU/EEA (notably US-based subprocessors), the transfer is governed by the European Commission&rsquo;s Standard Contractual Clauses ("SCCs"), with supplementary measures as appropriate. The Controller authorizes the Processor to enter into SCCs with subprocessors on the Controller&rsquo;s behalf.</p>
+    <p>Primary processing occurs in the European Union (Hetzner, Germany). Where a subprocessor processes data outside the EU/EEA (notably US-based subprocessors: Resend, Anthropic, OpenAI, Google, Functional Software/Sentry), the transfer is governed by the European Commission&rsquo;s Standard Contractual Clauses (Decision (EU) 2021/914, Modules Two and Three as applicable). Supplementary measures applied include: (a) TLS 1.2+ in transit on every connection; (b) minimization of payloads (the AI subprocessors receive only the already-redacted action they are asked to explain, not full event streams); (c) contractual no-training terms with AI subprocessors via their commercial API tiers; (d) Sentry configured to suppress personally-identifiable information at the client (<code>send_default_pii: false</code>). The Controller authorizes the Processor to enter into SCCs with subprocessors on the Controller&rsquo;s behalf.</p>
 
     <h2>12. Audit rights</h2>
     <p>The Processor will respond to reasonable written requests for information needed for the Controller to demonstrate compliance with Article 28. For on-site audits, the Controller may request a third-party auditor of mutual agreement, no more than once every 12 months, with at least 60 days&rsquo; advance written notice, subject to confidentiality undertakings and at the Controller&rsquo;s expense.</p>
