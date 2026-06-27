@@ -2804,7 +2804,7 @@
       <div class="section__head">
         <span class="section__eyebrow"><span class="num">07</span>FAQ</span>
         <h2 class="section__title section__title--narrow">Questions, answered.</h2>
-        <p class="section__sub">The nine things people actually ask. Click any to expand.</p>
+        <p class="section__sub">The things people actually ask. Click any to expand.</p>
       </div>
       <div data-embed="faq-accordion.html">
 <!-- INLINED FROM embeds/faq-accordion.html -->
@@ -2920,6 +2920,11 @@
   </details>
 
   <details>
+    <summary>Can I ask it questions, and will it tell me when something changes? <span class="ez-faq__plus" aria-hidden="true"></span></summary>
+    <p class="ez-faq__answer">Yes. Ask in plain English and you get a cited answer — every number clicks back to the events behind it. You can also pin a question (&ldquo;tell me when a trial account goes quiet for 3 days&rdquo;) and EZLogs watches it for you, notifying you in-app, by email, or in Slack the moment the answer changes. It only ever notifies — it never writes anything back into your app.</p>
+  </details>
+
+  <details>
     <summary>Will it slow down my app? <span class="ez-faq__plus" aria-hidden="true"></span></summary>
     <p class="ez-faq__answer">No. The agent runs out-of-band: events are buffered in memory and shipped to EZLogs over a separate connection. If our service is down, the agent fails open and your app keeps running. Average overhead in benchmarks: under 1 ms per request.</p>
   </details>
@@ -2936,7 +2941,7 @@
 
   <details>
     <summary>Do you store my customer data? <span class="ez-faq__plus" aria-hidden="true"></span></summary>
-    <p class="ez-faq__answer">We store the events your app sends us — request paths, job names, table names, and the before/after values you explicitly capture. We do not store request bodies, response bodies, or full database rows unless you opt in. Field-level redaction is on by default for any column matching <code>password</code>, <code>token</code>, <code>secret</code>, <code>key</code>, or <code>*_at</code> timestamps.</p>
+    <p class="ez-faq__answer">We store the events your app sends us — request paths and parsed params, job names, table names, and the before/after values of the columns that changed. We never store raw request bodies or response bodies. Field-level redaction is on by default for any field matching <code>password</code>, <code>token</code>, <code>secret</code>, <code>api_key</code>, <code>credit_card</code>, and more — the value is masked before it ever leaves your app.</p>
   </details>
 
   <details>
@@ -2956,7 +2961,7 @@
 
   <details>
     <summary>What happens when my free trial ends? <span class="ez-faq__plus" aria-hidden="true"></span></summary>
-    <p class="ez-faq__answer">Your account auto-downgrades to our Free plan (5,000 actions/month, 25 chat messages, 14-day retention) — no lockout. Your data stays viewable for 30 days while you decide whether to upgrade. Pick a paid plan any time; the agent reconnects on its next request, no redeploy needed.</p>
+    <p class="ez-faq__answer">Your account auto-downgrades to our Free plan (5,000 actions/month, 25 chat messages, 14-day retention) — no lockout, nothing to redeploy. You keep using EZLogs on the smaller limits, and you can pick a paid plan any time; the agent reconnects on its next request.</p>
   </details>
 
   <details>
