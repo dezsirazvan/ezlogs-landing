@@ -1678,8 +1678,280 @@
     </div>
   </section>
 
+  <!-- Section 3.7: Ask your product (standing questions) -->
+  <section class="section section--alt">
+    <div class="section__inner">
+      <div class="section__head">
+        <span class="section__eyebrow"><span class="num">02d</span>Ask your product</span>
+        <h2 class="section__title section__title--wide">Ask once. It watches the answer for you.</h2>
+        <p class="section__sub">Pin a question in plain English &mdash; no metric to name, no query to write, no threshold to set. EZLogs watches the real events and tells you the moment the answer changes, with the evidence one click away. Everyone gets the answer they care about, on their own channel.</p>
+      </div>
+      <div data-embed="ask-your-product.html">
+<!-- INLINED FROM embeds/ask-your-product.html -->
+<!--
+  EZLogs — Ask your product (Section 3.7).
+  The standing-question feature: pin a question in plain English, EZLogs
+  watches the deterministic action stream and notifies when the answer
+  changes, with the evidence one click away. Two real-shaped examples:
+  a sales churn-watch and a designer feature-failure watch.
+
+  Mirrors the real in-app .app-alert component (the green fold icon, unread
+  dot, cited CTA, "from your question" meta line). Static, no JS.
+  All classes prefixed .ez-ask- to avoid bleed.
+
+  Layout: each example is a self-contained vertical column
+  (label -> question -> connector -> alert) so it stacks perfectly on
+  mobile in DOM order. On >=760px the two columns sit side by side and
+  flex:1 on the question/alert cards keeps the two rows height-matched.
+-->
+<style>
+  .ez-ask {
+    --green: #01E63E;
+    --green-soft: rgba(1, 230, 62, 0.14);
+    --green-faint: rgba(1, 230, 62, 0.05);
+    --bg-1: #0F0F10;
+    --bg-2: #131314;
+    --line: rgba(255, 255, 255, 0.08);
+    --line-strong: rgba(255, 255, 255, 0.14);
+    --text: rgba(255, 255, 255, 0.96);
+    --muted: rgba(255, 255, 255, 0.66);
+    --faint: rgba(255, 255, 255, 0.42);
+    --font: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+    box-sizing: border-box;
+    max-width: 1100px;
+    margin: 0 auto;
+    color: var(--text);
+    font-family: var(--font);
+    text-align: left;
+  }
+  .ez-ask *, .ez-ask *::before, .ez-ask *::after { box-sizing: border-box; }
+
+  /* Board: stacked single column on mobile, two columns on desktop. */
+  .ez-ask__board {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 36px 20px;
+    align-items: stretch;
+  }
+  @media (min-width: 760px) {
+    .ez-ask__board {
+      grid-template-columns: 1fr 1fr;
+      /* Four shared row tracks: label, question, connector, alert.
+         Each column is a subgrid onto these rows so the question cards,
+         the connectors, and the alert cards line up across columns no
+         matter how the text wraps at any width. */
+      grid-template-rows: auto auto auto 1fr;
+      gap: 0 20px;
+    }
+  }
+
+  /* One example = a self-contained vertical stack.
+     On mobile it's a plain flex column (DOM order stacks correctly).
+     On desktop it becomes a subgrid sharing the board's row tracks. */
+  .ez-ask__col {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+  @media (min-width: 760px) {
+    .ez-ask__col {
+      display: grid;
+      grid-template-rows: subgrid;
+      grid-row: 1 / span 4;
+    }
+  }
+
+  .ez-ask__label {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-weight: 600;
+    font-size: 11.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--faint);
+    padding-bottom: 14px;
+  }
+  .ez-ask__label .num {
+    width: 20px; height: 20px;
+    border-radius: 6px;
+    display: grid; place-items: center;
+    font-family: var(--mono);
+    font-size: 11px;
+    background: var(--green-soft);
+    color: var(--green);
+    letter-spacing: 0;
+    flex-shrink: 0;
+  }
+
+  .ez-ask__card {
+    background: var(--bg-1);
+    background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.018), transparent 40%);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+  }
+  /* The two question cards (and the two alert cards) flex to match each
+     other's height row-for-row when side by side. */
+  .ez-ask__q-card { flex: 1; }
+  .ez-ask__alert { flex: 1; }
+
+  /* Connector between question and alert. */
+  .ez-ask__connector { padding: 16px 0; }
+  .ez-ask__down {
+    display: flex; align-items: center; gap: 10px;
+    color: var(--faint); font-size: 12px; font-family: var(--mono);
+  }
+  .ez-ask__down .ln {
+    flex: 1; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--line) 30%, var(--line));
+  }
+  .ez-ask__down svg { flex-shrink: 0; }
+
+  /* The pinned question */
+  .ez-ask__q-card { border-color: var(--line-strong); }
+  .ez-ask__eyebrow {
+    font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--faint); margin-bottom: 9px; font-weight: 600;
+  }
+  .ez-ask__q {
+    font-size: 17px; line-height: 1.42; color: var(--text); font-weight: 500;
+  }
+  .ez-ask__cursor {
+    display: inline-block; width: 2px; height: 17px;
+    background: var(--green); margin-left: 3px; vertical-align: -2px;
+    border-radius: 1px;
+  }
+  .ez-ask__chips { display: flex; gap: 8px; margin-top: 14px; flex-wrap: wrap; }
+  .ez-ask__chip {
+    font-family: var(--mono); font-size: 11px; color: var(--muted);
+    background: rgba(255, 255, 255, 0.05); border: 1px solid var(--line);
+    border-radius: 999px; padding: 4px 10px;
+  }
+  .ez-ask__chip--on {
+    color: var(--green); border-color: var(--green-soft); background: var(--green-faint);
+  }
+  .ez-ask__summary {
+    font-size: 13px; color: var(--muted); margin-top: auto;
+    line-height: 1.45; padding-top: 14px; border-top: 1px solid var(--line);
+  }
+  .ez-ask__summary .lbl { color: var(--faint); }
+  .ez-ask__summary .mono { font-family: var(--mono); color: var(--text); word-break: break-word; }
+
+  /* The alert card (mirrors in-app .app-alert) */
+  .ez-ask__alert { flex-direction: row; gap: 13px; align-items: flex-start; position: relative; border-color: rgba(1, 230, 62, 0.22); }
+  .ez-ask__icon { color: var(--green); margin-top: 1px; flex-shrink: 0; }
+  .ez-ask__abody { min-width: 0; flex: 1; display: flex; flex-direction: column; }
+  .ez-ask__topline { display: flex; align-items: center; gap: 9px; }
+  .ez-ask__dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--green); box-shadow: 0 0 8px rgba(1, 230, 62, 0.8); flex-shrink: 0;
+  }
+  .ez-ask__title { font-weight: 600; color: var(--text); font-size: 15px; }
+  .ez-ask__body { font-size: 13.5px; color: var(--muted); margin-top: 6px; line-height: 1.5; }
+  .ez-ask__body b { color: var(--text); font-weight: 500; }
+  .ez-ask__cta {
+    display: inline-flex; align-items: center; gap: 6px;
+    color: var(--green); font-size: 13px; font-weight: 500; margin-top: 12px;
+    text-decoration: none;
+  }
+  .ez-ask__meta { font-size: 11.5px; color: var(--faint); margin-top: auto; padding-top: 14px; }
+  .ez-ask__meta .mono { font-family: var(--mono); word-break: break-word; }
+  .ez-ask__markread {
+    flex-shrink: 0; border: 1px solid var(--line-strong); background: transparent;
+    color: var(--muted); font-size: 12px; font-weight: 500; border-radius: 7px;
+    padding: 6px 11px; white-space: nowrap;
+  }
+</style>
+
+<div class="ez-ask">
+  <div class="ez-ask__board">
+    <!-- Example 1 — Sales -->
+    <div class="ez-ask__col">
+      <div class="ez-ask__label"><span class="num">1</span> Sales &middot; catch a churning account</div>
+
+      <div class="ez-ask__card ez-ask__q-card">
+        <div class="ez-ask__eyebrow">You pinned</div>
+        <div class="ez-ask__q">&ldquo;Tell me the moment a trial account goes quiet for 3 days.&rdquo;<span class="ez-ask__cursor"></span></div>
+        <div class="ez-ask__chips">
+          <span class="ez-ask__chip ez-ask__chip--on">Slack</span>
+          <span class="ez-ask__chip">checked daily</span>
+          <span class="ez-ask__chip">last checked 6 min ago</span>
+        </div>
+        <div class="ez-ask__summary"><span class="lbl">Watching:</span> any trial account with no significant activity for 3 days, or its first failures.</div>
+      </div>
+
+      <div class="ez-ask__connector">
+        <div class="ez-ask__down"><span class="ln"></span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+          answer changed</div>
+      </div>
+
+      <div class="ez-ask__card ez-ask__alert">
+        <span class="ez-ask__icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        </span>
+        <div class="ez-ask__abody">
+          <div class="ez-ask__topline"><span class="ez-ask__dot"></span><span class="ez-ask__title">Acme Corp went quiet</span></div>
+          <p class="ez-ask__body"><b>Acme Corp</b> (trial, day 9) had zero significant activity for 3 days, then <b>4 failed logins</b> this morning.</p>
+          <span class="ez-ask__cta">See the account&rsquo;s timeline
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </span>
+          <div class="ez-ask__meta">about 1 hour ago &middot; from <span class="mono">&ldquo;trial account goes quiet for 3 days&rdquo;</span></div>
+        </div>
+        <button class="ez-ask__markread" type="button">Mark read</button>
+      </div>
+    </div>
+
+    <!-- Example 2 — Designer -->
+    <div class="ez-ask__col">
+      <div class="ez-ask__label"><span class="num">2</span> Designer &middot; is my feature broken</div>
+
+      <div class="ez-ask__card ez-ask__q-card">
+        <div class="ez-ask__eyebrow">You pinned</div>
+        <div class="ez-ask__q">&ldquo;Is the bulk-export feature failing for anyone?&rdquo;<span class="ez-ask__cursor"></span></div>
+        <div class="ez-ask__chips">
+          <span class="ez-ask__chip ez-ask__chip--on">In-app</span>
+          <span class="ez-ask__chip">checked daily</span>
+          <span class="ez-ask__chip">last checked 12 min ago</span>
+        </div>
+        <div class="ez-ask__summary"><span class="lbl">Watching:</span> failures on <span class="mono">bulk_export.run</span> over the last 7 days.</div>
+      </div>
+
+      <div class="ez-ask__connector">
+        <div class="ez-ask__down"><span class="ln"></span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+          answer changed</div>
+      </div>
+
+      <div class="ez-ask__card ez-ask__alert">
+        <span class="ez-ask__icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><path d="M12 9v4M12 17h.01"/></svg>
+        </span>
+        <div class="ez-ask__abody">
+          <div class="ez-ask__topline"><span class="ez-ask__dot"></span><span class="ez-ask__title">Bulk-export is failing for 5 people</span></div>
+          <p class="ez-ask__body"><b>47 people</b> ran bulk-export this week. <b>5 hit a failure</b>, all on exports over 10,000 rows, the same step every time.</p>
+          <span class="ez-ask__cta">See all 5 failures
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </span>
+          <div class="ez-ask__meta">about 3 hours ago &middot; from <span class="mono">&ldquo;is the bulk-export feature failing&rdquo;</span></div>
+        </div>
+        <button class="ez-ask__markread" type="button">Mark read</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+      <p class="section__caption">Every figure is counted from what actually happened, not guessed &mdash; and clicks straight back to the events behind it.</p>
+    </div>
+  </section>
+
   <!-- Section 4: A real action, end to end -->
-  <section class="section section--alt" id="action">
+  <section class="section" id="action">
     <div class="section__inner">
       <div class="section__head">
         <span class="section__eyebrow"><span class="num">03</span>The product</span>
@@ -2097,7 +2369,7 @@
   </section>
 
   <!-- Section 5: Install -->
-  <section class="section" id="install">
+  <section class="section section--alt" id="install">
     <div class="section__inner">
       <div class="section__head">
         <span class="section__eyebrow"><span class="num">04</span>Install</span>
@@ -2296,7 +2568,7 @@
   </section>
 
   <!-- Section 6: Personas -->
-  <section class="section section--alt">
+  <section class="section">
     <div class="section__inner">
       <div class="section__head">
         <span class="section__eyebrow"><span class="num">05</span>Who it&rsquo;s for</span>
@@ -2421,7 +2693,7 @@
   </section>
 
   <!-- Section 7: Pricing -->
-  <section class="section">
+  <section class="section section--alt">
     <div class="section__inner">
       <div class="section__head">
         <span class="section__eyebrow"><span class="num">06</span>Pricing</span>
@@ -2527,7 +2799,7 @@
   </section>
 
   <!-- Section 8: FAQ -->
-  <section class="section section--alt" id="faq">
+  <section class="section" id="faq">
     <div class="section__inner">
       <div class="section__head">
         <span class="section__eyebrow"><span class="num">07</span>FAQ</span>
