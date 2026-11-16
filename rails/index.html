@@ -75,12 +75,14 @@
     <p>Events are correlated by request ID, current user, and resource ID. Each customer action becomes one card, not a wall of logs.</p>
 
     <h2>Install in 60 seconds</h2>
-    <pre><code>bundle add ez_logs_agent</code></pre>
-    <pre><code># config/initializers/ezlogs.rb
-EzLogs.configure do |c|
-  c.api_key = ENV["EZLOGS_API_KEY"]
+    <pre><code>bundle add ez_logs_agent
+rails generate ez_logs_agent:install</code></pre>
+    <pre><code># config/initializers/ez_logs_agent.rb
+EzLogsAgent.configure do |config|
+  config.server_url = "https://app.ezlogs.io"
+  config.project_token = "ezl_your_api_key_here"
 end</code></pre>
-    <p>That&rsquo;s it. Restart your app. No per-controller code, no model concerns, no per-job wrapper. The gem hooks into Rails&rsquo; existing instrumentation.</p>
+    <p>Set your API key, then restart your app. No per-controller code, no model concerns, no per-job wrapper. The gem hooks into Rails&rsquo; existing instrumentation.</p>
 
     <h2>How is this different from PaperTrail or Audited?</h2>
     <p>PaperTrail and Audited are model-versioning gems &mdash; they let you go back and inspect a row at a given timestamp. They are great at that and EZLogs does not try to replace them. EZLogs is solving a different problem: <strong>tell me, in plain English, what one customer (or one AI agent) actually did in my app today</strong> &mdash; HTTP + jobs + DB stitched together, summarized in a sentence, readable by anyone in the company. PaperTrail+Audited gives you the rows. EZLogs gives you the story.</p>
@@ -92,7 +94,7 @@ end</code></pre>
     <ul>
       <li><strong>Out-of-band:</strong> events buffered in memory, shipped over a separate connection. Average overhead under 1 ms per request in benchmarks.</li>
       <li><strong>Fails open:</strong> if EZLogs is unreachable, the agent buffers up to 10,000 events and retries. If the buffer overflows, oldest events drop. The agent <em>never</em> raises into your request path.</li>
-      <li><strong>Field-level redaction</strong> on by default for <code>password</code>, <code>token</code>, <code>secret</code>, <code>key</code>, <code>*_at</code> columns.</li>
+      <li><strong>Field-level redaction</strong> on by default for passwords, tokens, secrets, API keys, and card numbers.</li>
       <li><strong>Open source</strong> at <a href="https://github.com/dezsirazvan/ez_logs_agent" target="_blank" rel="noopener">github.com/dezsirazvan/ez_logs_agent</a>. Pin to a SHA, audit the code.</li>
     </ul>
 

@@ -64,7 +64,7 @@
   <main class="doc">
     <p class="doc__eyebrow">AI agent activity log</p>
     <h1>The activity log for AI work inside your app.</h1>
-    <p class="doc__lead">By end of 2026, AI agents will do 30&ndash;60% of meaningful work inside production apps. Nobody has a clean way to see that work happening, explain it to non-technical colleagues, or let the AI itself answer "what did I do yesterday?". EZLogs is built for exactly that.</p>
+    <p class="doc__lead">AI agents now do real work inside production apps. Nobody has a clean way to see that work happening, explain it to non-technical colleagues, or let the AI itself answer "what did I do yesterday?". EZLogs is built for exactly that.</p>
 
     <h2>What it does</h2>
     <p>The EZLogs agent drops into your Rails or Next.js app and captures every HTTP request, every background job, and every database change &mdash; whether the actor is a human user, a system process, or an AI agent. EZLogs correlates those events into a single &ldquo;action&rdquo; per business event, then renders each action as a plain-English card:</p>
@@ -92,17 +92,34 @@
     <p>One gem (Rails) or one npm package (Next.js). Zero per-route code, zero per-agent instrumentation.</p>
 
     <h3>Rails</h3>
-    <pre><code>bundle add ez_logs_agent</code></pre>
-    <pre><code># config/initializers/ezlogs.rb
-EzLogs.configure do |c|
-  c.api_key = ENV["EZLOGS_API_KEY"]
+    <pre><code>bundle add ez_logs_agent
+rails generate ez_logs_agent:install</code></pre>
+    <pre><code># config/initializers/ez_logs_agent.rb
+EzLogsAgent.configure do |config|
+  config.server_url = "https://app.ezlogs.io"
+  config.project_token = "ezl_your_api_key_here"
 end</code></pre>
 
     <h3>Next.js</h3>
     <pre><code>npm install ezlogs-nextjs</code></pre>
-    <pre><code>// next.config.ts
+    <pre><code>// instrumentation.ts
+import { ezlogs } from "ezlogs-nextjs";
+
+export async function register() {
+  if (process.env.NEXT_RUNTIME === "nodejs") {
+    ezlogs.init({
+      serverUrl: process.env.EZLOGS_SERVER_URL!,
+      projectToken: process.env.EZLOGS_PROJECT_TOKEN!,
+    });
+  }
+}</code></pre>
+    <pre><code>// next.config.mjs
 import { withEzlogsConfig } from "ezlogs-nextjs/plugin";
-export default withEzlogsConfig({});</code></pre>
+const nextConfig = { /* your options */ };
+export default withEzlogsConfig(nextConfig);</code></pre>
+    <pre><code># .env.local
+EZLOGS_SERVER_URL=https://app.ezlogs.io
+EZLOGS_PROJECT_TOKEN=ezl_your_api_key_here</code></pre>
 
     <p>Restart. Every HTTP request, every job, every DB change &mdash; including everything your AI agents do &mdash; starts flowing into EZLogs immediately.</p>
 

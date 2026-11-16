@@ -69,24 +69,39 @@
     <h2>What gets captured automatically</h2>
     <ul>
       <li><strong>HTTP routes</strong> (App Router + Pages Router) &mdash; method, path, status, duration, requesting user if your app exposes one.</li>
-      <li><strong>Server Actions</strong> &mdash; the action name, arguments, return value, success/failure.</li>
-      <li><strong>Postgres changes</strong> via lightweight database triggers &mdash; table, primary key, operation, redacted before/after column values. Works with Prisma, Drizzle, supabase-js, Kysely, raw SQL.</li>
+      <li><strong>Server Actions</strong> &mdash; the action name, arguments, success or failure.</li>
+      <li><strong>Postgres changes</strong> via lightweight database triggers &mdash; table, primary key, operation, redacted before/after column values. Works with Prisma, Drizzle, supabase-js, raw SQL.</li>
       <li><strong>Background jobs</strong> via instrumentation hooks for BullMQ, Inngest, Trigger.dev, Upstash QStash, Supabase Queues.</li>
     </ul>
 
     <h2>Install in 60 seconds</h2>
     <pre><code>npm install ezlogs-nextjs</code></pre>
-    <pre><code>// next.config.ts
+    <pre><code>// instrumentation.ts
+import { ezlogs } from "ezlogs-nextjs";
+
+export async function register() {
+  if (process.env.NEXT_RUNTIME === "nodejs") {
+    ezlogs.init({
+      serverUrl: process.env.EZLOGS_SERVER_URL!,
+      projectToken: process.env.EZLOGS_PROJECT_TOKEN!,
+    });
+  }
+}</code></pre>
+    <pre><code>// next.config.mjs
 import { withEzlogsConfig } from "ezlogs-nextjs/plugin";
-export default withEzlogsConfig({});</code></pre>
-    <p>That&rsquo;s it. Restart your dev server, deploy to prod &mdash; HTTP routes, Server Actions, and DB changes start streaming into EZLogs immediately. Works with Turbopack and Webpack, App Router and Pages Router.</p>
+const nextConfig = { /* your options */ };
+export default withEzlogsConfig(nextConfig);</code></pre>
+    <pre><code># .env.local
+EZLOGS_SERVER_URL=https://app.ezlogs.io
+EZLOGS_PROJECT_TOKEN=ezl_your_api_key_here</code></pre>
+    <p>Restart your dev server. HTTP routes and Server Actions start streaming into EZLogs right away. For Postgres changes, run <code>npx ezlogs-nextjs install-triggers</code> once. Works with Turbopack and Webpack, App Router and Pages Router.</p>
 
     <h2>Works with your stack</h2>
     <ul>
-      <li><strong>ORMs / DB clients:</strong> Prisma, Drizzle, supabase-js, Kysely, raw <code>pg</code>.</li>
+      <li><strong>ORMs / DB clients:</strong> Prisma, Drizzle, supabase-js, raw <code>pg</code>.</li>
       <li><strong>Background-job runners:</strong> BullMQ, Inngest, Trigger.dev, Upstash QStash, Supabase Queues.</li>
       <li><strong>Auth:</strong> NextAuth / Auth.js (we read <code>session.user.id</code>), Clerk, Supabase Auth, custom JWT.</li>
-      <li><strong>Hosting:</strong> Vercel, Netlify, AWS, Cloudflare Workers, self-hosted Node.</li>
+      <li><strong>Hosting:</strong> Vercel, or anywhere Next.js runs on Node.</li>
     </ul>
 
     <h2>How is this different from Sentry or Datadog?</h2>
@@ -102,7 +117,7 @@ export default withEzlogsConfig({});</code></pre>
     </ul>
 
     <h2>Supported versions</h2>
-    <p>Next.js 13.4+ (App Router + Server Actions), Next.js 12+ (Pages Router). Node 18+. Postgres 13+ for trigger-based DB capture.</p>
+    <p>Next.js 14+ (App Router and Pages Router). Node 18.17+. Postgres 13+ for trigger-based DB capture.</p>
 
     <div class="doc__callout" style="text-align:center;">
       <a href="https://app.ezlogs.io/users/sign_up" target="_blank" rel="noopener" style="display:inline-block; padding:12px 22px; background:var(--green); color:#000; font-weight:600; border-radius:10px; text-decoration:none;">Start free &mdash; beta &rarr;</a>

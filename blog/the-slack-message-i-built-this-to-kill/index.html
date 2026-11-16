@@ -119,7 +119,7 @@ rails generate ez_logs_agent:install</code></pre>
 
     <p>That&rsquo;s the part the support team opens to answer &ldquo;what happened to this order?&rdquo; That&rsquo;s the part the product team reads when they want to understand a flow. That&rsquo;s the part you can paste into a Notion doc when you&rsquo;re explaining a bug to the CEO.</p>
 
-    <p>Sensitive fields are redacted by default. Anything matching <code>password</code>, <code>token</code>, <code>secret</code>, <code>key</code>, or any <code>*_at</code> timestamp column is dropped before the event leaves your process. You can extend the redaction list in the initializer. The reason redaction is on by default and not opt-in is that the audience for the card is the whole company. If the CS lead has to wonder whether a card is safe to send to the CEO, the gem has already failed.</p>
+    <p>Sensitive fields are redacted by default. Anything matching <code>password</code>, <code>token</code>, <code>secret</code>, or <code>key</code> is dropped before the event leaves your process. You can extend the redaction list in the initializer. The reason redaction is on by default and not opt-in is that the audience for the card is the whole company. If the CS lead has to wonder whether a card is safe to send to the CEO, the gem has already failed.</p>
 
     <p>It&rsquo;s not metrics. It&rsquo;s not APM. It doesn&rsquo;t replace Datadog and doesn&rsquo;t try to. If you want p99 latency graphs, this is the wrong tool. If you want logs your CS team can read without asking an engineer, that&rsquo;s the whole pitch.</p>
 
@@ -152,7 +152,7 @@ config.project_token = ENV["EZLOGS_API_KEY"]</code></pre>
     <p>If your support team currently pings engineering to translate logs, I&rsquo;d like to hear how they ask, how often, and what about the answer they get back today hurts the most. Reply on Hacker News if this is on the front page when you read it. Email me at <a href="mailto:hello@ezlogs.io">hello@ezlogs.io</a> if it isn&rsquo;t. The next people who try EZLogs shape what ships in 0.2.0, and the next person who installs the gem should not have to figure out which URL goes where.</p>
 
     <div class="doc__callout" style="text-align:center; margin-top:48px;">
-      <a href="https://app.ezlogs.io/users/sign_up" target="_blank" rel="noopener" style="display:inline-block; padding:12px 22px; background:var(--green); color:#000; font-weight:600; border-radius:10px; text-decoration:none;">Try EZLogs &mdash; 14 days, no card &rarr;</a>
+      <a href="https://app.ezlogs.io/users/sign_up" target="_blank" rel="noopener" style="display:inline-block; padding:12px 22px; background:var(--green); color:#000; font-weight:600; border-radius:10px; text-decoration:none;">Try EZLogs &mdash; free during beta, no card &rarr;</a>
       <p style="margin:14px 0 0; font-size:13px; color:var(--faint);">Or read the docs at <a href="/rails/">ezlogs.io/rails</a>. Or just <code>bundle add ez_logs_agent</code> and see what happens.</p>
     </div>
 

@@ -140,7 +140,7 @@
         "name": "What languages and frameworks are supported today?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Ruby on Rails (Sidekiq, ActiveJob, ActiveRecord) and Next.js (App Router, Pages Router, Server Actions, Prisma, Drizzle, supabase-js, BullMQ, Inngest, Trigger.dev, Upstash, Supabase Queues). FastAPI is next."
+          "text": "Ruby on Rails (Sidekiq, ActiveJob, ActiveRecord) and Next.js (App Router, Pages Router, Server Actions, Prisma, Drizzle, supabase-js, BullMQ, Inngest, Trigger.dev, Upstash, Supabase Queues)."
         }
       },
       {
@@ -156,7 +156,7 @@
         "name": "Is the AI explanation accurate?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "The AI only writes sentences using the structured events your app actually sent. It never invents data. If it doesn't know, it says so. Every generated explanation is cached and reproducible — re-running the same action produces the same words."
+          "text": "The cards, titles, and timeline are built without AI. AI is optional and only writes the extra explanation, using the structured events your app actually sent. It never invents data. If it doesn't know, it says so. Every generated explanation is cached and reproducible — re-running the same action produces the same words."
         }
       },
       {
@@ -1275,7 +1275,7 @@
         </div>
 
         <ol class="ez-ba__events">
-          <li class="http"><time>14:02:11</time> <strong>POST /orders</strong> <em>— 200, 89 ms</em></li>
+          <li class="http"><time>14:02:11</time> <strong>POST /orders</strong> <em>— 302, 89 ms</em></li>
           <li class="db"><time>14:02:11</time> <strong>Order #1247</strong> created</li>
           <li class="db"><time>14:02:11</time> <strong>Order Item &times;3</strong> created</li>
           <li class="job"><time>14:02:12</time> <strong>ChargeCardJob</strong> started</li>
@@ -1336,7 +1336,7 @@
   <section class="section section--alt">
     <div class="section__inner">
       <div class="section__head">
-        <span class="section__eyebrow"><span class="num">02b</span>Connect your AI</span>
+        <span class="section__eyebrow"><span class="num">03</span>Connect your AI</span>
         <h2 class="section__title section__title--wide">Same activity log. The way each person reads it.</h2>
         <p class="section__sub">Your team reads the log on a page. Your AI reads it over MCP. Paste one URL into Claude Desktop, Cursor, Claude Code, or Codex, sign in once in the browser, and your AI now reads the same activity log your team trusts &mdash; same data, same answer, with citations.</p>
       </div>
@@ -1355,9 +1355,9 @@
   <section class="section">
     <div class="section__inner">
       <div class="section__head">
-        <span class="section__eyebrow"><span class="num">02c</span>Proof</span>
+        <span class="section__eyebrow"><span class="num">04</span>Proof</span>
         <h2 class="section__title section__title--wide">This is what your team sees on day one.</h2>
-        <p class="section__sub">Six real screens from a real company ("ACME-INC") after one week of using EZLogs. No mockups, no marketing edits &mdash; this is the product.</p>
+        <p class="section__sub">Six screens from a working EZLogs account ("ACME-INC") after one week of use. No mockups, no marketing edits &mdash; this is the product.</p>
       </div>
 
       <div class="proof">
@@ -1434,7 +1434,7 @@
   <section class="section section--alt">
     <div class="section__inner">
       <div class="section__head">
-        <span class="section__eyebrow"><span class="num">02d</span>Ask your product</span>
+        <span class="section__eyebrow"><span class="num">05</span>Ask your product</span>
         <h2 class="section__title section__title--wide">Ask once. It watches the answer for you.</h2>
         <p class="section__sub">Pin a question in plain English &mdash; no metric to name, no query to write, no threshold to set. EZLogs watches the real events and tells you the moment the answer changes, with the evidence one click away. Everyone gets the answer they care about, on their own channel.</p>
       </div>
@@ -1706,7 +1706,7 @@
   <section class="section" id="action">
     <div class="section__inner">
       <div class="section__head">
-        <span class="section__eyebrow"><span class="num">03</span>The product</span>
+        <span class="section__eyebrow"><span class="num">06</span>The product</span>
         <h2 class="section__title section__title--wide">This is one customer placing an order.</h2>
         <p class="section__sub">Read it top to bottom. No log files, no grepping, no engineers needed. The live card below is real product UI.</p>
       </div>
@@ -2099,7 +2099,7 @@
         <span class="ez-details-label-open">Hide events</span>
       </summary>
       <ol class="ez-events">
-        <li class="is-http"><time>14:02:11.083</time> <strong>POST /orders</strong> <em>— 200, 89 ms, Maria Chen</em></li>
+        <li class="is-http"><time>14:02:11.083</time> <strong>POST /orders</strong> <em>— 302, 89 ms, Maria Chen</em></li>
         <li class="is-db"><time>14:02:11.087</time> <strong>Order #1247</strong> created <em>— status: <code>pending</code></em></li>
         <li class="is-db"><time>14:02:11.089</time> <strong>Order Item &times;3</strong> created <em>— Snow Crash, Babel, A Wizard of Earthsea</em></li>
         <li class="is-db"><time>14:02:11.092</time> <strong>Cart #92</strong> emptied</li>
@@ -2124,7 +2124,7 @@
   <section class="section section--alt" id="install">
     <div class="section__inner">
       <div class="section__head">
-        <span class="section__eyebrow"><span class="num">04</span>Install</span>
+        <span class="section__eyebrow"><span class="num">07</span>Install</span>
         <h2 class="section__title section__title--narrow">Two stacks. One install.</h2>
         <p class="section__sub">Drop the agent in. Restart. Done. No per-route code, no SDK to learn.</p>
       </div>
@@ -2217,6 +2217,7 @@
     font-size: 11.5px;
     color: var(--faint);
   }
+  .ez-codeblock__head span:last-child { white-space: nowrap; }
   .ez-codeblock pre {
     margin: 0;
     font-family: var(--mono);
@@ -2242,6 +2243,12 @@
   .ez-tabs__caption strong {
     color: var(--text);
     font-weight: 600;
+  }
+  .ez-tabs__caption code {
+    font-family: var(--mono);
+    font-size: 12.5px;
+    color: var(--text);
+    white-space: nowrap;
   }
   .ez-tabs__more {
     margin-top: 20px;
@@ -2281,17 +2288,22 @@
   <!-- Ruby panel -->
   <div class="ez-tabs__panel ez-tabs__panel--ruby" role="tabpanel" aria-label="Ruby on Rails install">
     <div class="ez-codeblock">
-      <div class="ez-codeblock__head"><span>terminal</span><span>1 line</span></div>
-<pre><span class="o">$</span> <span class="k">bundle</span> <span class="p">add</span> <span class="v">ez_logs_agent</span></pre>
+      <div class="ez-codeblock__head"><span>terminal</span><span>2 lines</span></div>
+<pre><span class="o">$</span> <span class="k">bundle</span> <span class="p">add</span> <span class="v">ez_logs_agent</span>
+<span class="o">$</span> <span class="k">rails</span> <span class="p">generate</span> <span class="v">ez_logs_agent:install</span></pre>
     </div>
     <div class="ez-codeblock">
-      <div class="ez-codeblock__head"><span>config/initializers/ezlogs.rb</span><span>3 lines</span></div>
-<pre><span class="v">EzLogs</span>.<span class="k">configure</span> <span class="k">do</span> |c|
-  c.api_key = <span class="v">ENV</span>[<span class="s">"EZLOGS_API_KEY"</span>]
+      <div class="ez-codeblock__head"><span>config/initializers/ez_logs_agent.rb</span><span>4 lines</span></div>
+<pre><span class="v">EzLogsAgent</span>.<span class="k">configure</span> <span class="k">do</span> |config|
+  config.server_url = <span class="s">"https://app.ezlogs.io"</span>
+  config.project_token = <span class="s">"ezl_your_api_key_here"</span>
 <span class="k">end</span></pre>
     </div>
     <p class="ez-tabs__caption">
-      Auto-captures HTTP, <strong>Sidekiq / ActiveJob</strong>, and ActiveRecord changes. Zero per-controller code.
+      Auto-captures HTTP, <strong>Sidekiq / ActiveJob</strong>, ActiveRecord changes, and bulk SQL. Zero per-controller code.
+    </p>
+    <p class="ez-tabs__more">
+      <a href="https://github.com/dezsirazvan/ez_logs_agent" target="_blank" rel="noopener">Read the full Rails setup guide →</a>
     </p>
   </div>
 
@@ -2302,18 +2314,36 @@
 <pre><span class="o">$</span> <span class="k">npm</span> <span class="p">install</span> <span class="v">ezlogs-nextjs</span></pre>
     </div>
     <div class="ez-codeblock">
-      <div class="ez-codeblock__head"><span>next.config.ts</span><span>2 lines</span></div>
+      <div class="ez-codeblock__head"><span>instrumentation.ts</span><span>10 lines</span></div>
+<pre><span class="k">import</span> { ezlogs } <span class="k">from</span> <span class="s">"ezlogs-nextjs"</span>;
+
+<span class="k">export async function</span> <span class="g">register</span>() {
+  <span class="k">if</span> (process.env.NEXT_RUNTIME === <span class="s">"nodejs"</span>) {
+    ezlogs.<span class="g">init</span>({
+      serverUrl: process.env.EZLOGS_SERVER_URL!,
+      projectToken: process.env.EZLOGS_PROJECT_TOKEN!,
+    });
+  }
+}</pre>
+    </div>
+    <div class="ez-codeblock">
+      <div class="ez-codeblock__head"><span>next.config.mjs</span><span>3 lines</span></div>
 <pre><span class="k">import</span> { withEzlogsConfig } <span class="k">from</span> <span class="s">"ezlogs-nextjs/plugin"</span>;
-<span class="k">export default</span> <span class="g">withEzlogsConfig</span>({});</pre>
+<span class="k">const</span> nextConfig = { <span class="c">/* your options */</span> };
+<span class="k">export default</span> <span class="g">withEzlogsConfig</span>(nextConfig);</pre>
+    </div>
+    <div class="ez-codeblock">
+      <div class="ez-codeblock__head"><span>.env.local</span><span>2 lines</span></div>
+<pre><span class="v">EZLOGS_SERVER_URL</span>=https://app.ezlogs.io
+<span class="v">EZLOGS_PROJECT_TOKEN</span>=ezl_your_api_key_here</pre>
     </div>
     <p class="ez-tabs__caption">
-      Auto-captures <strong>HTTP, Server Actions, and Postgres changes</strong> (via triggers). Works with App Router, Pages Router, Turbopack, Webpack.
+      Auto-captures <strong>HTTP, Server Actions, and background jobs</strong>. For Postgres changes, run <code>npx ezlogs-nextjs install-triggers</code> once. Works with App Router, Pages Router, Turbopack, Webpack.
+    </p>
+    <p class="ez-tabs__more">
+      <a href="https://github.com/dezsirazvan/ez_logs_agent_nextjs" target="_blank" rel="noopener">Read the full Next.js setup guide →</a>
     </p>
   </div>
-
-  <p class="ez-tabs__more">
-    <a href="https://github.com/dezsirazvan/ez_logs_agent" target="_blank" rel="noopener">Read the full setup guide →</a>
-  </p>
 </div>
 </div>
     </div>
@@ -2323,7 +2353,7 @@
   <section class="section">
     <div class="section__inner">
       <div class="section__head">
-        <span class="section__eyebrow"><span class="num">05</span>Who it&rsquo;s for</span>
+        <span class="section__eyebrow"><span class="num">08</span>Who it&rsquo;s for</span>
         <h2 class="section__title section__title--wide">Built so anyone in your company can read it.</h2>
         <p class="section__sub">Engineers ship it. Founders, support, and PMs read it. One shared vocabulary for what the product is doing.</p>
       </div>
@@ -2448,7 +2478,7 @@
   <section class="section" id="faq">
     <div class="section__inner">
       <div class="section__head">
-        <span class="section__eyebrow"><span class="num">06</span>FAQ</span>
+        <span class="section__eyebrow"><span class="num">09</span>FAQ</span>
         <h2 class="section__title section__title--narrow">Questions, answered.</h2>
         <p class="section__sub">The things people actually ask. Click any to expand.</p>
       </div>
@@ -2592,7 +2622,7 @@
 
   <details>
     <summary>What languages and frameworks are supported today? <span class="ez-faq__plus" aria-hidden="true"></span></summary>
-    <p class="ez-faq__answer">Ruby on Rails (Sidekiq, ActiveJob, ActiveRecord) and Next.js (App Router, Pages Router, Server Actions, Prisma, Drizzle, supabase-js, BullMQ, Inngest, Trigger.dev, Upstash, Supabase Queues). FastAPI is next.</p>
+    <p class="ez-faq__answer">Ruby on Rails (Sidekiq, ActiveJob, ActiveRecord) and Next.js (App Router, Pages Router, Server Actions, Prisma, Drizzle, supabase-js, BullMQ, Inngest, Trigger.dev, Upstash, Supabase Queues).</p>
   </details>
 
   <details>
@@ -2602,7 +2632,7 @@
 
   <details>
     <summary>Is the AI explanation accurate? <span class="ez-faq__plus" aria-hidden="true"></span></summary>
-    <p class="ez-faq__answer">The AI only writes sentences using the structured events your app actually sent. It never invents data. If it doesn't know, it says so. Every generated explanation is cached and reproducible — re-running the same action produces the same words.</p>
+    <p class="ez-faq__answer">The cards, titles, and timeline are built without AI. AI is optional and only writes the extra explanation, using the structured events your app actually sent. It never invents data. If it doesn't know, it says so. Every generated explanation is cached and reproducible — re-running the same action produces the same words.</p>
   </details>
 
   <details>

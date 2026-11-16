@@ -142,6 +142,13 @@ a:hover { text-decoration: underline; }
   padding: 1px 6px;
   color: var(--text);
 }
+/* Long code lines scroll inside the block instead of widening the page on phones. */
+.doc pre {
+  overflow-x: auto;
+  max-width: 100%;
+}
+.doc pre code { display: block; width: max-content; min-width: 100%; box-sizing: border-box; }
+.doc th, .doc td, .doc a { overflow-wrap: anywhere; }
 .doc table {
   width: 100%;
   border-collapse: collapse;
