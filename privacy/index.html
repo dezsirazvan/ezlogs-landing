@@ -29,19 +29,19 @@
       <a href="/#faq">FAQ</a>
       <a href="https://github.com/dezsirazvan/ez_logs_agent" target="_blank" rel="noopener">GitHub</a>
       <a href="https://app.ezlogs.io/users/sign_in" target="_blank" rel="noopener">Sign in</a>
-      <a href="https://app.ezlogs.io/users/sign_up" class="nav__cta" target="_blank" rel="noopener">Start free &mdash; 14 days</a>
+      <a href="https://app.ezlogs.io/users/sign_up" class="nav__cta" target="_blank" rel="noopener">Start free &mdash; beta</a>
     </div>
   </nav>
 
   <main class="doc">
     <p class="doc__eyebrow">Legal</p>
     <h1>Privacy Policy</h1>
-    <p class="doc__meta">Effective date: 3 June 2026 &middot; Version 1.1</p>
+    <p class="doc__meta">Effective date: 16 November 2026 &middot; Version 1.2</p>
 
     <p class="doc__lead">EZLogs is a product that captures activity from your applications and turns it into plain-English logs. This policy explains what data we collect, why we collect it, where we store it, and what rights you have over it.</p>
 
     <h2>1. Who we are</h2>
-    <p>EZLogs is operated by <strong>Razvan Dezsi</strong>, a sole trader and tax resident in Spain (NIE Y8228368V). For privacy-related questions, contact <a href="mailto:hello@ezlogs.io">hello@ezlogs.io</a>.</p>
+    <p>EZLogs is operated by <strong>Razvan Dezsi</strong>. For privacy-related questions, contact <a href="mailto:hello@ezlogs.io">hello@ezlogs.io</a>.</p>
     <p>For the purposes of the EU General Data Protection Regulation (GDPR), Razvan Dezsi is the <strong>data controller</strong> for personal data we collect about you (the EZLogs customer). For the event data your application sends to EZLogs, we act as a <strong>data processor</strong> on your behalf &mdash; see Section 5.</p>
     <p>EZLogs has not designated a Data Protection Officer because we fall below the thresholds set out in Article 37 GDPR (we do not carry out large-scale processing of special-category data and our core activities do not require regular and systematic monitoring of data subjects on a large scale). The privacy contact above is your point of contact for all data-protection matters.</p>
 
@@ -53,7 +53,7 @@
       <li><strong>Email address</strong> &mdash; used for authentication, billing receipts, and product communication.</li>
       <li><strong>Hashed password</strong> &mdash; we never store plaintext passwords; they are hashed with bcrypt before being written to the database.</li>
       <li><strong>Organization / company name</strong> &mdash; the workspace label you choose.</li>
-      <li><strong>Billing information</strong> &mdash; processed by Stripe; we never see or store your card number. We receive only the last four digits, card brand, country, VAT ID (if you supply one), and billing email.</li>
+      <li><strong>Billing information</strong> &mdash; if paid plans are introduced, processed by Stripe; we never see or store your card number. We receive only the last four digits, card brand, country, VAT ID (if you supply one), and billing email.</li>
     </ul>
 
     <h3>2.2 Event data sent by your application</h3>
@@ -109,8 +109,8 @@
     <h2>7. How long we keep your data</h2>
     <ul>
       <li><strong>Account data:</strong> for as long as your account is active. When you delete your account through Settings &rarr; Profile, or when an admin deletes your company through Settings &rarr; Company, the records are permanently deleted from the live database within minutes; there is no recovery window. Backups age out within 14 days (Section 9).</li>
-      <li><strong>Event data:</strong> per the retention window of your plan &mdash; <strong>14 days</strong> (Free), <strong>30 days</strong> (Solo), <strong>90 days</strong> (Team), <strong>180 days</strong> (Business), or <strong>365 days</strong> (Scale; custom on Enterprise). Older events are automatically deleted by a daily prune job.</li>
-      <li><strong>Billing records:</strong> 7 years, as required by the EU VAT Directive (2006/112/EC, Art. 244&ndash;250) as implemented in Spanish tax law (Ley General Tributaria 58/2003).</li>
+      <li><strong>Event data:</strong> <strong>14 days</strong> during beta. Older events are automatically deleted by a daily prune job.</li>
+      <li><strong>Billing records:</strong> if paid plans are introduced, 7 years, as required by the EU VAT Directive (2006/112/EC, Art. 244&ndash;250) as implemented in Spanish tax law (Ley General Tributaria 58/2003).</li>
       <li><strong>Technical logs:</strong> rotated automatically; live logs retained no longer than 90 days, backups no longer than 14 days.</li>
     </ul>
 
@@ -154,8 +154,6 @@
     <div class="footer__links">
       <a href="https://github.com/dezsirazvan/ez_logs_agent" target="_blank" rel="noopener">GitHub</a>
       <span style="color:var(--faint);">&middot;</span>
-      <a href="https://ruby.social/@dezsirazvan" target="_blank" rel="me noopener">Mastodon</a>
-      <span style="color:var(--faint);">&middot;</span>
       <a href="https://app.ezlogs.io/users/sign_in" target="_blank" rel="noopener">Sign in</a>
       <span style="color:var(--faint);">&middot;</span>
       <a href="mailto:hello@ezlogs.io">Contact</a>
@@ -167,8 +165,6 @@
       <a href="/nextjs/">Next.js</a>
       <span style="color:var(--faint);">&middot;</span>
       <a href="/ai-agent-activity-log/">AI agent activity log</a>
-      <span style="color:var(--faint);">&middot;</span>
-      <a href="/enterprise/">Enterprise</a>
     </div>
     <div class="footer__legal">
       <a href="/privacy/">Privacy</a>

@@ -19,7 +19,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>EZLogs &mdash; Plain-English activity logs for Rails &amp; Next.js apps</title>
-  <meta name="description" content="EZLogs auto-captures every request, job, and database change in your Rails or Next.js app and turns each action into one plain-English card your whole team can read. 14-day free trial.">
+  <meta name="description" content="EZLogs auto-captures every request, job, and database change in your Rails or Next.js app and turns each action into one plain-English card your whole team can read. Free during beta.">
   <meta name="keywords" content="activity log, audit log, rails activity log, next.js activity log, mcp server, plain english audit log, ezlogs">
 
   <!-- Canonical + theme -->
@@ -42,7 +42,7 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="EZLogs">
   <meta property="og:title" content="Plain-English activity logs for every action in your app.">
-  <meta property="og:description" content="EZLogs captures every request, job, and DB change in your Rails or Next.js app. Turns them into readable action cards your whole team can read. 14-day free trial.">
+  <meta property="og:description" content="EZLogs captures every request, job, and DB change in your Rails or Next.js app. Turns them into readable action cards your whole team can read. Free during beta.">
   <meta property="og:url" content="https://ezlogs.io/">
   <meta property="og:image" content="https://ezlogs.io/assets/og-image.png">
   <meta property="og:image:width" content="1200">
@@ -87,55 +87,7 @@
     "description": "Auto-captures every request, background job, and database change in Rails or Next.js apps and turns each action into a plain-English card readable by humans and queryable by AI agents via MCP.",
     "url": "https://ezlogs.io/",
     "image": "https://ezlogs.io/assets/og-image.png",
-    "offers": [
-      {
-        "@type": "Offer",
-        "name": "Free",
-        "price": "0",
-        "priceCurrency": "EUR",
-        "description": "1 seat. 5,000 actions / month. 14-day retention. 25 chat messages / month. 100 AI explainer calls / month.",
-        "url": "https://app.ezlogs.io/users/sign_up"
-      },
-      {
-        "@type": "Offer",
-        "name": "Solo",
-        "price": "19",
-        "priceCurrency": "EUR",
-        "description": "2 seats. 250,000 actions / month. 30-day retention. 500 chat messages / month. 2,000 AI explainer calls / month.",
-        "url": "https://app.ezlogs.io/users/sign_up"
-      },
-      {
-        "@type": "Offer",
-        "name": "Team",
-        "price": "79",
-        "priceCurrency": "EUR",
-        "description": "10 seats. 1,500,000 actions / month. 90-day retention. 2,000 chat messages / month. 15,000 AI explainer calls / month.",
-        "url": "https://app.ezlogs.io/users/sign_up"
-      },
-      {
-        "@type": "Offer",
-        "name": "Business",
-        "price": "249",
-        "priceCurrency": "EUR",
-        "description": "25 seats. 10,000,000 actions / month. 180-day retention. 5,000 chat messages / month. 50,000 AI explainer calls / month.",
-        "url": "https://app.ezlogs.io/users/sign_up"
-      },
-      {
-        "@type": "Offer",
-        "name": "Scale",
-        "price": "799",
-        "priceCurrency": "EUR",
-        "description": "Unlimited seats. 50,000,000 actions / month. 365-day retention. 30,000 chat messages / month. 200,000 AI explainer calls / month.",
-        "url": "https://app.ezlogs.io/users/sign_up"
-      },
-      {
-        "@type": "Offer",
-        "name": "Enterprise",
-        "priceCurrency": "EUR",
-        "description": "Custom volume. SSO/SAML, audit logs, SLA, EU data residency, DPA, on-prem option.",
-        "url": "https://ezlogs.io/enterprise/"
-      }
-    ]
+    "offers": {"@type":"Offer","name":"Beta","price":"0","priceCurrency":"EUR","description":"Free during beta.","url":"https://app.ezlogs.io/users/sign_up"}
   }
   </script>
   <script type="application/ld+json">
@@ -209,10 +161,10 @@
       },
       {
         "@type": "Question",
-        "name": "What happens when my free trial ends?",
+        "name": "Is EZLogs free?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Your app keeps running normally — EZLogs just stops accepting new events from it. The data you already collected stays exactly where it is, browseable, shareable, and exportable. Pick a plan any time to resume ingestion; the agent reconnects on its next request, no redeploy needed."
+          "text": "Yes. EZLogs is free while it's in beta, with generous usage limits. We will never charge you without you explicitly choosing a paid plan, and we'll announce any pricing well in advance."
         }
       }
     ]
@@ -654,206 +606,6 @@
       line-height: 1.55;
     }
 
-    /* Pricing */
-    /*
-     * Plans v3 layout (2026-05-18): 4-up self-serve ladder
-     * (Solo / Team / Business / Scale) with Free + Enterprise as
-     * compact "edge" rows above/below. Matches the Stripe / Linear /
-     * Vercel pattern where the top-of-funnel hook and the sales
-     * CTA flank the main self-serve grid.
-     */
-    .pricing-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-      max-width: 1140px;
-      margin: 0 auto;
-    }
-    @media (max-width: 980px) {
-      .pricing-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-    @media (max-width: 560px) {
-      .pricing-grid { grid-template-columns: 1fr; }
-    }
-
-    /* Monthly ↔ annual cadence toggle. Centered above the grid;
-       only renders once per .section. */
-    .cadence-toggle {
-      display: inline-flex;
-      gap: 4px;
-      padding: 4px;
-      margin: 14px auto 0;
-      background: var(--bg-1);
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      font-size: 13px;
-    }
-    .cadence-toggle__btn {
-      appearance: none;
-      background: transparent;
-      border: 0;
-      color: var(--muted);
-      padding: 6px 14px;
-      border-radius: 999px;
-      cursor: pointer;
-      font: inherit;
-      transition: background 160ms ease, color 160ms ease;
-    }
-    .cadence-toggle__btn:hover:not(.is-active) { color: var(--text); }
-    .cadence-toggle__btn.is-active {
-      background: rgba(1, 230, 62, 0.16);
-      color: var(--green);
-    }
-    .cadence-toggle__badge {
-      font-size: 11px;
-      margin-left: 4px;
-      color: var(--green);
-      opacity: 0.95;
-    }
-
-    /* Compact edge cards (Free + Enterprise) — banner-shaped, full-width,
-       stacked above and below the main 4-up grid. */
-    .pricing-edge {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-      max-width: 1140px;
-      margin: 0 auto 16px;
-      padding: 18px 24px;
-      background: var(--bg-1);
-      border: 1px solid var(--line);
-      border-radius: 14px;
-    }
-    .pricing-edge--bottom {
-      margin: 16px auto 0;
-    }
-    .pricing-edge__head {
-      display: flex;
-      align-items: baseline;
-      gap: 14px;
-      flex-wrap: wrap;
-    }
-    .pricing-edge__name {
-      font-family: var(--display);
-      font-weight: 600;
-      font-size: 13px;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin: 0;
-    }
-    .pricing-edge__price {
-      font-family: var(--display);
-      font-weight: 600;
-      font-size: 22px;
-      color: var(--text);
-      margin: 0;
-      letter-spacing: -0.01em;
-    }
-    .pricing-edge__cadence {
-      font-size: 12px;
-      color: var(--faint);
-    }
-    .pricing-edge__pitch {
-      font-size: 13px;
-      color: var(--muted);
-      margin: 0;
-      max-width: 520px;
-      line-height: 1.5;
-    }
-    .pricing-edge__cta {
-      flex-shrink: 0;
-    }
-    @media (max-width: 720px) {
-      .pricing-edge {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 12px;
-      }
-    }
-    .pricing-card {
-      display: flex;
-      flex-direction: column;
-      padding: 28px 24px;
-      background: var(--bg-1);
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      text-align: left;
-    }
-    .pricing-card--featured {
-      border-color: rgba(1, 230, 62, 0.35);
-      box-shadow: 0 0 0 1px rgba(1, 230, 62, 0.20);
-    }
-    .pricing-card__name {
-      font-family: var(--display);
-      font-weight: 600;
-      font-size: 15px;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin: 0 0 8px;
-    }
-    .pricing-card__price {
-      font-family: var(--display);
-      font-weight: 600;
-      font-size: 28px;
-      color: var(--text);
-      margin: 0 0 4px;
-      letter-spacing: -0.01em;
-    }
-    .pricing-card__cadence {
-      font-size: 13px;
-      color: var(--faint);
-      margin: 0 0 16px;
-    }
-    .pricing-card__pitch {
-      font-size: 13.5px;
-      color: var(--muted);
-      margin: 0 0 16px;
-      line-height: 1.5;
-    }
-    .pricing-card__features {
-      list-style: none;
-      padding: 0;
-      margin: 0 0 24px;
-      font-size: 13.5px;
-      color: var(--muted);
-      line-height: 1.7;
-    }
-    .pricing-card__features li {
-      padding-left: 18px;
-      position: relative;
-    }
-    .pricing-card__features li::before {
-      content: "·";
-      position: absolute;
-      left: 6px;
-      color: var(--green);
-      font-weight: bold;
-    }
-    .pricing-card .btn {
-      margin-top: auto;
-      width: 100%;
-      justify-content: center;
-      text-align: center;
-      box-sizing: border-box;
-    }
-    /* Drop the green-glow halo on .btn--primary when it sits inside
-       a pricing card. The halo (box-shadow on the base style) is
-       designed for the hero CTA on a wide black background; inside
-       a narrow card it reads as weird inset padding. */
-    .pricing-card .btn--primary {
-      box-shadow: none;
-    }
-    .pricing-footnote {
-      margin: 32px auto 0;
-      max-width: 540px;
-      text-align: center;
-      font-size: 13px;
-      color: var(--faint);
-    }
-
     /* Footer */
     .footer {
       padding: 56px 24px 40px;
@@ -964,14 +716,14 @@
   <path d="M191 484.3V620.7L212.8 631.3C248.9 648.9 286.3 667.2 353.5 700C450.8 747.6 453 748.6 453.5 748.1C453.8 747.9 454 733.6 454 716.5C454 692.7 453.7 685 452.8 684.2C451.5 683.2 400.8 658.8 367 643C345.2 632.8 277.1 600.1 267 595L259 591V570C259 558.4 259.2 549 259.4 549C259.6 549 265.7 551.9 273.1 555.4C280.5 558.9 295.3 565.9 306 571C316.7 576.1 340.1 587.2 358 595.8C375.9 604.3 396.1 613.9 403 617.1L415.5 622.8L415.8 593.2C415.9 577 415.7 563.3 415.3 562.9C414.8 562.4 397.9 554 377.5 544.2C357.2 534.3 322.2 517.2 299.8 506.2L259 486.2V465.1V444.1L270.3 449.4C276.4 452.4 290.1 458.9 300.5 464C311 469.1 329.2 477.8 341 483.5C352.8 489.2 382.7 503.5 407.5 515.4C432.2 527.3 452.8 537 453.2 537C453.7 537 453.9 523 453.8 505.9L453.5 474.8L404.5 451.1C377.6 438 334.8 417.2 309.5 404.8C228.7 365.2 193.2 348 192.1 348C191.3 348 191 386.1 191 484.3Z" fill="black"/>
   <path d="M476.962 746.549C477.774 746.543 516.68 727.641 628.062 672.95C645.362 664.45 676.862 649.05 698.062 638.75L736.562 619.85L736.861 569.75C736.961 542.15 736.861 519.549 736.661 519.549C735.558 519.551 719.655 527.253 671.661 550.95C643.179 565.041 619.691 576.535 619.462 576.549C619.062 576.549 627.962 564.649 649.062 537.049C653.262 531.549 667.262 513.549 680.062 497.049C727.061 436.75 729.861 432.849 734.361 420.549C736.261 415.449 736.461 412.449 736.861 382.25C737.061 364.25 736.861 349.549 736.361 349.549C735.957 349.551 722.358 356.151 706.161 364.049C690.061 372.049 676.662 378.549 676.562 378.549C676.461 378.55 651.162 390.95 620.462 406.15C558.062 436.95 510.461 460.35 489.861 470.25L476.062 476.85V504.75C476.062 520.036 476.261 532.527 476.361 532.549C476.561 532.549 510.261 515.849 551.361 495.549C592.361 475.149 626.161 458.549 626.562 458.549C627.162 458.549 622.262 465.15 590.562 506.45C580.662 519.35 568.062 535.75 562.562 542.95C552.362 556.35 532.262 582.55 505.462 617.45C497.162 628.25 487.162 641.449 483.262 646.75L476.062 656.45V701.45C476.062 728.35 476.462 746.549 476.962 746.549ZM670.062 620.25L670.161 615.049L682.161 609.65C695.861 603.45 697.661 602.15 698.661 598.35C699.661 593.95 697.261 594.049 686.762 599.049C676.362 603.949 674.562 604.35 671.262 601.95C669.362 600.65 669.062 599.55 669.062 593.65C669.062 587.55 669.461 586.25 672.361 581.95C675.261 577.45 676.762 576.45 691.062 569.35C699.561 565.15 707.16 561.651 707.861 561.65C708.661 561.55 709.062 563.05 709.062 566.15V570.65L696.762 576.549C689.962 579.749 683.663 583.049 682.762 584.049C680.662 586.049 680.462 590.549 682.462 590.549C683.263 590.549 688.362 588.549 693.861 586.049C699.361 583.549 704.761 581.55 705.861 581.549C708.861 581.549 711.061 585.35 711.062 590.549C711.062 603.349 706.562 608.25 685.262 618.25L670.062 625.45V620.25ZM639.762 640.15C625.962 646.95 621.561 647.85 618.661 644.65C617.161 642.95 616.962 640.85 617.262 627.35C617.562 612.15 617.662 611.75 620.462 607.75C622.062 605.45 624.962 602.549 626.962 601.25C630.963 598.749 658.159 585.651 659.361 585.549C659.761 585.549 660.061 587.65 659.861 590.25L659.562 595.049L646.161 601.65C638.762 605.25 631.862 609.249 630.861 610.549C629.361 612.349 629.062 614.55 629.062 623.15C629.062 633.15 629.162 633.549 631.262 633.549C633.962 633.549 648.062 626.65 648.762 624.95C648.962 624.25 649.061 622.35 648.861 620.65L648.562 617.65L644.361 619.549L640.062 621.45V617.049C640.062 614.549 640.462 612.549 641.062 612.549C641.562 612.549 646.161 610.549 651.161 608.049C656.258 605.551 660.456 603.552 660.661 603.549C661.461 603.549 660.961 621.65 660.161 623.85C657.961 629.55 652.661 633.75 639.762 640.15ZM569.762 672.549C563.862 672.549 563.062 670.349 563.062 655.049C563.162 634.95 565.262 631.649 585.062 621.549C598.961 614.349 603.062 613.35 606.262 616.25C607.862 617.65 608.062 619.55 608.062 632.75C608.062 649.75 607.161 652.75 600.161 658.65C594.861 663.25 574.362 672.549 569.762 672.549ZM576.361 660.15C578.362 660.85 592.66 654.05 594.461 651.45C596.561 648.35 596.861 627.552 594.762 627.549C594.062 627.549 589.761 629.35 585.361 631.45C580.861 633.65 576.761 636.35 576.161 637.45C574.561 640.45 574.761 659.45 576.361 660.15ZM521.062 653.85L526.861 650.75L532.562 647.65L533.062 665.049L533.562 682.45L543.962 677.549C549.662 674.749 554.762 672.549 555.262 672.549C555.762 672.55 556.061 674.65 555.861 677.15L555.562 681.85L538.361 690.15L521.062 698.45V653.85Z" fill="black"/>
 </svg>
-      EZLogs
+      EZLogs <span style="margin-left:6px;padding:2px 8px;border-radius:999px;font-size:11px;font-weight:600;background:rgba(1,230,62,.12);color:#01E63E;border:1px solid rgba(1,230,62,.35);">Beta</span>
     </a>
     <div class="nav__links">
       <a href="#install">Install</a>
       <a href="#faq">FAQ</a>
       <a href="https://github.com/dezsirazvan/ez_logs_agent" target="_blank" rel="noopener">GitHub</a>
       <a href="https://app.ezlogs.io/users/sign_in" target="_blank" rel="noopener">Sign in</a>
-      <a href="https://app.ezlogs.io/users/sign_up" class="nav__cta" target="_blank" rel="noopener">Start free &mdash; 14 days</a>
+      <a href="https://app.ezlogs.io/users/sign_up" class="nav__cta" target="_blank" rel="noopener">Start free &mdash; beta</a>
     </div>
   </nav>
 
@@ -981,10 +733,10 @@
       <h1 class="hero__title">Plain-English activity logs for every action in your app.</h1>
       <p class="hero__sub">EZLogs auto-captures every request, background job, and database change in your Rails or Next.js app, then turns each customer or agent action into one plain-English card your whole team can read.</p>
       <div class="hero__ctas">
-        <a class="btn btn--primary" href="https://app.ezlogs.io/users/sign_up" target="_blank" rel="noopener">Start free &mdash; 14 days</a>
+        <a class="btn btn--primary" href="https://app.ezlogs.io/users/sign_up" target="_blank" rel="noopener">Start free &mdash; beta</a>
         <a class="btn btn--ghost" href="#action">See a real action &darr;</a>
       </div>
-      <p class="hero__trust">Drop-in for Rails and Next.js &middot; No card required &middot; Read-only by design</p>
+      <p class="hero__trust">Free during beta &middot; Drop-in for Rails and Next.js &middot; No card required &middot; Read-only by design</p>
       <div data-embed="signature-animation.html">
 <!-- INLINED FROM embeds/signature-animation.html -->
 <!--
@@ -2692,117 +2444,11 @@
     </div>
   </section>
 
-  <!-- Section 7: Pricing -->
-  <section class="section section--alt">
-    <div class="section__inner">
-      <div class="section__head">
-        <span class="section__eyebrow"><span class="num">06</span>Pricing</span>
-        <h2 class="section__title section__title--narrow">Try it free for 14 days.</h2>
-        <p class="section__sub">Then pick the plan that fits your team. AI explanations, chat, MCP, public shares, GDPR data export &mdash; every paid tier includes the whole product. The difference is volume.</p>
-
-        <!-- Cadence toggle (Plans v3, 2026-05-18). Monthly is the
-             default; annual saves 17% (2 months free). Vanilla JS
-             swaps prices + cadence labels in-place — no reload. -->
-        <div class="cadence-toggle" data-cadence-toggle role="tablist" aria-label="Billing cadence">
-          <button type="button" class="cadence-toggle__btn is-active" data-cadence="monthly" aria-pressed="true">Monthly</button>
-          <button type="button" class="cadence-toggle__btn" data-cadence="annual" aria-pressed="false">
-            Annual <span class="cadence-toggle__badge">2 months free</span>
-          </button>
-        </div>
-      </div>
-      <!-- Free edge card (top-of-funnel hook) -->
-      <div class="pricing-edge">
-        <div class="pricing-edge__head">
-          <p class="pricing-edge__name">Free</p>
-          <p class="pricing-edge__price">&euro;0</p>
-          <span class="pricing-edge__cadence">forever &middot; 1 seat &middot; 5k actions / mo &middot; 25 chats &middot; 14-day retention</span>
-        </div>
-        <p class="pricing-edge__pitch">Connect your AI in minutes. Includes 2 MCP tools + GDPR export.</p>
-        <a class="btn btn--secondary pricing-edge__cta" href="https://app.ezlogs.io/users/sign_up" target="_blank" rel="noopener">Get started &rarr;</a>
-      </div>
-
-      <div class="pricing-grid">
-        <div class="pricing-card pricing-card--featured" data-cadence-card>
-          <p class="pricing-card__name">Solo</p>
-          <p class="pricing-card__price" data-price data-price-monthly="&euro;19" data-price-annual="&euro;15.83">&euro;19</p>
-          <p class="pricing-card__cadence" data-cadence-label data-cadence-monthly="per month" data-cadence-annual="per month, billed annually (&euro;190/yr)">per month</p>
-          <p class="pricing-card__pitch">Indie SaaS and solo founders.</p>
-          <ul class="pricing-card__features">
-            <li>2 seats &middot; 250k actions / month</li>
-            <li>30-day retention</li>
-            <li>500 chat messages / month</li>
-            <li>2,000 AI explainer calls / month</li>
-            <li>MCP (unlimited) + shares + GDPR export</li>
-          </ul>
-          <a class="btn btn--primary" href="https://app.ezlogs.io/users/sign_up" target="_blank" rel="noopener">Start trial &rarr;</a>
-        </div>
-        <div class="pricing-card" data-cadence-card>
-          <p class="pricing-card__name">Team</p>
-          <p class="pricing-card__price" data-price data-price-monthly="&euro;79" data-price-annual="&euro;65.83">&euro;79</p>
-          <p class="pricing-card__cadence" data-cadence-label data-cadence-monthly="per month" data-cadence-annual="per month, billed annually (&euro;790/yr)">per month</p>
-          <p class="pricing-card__pitch">Real SaaS teams.</p>
-          <ul class="pricing-card__features">
-            <li>10 seats &middot; 1.5M actions / month</li>
-            <li>90-day retention</li>
-            <li>2,000 chat messages / month</li>
-            <li>15,000 AI explainer calls / month</li>
-            <li>Everything in Solo + audit exports</li>
-          </ul>
-          <a class="btn btn--secondary" href="https://app.ezlogs.io/users/sign_up" target="_blank" rel="noopener">Start trial &rarr;</a>
-        </div>
-        <div class="pricing-card" data-cadence-card>
-          <p class="pricing-card__name">Business</p>
-          <p class="pricing-card__price" data-price data-price-monthly="&euro;249" data-price-annual="&euro;207.50">&euro;249</p>
-          <p class="pricing-card__cadence" data-cadence-label data-cadence-monthly="per month" data-cadence-annual="per month, billed annually (&euro;2,490/yr)">per month</p>
-          <p class="pricing-card__pitch">Growing SaaS with audit needs.</p>
-          <ul class="pricing-card__features">
-            <li>25 seats &middot; 10M actions / mo</li>
-            <li>180-day retention</li>
-            <li>5,000 chat messages / month</li>
-            <li>50,000 AI explainer calls / month</li>
-            <li>Everything in Team</li>
-          </ul>
-          <a class="btn btn--secondary" href="https://app.ezlogs.io/users/sign_up" target="_blank" rel="noopener">Start trial &rarr;</a>
-        </div>
-        <div class="pricing-card" data-cadence-card>
-          <p class="pricing-card__name">Scale</p>
-          <p class="pricing-card__price" data-price data-price-monthly="&euro;799" data-price-annual="&euro;665.83">&euro;799</p>
-          <p class="pricing-card__cadence" data-cadence-label data-cadence-monthly="per month" data-cadence-annual="per month, billed annually (&euro;7,990/yr)">per month</p>
-          <p class="pricing-card__pitch">High-volume products and compliance teams.</p>
-          <ul class="pricing-card__features">
-            <li>Unlimited seats &middot; 50M actions / mo</li>
-            <li>365-day retention</li>
-            <li>30,000 chat messages / month</li>
-            <li>200,000 AI explainer calls / month</li>
-            <li>Everything in Business</li>
-          </ul>
-          <a class="btn btn--secondary" href="https://app.ezlogs.io/users/sign_up" target="_blank" rel="noopener">Start trial &rarr;</a>
-        </div>
-      </div>
-
-      <!-- Enterprise edge card (sales-driven, below the self-serve grid) -->
-      <div class="pricing-edge pricing-edge--bottom">
-        <div class="pricing-edge__head">
-          <p class="pricing-edge__name">Enterprise</p>
-          <p class="pricing-edge__price">Custom</p>
-          <span class="pricing-edge__cadence">SSO/SAML &middot; DPA &middot; SLA &middot; EU data residency &middot; on-prem option</span>
-        </div>
-        <p class="pricing-edge__pitch">For audit-conscious teams beyond Scale. Custom volume, dedicated support.</p>
-        <a class="btn btn--secondary pricing-edge__cta" href="/enterprise/">Talk to sales &rarr;</a>
-      </div>
-
-      <p class="pricing-footnote" style="max-width:780px; margin: 16px auto 0;">
-        <strong>MCP access is unlimited on every paid tier</strong> &mdash; chat-message limits do NOT apply to MCP. MCP is consumed by your AI, which spends its own credits to narrate the data it queries. We just deliver the structured rows.
-      </p>
-      <p class="pricing-footnote">Monthly plans cancel anytime. Annual plans billed once a year. VAT added at checkout for EU customers. Overage packs (&euro;10/500 chat, &euro;10/100k actions) available on Solo and above.</p>
-    </div>
-  </section>
-
-  <!-- Section 8: FAQ -->
+  <!-- Section 7: FAQ -->
   <section class="section" id="faq">
     <div class="section__inner">
       <div class="section__head">
-        <span class="section__eyebrow"><span class="num">07</span>FAQ</span>
+        <span class="section__eyebrow"><span class="num">06</span>FAQ</span>
         <h2 class="section__title section__title--narrow">Questions, answered.</h2>
         <p class="section__sub">The things people actually ask. Click any to expand.</p>
       </div>
@@ -2960,23 +2606,14 @@
   </details>
 
   <details>
-    <summary>What happens when my free trial ends? <span class="ez-faq__plus" aria-hidden="true"></span></summary>
-    <p class="ez-faq__answer">Your account auto-downgrades to our Free plan (5,000 actions/month, 25 chat messages, 14-day retention) — no lockout, nothing to redeploy. You keep using EZLogs on the smaller limits, and you can pick a paid plan any time; the agent reconnects on its next request.</p>
-  </details>
-
-  <details>
-    <summary>What's the difference between the trial and the Free plan? <span class="ez-faq__plus" aria-hidden="true"></span></summary>
-    <p class="ez-faq__answer">The 14-day trial gives you Business-tier chat (5,000 messages/mo) and AI explainer (50,000 calls/mo) with up to 500,000 actions ingested — full product access. The Free plan is forever-free with smaller limits (5,000 actions, 25 chat, 100 explainer) so you can keep using EZLogs on a small project even after the trial.</p>
-  </details>
-
-  <details>
     <summary>Can I export my data? <span class="ez-faq__plus" aria-hidden="true"></span></summary>
-    <p class="ez-faq__answer">Yes. <code>/settings/data-export</code> gives you a full JSON archive of every action, event, actor, and entity we have on file. Available on every plan, including Free — GDPR Article 20 compliant.</p>
+    <p class="ez-faq__answer">Yes. <code>/settings/data-export</code> gives you a full JSON archive of every action, event, actor, and entity we have on file. Available to every account — GDPR Article 20 compliant.</p>
   </details>
 
+
   <details>
-    <summary>How does MCP pricing work? <span class="ez-faq__plus" aria-hidden="true"></span></summary>
-    <p class="ez-faq__answer">MCP access is <strong>unlimited on every paid tier</strong>. Chat-message limits do NOT apply to MCP. This is intentional — MCP is consumed by your AI (Claude, Cursor, your internal copilot), which spends its own credits to narrate the data it queries. We just deliver the structured rows. The only meters that exist are: actions ingested, in-app chat messages, AI explainer calls. <strong>On Free</strong>, you get two of the six MCP tools: <code>find_actions</code> (browse activity) and <code>top_lists</code> (busiest actors, hottest entities). Enough to try MCP on a real project; paid tiers unlock the other four (action detail, actor / entity timelines, comparisons) plus MCP prompts.</p>
+    <summary>Is EZLogs free? <span class="ez-faq__plus" aria-hidden="true"></span></summary>
+    <p class="ez-faq__answer">Yes. EZLogs is free while it's in beta, with generous usage limits. We will never charge you without you explicitly choosing a paid plan, and we'll announce any pricing well in advance.</p>
   </details>
 </div>
 </div>
@@ -2998,8 +2635,6 @@
     <div class="footer__links">
       <a href="https://github.com/dezsirazvan/ez_logs_agent" target="_blank" rel="noopener">GitHub</a>
       <span style="color:var(--faint);">&middot;</span>
-      <a href="https://ruby.social/@dezsirazvan" target="_blank" rel="me noopener">Mastodon</a>
-      <span style="color:var(--faint);">&middot;</span>
       <a href="https://app.ezlogs.io/users/sign_in" target="_blank" rel="noopener">Sign in</a>
       <span style="color:var(--faint);">&middot;</span>
       <a href="mailto:hello@ezlogs.io">Contact</a>
@@ -3011,8 +2646,6 @@
       <a href="/nextjs/">Next.js</a>
       <span style="color:var(--faint);">&middot;</span>
       <a href="/ai-agent-activity-log/">AI agent activity log</a>
-      <span style="color:var(--faint);">&middot;</span>
-      <a href="/enterprise/">Enterprise</a>
     </div>
     <div class="footer__legal">
       <a href="/privacy/">Privacy</a>
@@ -3034,46 +2667,6 @@
     </div>
   </div>
   <script src="/assets/js/cookie-banner.js" defer></script>
-
-  <!-- Plans v3 (2026-05-18): monthly ↔ annual cadence toggle on the
-       pricing grid. Vanilla, no dependencies. Each .pricing-card has
-       data-price-monthly / data-price-annual and the toggle swaps in
-       place; no reload, no analytics tracking (yet). -->
-  <script>
-    (function () {
-      var toggle = document.querySelector("[data-cadence-toggle]");
-      if (!toggle) return;
-      var buttons = toggle.querySelectorAll("[data-cadence]");
-      var cards   = document.querySelectorAll("[data-cadence-card]");
-
-      function apply(cadence) {
-        buttons.forEach(function (b) {
-          var active = b.getAttribute("data-cadence") === cadence;
-          b.classList.toggle("is-active", active);
-          b.setAttribute("aria-pressed", active ? "true" : "false");
-        });
-        cards.forEach(function (card) {
-          var price = card.querySelector("[data-price]");
-          if (price) {
-            var v = price.getAttribute("data-price-" + cadence);
-            if (v) price.innerHTML = v;
-          }
-          var label = card.querySelector("[data-cadence-label]");
-          if (label) {
-            var t = label.getAttribute("data-cadence-" + cadence);
-            if (t) label.textContent = t;
-          }
-        });
-      }
-
-      buttons.forEach(function (b) {
-        b.addEventListener("click", function (e) {
-          e.preventDefault();
-          apply(b.getAttribute("data-cadence"));
-        });
-      });
-    })();
-  </script>
 
   
 

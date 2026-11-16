@@ -29,14 +29,14 @@
       <a href="/#faq">FAQ</a>
       <a href="https://github.com/dezsirazvan/ez_logs_agent" target="_blank" rel="noopener">GitHub</a>
       <a href="https://app.ezlogs.io/users/sign_in" target="_blank" rel="noopener">Sign in</a>
-      <a href="https://app.ezlogs.io/users/sign_up" class="nav__cta" target="_blank" rel="noopener">Start free &mdash; 14 days</a>
+      <a href="https://app.ezlogs.io/users/sign_up" class="nav__cta" target="_blank" rel="noopener">Start free &mdash; beta</a>
     </div>
   </nav>
 
   <main class="doc">
     <p class="doc__eyebrow">Legal</p>
     <h1>Data Processing Agreement</h1>
-    <p class="doc__meta">Effective date: 3 June 2026 &middot; Version 1.1 &middot; GDPR Article 28</p>
+    <p class="doc__meta">Effective date: 16 November 2026 &middot; Version 1.2 &middot; GDPR Article 28</p>
 
     <p class="doc__lead">This Data Processing Agreement ("DPA") governs the processing of personal data by EZLogs on your behalf when you use the service. It is incorporated by reference into our <a href="/terms/">Terms of Service</a> and takes effect automatically when you sign up; no signature is required.</p>
 
@@ -46,10 +46,10 @@
 
     <h2>1. Parties and roles</h2>
     <p><strong>Data Controller:</strong> you (the EZLogs customer), with respect to the personal data you process through the service about your end users.</p>
-    <p><strong>Data Processor:</strong> Razvan Dezsi, sole trader and tax resident in Spain (NIE Y8228368V), trading as EZLogs.</p>
+    <p><strong>Data Processor:</strong> Razvan Dezsi, trading as EZLogs.</p>
 
     <h2>2. Subject matter and duration</h2>
-    <p>The Processor will process Personal Data on behalf of the Controller for the duration of the Controller&rsquo;s subscription to the EZLogs service, and for the retention period defined in the Controller&rsquo;s active plan.</p>
+    <p>The Processor will process Personal Data on behalf of the Controller for the duration of the Controller&rsquo;s use of the EZLogs service, and for the retention period defined in the Controller&rsquo;s account.</p>
 
     <h2>3. Nature and purpose of processing</h2>
     <p>The Processor receives structured event data from the Controller&rsquo;s applications via the EZLogs agent (Ruby gem <code>ez_logs_agent</code> and/or npm package <code>ezlogs-nextjs</code>), stores and correlates those events, renders them as human-readable activity logs, and exposes them to the Controller&rsquo;s users (and, if enabled, to AI agents the Controller authorizes via MCP).</p>
@@ -91,7 +91,7 @@
     <p>On termination of the agreement (or earlier on the Controller&rsquo;s written request), the Processor will, at the Controller&rsquo;s choice:</p>
     <ul>
       <li>Return all Personal Data via the in-app audit export feature and the GDPR data export at Settings &rarr; Data export (both machine-readable JSON), or</li>
-      <li>Delete all Personal Data. When the Controller deletes its account or company through Settings, the records are permanently deleted from the live database within minutes; encrypted backups age out within 14 days (Section 9). Personal data within billing records is retained for 7 years where required by the EU VAT Directive (2006/112/EC, Art. 244&ndash;250) as implemented in Spanish tax law (Ley General Tributaria 58/2003).</li>
+      <li>Delete all Personal Data. When the Controller deletes its account or company through Settings, the records are permanently deleted from the live database within minutes; encrypted backups age out within 14 days (Section 9). If paid plans are introduced, personal data within billing records is retained for 7 years where required by the EU VAT Directive (2006/112/EC, Art. 244&ndash;250) as implemented in Spanish tax law (Ley General Tributaria 58/2003).</li>
     </ul>
 
     <h2>9. Security measures (Article 32)</h2>
@@ -139,8 +139,6 @@
     <div class="footer__links">
       <a href="https://github.com/dezsirazvan/ez_logs_agent" target="_blank" rel="noopener">GitHub</a>
       <span style="color:var(--faint);">&middot;</span>
-      <a href="https://ruby.social/@dezsirazvan" target="_blank" rel="me noopener">Mastodon</a>
-      <span style="color:var(--faint);">&middot;</span>
       <a href="https://app.ezlogs.io/users/sign_in" target="_blank" rel="noopener">Sign in</a>
       <span style="color:var(--faint);">&middot;</span>
       <a href="mailto:hello@ezlogs.io">Contact</a>
@@ -152,8 +150,6 @@
       <a href="/nextjs/">Next.js</a>
       <span style="color:var(--faint);">&middot;</span>
       <a href="/ai-agent-activity-log/">AI agent activity log</a>
-      <span style="color:var(--faint);">&middot;</span>
-      <a href="/enterprise/">Enterprise</a>
     </div>
     <div class="footer__legal">
       <a href="/privacy/">Privacy</a>

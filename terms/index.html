@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Terms of Service &mdash; EZLogs</title>
-  <meta name="description" content="The terms that govern your use of EZLogs: subscriptions, acceptable use, liability, cancellation, and applicable law.">
+  <meta name="description" content="The terms that govern your use of EZLogs: beta access, acceptable use, liability, cancellation, and applicable law.">
   <link rel="canonical" href="https://ezlogs.io/terms/">
   <meta name="robots" content="index, follow">
   <meta name="theme-color" content="#0A0A0A">
@@ -29,19 +29,19 @@
       <a href="/#faq">FAQ</a>
       <a href="https://github.com/dezsirazvan/ez_logs_agent" target="_blank" rel="noopener">GitHub</a>
       <a href="https://app.ezlogs.io/users/sign_in" target="_blank" rel="noopener">Sign in</a>
-      <a href="https://app.ezlogs.io/users/sign_up" class="nav__cta" target="_blank" rel="noopener">Start free &mdash; 14 days</a>
+      <a href="https://app.ezlogs.io/users/sign_up" class="nav__cta" target="_blank" rel="noopener">Start free &mdash; beta</a>
     </div>
   </nav>
 
   <main class="doc">
     <p class="doc__eyebrow">Legal</p>
     <h1>Terms of Service</h1>
-    <p class="doc__meta">Effective date: 3 June 2026 &middot; Version 1.1</p>
+    <p class="doc__meta">Effective date: 16 November 2026 &middot; Version 1.2</p>
 
     <p class="doc__lead">These terms govern your use of EZLogs. By signing up for an account or using any part of the service, you agree to them. Please read carefully.</p>
 
     <h2>1. The agreement</h2>
-    <p>This is a contract between <strong>you</strong> (or the legal entity you represent &mdash; "Customer") and <strong>Razvan Dezsi</strong>, a sole trader and tax resident in Spain (NIE Y8228368V), trading as <strong>EZLogs</strong> ("we", "us", "EZLogs"). The contract is formed when you click "Sign up" and accept these terms.</p>
+    <p>This is a contract between <strong>you</strong> (or the legal entity you represent &mdash; "Customer") and <strong>Razvan Dezsi</strong>, trading as <strong>EZLogs</strong> ("we", "us", "EZLogs"). The contract is formed when you click "Sign up" and accept these terms.</p>
 
     <h2>2. The service</h2>
     <p>EZLogs is a software-as-a-service product that:</p>
@@ -56,18 +56,11 @@
     <p>You must provide accurate signup information and keep your password confidential. You are responsible for all activity under your account. Notify us at <a href="mailto:hello@ezlogs.io">hello@ezlogs.io</a> immediately if you suspect unauthorized use.</p>
     <p>You must be at least 18 years old and able to enter into a binding contract under the law of your jurisdiction.</p>
 
-    <h2>4. Free trial</h2>
-    <p>New accounts get 14 days of full-product access at no cost. No credit card is required. At the end of the trial period, ingestion of new events pauses unless you select a paid plan, and your account auto-downgrades to the Free tier. Free-tier event retention is 14 days, so events older than 14 days are automatically deleted by our daily prune job. You may upgrade to a paid plan at any time to resume ingestion and extend retention.</p>
+    <h2>4. Beta</h2>
+    <p>EZLogs is currently in beta and is provided free of charge. We do not collect payment details. Accounts have usage limits (seats, actions, chat messages, AI explanations, and 14-day event retention), shown in the app. Usage above these limits may be rate-limited.</p>
 
-    <h2>5. Paid subscriptions</h2>
-    <ul>
-      <li><strong>Pricing</strong> is listed at <a href="/#pricing">ezlogs.io/#pricing</a> and on the in-app billing page. All prices are in Euros (EUR) and exclude applicable VAT, which is added at checkout based on your billing country.</li>
-      <li><strong>Billing cycle:</strong> monthly, in advance. Your card is charged automatically each cycle by our payment processor, Stripe.</li>
-      <li><strong>Quotas:</strong> each plan includes a monthly action quota, a retention window, a seat count, and a chat-message quota. Usage above quota may be rate-limited or charged at the overage rate published in-app.</li>
-      <li><strong>Plan changes:</strong> upgrades take effect immediately with prorated billing. Downgrades take effect at the end of the current billing cycle.</li>
-      <li><strong>Cancellation:</strong> you may cancel at any time from your account settings. You will not be billed for the next cycle. We do not pro-rate refunds for partial months.</li>
-      <li><strong>Refunds:</strong> we do not offer refunds for unused time on cancelled plans. If you believe a charge is incorrect, contact us within 30 days and we will investigate in good faith.</li>
-    </ul>
+    <h2>5. Fees</h2>
+    <p>There are no fees during the beta. If paid plans are introduced, account owners will receive email notice at least 30 days in advance, and nobody will be charged without explicitly choosing a paid plan.</p>
 
     <h2>6. Acceptable use</h2>
     <p>You agree not to use EZLogs to:</p>
@@ -88,7 +81,7 @@
     <p>The EZLogs name, logo, software, documentation, and the structure of the activity-log format are our intellectual property. The agent packages (<code>ez_logs_agent</code>, <code>ezlogs-nextjs</code>) are open source under their respective licenses; nothing in these terms restricts your rights under those licenses.</p>
 
     <h2>9. Service availability</h2>
-    <p>We work hard to keep EZLogs available, but we do not provide a contractual uptime guarantee on standard plans. Status and historical uptime are published at our status page when available.</p>
+    <p>We work hard to keep EZLogs available, but we do not provide a contractual uptime guarantee. Status and historical uptime are published at our status page when available.</p>
     <p>The EZLogs agent is designed to <strong>fail open</strong>: if our service is unavailable, your application continues to run normally. Events buffered in memory are retried; events that overflow the buffer are dropped (oldest first). The agent never blocks your customer's request.</p>
 
     <h2>10. Warranty disclaimer</h2>
@@ -109,7 +102,7 @@
     <p>These terms apply for as long as you have an account. Either party may terminate at any time. On termination:</p>
     <ul>
       <li>You lose access to the service.</li>
-      <li>When you delete your account or company through Settings, the records are permanently deleted from the live database within minutes; there is no recovery window. Backups age out per Section 9 of our <a href="/dpa/">DPA</a>. Billing records are retained for 7 years as required by tax law.</li>
+      <li>When you delete your account or company through Settings, the records are permanently deleted from the live database within minutes; there is no recovery window. Backups age out per Section 9 of our <a href="/dpa/">DPA</a>.</li>
       <li>If termination is at our initiative (e.g. for breach of Section 6), we will give you a reasonable opportunity to export your data first unless the breach makes that impossible.</li>
       <li>Sections that by their nature should survive (ownership, liability, indemnification, governing law) survive termination.</li>
     </ul>
@@ -142,8 +135,6 @@
     <div class="footer__links">
       <a href="https://github.com/dezsirazvan/ez_logs_agent" target="_blank" rel="noopener">GitHub</a>
       <span style="color:var(--faint);">&middot;</span>
-      <a href="https://ruby.social/@dezsirazvan" target="_blank" rel="me noopener">Mastodon</a>
-      <span style="color:var(--faint);">&middot;</span>
       <a href="https://app.ezlogs.io/users/sign_in" target="_blank" rel="noopener">Sign in</a>
       <span style="color:var(--faint);">&middot;</span>
       <a href="mailto:hello@ezlogs.io">Contact</a>
@@ -155,8 +146,6 @@
       <a href="/nextjs/">Next.js</a>
       <span style="color:var(--faint);">&middot;</span>
       <a href="/ai-agent-activity-log/">AI agent activity log</a>
-      <span style="color:var(--faint);">&middot;</span>
-      <a href="/enterprise/">Enterprise</a>
     </div>
     <div class="footer__legal">
       <a href="/privacy/">Privacy</a>
