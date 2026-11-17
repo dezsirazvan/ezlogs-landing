@@ -79,7 +79,6 @@
 rails generate ez_logs_agent:install</code></pre>
     <pre><code># config/initializers/ez_logs_agent.rb
 EzLogsAgent.configure do |config|
-  config.server_url = ENV.fetch("EZLOGS_SERVER_URL", "https://app.ezlogs.io")
   config.project_token = ENV["EZLOGS_API_KEY"]
 end</code></pre>
     <pre><code># your environment (.env, Kamal, Heroku...)

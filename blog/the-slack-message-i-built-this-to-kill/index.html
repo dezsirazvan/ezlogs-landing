@@ -145,6 +145,8 @@ config.project_token = ENV["EZLOGS_API_KEY"]</code></pre>
 
     <p>That&rsquo;s the whole config now. Self-hosters override <code>EZLOGS_SERVER_URL</code>. Everyone else just sets the API key.</p>
 
+    <p><em>Update, November 2026:</em> since 0.2.3 the agent defaults to app.ezlogs.io on its own, so even the <code>server_url</code> line is gone from the generated file. The API key is the only setting.</p>
+
     <p>The lesson I keep coming back to: <strong>the install matters more than the pitch</strong>. The landing page can be perfect, the README can be polished, the gem can ship at 854 specs green, and a placeholder URL in the generated initializer still kills your first conversion. The pitch is for people who haven&rsquo;t signed up yet. The install is for the people who already trust you enough to try. Getting the install wrong is the more expensive of the two.</p>
 
     <p>I&rsquo;m writing this on day four. Stars on the gem repo are trickling in from people I don&rsquo;t know. Ruby Weekly might pick it up next Thursday. The Hacker News attempt is going to get one more shot once my account is old enough to not be a spam vector.</p>

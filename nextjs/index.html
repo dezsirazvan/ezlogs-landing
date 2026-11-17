@@ -82,7 +82,6 @@ import { ezlogs } from "ezlogs-nextjs";
 export async function register() {
   if (process.env.NEXT_RUNTIME === "nodejs") {
     ezlogs.init({
-      serverUrl: process.env.EZLOGS_SERVER_URL!,
       projectToken: process.env.EZLOGS_PROJECT_TOKEN!,
     });
   }
@@ -92,7 +91,6 @@ import { withEzlogsConfig } from "ezlogs-nextjs/plugin";
 const nextConfig = { /* your options */ };
 export default withEzlogsConfig(nextConfig);</code></pre>
     <pre><code># .env.local
-EZLOGS_SERVER_URL=https://app.ezlogs.io
 EZLOGS_PROJECT_TOKEN=ezl_your_api_key_here</code></pre>
     <p>Restart your dev server. HTTP routes and Server Actions start streaming into EZLogs right away. For Postgres changes, run <code>npx ezlogs-nextjs install-triggers</code> once. Works with Turbopack and Webpack, App Router and Pages Router.</p>
 
