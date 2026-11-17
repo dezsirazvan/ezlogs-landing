@@ -1,0 +1,47 @@
+# EZLogs
+
+> EZLogs is a plain-English activity log for Rails and Next.js apps. It captures requests, background jobs and database changes, links them into one card per action ("Refund failed: card expired"), and shows who did it (a person, an AI agent or the system) and which records it touched. Anyone on a team can read it, and AI assistants can query it read-only over MCP.
+
+Key facts:
+
+- Frameworks: Ruby on Rails (gem `ez_logs_agent`) and Next.js (npm package `ezlogs-nextjs`). No other frameworks yet.
+- Captures: HTTP requests, background jobs (Sidekiq / ActiveJob on Rails; BullMQ, Inngest, Trigger.dev, Upstash, Supabase Queues on Next.js), per-row database changes and bulk SQL.
+- Card titles and timelines are built from the real events your app sends by fixed rules, not by AI. AI is optional: it can add an explanation or answer chat questions from those events.
+- Read-only by design: EZLogs never writes back into the customer's app. No webhooks into the app, no write tools.
+- MCP server: `https://app.ezlogs.io/mcp` (streamable HTTP, OAuth sign-in). Six read-only tools: find_actions, get_action, actor_timeline, entity_timeline, top_lists, compare_actions. Works with Claude, Claude Code, ChatGPT, Cursor, Codex and Lovable.
+- Requires an EZLogs account with the agent installed in the app.
+- Pricing: free during the beta, no card required. 90 days of history during the beta.
+- Hosting: Hetzner, Germany (EU). Sensitive fields (passwords, tokens, secrets, API keys, card numbers) are masked inside the app before sending.
+- Not a monitoring, metrics or APM tool (not a Datadog, Sentry or New Relic replacement). Not self-hostable yet.
+- Agents are open source: https://github.com/dezsirazvan/ez_logs_agent (Rails) and https://github.com/dezsirazvan/ez_logs_agent_nextjs (Next.js).
+- Contact: hello@ezlogs.io
+
+## Product
+
+- [Home](https://ezlogs.io/): what EZLogs is, with screens from a demo account
+- [EZLogs for Rails](https://ezlogs.io/rails/): what the gem captures, install, supported versions
+- [EZLogs for Next.js](https://ezlogs.io/nextjs/): what the package captures, install, supported stack
+- [MCP server](https://ezlogs.io/mcp/): connect Claude, ChatGPT, Cursor, Codex or Lovable; tools and security
+- [AI agent activity log](https://ezlogs.io/ai-agent-activity-log/): seeing what AI agents did inside your app
+
+## Install guides (for coding assistants)
+
+- [Rails install prompt](https://app.ezlogs.io/install/rails.md): step-by-step install of `ez_logs_agent`, as markdown
+- [Next.js install prompt](https://app.ezlogs.io/install/nextjs.md): step-by-step install of `ezlogs-nextjs`, as markdown
+
+## Comparisons
+
+- [Activity log for Rails](https://ezlogs.io/rails-activity-log/): PaperTrail, Audited, public_activity, Ahoy and EZLogs compared
+- [Activity log for Next.js](https://ezlogs.io/nextjs-activity-log/): audit tables, Postgres triggers, PostHog, Sentry, WorkOS and EZLogs compared
+
+## Trust
+
+- [Security](https://ezlogs.io/security/): read-only architecture, EU hosting, redaction
+- [Privacy policy](https://ezlogs.io/privacy/)
+- [Terms](https://ezlogs.io/terms/)
+
+## Optional
+
+- [Subprocessors](https://ezlogs.io/subprocessors/)
+- [DPA](https://ezlogs.io/dpa/)
+- [Blog](https://ezlogs.io/blog/)

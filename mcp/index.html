@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EZLogs MCP Server &mdash; Ask your AI what happened in your app</title>
+  <meta name="description" content="Connect Claude, ChatGPT, Cursor, Codex or Lovable to EZLogs over MCP and ask what happened in your Rails or Next.js app. One URL, OAuth sign-in, six read-only tools.">
+  <link rel="canonical" href="https://ezlogs.io/mcp/">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#0A0A0A">
+  <meta name="color-scheme" content="dark">
+  <link rel="icon" type="image/x-icon" href="/assets/favicon/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+  <link rel="manifest" href="/assets/favicon/site.webmanifest">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="EZLogs">
+  <meta property="og:title" content="Ask Claude, ChatGPT or Cursor what happened in your app">
+  <meta property="og:description" content="The EZLogs MCP server gives your AI assistant read-only access to your app's activity log: requests, jobs and database changes as plain-English actions.">
+  <meta property="og:url" content="https://ezlogs.io/mcp/">
+  <meta property="og:image" content="https://ezlogs.io/assets/og-image.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="/assets/css/subpage.css">
+  <style>
+    .doc figure { margin: 24px 0 32px; }
+    .doc figure img { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: 10px; }
+    .doc figcaption { font-size: 13.5px; color: var(--faint); margin-top: 10px; }
+    .doc blockquote { margin: 0 0 20px; padding: 12px 16px; border-left: 2px solid var(--line-strong); background: var(--bg-1); border-radius: 0 8px 8px 0; }
+    .doc blockquote p { margin: 0 0 8px; }
+    .doc blockquote p:last-child { margin: 0; }
+    .doc td code { white-space: nowrap; font-size: 0.82em; }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "EZLogs MCP server",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Web",
+    "description": "A remote, read-only MCP server that lets AI assistants such as Claude, ChatGPT, Cursor and Codex query the plain-English activity log of a Rails or Next.js app: actions, actors, entities and failures. OAuth sign-in.",
+    "url": "https://ezlogs.io/mcp/",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "EUR",
+      "description": "Free during beta. No card required."
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "EZLogs",
+      "url": "https://ezlogs.io/",
+      "email": "hello@ezlogs.io"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Can my AI assistant change anything in my app through EZLogs?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No. All six tools only read your activity log. EZLogs has no write access to your app, and the MCP server has no tools that create, update or delete anything." }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need an EZLogs account?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. The MCP server reads the activity log EZLogs collects from your app, so you need an EZLogs account (free during the beta) with the agent installed in a Rails or Next.js app. Without it there is nothing to query." }
+      },
+      {
+        "@type": "Question",
+        "name": "Which AI clients work?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Any client that supports remote MCP servers over HTTP with OAuth and dynamic client registration. We have setup steps for Claude (claude.ai and Claude Desktop), Claude Code, ChatGPT, Cursor, Codex and Lovable." }
+      },
+      {
+        "@type": "Question",
+        "name": "Who can see my data?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Only people in your EZLogs company, the AI clients they sign in, and the subprocessors on our Subprocessors page (hosting in Germany, and the AI providers used for optional explanations). Each connection is tied to one user, can be revoked from Settings, Connectors, MCP, and uses short-lived access tokens. Data is stored in Germany (EU)." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does EZLogs use AI to make up the answers?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No. The tools return actions built from the real events your app sent: requests, background jobs and database changes. Your AI assistant writes the answer from that data, and each action has an id you can open in EZLogs to check it." }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <nav class="nav">
+    <a class="nav__brand" href="/">
+      <img src="/assets/EZLogo-mark.svg" alt="" width="28" height="28">
+      EZLogs
+    </a>
+    <div class="nav__links">
+      <a href="/#install">Install</a>
+      <a href="/#faq">FAQ</a>
+      <a href="https://app.ezlogs.io/users/sign_in" target="_blank" rel="noopener">Sign in</a>
+      <a href="https://app.ezlogs.io/users/sign_up" class="nav__cta" target="_blank" rel="noopener">Start free</a>
+    </div>
+  </nav>
+
+  <main class="doc">
+    <p class="doc__eyebrow">EZLogs over MCP</p>
+    <h1>Ask Claude, ChatGPT or Cursor what happened in your app</h1>
+    <p class="doc__lead">EZLogs turns the requests, background jobs and database changes in your Rails or Next.js app into plain-English actions. The EZLogs MCP server lets the AI assistant you already use read that log, so you can ask it what happened, who did it and what failed. It can only read. It cannot change anything in your app.</p>
+
+    <div class="doc__callout">
+      <strong>Server URL:</strong> <code>https://app.ezlogs.io/mcp</code><br>
+      Sign in with your EZLogs account (OAuth). Requires the EZLogs agent installed in a <a href="/rails/">Rails</a> or <a href="/nextjs/">Next.js</a> app. Free during the beta.
+    </div>
+
+    <h2>What your AI can see</h2>
+    <ul>
+      <li><strong>Actions:</strong> one plain-English card per thing that happened, built from the request, the jobs it started and the database rows it changed. For example &ldquo;Refund failed: card expired&rdquo;.</li>
+      <li><strong>Actors:</strong> who did it: a person, an AI agent, or the system.</li>
+      <li><strong>Entities:</strong> the business records involved, such as an order, a booking or a project, with their history.</li>
+      <li><strong>Failures:</strong> what went wrong and why, including partial failures where one step failed.</li>
+    </ul>
+
+    <h2>Example: a night of ferry rebookings</h2>
+    <p>These answers come from a demo account: Brackwater Ferries, a fictional ferry company where an AI rebooking assistant handles disrupted bookings. A gale cancelled two sailings overnight.</p>
+    <figure>
+      <img src="/assets/screenshots/mcp-claude-ferry.png" alt="Claude answering 'what did the rebooking assistant do last night?' using EZLogs: 48 bookings disrupted, 40 rebooked, 5 refunds issued, two sailing-full rejections that went through on a retry, and a table of the three failed refunds totalling 152.00 EUR" width="1400" height="1225" loading="lazy">
+      <figcaption>Claude, connected to EZLogs over MCP, answering a question about the demo account.</figcaption>
+    </figure>
+
+    <blockquote>
+      <p><strong>&ldquo;What did the rebooking assistant do last night? Anything I need to deal with?&rdquo;</strong></p>
+      <p>Two sailings were cancelled at about 04:26, citing the gale warning, which disrupted 48 bookings. The Rebooking assistant moved 40 onto other sailings and refunded the other 8. Five refunds went through (&euro;355.45). Three failed because the card had expired, and those bookings are now in &ldquo;refund failed&rdquo;.</p>
+    </blockquote>
+    <blockquote>
+      <p><strong>&ldquo;What happened to refund RF-M9PM?&rdquo;</strong></p>
+      <p>It failed at 03:27 UTC. The Rebooking assistant tried to refund &euro;64.20 for booking BRK-M9PM. The refund went from pending to failed because the card had expired, and the booking was marked &ldquo;refund failed&rdquo;.</p>
+    </blockquote>
+    <blockquote>
+      <p><strong>&ldquo;Which refunds failed, and how much money is stuck?&rdquo;</strong></p>
+      <p>Three: RF-M9PM (&euro;64.20), RF-9LDK (&euro;55.70) and RF-3JRW (&euro;32.10), &euro;152.00 in total. Nothing in the log shows anyone contacting these passengers yet.</p>
+    </blockquote>
+    <blockquote>
+      <p><strong>&ldquo;Were any rebookings rejected?&rdquo;</strong></p>
+      <p>Two were rejected as &ldquo;sailing full&rdquo; (BRK-QSKS and BRK-Y4CZ). Both went through on a retry.</p>
+    </blockquote>
+    <p>Other questions that work well: &ldquo;What did sarah@example.com do today?&rdquo;, &ldquo;Show me failed checkouts this week&rdquo;, &ldquo;Who were the most active users in the last 7 days?&rdquo;, &ldquo;Why did this order succeed and that one fail?&rdquo;.</p>
+
+    <h2>Connect your AI assistant</h2>
+    <p>Every client uses the same URL, <code>https://app.ezlogs.io/mcp</code>, and signs in through your browser. No API key to copy.</p>
+
+    <h3>Claude (claude.ai and Claude Desktop)</h3>
+    <ol>
+      <li>Open <strong>Customize &rarr; Connectors &rarr; Add custom connector</strong>.</li>
+      <li>Name it <code>EZLogs</code> and paste <code>https://app.ezlogs.io/mcp</code>.</li>
+      <li>Select <strong>Connect</strong> and sign in to EZLogs.</li>
+    </ol>
+    <p>On Team and Enterprise plans an owner may need to add the connector for the organisation first.</p>
+
+    <h3>Claude Code</h3>
+    <pre><code>claude mcp add --transport http ezlogs https://app.ezlogs.io/mcp</code></pre>
+    <p>Then run <code>/mcp</code> inside Claude Code and choose <strong>ezlogs</strong> to sign in.</p>
+
+    <h3>ChatGPT</h3>
+    <p>Custom MCP connectors need a paid ChatGPT plan, and on Business or Enterprise an admin may need to allow them. Turn on <strong>Developer mode</strong> in Settings (under Apps &rarr; Advanced), then create a connector with the URL <code>https://app.ezlogs.io/mcp</code> and OAuth authentication. ChatGPT moves these menus from time to time; the connector itself stays the same.</p>
+
+    <h3>Cursor</h3>
+    <p>Open Cursor&rsquo;s <strong>Customize</strong> page and add a new MCP server with the URL. Or add this to <code>~/.cursor/mcp.json</code>:</p>
+    <pre><code>{
+  "mcpServers": {
+    "ezlogs": { "url": "https://app.ezlogs.io/mcp" }
+  }
+}</code></pre>
+    <p>Cursor asks you to sign in the first time.</p>
+
+    <h3>Codex</h3>
+    <pre><code>codex mcp add ezlogs --url https://app.ezlogs.io/mcp
+codex mcp login ezlogs</code></pre>
+
+    <h3>Lovable</h3>
+    <p>Open <strong>Connectors &rarr; Add custom &rarr; MCP server</strong>, paste the URL, keep OAuth, then add and authorize. If MCP server is greyed out, a workspace admin has turned custom servers off.</p>
+
+    <h2>Tools (all read-only)</h2>
+    <p>Every tool is marked <code>readOnlyHint: true</code>. None of them can create, change or delete anything, in EZLogs or in your app.</p>
+    <table>
+      <thead><tr><th>Tool</th><th>What it does</th></tr></thead>
+      <tbody>
+        <tr><td><code>find_actions</code></td><td>Search actions by text, actor, entity, outcome (success, failure, partial failure), intent and date. Answers &ldquo;what happened&rdquo; questions.</td></tr>
+        <tr><td><code>get_action</code></td><td>Open one action with its full list of events (requests, jobs, database changes).</td></tr>
+        <tr><td><code>actor_timeline</code></td><td>One person&rsquo;s or agent&rsquo;s recent actions, plus their current state with links to the actions behind each value.</td></tr>
+        <tr><td><code>entity_timeline</code></td><td>One record&rsquo;s recent actions (an order, a booking, a project), plus its current state.</td></tr>
+        <tr><td><code>top_lists</code></td><td>The most active actors and entities over a window of up to 90 days.</td></tr>
+        <tr><td><code>compare_actions</code></td><td>Compare 2 to 5 actions and show where they first differ. Useful when one worked and one failed.</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Security and privacy</h2>
+    <ul>
+      <li><strong>Read-only by design.</strong> EZLogs holds no write credentials into your app. The MCP server can only answer questions. See <a href="/security/">Security</a>.</li>
+      <li><strong>OAuth sign-in.</strong> Each connection belongs to one user and one EZLogs company. Access tokens are short-lived, and you can revoke a connected app any time from <strong>Settings &rarr; Connectors &rarr; MCP</strong>.</li>
+      <li><strong>Hosted in the EU.</strong> Data is stored on Hetzner servers in Germany.</li>
+      <li><strong>Masked at the source.</strong> The agent masks fields named like passwords, tokens, secrets, API keys and card numbers inside your app before anything is sent. Raw request and response bodies are never sent.</li>
+      <li><strong>One redaction layer.</strong> Everything that leaves EZLogs (MCP, share links, embeds, exports) passes through the same redaction step. Over MCP you see your own data in full, because it is your AI reading your log.</li>
+    </ul>
+
+    <h2>FAQ</h2>
+    <h3>Can my AI assistant change anything in my app through EZLogs?</h3>
+    <p>No. All six tools only read your activity log. EZLogs has no write access to your app, and the MCP server has no tools that create, update or delete anything.</p>
+    <h3>Do I need an EZLogs account?</h3>
+    <p>Yes. The MCP server reads the activity log EZLogs collects from your app, so you need an EZLogs account (free during the beta) with the agent installed in a <a href="/rails/">Rails</a> or <a href="/nextjs/">Next.js</a> app. Without it there is nothing to query.</p>
+    <h3>Which AI clients work?</h3>
+    <p>Any client that supports remote MCP servers over HTTP with OAuth and dynamic client registration. We have setup steps above for Claude (claude.ai and Claude Desktop), Claude Code, ChatGPT, Cursor, Codex and Lovable.</p>
+    <h3>Who can see my data?</h3>
+    <p>Only people in your EZLogs company, the AI clients they sign in, and the subprocessors on our Subprocessors page (hosting in Germany, and the AI providers used for optional explanations). Each connection is tied to one user, can be revoked from Settings &rarr; Connectors &rarr; MCP, and uses short-lived access tokens. Data is stored in Germany (EU).</p>
+    <h3>Does EZLogs use AI to make up the answers?</h3>
+    <p>No. The tools return actions built from the real events your app sent: requests, background jobs and database changes. Your AI assistant writes the answer from that data, and each action has an id you can open in EZLogs to check it.</p>
+
+    <div class="doc__callout" style="text-align:center;">
+      <a href="https://app.ezlogs.io/users/sign_up" target="_blank" rel="noopener" style="display:inline-block; padding:12px 22px; background:var(--green); color:#000; font-weight:600; border-radius:10px; text-decoration:none;">Start free &rarr;</a>
+      <p style="margin:14px 0 0; font-size:13px; color:var(--muted);">No card required &middot; Read-only by design</p>
+    </div>
+
+    <a class="doc__back" href="/">&larr; Back to home</a>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__brand">
+      <img src="/assets/EZLogo-mark.svg" alt="" width="24" height="24">
+      EZLogs
+    </div>
+    <p class="footer__tagline">Plain-English activity logs for every action in your app.</p>
+    <div class="footer__links">
+      <a href="https://github.com/dezsirazvan/ez_logs_agent" target="_blank" rel="noopener">GitHub: Rails agent</a>
+      <span style="color:var(--faint);">&middot;</span>
+      <a href="https://github.com/dezsirazvan/ez_logs_agent_nextjs" target="_blank" rel="noopener">GitHub: Next.js agent</a>
+      <span style="color:var(--faint);">&middot;</span>
+      <a href="mailto:hello@ezlogs.io">Contact</a>
+    </div>
+    <div class="footer__product">
+      <span class="footer__product__label">Product</span>
+      <a href="/rails/">Rails</a>
+      <span style="color:var(--faint);">&middot;</span>
+      <a href="/nextjs/">Next.js</a>
+      <span style="color:var(--faint);">&middot;</span>
+      <a href="/mcp/">MCP server</a>
+      <span style="color:var(--faint);">&middot;</span>
+      <a href="/ai-agent-activity-log/">AI agent activity log</a>
+    </div>
+    <div class="footer__legal">
+      <a href="/privacy/">Privacy</a>
+      <a href="/terms/">Terms</a>
+      <a href="/security/">Security</a>
+      <a href="/subprocessors/">Subprocessors</a>
+      <a href="/dpa/">DPA</a>
+    </div>
+    <p class="footer__copy">&copy; 2026 EZLogs. Activity logs everyone can read.</p>
+  </footer>
+
+  <div id="cookie-banner" class="cookie-banner" data-ga-id="G-YJ8DP8VLSS">
+    <div class="cookie-banner__text">
+      We use one strictly-necessary cookie to keep you signed in. With your consent we also load <strong>Google Analytics</strong> to measure aggregate site usage. See our <a href="/privacy/#cookies">cookie policy</a>.
+    </div>
+    <div class="cookie-banner__actions">
+      <button type="button" data-action="decline">Decline</button>
+      <button type="button" class="is-primary" data-action="accept">Accept</button>
+    </div>
+  </div>
+  <script src="/assets/js/cookie-banner.js" defer></script>
+</body>
+</html>

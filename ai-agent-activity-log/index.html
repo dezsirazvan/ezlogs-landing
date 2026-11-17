@@ -80,7 +80,7 @@
     <p>Open <code>/actors/agent:claude</code> or <code>/entities/Order/4471</code>. Live state. Sentence-level summaries. Citations on every value. The same screen support uses to answer &ldquo;what happened to this order?&rdquo; and product uses to ask &ldquo;what is this agent doing?&rdquo;</p>
 
     <h3>For your AI &mdash; MCP server + in-app chat</h3>
-    <p>Six query-only MCP tools at <code>https://app.ezlogs.io/mcp</code> for Claude Desktop, Claude Code, Cursor, Codex and ChatGPT. Plus an in-app &ldquo;Ask EZLogs&rdquo; chat sidebar that runs the same tools in-process. Your AI finally has memory of what your app did, and answers your team in their own words with citations they can click through.</p>
+    <p>Six query-only MCP tools at <code>https://app.ezlogs.io/mcp</code> for Claude Desktop, Claude Code, Cursor, Codex and ChatGPT. Plus an in-app &ldquo;Ask EZLogs&rdquo; chat sidebar that runs the same tools in-process. Your AI finally has memory of what your app did, and answers your team in their own words with citations they can click through. <a href="/mcp/">MCP setup guide &rarr;</a></p>
 
     <h2>Read-only by design</h2>
     <p>EZLogs <strong>reads</strong> activity from your app. It never writes back. There are no &ldquo;pause agent&rdquo; toggles that throttle your code, no approval queues that send anything anywhere, no MCP tools that perform actions. The MCP layer is for <em>asking what happened</em>, not <em>making something happen</em>. If you compromise an EZLogs account, the blast radius is read-only.</p>
@@ -100,7 +100,7 @@ EzLogsAgent.configure do |config|
 end</code></pre>
 
     <h3>Next.js</h3>
-    <pre><code>npm install ezlogs-nextjs@^0.4.2</code></pre>
+    <pre><code>npm install ezlogs-nextjs@^0.4.3</code></pre>
     <pre><code>// instrumentation.ts
 import { ezlogs } from "ezlogs-nextjs";
 

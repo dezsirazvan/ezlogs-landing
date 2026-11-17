@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Activity Log and Audit Log for Rails: PaperTrail, Audited, Ahoy, EZLogs Compared</title>
+  <meta name="description" content="Which Rails gem should you use for an activity log or audit log? An honest comparison of PaperTrail, Audited, public_activity, Ahoy and EZLogs: what each records, where the data lives, and when to pick it.">
+  <link rel="canonical" href="https://ezlogs.io/rails-activity-log/">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#0A0A0A">
+  <meta name="color-scheme" content="dark">
+  <link rel="icon" type="image/x-icon" href="/assets/favicon/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+  <link rel="manifest" href="/assets/favicon/site.webmanifest">
+
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="EZLogs">
+  <meta property="og:title" content="Activity log or audit log for Rails: which gem?">
+  <meta property="og:description" content="PaperTrail, Audited, public_activity, Ahoy and EZLogs compared: what each records and when to pick it.">
+  <meta property="og:url" content="https://ezlogs.io/rails-activity-log/">
+  <meta property="og:image" content="https://ezlogs.io/assets/og-image.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="/assets/css/subpage.css">
+  <style>.doc td:last-child, .doc th:last-child { width: 38%; overflow-wrap: break-word; }</style>
+</head>
+<body>
+
+  <nav class="nav">
+    <a class="nav__brand" href="/">
+      <img src="/assets/EZLogo-mark.svg" alt="" width="28" height="28">
+      EZLogs
+    </a>
+    <div class="nav__links">
+      <a href="/#install">Install</a>
+      <a href="/#faq">FAQ</a>
+      <a href="https://app.ezlogs.io/users/sign_in" target="_blank" rel="noopener">Sign in</a>
+      <a href="https://app.ezlogs.io/users/sign_up" class="nav__cta" target="_blank" rel="noopener">Start free</a>
+    </div>
+  </nav>
+
+  <main class="doc">
+    <p class="doc__eyebrow">Rails guide</p>
+    <h1>Activity log or audit log for Rails: which gem?</h1>
+    <p class="doc__lead">&ldquo;Activity log&rdquo; means different things to different teams. Sometimes it is a history of every change to a record. Sometimes it is a feed of what users did. Sometimes it is analytics. The usual Rails gems each solve one of these well. Here is what each one records, so you can pick the right one, or combine them.</p>
+    <p class="doc__meta">Written by the EZLogs team, so we are biased. We have tried to describe the other tools fairly; check their docs for details.</p>
+
+    <h2>The short answer</h2>
+    <table>
+      <thead><tr><th>You need</th><th>Good fit</th></tr></thead>
+      <tbody>
+        <tr><td>The full history of a record, and the option to restore an old version</td><td>PaperTrail</td></tr>
+        <tr><td>A record of who changed which columns, stored in your own database</td><td>Audited (or PaperTrail)</td></tr>
+        <tr><td>An in-app feed like &ldquo;Ana commented on your post&rdquo; that you design yourself</td><td>public_activity</td></tr>
+        <tr><td>Visits, traffic sources and product events for analytics</td><td>Ahoy</td></tr>
+        <tr><td>A plain-English feed of everything that happened (requests, background jobs and database changes together) that anyone on the team can read, and that AI assistants can query</td><td>EZLogs</td></tr>
+      </tbody>
+    </table>
+
+    <h2>PaperTrail</h2>
+    <p><a href="https://github.com/paper-trail-gem/paper_trail" target="_blank" rel="noopener">PaperTrail</a> adds <code>has_paper_trail</code> to the models you choose. On each create, update and destroy it stores a version row in a <code>versions</code> table in your database, with the changes and, if you set it, <code>whodunnit</code> (who made the change). You can see what a record looked like at a given time and restore it.</p>
+    <p><strong>Pick it when</strong> you need record history or undo, inside your own database. <strong>It does not</strong> record requests or background jobs as events of their own (you can attach request details such as the IP to each version with <code>info_for_paper_trail</code>), and its versions are data for developers, not sentences for the rest of the team.</p>
+
+    <h2>Audited</h2>
+    <p><a href="https://github.com/collectiveidea/audited" target="_blank" rel="noopener">Audited</a> adds <code>audited</code> to your models and writes each change to an <code>audits</code> table, with the changed columns, the action, the current user, and the request&rsquo;s IP address and request id. You can limit it to some columns and group audits under a parent record.</p>
+    <p><strong>Pick it when</strong> you want a simple &ldquo;who changed what&rdquo; trail in your own database. <strong>It does not</strong> record requests or jobs as events of their own: only model changes, tagged with the request they came from.</p>
+
+    <h2>public_activity</h2>
+    <p><a href="https://github.com/public-activity/public_activity" target="_blank" rel="noopener">public_activity</a> records activities on your models (create, update, destroy, or your own keys) with an owner and the record involved, and you render each one with your own view partial. It is built for user-facing feeds, like a timeline inside your product.</p>
+    <p><strong>Pick it when</strong> you are building a feed for your users and want control over each line. You write the wording and choose what to track.</p>
+
+    <h2>Ahoy</h2>
+    <p><a href="https://github.com/ankane/ahoy" target="_blank" rel="noopener">Ahoy</a> is first-party analytics for Rails. It records visits (referrer, device, and location if you enable geocoding) and events you track from Ruby or JavaScript, in your own database.</p>
+    <p><strong>Pick it when</strong> you want to know how people use your product in aggregate. <strong>It is not</strong> a record of database changes.</p>
+
+    <h2>EZLogs</h2>
+    <p><a href="/rails/">EZLogs</a> is a hosted activity log. The <code>ez_logs_agent</code> gem captures your requests, Sidekiq and ActiveJob runs, ActiveRecord changes and bulk SQL like <code>update_all</code>, with no per-model or per-controller code. EZLogs links them by request and record, then shows one plain-English card per action: &ldquo;Refund failed: card expired&rdquo;, with who did it (a person, an AI agent or the system) and which records it touched. Support, product and founders can read it without asking an engineer. You can also connect <a href="/mcp/">Claude, ChatGPT or Cursor over MCP</a> and ask what happened.</p>
+    <p><strong>Trade-offs, honestly:</strong></p>
+    <ul>
+      <li>Data leaves your app. It is sent to EZLogs servers in Germany (EU), after the agent masks fields like passwords, tokens and card numbers. PaperTrail, Audited, public_activity and Ahoy keep everything in your own database.</li>
+      <li>EZLogs is read-only. It cannot restore an old version of a record. Keep PaperTrail if you need undo.</li>
+      <li>History is kept for 90 days during the beta. For a long-term compliance trail, keep an audit gem in your own database.</li>
+      <li>It is a hosted service. It is free during the beta, and the agent is open source; the server is not self-hostable yet.</li>
+    </ul>
+    <p>Many teams run both: an audit gem for record history, and EZLogs for the readable story of what happened across requests, jobs and data.</p>
+
+    <h2>Try EZLogs on your Rails app</h2>
+    <pre><code>bundle add ez_logs_agent
+rails generate ez_logs_agent:install</code></pre>
+    <p>Set <code>EZLOGS_API_KEY</code> and restart. The full steps are on the <a href="/rails/">Rails page</a>, and there is a copy-paste prompt for your coding AI at <a href="https://app.ezlogs.io/install/rails.md" target="_blank" rel="noopener">app.ezlogs.io/install/rails.md</a>.</p>
+
+    <div class="doc__callout" style="text-align:center;">
+      <a href="https://app.ezlogs.io/users/sign_up" target="_blank" rel="noopener" style="display:inline-block; padding:12px 22px; background:var(--green); color:#000; font-weight:600; border-radius:10px; text-decoration:none;">Start free &rarr;</a>
+      <p style="margin:14px 0 0; font-size:13px; color:var(--muted);">No card required &middot; Read-only by design</p>
+    </div>
+
+    <a class="doc__back" href="/">&larr; Back to home</a>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__brand">
+      <img src="/assets/EZLogo-mark.svg" alt="" width="24" height="24">
+      EZLogs
+    </div>
+    <p class="footer__tagline">Plain-English activity logs for every action in your app.</p>
+    <div class="footer__links">
+      <a href="https://github.com/dezsirazvan/ez_logs_agent" target="_blank" rel="noopener">GitHub: Rails agent</a>
+      <span style="color:var(--faint);">&middot;</span>
+      <a href="https://github.com/dezsirazvan/ez_logs_agent_nextjs" target="_blank" rel="noopener">GitHub: Next.js agent</a>
+      <span style="color:var(--faint);">&middot;</span>
+      <a href="mailto:hello@ezlogs.io">Contact</a>
+    </div>
+    <div class="footer__product">
+      <span class="footer__product__label">Product</span>
+      <a href="/rails/">Rails</a>
+      <span style="color:var(--faint);">&middot;</span>
+      <a href="/nextjs/">Next.js</a>
+      <span style="color:var(--faint);">&middot;</span>
+      <a href="/mcp/">MCP server</a>
+      <span style="color:var(--faint);">&middot;</span>
+      <a href="/ai-agent-activity-log/">AI agent activity log</a>
+    </div>
+    <div class="footer__legal">
+      <a href="/privacy/">Privacy</a>
+      <a href="/terms/">Terms</a>
+      <a href="/security/">Security</a>
+      <a href="/subprocessors/">Subprocessors</a>
+      <a href="/dpa/">DPA</a>
+    </div>
+    <p class="footer__copy">&copy; 2026 EZLogs. Activity logs everyone can read.</p>
+  </footer>
+
+  <div id="cookie-banner" class="cookie-banner" data-ga-id="G-YJ8DP8VLSS">
+    <div class="cookie-banner__text">
+      We use one strictly-necessary cookie to keep you signed in. With your consent we also load <strong>Google Analytics</strong> to measure aggregate site usage. See our <a href="/privacy/#cookies">cookie policy</a>.
+    </div>
+    <div class="cookie-banner__actions">
+      <button type="button" data-action="decline">Decline</button>
+      <button type="button" class="is-primary" data-action="accept">Accept</button>
+    </div>
+  </div>
+  <script src="/assets/js/cookie-banner.js" defer></script>
+</body>
+</html>

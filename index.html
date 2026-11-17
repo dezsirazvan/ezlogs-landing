@@ -107,7 +107,7 @@
         "name": "Will it slow down my app, or break it if EZLogs is down?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "It’s built not to. On a normal server, events are buffered in memory and sent in the background, outside your request. On serverless hosts (Vercel, Lambda, Netlify) they are sent as each request finishes, so a slow EZLogs can add a little time there. If EZLogs is unreachable your app keeps running: the agent retries each batch a few times, then drops it, and never holds more than 10,000 events in memory. Delivery is best-effort, and it never throws an error into your app."
+          "text": "It’s built not to. On a normal server, events are buffered in memory and sent in the background, outside your request. On serverless hosts (Vercel, Lambda, Netlify) they are sent as each request finishes: after the response where the host allows it, otherwise within a 2-second limit, so a slow EZLogs never holds a request for longer than that. If EZLogs is unreachable your app keeps running: the agent retries each batch a few times, then drops it, and never holds more than 10,000 events in memory. Delivery is best-effort, and it never throws an error into your app."
         }
       },
       {
@@ -562,6 +562,8 @@
       line-height: 1.55;
     }
     .reader__body strong { color: var(--text); font-weight: 500; }
+    .reader__body a { color: var(--green); text-decoration: none; white-space: nowrap; }
+    .reader__body a:hover { text-decoration: underline; }
     .reader__body code {
       font-family: var(--mono); font-size: 13px; color: var(--green);
       overflow-wrap: anywhere;
@@ -1061,7 +1063,7 @@
         <article class="reader">
           <span class="reader__tag">Over MCP</span>
           <h3 class="reader__title">Or ask Claude, Cursor or Codex</h3>
-          <p class="reader__body">Paste <code>https://app.ezlogs.io/mcp</code> into <strong>Claude Desktop</strong> (Customize &rarr; Connectors &rarr; Add custom connector), Claude Code, Cursor or Codex and sign in once. Your AI can then query the log, read-only.</p>
+          <p class="reader__body">Paste <code>https://app.ezlogs.io/mcp</code> into <strong>Claude Desktop</strong> (Customize &rarr; Connectors &rarr; Add custom connector), Claude Code, Cursor or Codex and sign in once. Your AI can then query the log, read-only. <a href="/mcp/">Setup guide &rarr;</a></p>
           <figure class="reader__shot">
             <img src="assets/screenshots/mcp-claude-ferry.png" alt="Claude Desktop answering 'what did the rebooking assistant do last night?' using EZLogs: 48 bookings disrupted, 40 rebooked, 5 refunds issued, two sailing-full rejections that went through on a retry, and a table of the three failed refunds totalling 152.00 EUR" width="1400" height="1225" loading="lazy">
           </figure>
@@ -1566,7 +1568,7 @@
     <p class="ez-ai__or">Or do it by hand:</p>
     <div class="ez-codeblock">
       <div class="ez-codeblock__head"><span>terminal</span><span>1 line</span></div>
-<pre><span class="o">$</span> <span class="k">npm</span> <span class="p">install</span> <span class="v">ezlogs-nextjs@^0.4.2</span></pre>
+<pre><span class="o">$</span> <span class="k">npm</span> <span class="p">install</span> <span class="v">ezlogs-nextjs@^0.4.3</span></pre>
     </div>
     <div class="ez-codeblock">
       <div class="ez-codeblock__head"><span>instrumentation.ts</span><span>9 lines</span></div>
@@ -1726,7 +1728,7 @@
 <div class="ez-faq">
   <details>
     <summary>Will it slow down my app, or break it if EZLogs is down? <span class="ez-faq__plus" aria-hidden="true"></span></summary>
-    <p class="ez-faq__answer">It&rsquo;s built not to. On a normal server, events are buffered in memory and sent in the background, outside your request. On serverless hosts (Vercel, Lambda, Netlify) they are sent as each request finishes, so a slow EZLogs can add a little time there. If EZLogs is unreachable your app keeps running: the agent retries each batch a few times, then drops it, and never holds more than 10,000 events in memory. Delivery is best-effort, and it never throws an error into your app.</p>
+    <p class="ez-faq__answer">It&rsquo;s built not to. On a normal server, events are buffered in memory and sent in the background, outside your request. On serverless hosts (Vercel, Lambda, Netlify) they are sent as each request finishes: after the response where the host allows it, otherwise within a 2-second limit, so a slow EZLogs never holds a request for longer than that. If EZLogs is unreachable your app keeps running: the agent retries each batch a few times, then drops it, and never holds more than 10,000 events in memory. Delivery is best-effort, and it never throws an error into your app.</p>
   </details>
 
   <details>
@@ -1804,6 +1806,7 @@
       <span class="footer__label">Product</span>
       <a href="/rails/">Rails</a>
       <a href="/nextjs/">Next.js</a>
+      <a href="/mcp/">MCP server</a>
       <a href="/ai-agent-activity-log/">AI agent activity log</a>
     </div>
     <div class="footer__legal">

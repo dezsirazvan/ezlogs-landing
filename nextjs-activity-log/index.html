@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Activity Log and Audit Log for Next.js: Your Options Compared</title>
+  <meta name="description" content="How to add an activity log or audit log to a Next.js app: a homemade audit table, Postgres triggers, PostHog, Sentry, WorkOS Audit Logs or EZLogs. What each records and when to pick it.">
+  <link rel="canonical" href="https://ezlogs.io/nextjs-activity-log/">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#0A0A0A">
+  <meta name="color-scheme" content="dark">
+  <link rel="icon" type="image/x-icon" href="/assets/favicon/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+  <link rel="manifest" href="/assets/favicon/site.webmanifest">
+
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="EZLogs">
+  <meta property="og:title" content="Activity log or audit log for Next.js: your options">
+  <meta property="og:description" content="A homemade audit table, Postgres triggers, PostHog, Sentry, WorkOS Audit Logs or EZLogs: what each records and when to pick it.">
+  <meta property="og:url" content="https://ezlogs.io/nextjs-activity-log/">
+  <meta property="og:image" content="https://ezlogs.io/assets/og-image.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="/assets/css/subpage.css">
+  <style>.doc td:last-child, .doc th:last-child { width: 38%; overflow-wrap: break-word; }</style>
+</head>
+<body>
+
+  <nav class="nav">
+    <a class="nav__brand" href="/">
+      <img src="/assets/EZLogo-mark.svg" alt="" width="28" height="28">
+      EZLogs
+    </a>
+    <div class="nav__links">
+      <a href="/#install">Install</a>
+      <a href="/#faq">FAQ</a>
+      <a href="https://app.ezlogs.io/users/sign_in" target="_blank" rel="noopener">Sign in</a>
+      <a href="https://app.ezlogs.io/users/sign_up" class="nav__cta" target="_blank" rel="noopener">Start free</a>
+    </div>
+  </nav>
+
+  <main class="doc">
+    <p class="doc__eyebrow">Next.js guide</p>
+    <h1>Activity log or audit log for Next.js: your options</h1>
+    <p class="doc__lead">Next.js has no built-in activity log, and there is no single standard package for one. Teams usually pick one of the approaches below, depending on whether they need record history, analytics, error tracking, an audit log for their own customers, or a readable story of what happened.</p>
+    <p class="doc__meta">Written by the EZLogs team, so we are biased. We have tried to describe the other options fairly; check their docs for details.</p>
+
+    <h2>The short answer</h2>
+    <table>
+      <thead><tr><th>You need</th><th>Good fit</th></tr></thead>
+      <tbody>
+        <tr><td>A history of changes to a few tables, in your own database</td><td>Your own audit table, or Postgres triggers</td></tr>
+        <tr><td>Funnels, retention and how people use the product</td><td>Product analytics such as PostHog</td></tr>
+        <tr><td>Errors and slow requests, for engineers</td><td>Sentry or another error tracker</td></tr>
+        <tr><td>An audit log you show to your enterprise customers</td><td>WorkOS Audit Logs or similar</td></tr>
+        <tr><td>A plain-English feed of everything that happened (routes, Server Actions, database changes and jobs together) that anyone on the team can read, and that AI assistants can query</td><td>EZLogs</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Your own audit table</h2>
+    <p>Create an <code>audit_log</code> table and write a row from your Server Actions and route handlers, or centrally with a Prisma Client extension or your own wrapper around Drizzle queries. You control every field and the data stays in your database.</p>
+    <p><strong>The cost:</strong> you write and maintain it, and anything you forget to log is missing. Changes made outside your ORM (a script, the database console, another service) are not recorded unless you add them.</p>
+
+    <h2>Postgres triggers</h2>
+    <p>A trigger records every insert, update and delete on a table, whatever made the change. Supabase&rsquo;s open-source <a href="https://github.com/supabase/supa_audit" target="_blank" rel="noopener">supa_audit</a> showed the pattern (one SQL call per table), but it was archived in February 2025, so copy its trigger approach rather than install it.</p>
+    <p><strong>Pick it when</strong> you want complete row history in your own database. <strong>It does not</strong> tell you which request or user caused a change unless you pass that in yourself, and the rows are data for developers.</p>
+
+    <h2>Product analytics (PostHog and others)</h2>
+    <p><a href="https://posthog.com" target="_blank" rel="noopener">PostHog</a> and similar tools record page views and the events you send, and turn them into funnels, trends and recordings.</p>
+    <p><strong>Pick it when</strong> you want to understand usage in aggregate. <strong>It is not</strong> a record of what changed in your database. It sees what happens in the browser plus the events you send.</p>
+
+    <h2>Error tracking (Sentry and others)</h2>
+    <p><a href="https://sentry.io" target="_blank" rel="noopener">Sentry</a> captures exceptions and performance traces so engineers can fix them.</p>
+    <p><strong>Pick it when</strong> you need to debug. <strong>It is</strong> built around errors and performance, for engineers, not as a plain-language story for support or product.</p>
+
+    <h2>Audit logs for your customers (WorkOS and others)</h2>
+    <p><a href="https://workos.com/docs/audit-logs" target="_blank" rel="noopener">WorkOS Audit Logs</a> and similar services store events you send from your code and let your enterprise customers view or export their own audit trail.</p>
+    <p><strong>Pick it when</strong> your customers ask for an audit log as a feature. You still choose and send each event yourself.</p>
+
+    <h2>EZLogs</h2>
+    <p><a href="/nextjs/">EZLogs</a> is a hosted activity log for your own team. The <code>ezlogs-nextjs</code> package captures routes and Server Actions on its own; Postgres changes after one command (<code>npx ezlogs-nextjs install-triggers</code>); and background jobs with one wrapper per queue (BullMQ, Inngest, Trigger.dev, Upstash, Supabase Queues). EZLogs links them by request and record, then shows one plain-English card per action: &ldquo;Refund failed: card expired&rdquo;, with who did it (a person, an AI agent or the system) and which records it touched. You can also connect <a href="/mcp/">Claude, ChatGPT or Cursor over MCP</a> and ask what happened.</p>
+    <p><strong>Trade-offs, honestly:</strong></p>
+    <ul>
+      <li>Data leaves your app. It is sent to EZLogs servers in Germany (EU), after sensitive parameters and columns are masked or removed. A homemade table or triggers keep everything in your own database.</li>
+      <li>EZLogs is read-only. It explains what happened; it cannot restore old rows.</li>
+      <li>History is kept for 90 days during the beta. For a long-term compliance trail, keep your own audit table as well.</li>
+      <li>It is not a customer-facing audit log product like WorkOS.</li>
+      <li>It is a hosted service. It is free during the beta, and the agent is open source; the server is not self-hostable yet.</li>
+    </ul>
+
+    <h2>Try EZLogs on your Next.js app</h2>
+    <pre><code>npm install ezlogs-nextjs</code></pre>
+    <p>Then add <code>ezlogs.init()</code> to <code>instrumentation.ts</code> and wrap your Next config. The full steps are on the <a href="/nextjs/">Next.js page</a>, and there is a copy-paste prompt for your coding AI at <a href="https://app.ezlogs.io/install/nextjs.md" target="_blank" rel="noopener">app.ezlogs.io/install/nextjs.md</a>.</p>
+
+    <div class="doc__callout" style="text-align:center;">
+      <a href="https://app.ezlogs.io/users/sign_up" target="_blank" rel="noopener" style="display:inline-block; padding:12px 22px; background:var(--green); color:#000; font-weight:600; border-radius:10px; text-decoration:none;">Start free &rarr;</a>
+      <p style="margin:14px 0 0; font-size:13px; color:var(--muted);">No card required &middot; Read-only by design</p>
+    </div>
+
+    <a class="doc__back" href="/">&larr; Back to home</a>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__brand">
+      <img src="/assets/EZLogo-mark.svg" alt="" width="24" height="24">
+      EZLogs
+    </div>
+    <p class="footer__tagline">Plain-English activity logs for every action in your app.</p>
+    <div class="footer__links">
+      <a href="https://github.com/dezsirazvan/ez_logs_agent" target="_blank" rel="noopener">GitHub: Rails agent</a>
+      <span style="color:var(--faint);">&middot;</span>
+      <a href="https://github.com/dezsirazvan/ez_logs_agent_nextjs" target="_blank" rel="noopener">GitHub: Next.js agent</a>
+      <span style="color:var(--faint);">&middot;</span>
+      <a href="mailto:hello@ezlogs.io">Contact</a>
+    </div>
+    <div class="footer__product">
+      <span class="footer__product__label">Product</span>
+      <a href="/rails/">Rails</a>
+      <span style="color:var(--faint);">&middot;</span>
+      <a href="/nextjs/">Next.js</a>
+      <span style="color:var(--faint);">&middot;</span>
+      <a href="/mcp/">MCP server</a>
+      <span style="color:var(--faint);">&middot;</span>
+      <a href="/ai-agent-activity-log/">AI agent activity log</a>
+    </div>
+    <div class="footer__legal">
+      <a href="/privacy/">Privacy</a>
+      <a href="/terms/">Terms</a>
+      <a href="/security/">Security</a>
+      <a href="/subprocessors/">Subprocessors</a>
+      <a href="/dpa/">DPA</a>
+    </div>
+    <p class="footer__copy">&copy; 2026 EZLogs. Activity logs everyone can read.</p>
+  </footer>
+
+  <div id="cookie-banner" class="cookie-banner" data-ga-id="G-YJ8DP8VLSS">
+    <div class="cookie-banner__text">
+      We use one strictly-necessary cookie to keep you signed in. With your consent we also load <strong>Google Analytics</strong> to measure aggregate site usage. See our <a href="/privacy/#cookies">cookie policy</a>.
+    </div>
+    <div class="cookie-banner__actions">
+      <button type="button" data-action="decline">Decline</button>
+      <button type="button" class="is-primary" data-action="accept">Accept</button>
+    </div>
+  </div>
+  <script src="/assets/js/cookie-banner.js" defer></script>
+</body>
+</html>
