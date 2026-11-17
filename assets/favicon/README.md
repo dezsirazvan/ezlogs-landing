@@ -24,12 +24,12 @@ If you'd rather not use the online generator, with `imagemagick` installed:
 
 ```bash
 # Run from marketing/landing-page/assets/
-magick EZLogo-mark.svg -background none -resize 16x16    favicon/icon-16.png
-magick EZLogo-mark.svg -background none -resize 32x32    favicon/icon-32.png
-magick EZLogo-mark.svg -background none -resize 48x48    favicon/icon-48.png
-magick EZLogo-mark.svg -background none -resize 180x180  favicon/apple-touch-icon.png
-magick EZLogo-mark.svg -background none -resize 192x192  favicon/icon-192.png
-magick EZLogo-mark.svg -background none -resize 512x512  favicon/icon-512.png
+magick EZLogo-mark.svg -background none -resize 16x16 -gravity center -extent 16x16    favicon/icon-16.png
+magick EZLogo-mark.svg -background none -resize 32x32 -gravity center -extent 32x32    favicon/icon-32.png
+magick EZLogo-mark.svg -background none -resize 48x48 -gravity center -extent 48x48    favicon/icon-48.png
+magick EZLogo-mark.svg -background '#0A0A0A' -resize 150x150 -gravity center -extent 180x180 -alpha remove favicon/apple-touch-icon.png  # iOS fills transparency with black
+magick EZLogo-mark.svg -background none -resize 192x192 -gravity center -extent 192x192  favicon/icon-192.png
+magick EZLogo-mark.svg -background none -resize 512x512 -gravity center -extent 512x512  favicon/icon-512.png
 magick favicon/icon-16.png favicon/icon-32.png favicon/icon-48.png favicon/favicon.ico
 ```
 

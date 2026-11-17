@@ -110,7 +110,7 @@ EZLOGS_PROJECT_TOKEN=ezl_your_api_key_here</code></pre>
     <h2>Performance and safety</h2>
     <ul>
       <li><strong>Edge-compatible:</strong> works in Edge runtime + Node runtime.</li>
-      <li><strong>Out-of-band:</strong> events buffered in memory, shipped asynchronously. Average overhead under 1 ms per request.</li>
+      <li><strong>Out-of-band:</strong> events buffered in memory, shipped asynchronously.</li>
       <li><strong>Fails open:</strong> if EZLogs is unreachable, the agent buffers and retries. The agent <em>never</em> throws into your request path.</li>
       <li><strong>Field-level redaction</strong> on by default for credentials, tokens, and sensitive columns.</li>
       <li><strong>Open source</strong> at <a href="https://github.com/dezsirazvan/ez_logs_agent_nextjs" target="_blank" rel="noopener">github.com/dezsirazvan/ez_logs_agent_nextjs</a>.</li>

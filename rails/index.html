@@ -92,7 +92,7 @@ end</code></pre>
 
     <h2>Performance and safety</h2>
     <ul>
-      <li><strong>Out-of-band:</strong> events buffered in memory, shipped over a separate connection. Average overhead under 1 ms per request in benchmarks.</li>
+      <li><strong>Out-of-band:</strong> events buffered in memory, shipped over a separate connection.</li>
       <li><strong>Fails open:</strong> if EZLogs is unreachable, the agent buffers up to 10,000 events and retries. If the buffer overflows, oldest events drop. The agent <em>never</em> raises into your request path.</li>
       <li><strong>Field-level redaction</strong> on by default for passwords, tokens, secrets, API keys, and card numbers.</li>
       <li><strong>Open source</strong> at <a href="https://github.com/dezsirazvan/ez_logs_agent" target="_blank" rel="noopener">github.com/dezsirazvan/ez_logs_agent</a>. Pin to a SHA, audit the code.</li>

@@ -105,10 +105,18 @@
       },
       {
         "@type": "Question",
+        "name": "Can I ask it questions, and will it tell me when something changes?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Ask in plain English and you get a cited answer — every number clicks back to the events behind it. You can also pin a question (“tell me when a trial account goes quiet for 3 days”) and EZLogs watches it for you, checking it every day and notifying you in-app or by email when the answer changes. It only ever notifies — it never writes anything back into your app."
+        }
+      },
+      {
+        "@type": "Question",
         "name": "Will it slow down my app?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "No. The agent runs out-of-band: events are buffered in memory and shipped to EZLogs over a separate connection. If our service is down, the agent fails open and your app keeps running. Average overhead in benchmarks: under 1 ms per request."
+          "text": "No. The agent runs out-of-band: events are buffered in memory and shipped to EZLogs over a separate connection. If our service is down, the agent fails open and your app keeps running."
         }
       },
       {
@@ -124,7 +132,7 @@
         "name": "How is this different from Datadog, New Relic, or Honeycomb?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Those tools are for engineers, and they answer 'is the system healthy?' EZLogs is for everyone, and it answers 'what happened to my customer?' We don't compete with metrics. We're the layer above them."
+          "text": "Those tools are for engineers, and they answer \"is the system healthy?\" EZLogs is for everyone, and it answers \"what happened to my customer?\" We don't compete with metrics. We're the layer above them."
         }
       },
       {
@@ -132,7 +140,7 @@
         "name": "Do you store my customer data?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "We store the events your app sends us — request paths, job names, table names, and the before/after values you explicitly capture. We do not store request bodies, response bodies, or full database rows unless you opt in. Field-level redaction is on by default for any column matching password, token, secret, key, or *_at timestamps."
+          "text": "We store the events your app sends us — request paths and parsed params, job names, table names, and the before/after values of the columns that changed. We never store raw request bodies or response bodies. Field-level redaction is on by default for any field matching password, token, secret, api_key, credit_card, and more — the value is masked before it ever leaves your app."
         }
       },
       {
@@ -148,7 +156,7 @@
         "name": "Can I self-host?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Not yet. Self-host is on the post-launch roadmap. If self-hosting is a hard requirement for you, email hello@ezlogs.io — we want to talk."
+          "text": "Not yet. Self-host is on the post-launch roadmap. If self-hosting is a hard requirement for you, email us — we want to talk."
         }
       },
       {
@@ -157,6 +165,14 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "The cards, titles, and timeline are built without AI. AI is optional and only writes the extra explanation, using the structured events your app actually sent. It never invents data. If it doesn't know, it says so. Every generated explanation is cached and reproducible — re-running the same action produces the same words."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I export my data?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. /settings/data-export gives you a full JSON archive of every action, event, actor, and entity we have on file. Company admins can download it at any time, on every account."
         }
       },
       {
@@ -403,6 +419,28 @@
       color: var(--faint);
       letter-spacing: 0.01em;
     }
+    /* Demo video: a poster + play button; the YouTube player only loads on click (no third-party request before that) */
+    .hero__video {
+      position: relative; display: block; width: 100%; max-width: 880px; margin: 0 auto 64px; aspect-ratio: 16 / 9;
+      border-radius: 16px; overflow: hidden; border: 1px solid rgba(255,255,255,0.10); background: #000; padding: 0; cursor: pointer;
+      box-shadow: 0 30px 90px rgba(0,0,0,0.55), 0 0 80px rgba(1,230,62,0.08);
+    }
+    .hero__video img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .hero__video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+    .hero__play {
+      position: absolute; left: 50%; bottom: 22px; transform: translateX(-50%); white-space: nowrap;
+      display: inline-flex; align-items: center; gap: 10px; padding: 14px 22px; border-radius: 999px;
+      background: var(--green, #01E63E); color: #000; font-weight: 600; font-size: 15px; box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+      transition: transform 160ms ease;
+    }
+    .hero__video:hover .hero__play { transform: translateX(-50%) scale(1.05); }
+    /* phones: a round play button in the corner so it never covers the poster headline */
+    @media (max-width: 480px) {
+      .hero__play { left: auto; right: 12px; bottom: 12px; transform: none; padding: 12px; font-size: 0; gap: 0; }
+      .hero__video:hover .hero__play { transform: scale(1.05); }
+      .hero__play svg { width: 18px; height: 18px; }
+    }
+    .hero__video:focus-visible { outline: 2px solid #fff; outline-offset: 4px; }
     .btn {
       display: inline-flex; align-items: center; gap: 8px;
       padding: 13px 22px;
@@ -737,6 +775,10 @@
         <a class="btn btn--ghost" href="#action">See a real action &darr;</a>
       </div>
       <p class="hero__trust">Free during beta &middot; Drop-in for Rails and Next.js &middot; No card required &middot; Read-only by design</p>
+      <button type="button" class="hero__video" id="demo-video" data-yt="xBzMipWUdEQ" aria-label="Play the 77-second EZLogs demo video">
+        <img src="/assets/video-poster.jpg" alt="04:26, gale warning. What did your AI agent do last night?" width="1280" height="720" loading="eager">
+        <span class="hero__play"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5v11l9-5.5z" fill="currentColor"/></svg>Watch the demo &middot; 77s</span>
+      </button>
       <div data-embed="signature-animation.html">
 <!-- INLINED FROM embeds/signature-animation.html -->
 <!--
@@ -1436,7 +1478,7 @@
       <div class="section__head">
         <span class="section__eyebrow"><span class="num">05</span>Ask your product</span>
         <h2 class="section__title section__title--wide">Ask once. It watches the answer for you.</h2>
-        <p class="section__sub">Pin a question in plain English &mdash; no metric to name, no query to write, no threshold to set. EZLogs watches the real events and tells you the moment the answer changes, with the evidence one click away. Everyone gets the answer they care about, on their own channel.</p>
+        <p class="section__sub">Pin a question in plain English &mdash; no metric to name, no query to write, no threshold to set. EZLogs watches the real events and checks it every day and tells you when the answer changes, with the evidence one click away. Everyone gets the answer they care about, on their own channel.</p>
       </div>
       <div data-embed="ask-your-product.html">
 <!-- INLINED FROM embeds/ask-your-product.html -->
@@ -1628,9 +1670,9 @@
 
       <div class="ez-ask__card ez-ask__q-card">
         <div class="ez-ask__eyebrow">You pinned</div>
-        <div class="ez-ask__q">&ldquo;Tell me the moment a trial account goes quiet for 3 days.&rdquo;<span class="ez-ask__cursor"></span></div>
+        <div class="ez-ask__q">&ldquo;Tell me when a trial account goes quiet for 3 days.&rdquo;<span class="ez-ask__cursor"></span></div>
         <div class="ez-ask__chips">
-          <span class="ez-ask__chip ez-ask__chip--on">Slack</span>
+          <span class="ez-ask__chip ez-ask__chip--on">Email</span>
           <span class="ez-ask__chip">checked daily</span>
           <span class="ez-ask__chip">last checked 6 min ago</span>
         </div>
@@ -2133,7 +2175,7 @@
 <!--
   EZLogs — Language tabs (Section 5).
   Ruby on Rails / Next.js install + config. Tab swap via :checked
-  radio + sibling selectors. No JS. Default = Rails.
+  radio + sibling selectors. Default = Rails. The only JS is the Copy button.
 -->
 <style>
   .ez-tabs {
@@ -2184,6 +2226,8 @@
     gap: 8px;
   }
   .ez-tabs__bar label:hover { color: var(--text); }
+  #ez-tab-ruby:focus-visible   ~ .ez-tabs__bar .ez-tab-label-ruby,
+  #ez-tab-nextjs:focus-visible ~ .ez-tabs__bar .ez-tab-label-nextjs { outline: 2px solid #fff; outline-offset: 2px; }
   .ez-tabs__bar svg { width: 16px; height: 16px; }
 
   /* Active tab highlight */
@@ -2250,6 +2294,29 @@
     color: var(--text);
     white-space: nowrap;
   }
+  /* "Paste this into your AI": a one-line prompt that points the coding AI at the public, key-free install guide */
+  .ez-ai {
+    border: 1px solid rgba(1, 230, 62, 0.35);
+    background: linear-gradient(180deg, rgba(1, 230, 62, 0.07), rgba(1, 230, 62, 0.02));
+    border-radius: 12px;
+    padding: 16px 18px;
+    margin: 0 0 14px;
+  }
+  .ez-ai__title { margin: 0 0 4px; font-size: 14px; font-weight: 600; color: var(--text); }
+  .ez-ai__sub { margin: 0 0 12px; font-size: 13px; color: var(--muted); line-height: 1.5; }
+  .ez-ai__row { display: flex; gap: 10px; align-items: stretch; }
+  .ez-ai__prompt {
+    flex: 1; min-width: 0; margin: 0; padding: 10px 12px; border-radius: 8px; background: var(--bg); border: 1px solid var(--line);
+    font-family: var(--mono); font-size: 12.5px; line-height: 1.5; color: var(--text); white-space: normal; word-break: break-word;
+  }
+  .ez-ai__copy {
+    flex-shrink: 0; cursor: pointer; border: 0; border-radius: 8px; padding: 0 16px; font: 600 13px var(--font);
+    background: var(--green); color: #000;
+  }
+  .ez-ai__copy:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+  .ez-ai__or { margin: 4px 2px 12px; font-size: 12.5px; color: var(--muted); }
+  @media (max-width: 480px) { .ez-ai__row { flex-direction: column; } .ez-ai__copy { padding: 10px 16px; } }
+
   .ez-tabs__more {
     margin-top: 20px;
     text-align: center;
@@ -2274,30 +2341,43 @@
   <input type="radio" name="ez-tabs-lang" id="ez-tab-ruby"   class="ez-tabs__radio" checked>
   <input type="radio" name="ez-tabs-lang" id="ez-tab-nextjs" class="ez-tabs__radio">
 
-  <div class="ez-tabs__bar" role="tablist" aria-label="Install language">
-    <label for="ez-tab-ruby" class="ez-tab-label-ruby" role="tab">
+  <div class="ez-tabs__bar" role="group" aria-label="Install language">
+    <label for="ez-tab-ruby" class="ez-tab-label-ruby">
       <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.5 13.5l-7 7-7-7 7-7 7 7zM12 2v6.5L17.5 14 12 19.5 6.5 14 12 8.5V2z"/></svg>
       Ruby on Rails
     </label>
-    <label for="ez-tab-nextjs" class="ez-tab-label-nextjs" role="tab">
+    <label for="ez-tab-nextjs" class="ez-tab-label-nextjs">
       <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 1 0 5.5 18.4L9 9v8.5H7V7h2l9.6 13.1A10 10 0 0 0 12 2zm4.5 13.2L14 11.7V7h2v7l.5 1.2z"/></svg>
       Next.js
     </label>
   </div>
 
   <!-- Ruby panel -->
-  <div class="ez-tabs__panel ez-tabs__panel--ruby" role="tabpanel" aria-label="Ruby on Rails install">
+  <div class="ez-tabs__panel ez-tabs__panel--ruby" aria-label="Ruby on Rails install">
+    <div class="ez-ai">
+      <p class="ez-ai__title">Building with Cursor or Claude Code? Let your AI install it.</p>
+      <p class="ez-ai__sub">Paste this into its chat. It follows our step-by-step guide, sets everything up and checks it works. You add your key from Settings after you sign up.</p>
+      <div class="ez-ai__row">
+        <p class="ez-ai__prompt">Install EZLogs in this Rails app. Follow https://app.ezlogs.io/install/rails.md exactly, then run its verify step.</p>
+        <button type="button" class="ez-ai__copy" data-ez-copy aria-live="polite">Copy</button>
+      </div>
+    </div>
+    <p class="ez-ai__or">Or do it by hand:</p>
     <div class="ez-codeblock">
       <div class="ez-codeblock__head"><span>terminal</span><span>2 lines</span></div>
 <pre><span class="o">$</span> <span class="k">bundle</span> <span class="p">add</span> <span class="v">ez_logs_agent</span>
 <span class="o">$</span> <span class="k">rails</span> <span class="p">generate</span> <span class="v">ez_logs_agent:install</span></pre>
     </div>
     <div class="ez-codeblock">
-      <div class="ez-codeblock__head"><span>config/initializers/ez_logs_agent.rb</span><span>4 lines</span></div>
+      <div class="ez-codeblock__head"><span>config/initializers/ez_logs_agent.rb</span><span>created by the generator</span></div>
 <pre><span class="v">EzLogsAgent</span>.<span class="k">configure</span> <span class="k">do</span> |config|
-  config.server_url = <span class="s">"https://app.ezlogs.io"</span>
-  config.project_token = <span class="s">"ezl_your_api_key_here"</span>
+  config.server_url = ENV.<span class="g">fetch</span>(<span class="s">"EZLOGS_SERVER_URL"</span>, <span class="s">"https://app.ezlogs.io"</span>)
+  config.project_token = ENV[<span class="s">"EZLOGS_API_KEY"</span>]
 <span class="k">end</span></pre>
+    </div>
+    <div class="ez-codeblock">
+      <div class="ez-codeblock__head"><span>environment (.env, Kamal, Heroku&hellip;)</span><span>1 line</span></div>
+<pre><span class="v">EZLOGS_API_KEY</span>=ezl_your_api_key_here</pre>
     </div>
     <p class="ez-tabs__caption">
       Auto-captures HTTP, <strong>Sidekiq / ActiveJob</strong>, ActiveRecord changes, and bulk SQL. Zero per-controller code.
@@ -2308,7 +2388,16 @@
   </div>
 
   <!-- Next.js panel -->
-  <div class="ez-tabs__panel ez-tabs__panel--nextjs" role="tabpanel" aria-label="Next.js install">
+  <div class="ez-tabs__panel ez-tabs__panel--nextjs" aria-label="Next.js install">
+    <div class="ez-ai">
+      <p class="ez-ai__title">Building with Cursor or Claude Code? Let your AI install it.</p>
+      <p class="ez-ai__sub">Paste this into its chat. It follows our step-by-step guide, sets everything up and checks it works. You add your key from Settings after you sign up.</p>
+      <div class="ez-ai__row">
+        <p class="ez-ai__prompt">Install EZLogs in this Next.js app. Follow https://app.ezlogs.io/install/nextjs.md exactly, then run its verify step.</p>
+        <button type="button" class="ez-ai__copy" data-ez-copy aria-live="polite">Copy</button>
+      </div>
+    </div>
+    <p class="ez-ai__or">Or do it by hand:</p>
     <div class="ez-codeblock">
       <div class="ez-codeblock__head"><span>terminal</span><span>1 line</span></div>
 <pre><span class="o">$</span> <span class="k">npm</span> <span class="p">install</span> <span class="v">ezlogs-nextjs</span></pre>
@@ -2345,6 +2434,21 @@
     </p>
   </div>
 </div>
+<script>
+  document.querySelectorAll("[data-ez-copy]").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var text = btn.parentNode.querySelector(".ez-ai__prompt").textContent.trim();
+      var done = function () { btn.textContent = "Copied"; setTimeout(function () { btn.textContent = "Copy"; }, 1600); };
+      var select = function () {
+        var r = document.createRange(); r.selectNodeContents(btn.parentNode.querySelector(".ez-ai__prompt"));
+        var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r);
+        btn.textContent = "Press Ctrl/Cmd+C";
+        setTimeout(function () { btn.textContent = "Copy"; }, 2500);
+      };
+      if (navigator.clipboard) navigator.clipboard.writeText(text).then(done, select); else select();
+    });
+  });
+</script>
 </div>
     </div>
   </section>
@@ -2597,12 +2701,12 @@
 
   <details>
     <summary>Can I ask it questions, and will it tell me when something changes? <span class="ez-faq__plus" aria-hidden="true"></span></summary>
-    <p class="ez-faq__answer">Yes. Ask in plain English and you get a cited answer — every number clicks back to the events behind it. You can also pin a question (&ldquo;tell me when a trial account goes quiet for 3 days&rdquo;) and EZLogs watches it for you, notifying you in-app, by email, or in Slack the moment the answer changes. It only ever notifies — it never writes anything back into your app.</p>
+    <p class="ez-faq__answer">Yes. Ask in plain English and you get a cited answer — every number clicks back to the events behind it. You can also pin a question (&ldquo;tell me when a trial account goes quiet for 3 days&rdquo;) and EZLogs watches it for you, checking it every day and notifying you in-app or by email when the answer changes. It only ever notifies — it never writes anything back into your app.</p>
   </details>
 
   <details>
     <summary>Will it slow down my app? <span class="ez-faq__plus" aria-hidden="true"></span></summary>
-    <p class="ez-faq__answer">No. The agent runs out-of-band: events are buffered in memory and shipped to EZLogs over a separate connection. If our service is down, the agent fails open and your app keeps running. Average overhead in benchmarks: under 1 ms per request.</p>
+    <p class="ez-faq__answer">No. The agent runs out-of-band: events are buffered in memory and shipped to EZLogs over a separate connection. If our service is down, the agent fails open and your app keeps running.</p>
   </details>
 
   <details>
@@ -2637,7 +2741,7 @@
 
   <details>
     <summary>Can I export my data? <span class="ez-faq__plus" aria-hidden="true"></span></summary>
-    <p class="ez-faq__answer">Yes. <code>/settings/data-export</code> gives you a full JSON archive of every action, event, actor, and entity we have on file. Available to every account — GDPR Article 20 compliant.</p>
+    <p class="ez-faq__answer">Yes. <code>/settings/data-export</code> gives you a full JSON archive of every action, event, actor, and entity we have on file. Company admins can download it at any time, on every account.</p>
   </details>
 
 
@@ -2697,6 +2801,25 @@
     </div>
   </div>
   <script src="/assets/js/cookie-banner.js" defer></script>
+  <script>
+    (function () {
+      var v = document.getElementById("demo-video");
+      if (!v) return;
+      v.addEventListener("click", function () {
+        // swap the button for a plain box: an iframe must not live inside a <button> (Firefox swallows its clicks)
+        var box = document.createElement("div");
+        box.className = "hero__video";
+        box.style.cursor = "default";
+        var f = document.createElement("iframe");
+        f.src = "https://www.youtube-nocookie.com/embed/" + v.dataset.yt + "?autoplay=1&rel=0&modestbranding=1";
+        f.title = "EZLogs demo";
+        f.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen";
+        box.appendChild(f);
+        v.replaceWith(box);
+        f.focus();
+      }, { once: true });
+    })();
+  </script>
 
   
 
