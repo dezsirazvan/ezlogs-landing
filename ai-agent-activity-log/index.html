@@ -33,7 +33,7 @@
     "name": "EZLogs",
     "applicationCategory": "DeveloperApplication",
     "operatingSystem": "Web, Linux, macOS",
-    "description": "The activity log for AI work inside your app. Auto-captures every request, background job, and database change in Rails or Next.js apps and turns each AI action into a plain-English card readable by humans and queryable by AI agents via MCP.",
+    "description": "The activity log for AI work inside your app. Captures every request, background job, and database change in Rails or Next.js apps and turns each AI action into a plain-English card readable by humans and queryable by AI agents via MCP.",
     "url": "https://ezlogs.io/ai-agent-activity-log/",
     "offers": {
       "@type": "Offer",
@@ -57,7 +57,7 @@
       <a href="/#faq">FAQ</a>
       <a href="https://github.com/dezsirazvan/ez_logs_agent" target="_blank" rel="noopener">GitHub</a>
       <a href="https://app.ezlogs.io/users/sign_in" target="_blank" rel="noopener">Sign in</a>
-      <a href="https://app.ezlogs.io/users/sign_up" class="nav__cta" target="_blank" rel="noopener">Start free &mdash; beta</a>
+      <a href="https://app.ezlogs.io/users/sign_up" class="nav__cta" target="_blank" rel="noopener">Start free</a>
     </div>
   </nav>
 
@@ -70,17 +70,17 @@
     <p>The EZLogs agent drops into your Rails or Next.js app and captures every HTTP request, every background job, and every database change &mdash; whether the actor is a human user, a system process, or an AI agent. EZLogs correlates those events into a single &ldquo;action&rdquo; per business event, then renders each action as a plain-English card:</p>
 
     <div class="doc__callout">
-      <strong>"Claude created 3 orders this morning.</strong> Two succeeded (action <code>5fa3b0</code>, action <code>270c9a</code>) and one failed (action <code>7e03ba</code>) when Stripe timed out. Total spend: &euro;142.50."
+      <strong>&ldquo;Refund &rsquo;RF-M9PM&rsquo; failed&rdquo;</strong> &middot; status pending &rarr; failed (64.20 EUR), booking 'BRK-M9PM' marked as refund failed and failure reason set to 'card expired' &middot; <em>Agent &middot; Rebooking assistant</em>
     </div>
 
-    <p>Every claim links back to the underlying action. Every citation is real. The AI never invents data &mdash; it only phrases events your app actually emitted.</p>
+    <p>That card is built from the six events behind it (one request, four data changes, one failed background job) by fixed rules, not by AI, so the same events always give the same card. AI is optional: it can add an explanation or answer questions, and it only works from events your app actually sent.</p>
 
     <h2>Two readers, one source of truth</h2>
     <h3>For your team &mdash; Pulse pages, in plain English</h3>
     <p>Open <code>/actors/agent:claude</code> or <code>/entities/Order/4471</code>. Live state. Sentence-level summaries. Citations on every value. The same screen support uses to answer &ldquo;what happened to this order?&rdquo; and product uses to ask &ldquo;what is this agent doing?&rdquo;</p>
 
     <h3>For your AI &mdash; MCP server + in-app chat</h3>
-    <p>Six query-only MCP tools at <code>POST /mcp</code> for Claude Desktop / Cursor / ChatGPT. Plus an in-app &ldquo;Ask EZLogs&rdquo; chat sidebar that runs the same tools in-process. Your AI finally has memory of what your app did, and answers your team in their own words with citations they can click through.</p>
+    <p>Six query-only MCP tools at <code>https://app.ezlogs.io/mcp</code> for Claude Desktop, Claude Code, Cursor, Codex and ChatGPT. Plus an in-app &ldquo;Ask EZLogs&rdquo; chat sidebar that runs the same tools in-process. Your AI finally has memory of what your app did, and answers your team in their own words with citations they can click through.</p>
 
     <h2>Read-only by design</h2>
     <p>EZLogs <strong>reads</strong> activity from your app. It never writes back. There are no &ldquo;pause agent&rdquo; toggles that throttle your code, no approval queues that send anything anywhere, no MCP tools that perform actions. The MCP layer is for <em>asking what happened</em>, not <em>making something happen</em>. If you compromise an EZLogs account, the blast radius is read-only.</p>
@@ -96,11 +96,11 @@
 rails generate ez_logs_agent:install</code></pre>
     <pre><code># config/initializers/ez_logs_agent.rb
 EzLogsAgent.configure do |config|
-  config.project_token = "ezl_your_api_key_here"
+  config.project_token = ENV["EZLOGS_API_KEY"]
 end</code></pre>
 
     <h3>Next.js</h3>
-    <pre><code>npm install ezlogs-nextjs</code></pre>
+    <pre><code>npm install ezlogs-nextjs@^0.4.2</code></pre>
     <pre><code>// instrumentation.ts
 import { ezlogs } from "ezlogs-nextjs";
 
@@ -118,11 +118,11 @@ export default withEzlogsConfig(nextConfig);</code></pre>
     <pre><code># .env.local
 EZLOGS_PROJECT_TOKEN=ezl_your_api_key_here</code></pre>
 
-    <p>Restart. Every HTTP request, every job, every DB change &mdash; including everything your AI agents do &mdash; starts flowing into EZLogs immediately.</p>
+    <p>Restart. On Rails, requests, jobs and database changes &mdash; including everything your AI agents do &mdash; start flowing in right away. On Next.js, routes and Server Actions do; database changes need <code>npx ezlogs-nextjs install-triggers</code> once, and each job queue needs its one-line wrapper (see the <a href="/nextjs/">Next.js guide</a>).</p>
 
     <div class="doc__callout" style="text-align:center;">
-      <a href="https://app.ezlogs.io/users/sign_up" target="_blank" rel="noopener" style="display:inline-block; padding:12px 22px; background:var(--green); color:#000; font-weight:600; border-radius:10px; text-decoration:none;">Start free &mdash; beta &rarr;</a>
-      <p style="margin:14px 0 0; font-size:13px; color:var(--faint);">No card required &middot; Read-only by design</p>
+      <a href="https://app.ezlogs.io/users/sign_up" target="_blank" rel="noopener" style="display:inline-block; padding:12px 22px; background:var(--green); color:#000; font-weight:600; border-radius:10px; text-decoration:none;">Start free &rarr;</a>
+      <p style="margin:14px 0 0; font-size:13px; color:var(--muted);">No card required &middot; Read-only by design</p>
     </div>
 
     <a class="doc__back" href="/">&larr; Back to home</a>

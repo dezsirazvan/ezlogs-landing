@@ -29,7 +29,7 @@
       <a href="/#faq">FAQ</a>
       <a href="https://github.com/dezsirazvan/ez_logs_agent" target="_blank" rel="noopener">GitHub</a>
       <a href="https://app.ezlogs.io/users/sign_in" target="_blank" rel="noopener">Sign in</a>
-      <a href="https://app.ezlogs.io/users/sign_up" class="nav__cta" target="_blank" rel="noopener">Start free &mdash; beta</a>
+      <a href="https://app.ezlogs.io/users/sign_up" class="nav__cta" target="_blank" rel="noopener">Start free</a>
     </div>
   </nav>
 
@@ -53,15 +53,14 @@
     </ul>
 
     <h2>Redaction by default</h2>
-    <p>The EZLogs agent applies field-level redaction <strong>before</strong> events leave your application. Any column, parameter, or header whose name matches one of these patterns is replaced with <code>[redacted]</code> at the source:</p>
+    <p>The EZLogs agent applies field-level redaction <strong>before</strong> events leave your application. Any parameter, job argument or column whose name contains one of these patterns is masked (sent as <code>[FILTERED]</code>) or dropped at the source:</p>
     <ul>
-      <li><code>password</code>, <code>password_*</code>, <code>*_password</code></li>
-      <li><code>token</code>, <code>*_token</code>, <code>token_*</code></li>
-      <li><code>secret</code>, <code>*_secret</code></li>
-      <li><code>key</code>, <code>*_key</code>, <code>api_key</code>, <code>private_key</code></li>
-      <li><code>*_at</code> timestamps that look like internal-only data</li>
+      <li><code>password</code>, <code>passwd</code>, <code>pwd</code></li>
+      <li><code>token</code>, <code>secret</code>, <code>api_key</code>, <code>private_key</code>, <code>credential</code>, <code>authorization</code></li>
+      <li><code>credit_card</code>, <code>card_number</code>, <code>cvv</code>, <code>ssn</code></li>
+      <li>and more; the full list is in the open-source agents</li>
     </ul>
-    <p>You can extend the redaction list with your own patterns in the agent configuration. We never store request bodies, response bodies, or full database rows unless you explicitly opt in at the agent layer.</p>
+    <p>You can extend the redaction list with your own patterns in the agent configuration. Raw request and response bodies are never sent. What is sent: request paths and parsed parameters, job names and arguments, and database values (what changed on an update, a new record&rsquo;s values on create and, on Next.js, a deleted record&rsquo;s last values), all after the masking above.</p>
 
     <h2>Public surfaces &mdash; one redaction layer</h2>
     <p>Any data that leaves the EZLogs app &mdash; via the MCP server, a public share URL, an embedded widget, or an audit export &mdash; passes through a single redaction pass before it ships. Shared and embedded artifacts default to a conservative allowlist (display-name fields only); full visibility requires explicit per-share opt-in. The MCP server and audit exports default to your full data, because they are <em>your</em> AI and <em>your</em> admin reading <em>your</em> data &mdash; redaction would be incorrect there.</p>

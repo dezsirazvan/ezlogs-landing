@@ -57,7 +57,7 @@
       <a href="/#faq">FAQ</a>
       <a href="https://github.com/dezsirazvan/ez_logs_agent" target="_blank" rel="noopener">GitHub</a>
       <a href="https://app.ezlogs.io/users/sign_in" target="_blank" rel="noopener">Sign in</a>
-      <a href="https://app.ezlogs.io/users/sign_up" class="nav__cta" target="_blank" rel="noopener">Start free &mdash; beta</a>
+      <a href="https://app.ezlogs.io/users/sign_up" class="nav__cta" target="_blank" rel="noopener">Start free</a>
     </div>
   </nav>
 
@@ -71,6 +71,7 @@
       <li><strong>HTTP requests</strong> via Rack middleware &mdash; controller, action, path, status, duration, current_user if your app sets one.</li>
       <li><strong>Background jobs</strong> via ActiveJob / Sidekiq instrumentation &mdash; class, queue, arguments, result, duration.</li>
       <li><strong>Database changes</strong> via ActiveRecord callbacks &mdash; table, primary key, operation, redacted before/after column values.</li>
+      <li><strong>Bulk SQL</strong> that skips callbacks &mdash; <code>update_all</code>, <code>delete_all</code>, <code>insert_all</code>, <code>upsert_all</code>, and <code>dependent: :delete_all</code> cascades.</li>
     </ul>
     <p>Events are correlated by request ID, current user, and resource ID. Each customer action becomes one card, not a wall of logs.</p>
 
@@ -103,8 +104,8 @@ EZLOGS_API_KEY=ezl_your_api_key_here</code></pre>
     <p>Rails 6.1+, Ruby 3.1+. Sidekiq 6+, ActiveJob (built-in). ActiveRecord with PostgreSQL or MySQL.</p>
 
     <div class="doc__callout" style="text-align:center;">
-      <a href="https://app.ezlogs.io/users/sign_up" target="_blank" rel="noopener" style="display:inline-block; padding:12px 22px; background:var(--green); color:#000; font-weight:600; border-radius:10px; text-decoration:none;">Start free &mdash; beta &rarr;</a>
-      <p style="margin:14px 0 0; font-size:13px; color:var(--faint);">No card required &middot; Read-only by design</p>
+      <a href="https://app.ezlogs.io/users/sign_up" target="_blank" rel="noopener" style="display:inline-block; padding:12px 22px; background:var(--green); color:#000; font-weight:600; border-radius:10px; text-decoration:none;">Start free &rarr;</a>
+      <p style="margin:14px 0 0; font-size:13px; color:var(--muted);">No card required &middot; Read-only by design</p>
     </div>
 
     <a class="doc__back" href="/">&larr; Back to home</a>

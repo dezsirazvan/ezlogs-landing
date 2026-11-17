@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Activity Logs for Next.js &mdash; EZLogs</title>
-  <meta name="description" content="EZLogs is a Next.js activity log that auto-captures HTTP routes, Server Actions, and Postgres changes. Works with App Router, Pages, Prisma, Drizzle, Inngest, Trigger.dev. Plain-English cards your team can read.">
+  <meta name="description" content="EZLogs is a Next.js activity log: routes and Server Actions out of the box, page views with middleware, plus Postgres changes and background jobs with a short setup. Works with App Router, Pages Router, Prisma, Drizzle, Inngest, Trigger.dev. Plain-English cards your team can read.">
   <meta name="keywords" content="next.js activity log, next.js audit log, nextjs activity log, ezlogs nextjs, server actions logging, prisma audit log, drizzle audit log, app router activity log">
   <link rel="canonical" href="https://ezlogs.io/nextjs/">
   <meta name="robots" content="index, follow">
@@ -17,7 +17,7 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="EZLogs">
   <meta property="og:title" content="Activity logs for Next.js &mdash; App Router, Server Actions, Postgres.">
-  <meta property="og:description" content="Auto-captures HTTP routes, Server Actions, and database changes. Turns each customer or agent action into a plain-English card your whole team can read.">
+  <meta property="og:description" content="Captures routes, Server Actions, database changes and background jobs, and turns each customer or agent action into a plain-English card your whole team can read.">
   <meta property="og:url" content="https://ezlogs.io/nextjs/">
   <meta property="og:image" content="https://ezlogs.io/assets/og-image.png">
 
@@ -33,7 +33,7 @@
     "name": "EZLogs for Next.js (ezlogs-nextjs)",
     "applicationCategory": "DeveloperApplication",
     "operatingSystem": "Web, Linux, macOS",
-    "description": "A Next.js activity log package that auto-captures HTTP routes, Server Actions, and Postgres changes and turns each customer or agent action into a plain-English card.",
+    "description": "A Next.js activity log package that captures HTTP routes, Server Actions, page views, Postgres changes and background jobs and turns each customer or agent action into a plain-English card.",
     "url": "https://ezlogs.io/nextjs/",
     "downloadUrl": "https://www.npmjs.com/package/ezlogs-nextjs",
     "offers": {
@@ -57,25 +57,26 @@
       <a href="/#faq">FAQ</a>
       <a href="https://github.com/dezsirazvan/ez_logs_agent_nextjs" target="_blank" rel="noopener">GitHub</a>
       <a href="https://app.ezlogs.io/users/sign_in" target="_blank" rel="noopener">Sign in</a>
-      <a href="https://app.ezlogs.io/users/sign_up" class="nav__cta" target="_blank" rel="noopener">Start free &mdash; beta</a>
+      <a href="https://app.ezlogs.io/users/sign_up" class="nav__cta" target="_blank" rel="noopener">Start free</a>
     </div>
   </nav>
 
   <main class="doc">
     <p class="doc__eyebrow">EZLogs for Next.js</p>
     <h1>Activity logs for Next.js &mdash; App Router, Server Actions, Postgres.</h1>
-    <p class="doc__lead">EZLogs is a Next.js activity log that auto-captures every HTTP route, every Server Action, and every Postgres change, then correlates them into one plain-English card per customer (or agent) action. Anyone on your team can read it &mdash; no log files, no grepping, no engineers needed.</p>
+    <p class="doc__lead">EZLogs is a Next.js activity log that captures every HTTP route and Server Action on its own and, after a short setup, every Postgres change and background job, then correlates them into one plain-English card per customer (or agent) action. Anyone on your team can read it &mdash; no log files, no grepping, no engineers needed.</p>
 
-    <h2>What gets captured automatically</h2>
+    <h2>What gets captured</h2>
     <ul>
       <li><strong>HTTP routes</strong> (App Router + Pages Router) &mdash; method, path, status, duration, requesting user if your app exposes one.</li>
       <li><strong>Server Actions</strong> &mdash; the action name, arguments, success or failure.</li>
-      <li><strong>Postgres changes</strong> via lightweight database triggers &mdash; table, primary key, operation, redacted before/after column values. Works with Prisma, Drizzle, supabase-js, raw SQL.</li>
-      <li><strong>Background jobs</strong> via instrumentation hooks for BullMQ, Inngest, Trigger.dev, Upstash QStash, Supabase Queues.</li>
+      <li><strong>Page views</strong> &mdash; page loads, via your <code>middleware.ts</code> / <code>proxy.ts</code>.</li>
+      <li><strong>Postgres changes</strong> after one command, <code>npx ezlogs-nextjs install-triggers</code> &mdash; table, operation, before/after column values with sensitive columns removed. Works with supabase-js, Drizzle and raw <code>pg</code> as is; Prisma and postgres.js need a one-line wrapper.</li>
+      <li><strong>Background jobs</strong> with one wrapper per queue: BullMQ, Inngest, Trigger.dev, Upstash Workflow / QStash, Supabase Queues.</li>
     </ul>
 
     <h2>Install in 60 seconds</h2>
-    <pre><code>npm install ezlogs-nextjs</code></pre>
+    <pre><code>npm install ezlogs-nextjs@^0.4.2</code></pre>
     <pre><code>// instrumentation.ts
 import { ezlogs } from "ezlogs-nextjs";
 
@@ -92,12 +93,12 @@ const nextConfig = { /* your options */ };
 export default withEzlogsConfig(nextConfig);</code></pre>
     <pre><code># .env.local
 EZLOGS_PROJECT_TOKEN=ezl_your_api_key_here</code></pre>
-    <p>Restart your dev server. HTTP routes and Server Actions start streaming into EZLogs right away. For Postgres changes, run <code>npx ezlogs-nextjs install-triggers</code> once. Works with Turbopack and Webpack, App Router and Pages Router.</p>
+    <p>Restart your dev server. HTTP routes and Server Actions start streaming into EZLogs right away. For Postgres changes, run <code>npx ezlogs-nextjs install-triggers</code> once (and wrap your Prisma or postgres.js client); for jobs, wrap each queue. The <a href="https://github.com/dezsirazvan/ez_logs_agent_nextjs#readme" target="_blank" rel="noopener">README</a> has the one-liners. Works with Turbopack and Webpack, App Router and Pages Router.</p>
 
     <h2>Works with your stack</h2>
     <ul>
       <li><strong>ORMs / DB clients:</strong> Prisma, Drizzle, supabase-js, raw <code>pg</code>.</li>
-      <li><strong>Background-job runners:</strong> BullMQ, Inngest, Trigger.dev, Upstash QStash, Supabase Queues.</li>
+      <li><strong>Background-job runners</strong> (one wrapper each): BullMQ, Inngest, Trigger.dev, Upstash Workflow / QStash, Supabase Queues.</li>
       <li><strong>Auth:</strong> NextAuth / Auth.js (we read <code>session.user.id</code>), Clerk, Supabase Auth, custom JWT.</li>
       <li><strong>Hosting:</strong> Vercel, or anywhere Next.js runs on Node.</li>
     </ul>
@@ -110,7 +111,7 @@ EZLOGS_PROJECT_TOKEN=ezl_your_api_key_here</code></pre>
       <li><strong>Edge-compatible:</strong> works in Edge runtime + Node runtime.</li>
       <li><strong>Out-of-band:</strong> events buffered in memory, shipped asynchronously.</li>
       <li><strong>Fails open:</strong> if EZLogs is unreachable, the agent buffers and retries. The agent <em>never</em> throws into your request path.</li>
-      <li><strong>Field-level redaction</strong> on by default for credentials, tokens, and sensitive columns.</li>
+      <li><strong>Field-level redaction</strong> on by default: parameters named like passwords, tokens, secrets, API keys or card numbers are sent as <code>[FILTERED]</code>, and sensitive columns are removed by the trigger before anything is sent.</li>
       <li><strong>Open source</strong> at <a href="https://github.com/dezsirazvan/ez_logs_agent_nextjs" target="_blank" rel="noopener">github.com/dezsirazvan/ez_logs_agent_nextjs</a>.</li>
     </ul>
 
@@ -118,8 +119,8 @@ EZLOGS_PROJECT_TOKEN=ezl_your_api_key_here</code></pre>
     <p>Next.js 14+ (App Router and Pages Router). Node 18.17+. Postgres 13+ for trigger-based DB capture.</p>
 
     <div class="doc__callout" style="text-align:center;">
-      <a href="https://app.ezlogs.io/users/sign_up" target="_blank" rel="noopener" style="display:inline-block; padding:12px 22px; background:var(--green); color:#000; font-weight:600; border-radius:10px; text-decoration:none;">Start free &mdash; beta &rarr;</a>
-      <p style="margin:14px 0 0; font-size:13px; color:var(--faint);">No card required &middot; Read-only by design</p>
+      <a href="https://app.ezlogs.io/users/sign_up" target="_blank" rel="noopener" style="display:inline-block; padding:12px 22px; background:var(--green); color:#000; font-weight:600; border-radius:10px; text-decoration:none;">Start free &rarr;</a>
+      <p style="margin:14px 0 0; font-size:13px; color:var(--muted);">No card required &middot; Read-only by design</p>
     </div>
 
     <a class="doc__back" href="/">&larr; Back to home</a>

@@ -29,7 +29,7 @@
       <a href="/#faq">FAQ</a>
       <a href="https://github.com/dezsirazvan/ez_logs_agent" target="_blank" rel="noopener">GitHub</a>
       <a href="https://app.ezlogs.io/users/sign_in" target="_blank" rel="noopener">Sign in</a>
-      <a href="https://app.ezlogs.io/users/sign_up" class="nav__cta" target="_blank" rel="noopener">Start free &mdash; beta</a>
+      <a href="https://app.ezlogs.io/users/sign_up" class="nav__cta" target="_blank" rel="noopener">Start free</a>
     </div>
   </nav>
 
@@ -63,7 +63,7 @@
       <li>Background job metadata (job class name, queue, duration, success/failure).</li>
       <li>Database change metadata (table name, primary key, the operation, and a redacted set of before/after column values).</li>
     </ul>
-    <p>We do <strong>not</strong> store request bodies, response bodies, or full database rows unless you explicitly opt in. Field-level redaction is on by default at the agent for any column or parameter whose name matches <code>password</code>, <code>token</code>, <code>secret</code>, <code>api_key</code>, <code>credit_card</code>, and additional patterns we widen over time. You are responsible for configuring the agent&rsquo;s sensitive-keys list to cover any further fields that carry personal data your end users would not expect us to see.</p>
+    <p>We do <strong>not</strong> store raw request or response bodies. We store parsed request parameters and database values (what changed, a new record&rsquo;s values and, on Next.js, a deleted record&rsquo;s last values), after the agent masks sensitive fields. Field-level redaction is on by default at the agent for any column or parameter whose name matches <code>password</code>, <code>token</code>, <code>secret</code>, <code>api_key</code>, <code>credit_card</code>, and additional patterns we widen over time. You are responsible for configuring the agent&rsquo;s sensitive-keys list to cover any further fields that carry personal data your end users would not expect us to see.</p>
     <p>Because the event data describes actions performed by your end users, it may include personal data about individuals who never interact with EZLogs directly (for example, the email of one of your customers whose action triggered a captured event). For the purposes of Article 14 GDPR, the source of this data is your application, and the lawful basis for its processing is the contract we have with you as the data controller (Section 3). You remain responsible under your own privacy notice for informing your end users that you use EZLogs as a processor.</p>
 
     <h3>2.3 Technical data</h3>
