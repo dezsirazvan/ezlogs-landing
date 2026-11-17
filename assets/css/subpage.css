@@ -113,6 +113,7 @@ a:hover { text-decoration: underline; }
   margin: 0 0 40px;
   line-height: 1.55;
 }
+.doc h2, .doc h3 { line-height: 1.25; }
 .doc h2 {
   font-family: var(--display);
   font-size: 22px;
@@ -147,7 +148,7 @@ a:hover { text-decoration: underline; }
   overflow-x: auto;
   max-width: 100%;
 }
-.doc pre code { display: block; width: max-content; min-width: 100%; box-sizing: border-box; }
+.doc pre code { display: block; width: max-content; min-width: 100%; box-sizing: border-box; padding: 14px 16px; font-variant-ligatures: none; }
 .doc th, .doc td, .doc a { overflow-wrap: anywhere; }
 .doc table {
   width: 100%;

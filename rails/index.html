@@ -79,10 +79,12 @@
 rails generate ez_logs_agent:install</code></pre>
     <pre><code># config/initializers/ez_logs_agent.rb
 EzLogsAgent.configure do |config|
-  config.server_url = "https://app.ezlogs.io"
-  config.project_token = "ezl_your_api_key_here"
+  config.server_url = ENV.fetch("EZLOGS_SERVER_URL", "https://app.ezlogs.io")
+  config.project_token = ENV["EZLOGS_API_KEY"]
 end</code></pre>
-    <p>Set your API key, then restart your app. No per-controller code, no model concerns, no per-job wrapper. The gem hooks into Rails&rsquo; existing instrumentation.</p>
+    <pre><code># your environment (.env, Kamal, Heroku...)
+EZLOGS_API_KEY=ezl_your_api_key_here</code></pre>
+    <p>The generator writes the initializer for you. Set <code>EZLOGS_API_KEY</code>, then restart your app. No per-controller code, no model concerns, no per-job wrapper. The gem hooks into Rails&rsquo; existing instrumentation.</p>
 
     <h2>How is this different from PaperTrail or Audited?</h2>
     <p>PaperTrail and Audited are model-versioning gems &mdash; they let you go back and inspect a row at a given timestamp. They are great at that and EZLogs does not try to replace them. EZLogs is solving a different problem: <strong>tell me, in plain English, what one customer (or one AI agent) actually did in my app today</strong> &mdash; HTTP + jobs + DB stitched together, summarized in a sentence, readable by anyone in the company. PaperTrail+Audited gives you the rows. EZLogs gives you the story.</p>
