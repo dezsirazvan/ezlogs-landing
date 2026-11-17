@@ -2323,6 +2323,13 @@
     background: var(--green); color: #000;
   }
   .ez-ai__copy:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+  .ez-ai__cta {
+    display: inline-block; margin: 0 0 14px; padding: 10px 16px; border-radius: 8px; background: var(--green); color: #000;
+    font-weight: 600; font-size: 13.5px; text-decoration: none;
+  }
+  .ez-ai__cta:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+  .ez-ai__preview { margin: 0 0 8px; font-size: 12.5px; color: var(--muted); }
+  .ez-ai__copy--quiet { background: transparent; color: var(--text); border: 1px solid var(--line); }
   .ez-ai__or { margin: 4px 2px 12px; font-size: 12.5px; color: var(--muted); }
   @media (max-width: 480px) { .ez-ai__row { flex-direction: column; } .ez-ai__copy { padding: 10px 16px; } }
 
@@ -2366,10 +2373,12 @@
   <div class="ez-tabs__panel ez-tabs__panel--ruby" aria-label="Ruby on Rails install">
     <div class="ez-ai">
       <p class="ez-ai__title">Building with Cursor or Claude Code? Let your AI install it.</p>
-      <p class="ez-ai__sub">Paste this into its chat. It follows our step-by-step guide, sets everything up and checks it works. You add your key from Settings after you sign up.</p>
+      <p class="ez-ai__sub">Sign up, then copy your install prompt from <strong>Settings &rarr; API keys</strong>. It comes with your key already filled in, so your AI installs EZLogs and checks it works in one go.</p>
+      <a class="ez-ai__cta" href="https://app.ezlogs.io/users/sign_up" target="_blank" rel="noopener">Get your install prompt &mdash; free</a>
+      <p class="ez-ai__preview">Want to see it first? This is the prompt (your AI will ask you for the key):</p>
       <div class="ez-ai__row">
         <p class="ez-ai__prompt">Install EZLogs in this Rails app. Follow https://app.ezlogs.io/install/rails.md exactly, then run its verify step.</p>
-        <button type="button" class="ez-ai__copy" data-ez-copy aria-live="polite">Copy</button>
+        <button type="button" class="ez-ai__copy ez-ai__copy--quiet" data-ez-copy aria-live="polite">Copy</button>
       </div>
     </div>
     <p class="ez-ai__or">Or do it by hand:</p>
@@ -2401,10 +2410,12 @@
   <div class="ez-tabs__panel ez-tabs__panel--nextjs" aria-label="Next.js install">
     <div class="ez-ai">
       <p class="ez-ai__title">Building with Cursor or Claude Code? Let your AI install it.</p>
-      <p class="ez-ai__sub">Paste this into its chat. It follows our step-by-step guide, sets everything up and checks it works. You add your key from Settings after you sign up.</p>
+      <p class="ez-ai__sub">Sign up, then copy your install prompt from <strong>Settings &rarr; API keys</strong>. It comes with your key already filled in, so your AI installs EZLogs and checks it works in one go.</p>
+      <a class="ez-ai__cta" href="https://app.ezlogs.io/users/sign_up" target="_blank" rel="noopener">Get your install prompt &mdash; free</a>
+      <p class="ez-ai__preview">Want to see it first? This is the prompt (your AI will ask you for the key):</p>
       <div class="ez-ai__row">
         <p class="ez-ai__prompt">Install EZLogs in this Next.js app. Follow https://app.ezlogs.io/install/nextjs.md exactly, then run its verify step.</p>
-        <button type="button" class="ez-ai__copy" data-ez-copy aria-live="polite">Copy</button>
+        <button type="button" class="ez-ai__copy ez-ai__copy--quiet" data-ez-copy aria-live="polite">Copy</button>
       </div>
     </div>
     <p class="ez-ai__or">Or do it by hand:</p>
