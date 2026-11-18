@@ -72,13 +72,21 @@
       <li><strong>Server Actions</strong> &mdash; the action name, arguments, success or failure.</li>
       <li><strong>Page views</strong> &mdash; page loads, via your <code>middleware.ts</code> / <code>proxy.ts</code>.</li>
       <li><strong>Postgres changes</strong> after one command, <code>npx ezlogs-nextjs install-triggers</code> &mdash; table, operation, before/after column values with sensitive columns removed. Works with supabase-js, Drizzle and raw <code>pg</code> as is; Prisma and postgres.js need a one-line wrapper.</li>
-      <li><strong>Background jobs</strong> with one wrapper per queue: BullMQ, Inngest, Trigger.dev, Upstash Workflow / QStash, Supabase Queues.</li>
+      <li><strong>Background jobs:</strong> BullMQ and Upstash Workflow / QStash on their own; Inngest, Trigger.dev and Supabase Queues with a short addition.</li>
     </ul>
 
-    <h2>Install in 60 seconds</h2>
-    <pre><code>npm install ezlogs-nextjs@^0.4.3</code></pre>
-    <pre><code>// instrumentation.ts
-import { ezlogs } from "ezlogs-nextjs";
+    <h2>Install: paste the prompt into your coding AI, or do it by hand</h2>
+    <h3>1. Fastest: let your coding AI do it</h3>
+    <p>Paste this into Cursor, Claude Code, v0, Replit or any coding AI. It does every step below, including database changes and jobs, then checks that capture works. It asks you for your API key (<strong>Settings &rarr; API keys</strong> after you <a href="https://app.ezlogs.io/users/sign_up" target="_blank" rel="noopener">sign up</a>).</p>
+    <pre><code style="white-space: pre-wrap; width: auto; overflow-wrap: anywhere;">Install EZLogs in this app by following https://app.ezlogs.io/install/nextjs.md</code></pre>
+
+    <h3>2. By hand</h3>
+    <ol>
+      <li><strong>Install the package.</strong>
+        <pre><code>npm install ezlogs-nextjs@^0.4.6</code></pre>
+      </li>
+      <li><strong>Start the agent</strong> in <code>instrumentation.ts</code> at your project root (or in <code>src/</code>).
+        <pre><code>import { ezlogs } from "ezlogs-nextjs";
 
 export async function register() {
   if (process.env.NEXT_RUNTIME === "nodejs") {
@@ -87,18 +95,29 @@ export async function register() {
     });
   }
 }</code></pre>
-    <pre><code>// next.config.mjs
+      </li>
+      <li><strong>Wrap your Next config</strong> so routes and Server Actions are captured on their own.
+        <pre><code>// next.config.ts (or next.config.mjs)
 import { withEzlogsConfig } from "ezlogs-nextjs/plugin";
 const nextConfig = { /* your options */ };
 export default withEzlogsConfig(nextConfig);</code></pre>
-    <pre><code># .env.local
-EZLOGS_PROJECT_TOKEN=ezl_your_api_key_here</code></pre>
-    <p>Restart your dev server. HTTP routes and Server Actions start streaming into EZLogs right away. For Postgres changes, run <code>npx ezlogs-nextjs install-triggers</code> once (and wrap your Prisma or postgres.js client); for jobs, wrap each queue. The <a href="https://github.com/dezsirazvan/ez_logs_agent_nextjs#readme" target="_blank" rel="noopener">README</a> has the one-liners. Works with Turbopack and Webpack, App Router and Pages Router.</p>
+      </li>
+      <li><strong>Add your key</strong> to <code>.env.local</code> and restart the dev server. The terminal shows <code>[ezlogs] capturing &rarr; app.ezlogs.io</code>.
+        <pre><code>EZLOGS_PROJECT_TOKEN=ezl_your_api_key_here</code></pre>
+      </li>
+      <li><strong>Capture database changes</strong> (Postgres, Supabase included): which record, each column before and after, and who changed it. Set <code>DATABASE_URL</code>, then run once:
+        <pre><code>npm i pg
+npx ezlogs-nextjs install-triggers</code></pre>
+        That is all for supabase-js, Drizzle on node-postgres and raw <code>pg</code>. Prisma and postgres.js also need a one-line wrapper (<a href="https://github.com/dezsirazvan/ez_logs_agent_nextjs#5-capture-database-changes" target="_blank" rel="noopener">see the README</a>).
+      </li>
+      <li><strong>Background jobs</strong>, if you have them: BullMQ and Upstash Workflow / QStash need nothing more (the config wrapper instruments them where your code imports them); Inngest, Trigger.dev and Supabase Queues need a short addition. <a href="https://github.com/dezsirazvan/ez_logs_agent_nextjs/blob/master/docs/jobs.md" target="_blank" rel="noopener">Snippets</a>.</li>
+    </ol>
+    <p>Works with Turbopack and Webpack, App Router and Pages Router. Every option is in the <a href="https://github.com/dezsirazvan/ez_logs_agent_nextjs#readme" target="_blank" rel="noopener">README</a>.</p>
 
     <h2>Works with your stack</h2>
     <ul>
       <li><strong>ORMs / DB clients:</strong> Prisma, Drizzle, supabase-js, raw <code>pg</code>.</li>
-      <li><strong>Background-job runners</strong> (one wrapper each): BullMQ, Inngest, Trigger.dev, Upstash Workflow / QStash, Supabase Queues.</li>
+      <li><strong>Background-job runners:</strong> BullMQ, Upstash Workflow / QStash, Inngest, Trigger.dev, Supabase Queues.</li>
       <li><strong>Auth:</strong> NextAuth / Auth.js (we read <code>session.user.id</code>), Clerk, Supabase Auth, custom JWT.</li>
       <li><strong>Hosting:</strong> Vercel, or anywhere Next.js runs on Node.</li>
     </ul>

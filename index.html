@@ -131,7 +131,7 @@
         "name": "Which frameworks work today?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Ruby on Rails: requests, Sidekiq and ActiveJob jobs, ActiveRecord changes and bulk SQL (update_all, delete_all…), all on their own. Next.js: routes, Server Actions and page views when the app has a middleware.ts (or proxy.ts); database changes through Postgres triggers (one command) plus a one-line wrapper for Prisma or postgres.js; background jobs with one wrapper per queue (BullMQ, Inngest, Trigger.dev, Upstash, Supabase Queues)."
+          "text": "Ruby on Rails: requests, Sidekiq and ActiveJob jobs, ActiveRecord changes and bulk SQL (update_all, delete_all…), all on their own. Next.js: routes, Server Actions and page views when the app has a middleware.ts (or proxy.ts); database changes through Postgres triggers (one command) plus a one-line wrapper for Prisma or postgres.js; background jobs with BullMQ and Upstash Workflow / QStash on their own; Inngest, Trigger.dev and Supabase Queues with a short addition."
         }
       },
       {
@@ -1338,7 +1338,7 @@
       <div class="section__head">
         <span class="section__kicker">Install</span>
         <h2 class="section__title">Install it in a few minutes.</h2>
-        <p class="section__sub">One gem for Rails, one npm package for Next.js. Let your coding AI do it, or follow three short steps.</p>
+        <p class="section__sub">One gem for Rails, one npm package for Next.js. Let your coding AI do it, or follow the short steps by hand.</p>
       </div>
       <div data-embed="language-tabs.html">
 <!-- INLINED FROM embeds/language-tabs.html -->
@@ -1481,7 +1481,11 @@
     font-weight: 600; font-size: 13.5px; text-decoration: none;
   }
   .ez-ai__cta:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
-  .ez-ai__or { margin: 4px 2px 12px; font-size: 12.5px; color: var(--muted); }
+  .ez-ai__or { margin: 4px 2px 12px; font-size: 13.5px; font-weight: 600; color: var(--text); }
+  .ez-ai__pick {
+    display: inline-block; margin-right: 6px; padding: 1px 7px; border-radius: 6px; border: 1px solid var(--line);
+    font-size: 11.5px; font-weight: 600; color: var(--green); vertical-align: 1px;
+  }
 
   .ez-tabs__more {
     margin-top: 20px;
@@ -1522,28 +1526,28 @@
   <!-- Ruby panel -->
   <div class="ez-tabs__panel ez-tabs__panel--ruby" aria-label="Ruby on Rails install">
     <div class="ez-ai">
-      <p class="ez-ai__title">Building with Cursor or Claude Code? Let your AI install it.</p>
+      <p class="ez-ai__title"><span class="ez-ai__pick">Option 1</span> Fastest: let your coding AI install it.</p>
       <ol class="ez-ai__steps">
         <li>Sign up. It&rsquo;s free during beta.</li>
         <li>In <strong>Settings &rarr; API keys</strong>, create a key.</li>
-        <li>Copy the install prompt shown right under it (your key is already in it) and paste it into your AI. It installs EZLogs and checks it works.</li>
+        <li>Copy the install prompt on that page (your key is already in it) and paste it into your AI. It installs EZLogs and checks it works.</li>
       </ol>
       <a class="ez-ai__cta" href="https://app.ezlogs.io/users/sign_up" target="_blank" rel="noopener">Start free</a>
     </div>
-    <p class="ez-ai__or">Or do it by hand:</p>
+    <p class="ez-ai__or"><span class="ez-ai__pick">Option 2</span> Or do it by hand:</p>
     <div class="ez-codeblock">
-      <div class="ez-codeblock__head"><span>terminal</span><span>2 lines</span></div>
+      <div class="ez-codeblock__head"><span>1 &middot; terminal</span><span>2 lines</span></div>
 <pre><span class="o">$</span> <span class="k">bundle</span> <span class="p">add</span> <span class="v">ez_logs_agent</span>
 <span class="o">$</span> <span class="k">rails</span> <span class="p">generate</span> <span class="v">ez_logs_agent:install</span></pre>
     </div>
     <div class="ez-codeblock">
-      <div class="ez-codeblock__head"><span>config/initializers/ez_logs_agent.rb</span><span>created by the generator</span></div>
+      <div class="ez-codeblock__head"><span>2 &middot; config/initializers/ez_logs_agent.rb</span><span>created by the generator</span></div>
 <pre><span class="v">EzLogsAgent</span>.<span class="k">configure</span> <span class="k">do</span> |config|
   config.project_token = ENV[<span class="s">"EZLOGS_API_KEY"</span>]
 <span class="k">end</span></pre>
     </div>
     <div class="ez-codeblock">
-      <div class="ez-codeblock__head"><span>environment (.env, Kamal, Heroku&hellip;)</span><span>1 line</span></div>
+      <div class="ez-codeblock__head"><span>3 &middot; environment (.env, Kamal, Heroku&hellip;)</span><span>1 line</span></div>
 <pre><span class="v">EZLOGS_API_KEY</span>=ezl_your_api_key_here</pre>
     </div>
     <p class="ez-tabs__caption">
@@ -1557,21 +1561,21 @@
   <!-- Next.js panel -->
   <div class="ez-tabs__panel ez-tabs__panel--nextjs" aria-label="Next.js install">
     <div class="ez-ai">
-      <p class="ez-ai__title">Building with Cursor or Claude Code? Let your AI install it.</p>
+      <p class="ez-ai__title"><span class="ez-ai__pick">Option 1</span> Fastest: let your coding AI install it.</p>
       <ol class="ez-ai__steps">
         <li>Sign up. It&rsquo;s free during beta.</li>
         <li>In <strong>Settings &rarr; API keys</strong>, create a key.</li>
-        <li>Copy the install prompt shown right under it (your key is already in it) and paste it into your AI. It installs EZLogs and checks it works.</li>
+        <li>Copy the install prompt on that page (your key is already in it) and paste it into your AI. It installs EZLogs and checks it works.</li>
       </ol>
       <a class="ez-ai__cta" href="https://app.ezlogs.io/users/sign_up" target="_blank" rel="noopener">Start free</a>
     </div>
-    <p class="ez-ai__or">Or do it by hand:</p>
+    <p class="ez-ai__or"><span class="ez-ai__pick">Option 2</span> Or do it by hand:</p>
     <div class="ez-codeblock">
-      <div class="ez-codeblock__head"><span>terminal</span><span>1 line</span></div>
-<pre><span class="o">$</span> <span class="k">npm</span> <span class="p">install</span> <span class="v">ezlogs-nextjs@^0.4.3</span></pre>
+      <div class="ez-codeblock__head"><span>1 &middot; terminal</span><span>1 line</span></div>
+<pre><span class="o">$</span> <span class="k">npm</span> <span class="p">install</span> <span class="v">ezlogs-nextjs@^0.4.6</span></pre>
     </div>
     <div class="ez-codeblock">
-      <div class="ez-codeblock__head"><span>instrumentation.ts</span><span>9 lines</span></div>
+      <div class="ez-codeblock__head"><span>2 &middot; instrumentation.ts</span><span>9 lines</span></div>
 <pre><span class="k">import</span> { ezlogs } <span class="k">from</span> <span class="s">"ezlogs-nextjs"</span>;
 
 <span class="k">export async function</span> <span class="g">register</span>() {
@@ -1583,17 +1587,22 @@
 }</pre>
     </div>
     <div class="ez-codeblock">
-      <div class="ez-codeblock__head"><span>next.config.mjs</span><span>3 lines</span></div>
+      <div class="ez-codeblock__head"><span>3 &middot; next.config.ts (or .mjs)</span><span>3 lines</span></div>
 <pre><span class="k">import</span> { withEzlogsConfig } <span class="k">from</span> <span class="s">"ezlogs-nextjs/plugin"</span>;
 <span class="k">const</span> nextConfig = { <span class="c">/* your options */</span> };
 <span class="k">export default</span> <span class="g">withEzlogsConfig</span>(nextConfig);</pre>
     </div>
     <div class="ez-codeblock">
-      <div class="ez-codeblock__head"><span>.env.local</span><span>1 line</span></div>
+      <div class="ez-codeblock__head"><span>4 &middot; .env.local, then restart</span><span>1 line</span></div>
 <pre><span class="v">EZLOGS_PROJECT_TOKEN</span>=ezl_your_api_key_here</pre>
     </div>
+    <div class="ez-codeblock">
+      <div class="ez-codeblock__head"><span>5 &middot; database changes (Postgres, Supabase included)</span><span>run once</span></div>
+<pre><span class="o">$</span> <span class="k">npm</span> <span class="p">i</span> <span class="v">pg</span>
+<span class="o">$</span> <span class="k">npx</span> <span class="p">ezlogs-nextjs</span> <span class="v">install-triggers</span></pre>
+    </div>
     <p class="ez-tabs__caption">
-      Captures <strong>routes and Server Actions</strong> on its own, and <strong>page views</strong> when the app has a <code>middleware.ts</code> (or <code>proxy.ts</code>). <strong>Database changes:</strong> on Postgres, run <code>npx ezlogs-nextjs install-triggers</code> once (Prisma and postgres.js also need a one-line wrapper). <strong>Background jobs:</strong> one wrapper per queue (BullMQ, Inngest, Trigger.dev, Upstash, Supabase Queues). App Router and Pages Router, Turbopack and Webpack.
+      Steps 1&ndash;4 capture <strong>routes and Server Actions</strong>, and <strong>page views</strong> when the app has a <code>middleware.ts</code> (or <code>proxy.ts</code>). Step 5 adds <strong>database changes</strong>: each column before and after, and who changed it (set <code>DATABASE_URL</code> first; Prisma and postgres.js also need a one-line wrapper). <strong>Background jobs:</strong> BullMQ and Upstash Workflow / QStash on their own; Inngest, Trigger.dev and Supabase Queues with a short addition. App Router and Pages Router, Turbopack and Webpack.
     </p>
     <p class="ez-tabs__more">
       <a href="/nextjs/">Read the full Next.js setup guide →</a>
@@ -1743,7 +1752,7 @@
 
   <details>
     <summary>Which frameworks work today? <span class="ez-faq__plus" aria-hidden="true"></span></summary>
-    <p class="ez-faq__answer"><strong>Ruby on Rails:</strong> requests, Sidekiq and ActiveJob jobs, ActiveRecord changes and bulk SQL (<code>update_all</code>, <code>delete_all</code>&hellip;), all on their own. <strong>Next.js:</strong> routes, Server Actions and page views when the app has a <code>middleware.ts</code> (or <code>proxy.ts</code>); database changes through Postgres triggers (one command) plus a one-line wrapper for Prisma or postgres.js; background jobs with one wrapper per queue (BullMQ, Inngest, Trigger.dev, Upstash, Supabase Queues).</p>
+    <p class="ez-faq__answer"><strong>Ruby on Rails:</strong> requests, Sidekiq and ActiveJob jobs, ActiveRecord changes and bulk SQL (<code>update_all</code>, <code>delete_all</code>&hellip;), all on their own. <strong>Next.js:</strong> routes, Server Actions and page views when the app has a <code>middleware.ts</code> (or <code>proxy.ts</code>); database changes through Postgres triggers (one command) plus a one-line wrapper for Prisma or postgres.js; background jobs with BullMQ and Upstash Workflow / QStash on their own; Inngest, Trigger.dev and Supabase Queues with a short addition.</p>
   </details>
 
   <details>
