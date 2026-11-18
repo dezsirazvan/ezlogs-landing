@@ -72,7 +72,7 @@
       <li><strong>Server Actions</strong> &mdash; the action name, arguments, success or failure.</li>
       <li><strong>Page views</strong> &mdash; page loads, via your <code>middleware.ts</code> / <code>proxy.ts</code>.</li>
       <li><strong>Postgres changes</strong> after one command, <code>npx ezlogs-nextjs install-triggers</code> &mdash; table, operation, before/after column values with sensitive columns removed. Works with supabase-js, Drizzle and raw <code>pg</code> as is; Prisma and postgres.js need a one-line wrapper.</li>
-      <li><strong>Background jobs:</strong> BullMQ and Upstash Workflow / QStash on their own; Inngest, Trigger.dev and Supabase Queues with a short addition.</li>
+      <li><strong>Background jobs:</strong> BullMQ and Upstash Workflow / QStash on their own; Inngest v4 too; Inngest v3, Trigger.dev and Supabase Queues with a short addition.</li>
     </ul>
 
     <h2>Install: paste the prompt into your coding AI, or do it by hand</h2>
@@ -83,7 +83,7 @@
     <h3>2. By hand</h3>
     <ol>
       <li><strong>Install the package.</strong>
-        <pre><code>npm install ezlogs-nextjs@^0.4.6</code></pre>
+        <pre><code>npm install ezlogs-nextjs@^0.4.7</code></pre>
       </li>
       <li><strong>Start the agent</strong> in <code>instrumentation.ts</code> at your project root (or in <code>src/</code>).
         <pre><code>import { ezlogs } from "ezlogs-nextjs";
@@ -110,7 +110,7 @@ export default withEzlogsConfig(nextConfig);</code></pre>
 npx ezlogs-nextjs install-triggers</code></pre>
         That is all for supabase-js, Drizzle on node-postgres and raw <code>pg</code>. Prisma and postgres.js also need a one-line wrapper (<a href="https://github.com/dezsirazvan/ez_logs_agent_nextjs#5-capture-database-changes" target="_blank" rel="noopener">see the README</a>).
       </li>
-      <li><strong>Background jobs</strong>, if you have them: BullMQ and Upstash Workflow / QStash need nothing more (the config wrapper instruments them where your code imports them); Inngest, Trigger.dev and Supabase Queues need a short addition. <a href="https://github.com/dezsirazvan/ez_logs_agent_nextjs/blob/master/docs/jobs.md" target="_blank" rel="noopener">Snippets</a>.</li>
+      <li><strong>Background jobs</strong>, if you have them: BullMQ and Upstash Workflow / QStash need nothing more (the config wrapper instruments them where your code imports them); Inngest v4 too; Inngest v3, Trigger.dev and Supabase Queues need a short addition. <a href="https://github.com/dezsirazvan/ez_logs_agent_nextjs/blob/master/docs/jobs.md" target="_blank" rel="noopener">Snippets</a>.</li>
     </ol>
     <p>Works with Turbopack and Webpack, App Router and Pages Router. Every option is in the <a href="https://github.com/dezsirazvan/ez_logs_agent_nextjs#readme" target="_blank" rel="noopener">README</a>.</p>
 

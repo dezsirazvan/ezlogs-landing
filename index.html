@@ -131,7 +131,7 @@
         "name": "Which frameworks work today?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Ruby on Rails: requests, Sidekiq and ActiveJob jobs, ActiveRecord changes and bulk SQL (update_all, delete_all…), all on their own. Next.js: routes, Server Actions and page views when the app has a middleware.ts (or proxy.ts); database changes through Postgres triggers (one command) plus a one-line wrapper for Prisma or postgres.js; background jobs with BullMQ and Upstash Workflow / QStash on their own; Inngest, Trigger.dev and Supabase Queues with a short addition."
+          "text": "Ruby on Rails: requests, Sidekiq and ActiveJob jobs, ActiveRecord changes and bulk SQL (update_all, delete_all…), all on their own. Next.js: routes, Server Actions and page views when the app has a middleware.ts (or proxy.ts); database changes through Postgres triggers (one command) plus a one-line wrapper for Prisma or postgres.js; background jobs with BullMQ and Upstash Workflow / QStash on their own; Inngest v4 too; Inngest v3, Trigger.dev and Supabase Queues with a short addition."
         }
       },
       {
@@ -1572,7 +1572,7 @@
     <p class="ez-ai__or"><span class="ez-ai__pick">Option 2</span> Or do it by hand:</p>
     <div class="ez-codeblock">
       <div class="ez-codeblock__head"><span>1 &middot; terminal</span><span>1 line</span></div>
-<pre><span class="o">$</span> <span class="k">npm</span> <span class="p">install</span> <span class="v">ezlogs-nextjs@^0.4.6</span></pre>
+<pre><span class="o">$</span> <span class="k">npm</span> <span class="p">install</span> <span class="v">ezlogs-nextjs@^0.4.7</span></pre>
     </div>
     <div class="ez-codeblock">
       <div class="ez-codeblock__head"><span>2 &middot; instrumentation.ts</span><span>9 lines</span></div>
@@ -1602,7 +1602,7 @@
 <span class="o">$</span> <span class="k">npx</span> <span class="p">ezlogs-nextjs</span> <span class="v">install-triggers</span></pre>
     </div>
     <p class="ez-tabs__caption">
-      Steps 1&ndash;4 capture <strong>routes and Server Actions</strong>, and <strong>page views</strong> when the app has a <code>middleware.ts</code> (or <code>proxy.ts</code>). Step 5 adds <strong>database changes</strong>: each column before and after, and who changed it (set <code>DATABASE_URL</code> first; Prisma and postgres.js also need a one-line wrapper). <strong>Background jobs:</strong> BullMQ and Upstash Workflow / QStash on their own; Inngest, Trigger.dev and Supabase Queues with a short addition. App Router and Pages Router, Turbopack and Webpack.
+      Steps 1&ndash;4 capture <strong>routes and Server Actions</strong>, and <strong>page views</strong> when the app has a <code>middleware.ts</code> (or <code>proxy.ts</code>). Step 5 adds <strong>database changes</strong>: each column before and after, and who changed it (set <code>DATABASE_URL</code> first; Prisma and postgres.js also need a one-line wrapper). <strong>Background jobs:</strong> BullMQ and Upstash Workflow / QStash on their own; Inngest v4 too; Inngest v3, Trigger.dev and Supabase Queues with a short addition. App Router and Pages Router, Turbopack and Webpack.
     </p>
     <p class="ez-tabs__more">
       <a href="/nextjs/">Read the full Next.js setup guide →</a>
@@ -1752,7 +1752,7 @@
 
   <details>
     <summary>Which frameworks work today? <span class="ez-faq__plus" aria-hidden="true"></span></summary>
-    <p class="ez-faq__answer"><strong>Ruby on Rails:</strong> requests, Sidekiq and ActiveJob jobs, ActiveRecord changes and bulk SQL (<code>update_all</code>, <code>delete_all</code>&hellip;), all on their own. <strong>Next.js:</strong> routes, Server Actions and page views when the app has a <code>middleware.ts</code> (or <code>proxy.ts</code>); database changes through Postgres triggers (one command) plus a one-line wrapper for Prisma or postgres.js; background jobs with BullMQ and Upstash Workflow / QStash on their own; Inngest, Trigger.dev and Supabase Queues with a short addition.</p>
+    <p class="ez-faq__answer"><strong>Ruby on Rails:</strong> requests, Sidekiq and ActiveJob jobs, ActiveRecord changes and bulk SQL (<code>update_all</code>, <code>delete_all</code>&hellip;), all on their own. <strong>Next.js:</strong> routes, Server Actions and page views when the app has a <code>middleware.ts</code> (or <code>proxy.ts</code>); database changes through Postgres triggers (one command) plus a one-line wrapper for Prisma or postgres.js; background jobs with BullMQ and Upstash Workflow / QStash on their own; Inngest v4 too; Inngest v3, Trigger.dev and Supabase Queues with a short addition.</p>
   </details>
 
   <details>
