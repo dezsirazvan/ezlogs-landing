@@ -67,7 +67,7 @@
 
     <h2>Access controls</h2>
     <ul>
-      <li><strong>Authentication:</strong> bcrypt-hashed passwords, brute-force protection (Rack::Attack), session-based auth with secure cookies.</li>
+      <li><strong>Authentication:</strong> bcrypt-hashed passwords, brute-force protection (Rack::Attack), session-based auth with secure cookies, and optional two-factor authentication for every user (authenticator app with one-time recovery codes; the secret is encrypted at rest and each code works once).</li>
       <li><strong>Multi-tenant isolation:</strong> all customer data is scoped by <code>company_id</code> at the database query layer; cross-tenant access is impossible by construction.</li>
       <li><strong>User scoping:</strong> some data is per-user, not per-tenant. Chat threads and messages, for example, are not visible to other users in the same company &mdash; even to admins.</li>
       <li><strong>Operational access:</strong> only the founder has production database access. All access is via SSH key (no passwords), from named machines.</li>
