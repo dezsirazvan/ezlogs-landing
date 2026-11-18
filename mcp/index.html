@@ -80,7 +80,7 @@
       {
         "@type": "Question",
         "name": "Who can see my data?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Only people in your EZLogs company, the AI clients they sign in, and the subprocessors on our Subprocessors page (hosting in Germany, and the AI providers used for optional explanations). Each connection is tied to one user, can be revoked from Settings, Connectors, MCP, and uses short-lived access tokens. Data is stored in Germany (EU)." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Only people in your EZLogs company, the AI clients they sign in, and the subprocessors on our Subprocessors page (hosting in Finland, and the AI providers used for optional explanations). Each connection is tied to one user, can be revoked from Settings, Connectors, MCP, and uses short-lived access tokens. Data is stored in Finland (EU), with encrypted backups in the Netherlands (EU)." }
       },
       {
         "@type": "Question",
@@ -201,7 +201,7 @@ codex mcp login ezlogs</code></pre>
     <ul>
       <li><strong>Read-only by design.</strong> EZLogs holds no write credentials into your app. The MCP server can only answer questions. See <a href="/security/">Security</a>.</li>
       <li><strong>OAuth sign-in.</strong> Each connection belongs to one user and one EZLogs company. Access tokens are short-lived, and you can revoke a connected app any time from <strong>Settings &rarr; Connectors &rarr; MCP</strong>.</li>
-      <li><strong>Hosted in the EU.</strong> Data is stored on Hetzner servers in Germany.</li>
+      <li><strong>Hosted in the EU.</strong> Data is stored on Hetzner servers in Finland, with encrypted backups in the Netherlands (EU).</li>
       <li><strong>Masked at the source.</strong> The agent masks fields named like passwords, tokens, secrets, API keys and card numbers inside your app before anything is sent. Raw request and response bodies are never sent.</li>
       <li><strong>One redaction layer.</strong> Everything that leaves EZLogs (MCP, share links, embeds, exports) passes through the same redaction step. Over MCP you see your own data in full, because it is your AI reading your log.</li>
     </ul>
@@ -214,7 +214,7 @@ codex mcp login ezlogs</code></pre>
     <h3>Which AI clients work?</h3>
     <p>Any client that supports remote MCP servers over HTTP with OAuth and dynamic client registration. We have setup steps above for Claude (claude.ai and Claude Desktop), Claude Code, ChatGPT, Cursor, Codex and Lovable.</p>
     <h3>Who can see my data?</h3>
-    <p>Only people in your EZLogs company, the AI clients they sign in, and the subprocessors on our Subprocessors page (hosting in Germany, and the AI providers used for optional explanations). Each connection is tied to one user, can be revoked from Settings &rarr; Connectors &rarr; MCP, and uses short-lived access tokens. Data is stored in Germany (EU).</p>
+    <p>Only people in your EZLogs company, the AI clients they sign in, and the subprocessors on our Subprocessors page (hosting in Finland, and the AI providers used for optional explanations). Each connection is tied to one user, can be revoked from Settings &rarr; Connectors &rarr; MCP, and uses short-lived access tokens. Data is stored in Finland (EU), with encrypted backups in the Netherlands (EU).</p>
     <h3>Does EZLogs use AI to make up the answers?</h3>
     <p>No. The tools return actions built from the real events your app sent: requests, background jobs and database changes. Your AI assistant writes the answer from that data, and each action has an id you can open in EZLogs to check it.</p>
 

@@ -11,7 +11,7 @@ Key facts:
 - MCP server: `https://app.ezlogs.io/mcp` (streamable HTTP, OAuth sign-in). Six read-only tools: find_actions, get_action, actor_timeline, entity_timeline, top_lists, compare_actions. Works with Claude, Claude Code, ChatGPT, Cursor, Codex and Lovable.
 - Requires an EZLogs account with the agent installed in the app.
 - Pricing: free during the beta, no card required. 90 days of history during the beta.
-- Hosting: Hetzner, Germany (EU). Sensitive fields (passwords, tokens, secrets, API keys, card numbers) are masked inside the app before sending.
+- Hosting: Hetzner, Finland (EU). Encrypted backups: Backblaze, Netherlands (EU), kept 14 days. Sensitive fields (passwords, tokens, secrets, API keys, card numbers) are masked inside the app before sending.
 - Not a monitoring, metrics or APM tool (not a Datadog, Sentry or New Relic replacement). Not self-hostable yet.
 - Agents are open source: https://github.com/dezsirazvan/ez_logs_agent (Rails) and https://github.com/dezsirazvan/ez_logs_agent_nextjs (Next.js).
 - Contact: hello@ezlogs.io

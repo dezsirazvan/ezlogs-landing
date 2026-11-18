@@ -36,7 +36,7 @@
   <main class="doc">
     <p class="doc__eyebrow">Legal</p>
     <h1>Privacy Policy</h1>
-    <p class="doc__meta">Effective date: 17 November 2026 &middot; Version 1.3</p>
+    <p class="doc__meta">Effective date: 18 November 2026 &middot; Version 1.4</p>
 
     <p class="doc__lead">EZLogs is a product that captures activity from your applications and turns it into plain-English logs. This policy explains what data we collect, why we collect it, where we store it, and what rights you have over it.</p>
 
@@ -87,7 +87,7 @@
     </table>
 
     <h2>4. Where your data lives</h2>
-    <p>All EZLogs production data is stored in the European Union, specifically on servers operated by <strong>Hetzner Online GmbH</strong> in Germany. Backups are stored in the same jurisdiction. Some of the subprocessors listed in Section 5 are based in the <strong>United States</strong>; transfers to those subprocessors are governed by the European Commission&rsquo;s <strong>Standard Contractual Clauses</strong> (Decision (EU) 2021/914), with supplementary technical measures (encryption in transit, minimized payloads, contractual no-training terms for AI providers) as described in our <a href="/dpa/">DPA</a>.</p>
+    <p>All EZLogs production data is stored in the European Union, specifically on servers operated by <strong>Hetzner Online GmbH</strong> in a data center in Helsinki, Finland. Encrypted backups are stored in the EU as well, with Backblaze in the Netherlands. Some of the subprocessors listed in Section 5 are based in the <strong>United States</strong>; transfers to those subprocessors are governed by the European Commission&rsquo;s <strong>Standard Contractual Clauses</strong> (Decision (EU) 2021/914), with supplementary technical measures (encryption in transit, minimized payloads, contractual no-training terms for AI providers) as described in our <a href="/dpa/">DPA</a>.</p>
 
     <h2>5. Third parties (subprocessors)</h2>
     <p>To run EZLogs we rely on a small number of trusted service providers. Each one only receives the data it needs to perform its function. The current list is published at <a href="/subprocessors/">ezlogs.io/subprocessors</a> and we will notify you of material changes in advance.</p>
@@ -132,7 +132,7 @@
     <p>EZLogs does <strong>not</strong> make decisions that produce legal effects or similarly significant effects on you using automated processing alone (GDPR Article 22). Our AI features (action explanations, chat answers) are informational narratives generated for human readers; they do not determine outcomes for you or anyone else. Account-level decisions such as suspension or termination are made by humans.</p>
 
     <h2>10. Security</h2>
-    <p>We protect your data with TLS 1.2+ in transit, filesystem encryption at rest on our production hosts, bcrypt-hashed credentials, SSH-key-only access to production, multi-tenant isolation enforced at every database query, and rate-limiting against abuse. The architectural foundation is that EZLogs is <strong>read-only by design</strong> &mdash; we never write back into your application. See our <a href="/security/">Security page</a> and our <a href="/dpa/">DPA Section 9</a> for full detail.</p>
+    <p>We protect your data with TLS 1.2+ in transit, encryption at rest for sensitive columns and for backups, bcrypt-hashed credentials, SSH-key-only access to production, multi-tenant isolation enforced at every database query, and rate-limiting against abuse. The architectural foundation is that EZLogs is <strong>read-only by design</strong> &mdash; we never write back into your application. See our <a href="/security/">Security page</a> and our <a href="/dpa/">DPA Section 9</a> for full detail.</p>
 
     <h2>11. Children</h2>
     <p>EZLogs is a B2B developer tool and is not directed at children under 16. We do not knowingly collect personal data from children. If you become aware that a child has used the service, contact us and we will delete the account.</p>

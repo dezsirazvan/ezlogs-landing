@@ -36,7 +36,7 @@
   <main class="doc">
     <p class="doc__eyebrow">Trust</p>
     <h1>Subprocessors</h1>
-    <p class="doc__meta">Last updated: 3 June 2026</p>
+    <p class="doc__meta">Last updated: 18 November 2026</p>
 
     <p class="doc__lead">A subprocessor is a third party that processes customer data on our behalf. We keep this list short on purpose. We notify account owners by email at least 30 days before adding a new subprocessor.</p>
 
@@ -48,9 +48,15 @@
       <tbody>
         <tr>
           <td><strong>Hetzner Online GmbH</strong><br><a href="https://www.hetzner.com/legal/privacy-policy/" target="_blank" rel="noopener">Privacy</a></td>
-          <td>Application hosting, database, backups</td>
+          <td>Application hosting, database</td>
           <td>All customer event data, account data, application logs</td>
-          <td>Germany (EU)</td>
+          <td>Finland (EU)</td>
+        </tr>
+        <tr>
+          <td><strong>Backblaze, Inc.</strong> (B2 Cloud Storage)<br><a href="https://www.backblaze.com/company/policy/privacy" target="_blank" rel="noopener">Privacy</a> &middot; <a href="https://www.backblaze.com/company/policy/dpa" target="_blank" rel="noopener">DPA</a></td>
+          <td>Encrypted nightly database backups (AES-256 at rest), kept 14 days</td>
+          <td>All customer event data and account data, as a database backup</td>
+          <td>Netherlands (EU, eu-central region)</td>
         </tr>
         <tr>
           <td><strong>Stripe Payments Europe, Ltd.</strong> (only if paid plans are introduced)<br><a href="https://stripe.com/privacy" target="_blank" rel="noopener">Privacy</a> &middot; <a href="https://stripe.com/legal/dpa" target="_blank" rel="noopener">DPA</a></td>
@@ -92,7 +98,7 @@
     </table>
 
     <div class="doc__callout">
-      <strong>Note:</strong> the only subprocessor that touches the bulk of your customer event data is Hetzner (hosting), in the EU. Anthropic and OpenAI receive only the small, already-redacted event payloads needed to generate the specific explanations you (or your users) requested.
+      <strong>Note:</strong> the only subprocessors that touch the bulk of your customer event data are Hetzner (hosting) and Backblaze (encrypted backups), both in the EU. Anthropic and OpenAI receive only the small, already-redacted event payloads needed to generate the specific explanations you (or your users) requested.
     </div>
 
     <h2>Changes</h2>

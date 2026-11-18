@@ -46,9 +46,9 @@
 
     <h2>Where data lives</h2>
     <ul>
-      <li><strong>Hosting:</strong> Hetzner Online GmbH, Germany. EU jurisdiction throughout.</li>
-      <li><strong>Database:</strong> PostgreSQL on the same dedicated server, encrypted at rest at the filesystem layer.</li>
-      <li><strong>Backups:</strong> daily, encrypted, retained for 14 days, stored in the same EU jurisdiction.</li>
+      <li><strong>Hosting:</strong> Hetzner Online GmbH, data center in Helsinki, Finland. EU jurisdiction throughout.</li>
+      <li><strong>Database:</strong> PostgreSQL on the same cloud server, reachable only from that server. Sensitive columns are encrypted in the application; backups are encrypted at rest (AES-256).</li>
+      <li><strong>Backups:</strong> nightly, encrypted (AES-256 at rest), retained for 14 days, stored in the EU with Backblaze (Netherlands). Restores are tested.</li>
       <li><strong>Transit:</strong> TLS 1.2+ on every connection. We do not accept plaintext HTTP for ingestion.</li>
     </ul>
 
