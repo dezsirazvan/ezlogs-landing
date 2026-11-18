@@ -154,11 +154,10 @@
 
     <h3>Claude (claude.ai and Claude Desktop)</h3>
     <ol>
-      <li>Open <strong>Customize &rarr; Connectors &rarr; Add custom connector</strong>.</li>
-      <li>Name it <code>EZLogs</code> and paste <code>https://app.ezlogs.io/mcp</code>.</li>
-      <li>Select <strong>Connect</strong> and sign in to EZLogs.</li>
+      <li>Open <strong>Customize &rarr; Connectors &rarr; Discover</strong> and search <strong>EZLogs</strong>. It is in Claude's connector directory.</li>
+      <li>Open it, click <strong>Connect</strong>, then <strong>Authorize</strong> on the EZLogs page. No URL to paste.</li>
     </ol>
-    <p>On Team and Enterprise plans an owner may need to add the connector for the organisation first.</p>
+    <p>On Team and Enterprise plans an owner may need to allow the connector for the organisation first. If it does not show up, add it by hand: <strong>Add custom connector</strong>, name <code>EZLogs</code>, URL <code>https://app.ezlogs.io/mcp</code>.</p>
 
     <h3>Claude Code</h3>
     <pre><code>claude mcp add --transport http ezlogs https://app.ezlogs.io/mcp</code></pre>
