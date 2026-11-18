@@ -72,6 +72,7 @@
       <li><strong>Background jobs</strong> via ActiveJob / Sidekiq instrumentation &mdash; class, queue, arguments, result, duration.</li>
       <li><strong>Database changes</strong> via ActiveRecord callbacks &mdash; table, primary key, operation, redacted before/after column values.</li>
       <li><strong>Bulk SQL</strong> that skips callbacks &mdash; <code>update_all</code>, <code>delete_all</code>, <code>insert_all</code>, <code>upsert_all</code>, and <code>dependent: :delete_all</code> cascades.</li>
+      <li><strong>Changes made by hand or on a schedule</strong> &mdash; each <code>rails console</code> line, rake task and <code>rails runner</code> script that changes data is one card, named after what ran it (&ldquo;Rails console (deploy)&rdquo;, &ldquo;rake orders:backfill&rdquo;).</li>
     </ul>
     <p>Events are correlated by request ID, current user, and resource ID. Each customer action becomes one card, not a wall of logs.</p>
 
