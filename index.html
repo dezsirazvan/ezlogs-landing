@@ -11,7 +11,7 @@
   under embeds/ (component internals).
 
   Page order: hero (+ demo video) → before/after → the product (screens) →
-  ask it / your AI / pinned questions → install → FAQ → closing CTA.
+  ask it / your AI / alerts → install → FAQ → closing CTA.
   The FAQPage JSON-LD below mirrors embeds/faq-accordion.html; change both
   together. Every screen and example is the Brackwater Ferries demo account
   (the same story as the video).
@@ -139,7 +139,7 @@
         "name": "Does AI write the logs?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "No. Cards, titles and timelines are built from your events by fixed rules, so the same events always give the same card. AI is optional: it can add a plain-English explanation to an action, answer chat questions, and match a pinned question to a check you confirm. It only works from events your app actually sent, and you never need it to read a card."
+          "text": "No. Cards, titles and timelines are built from your events by fixed rules, so the same events always give the same card. AI is optional: it can add a plain-English explanation to an action, answer chat questions, and match an alert written in plain English to a check you confirm. It only works from events your app actually sent, and you never need it to read a card."
         }
       },
       {
@@ -1042,7 +1042,7 @@
     </div>
   </section>
 
-  <!-- Ask it, ask your own AI, pin a question -->
+  <!-- Ask it, ask your own AI, set an alert -->
   <section class="section section--alt" id="ask">
     <div class="section__inner">
       <div class="section__head">
@@ -1072,8 +1072,8 @@
       </div>
 
       <div class="sub-head">
-        <h3 class="sub-head__title">Pin a question. Get told when the answer changes.</h3>
-        <p class="section__sub">Pin a question in plain English, confirm what it watches, and get an in-app or email alert when the answer changes.</p>
+        <h3 class="sub-head__title">Ask once. Get told when the answer changes.</h3>
+        <p class="section__sub">Write an alert in plain English, confirm what it watches, and get it in the app, by email or in Slack.</p>
       </div>
       <div data-embed="ask-your-product.html">
 <!-- INLINED FROM embeds/ask-your-product.html -->
@@ -1262,13 +1262,13 @@
       <div class="ez-ask__label"><span class="num">1</span> Support &middot; a customer goes quiet</div>
 
       <div class="ez-ask__card ez-ask__q-card">
-        <div class="ez-ask__eyebrow">You pinned</div>
+        <div class="ez-ask__eyebrow">Your alert</div>
         <div class="ez-ask__q">&ldquo;Tell me when a customer goes quiet for 3 days.&rdquo;<span class="ez-ask__cursor"></span></div>
         <div class="ez-ask__chips">
-          <span class="ez-ask__chip ez-ask__chip--on">Email</span>
-          <span class="ez-ask__chip">checked daily</span>
+          <span class="ez-ask__chip ez-ask__chip--on">Email + in-app</span>
+          <span class="ez-ask__chip">every day</span>
         </div>
-        <div class="ez-ask__summary"><span class="lbl">You confirmed:</span> Watching for accounts quiet for 3+ days.</div>
+        <div class="ez-ask__summary"><span class="lbl">You confirmed:</span> Tells you when an account goes quiet for 3+ days.</div>
       </div>
 
       <div class="ez-ask__connector">
@@ -1297,13 +1297,13 @@
       <div class="ez-ask__label"><span class="num">2</span> Operations &middot; something keeps failing</div>
 
       <div class="ez-ask__card ez-ask__q-card">
-        <div class="ez-ask__eyebrow">You pinned</div>
+        <div class="ez-ask__eyebrow">Your alert</div>
         <div class="ez-ask__q">&ldquo;Tell me when a refund fails.&rdquo;<span class="ez-ask__cursor"></span></div>
         <div class="ez-ask__chips">
-          <span class="ez-ask__chip ez-ask__chip--on">In-app</span>
-          <span class="ez-ask__chip">checked daily</span>
+          <span class="ez-ask__chip ez-ask__chip--on">Slack #ops + in-app</span>
+          <span class="ez-ask__chip">as it happens</span>
         </div>
-        <div class="ez-ask__summary"><span class="lbl">You confirmed:</span> Watching for failed refunds over the last day.</div>
+        <div class="ez-ask__summary"><span class="lbl">You confirmed:</span> Tells you about failed refunds in the last day.</div>
       </div>
 
       <div class="ez-ask__connector">
@@ -1318,7 +1318,7 @@
         </span>
         <div class="ez-ask__abody">
           <div class="ez-ask__topline"><span class="ez-ask__dot"></span><span class="ez-ask__title">3 refunds failed in the last day</span></div>
-          <p class="ez-ask__body">Watching for failed refunds over the last day.</p>
+          <p class="ez-ask__body">3 new since the last check. Latest: Card expired (card ending 0069), by Rebooking assistant.</p>
           <span class="ez-ask__cta">See all 3 failures
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
           </span>
@@ -1329,7 +1329,7 @@
   </div>
 </div>
 </div>
-      <p class="section__caption">Checked every day against real events: an account going quiet, failures of one kind of action, or a week-over-week change in how often something happens. Each alert links to the actions behind it.</p>
+      <p class="section__caption">Checked against real events: something happening or failing within 5 minutes; an account going quiet or a week-over-week change every day or week. Each alert links to the actions behind it.</p>
     </div>
   </section>
 
