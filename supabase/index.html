@@ -81,6 +81,7 @@
     </ol>
     <p><strong>Keeping it in your migrations?</strong> Add <a href="https://app.ezlogs.io/install/supabase.sql" target="_blank" rel="noopener">the install SQL</a> (key-free) as a migration, then run the connect line once in the SQL editor, never in a migration, so the key stays out of git:</p>
     <pre><code>select ezlogs.connect('ezldb_your_database_key');</code></pre>
+    <p>Your database key (<code>ezldb_&hellip;</code>) is on <strong>Settings &rarr; API keys &rarr; Lovable &middot; Bolt &middot; v0</strong>, after <strong>Create install code</strong>. It can only send to EZLogs, never read anything.</p>
 
     <h2>How it works</h2>
     <ul>
