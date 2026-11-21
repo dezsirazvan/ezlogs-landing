@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>EZLogs MCP Server &mdash; Ask your AI what happened in your app</title>
-  <meta name="description" content="Connect Claude, ChatGPT, Cursor, Codex or Lovable to EZLogs over MCP and ask what happened in your Rails or Next.js app. One URL, OAuth sign-in, six read-only tools.">
+  <meta name="description" content="Connect Claude, ChatGPT, Cursor, Codex, Lovable, Bolt or v0 to EZLogs over MCP and ask what happened in your Rails, Next.js or Supabase app. One URL, OAuth sign-in, six read-only tools.">
   <link rel="canonical" href="https://ezlogs.io/mcp/">
   <meta name="robots" content="index, follow">
   <meta name="theme-color" content="#0A0A0A">
@@ -75,7 +75,7 @@
       {
         "@type": "Question",
         "name": "Which AI clients work?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Any client that supports remote MCP servers over HTTP with OAuth and dynamic client registration. We have setup steps for Claude (claude.ai and Claude Desktop), Claude Code, ChatGPT, Cursor, Codex and Lovable." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Any client that supports remote MCP servers over HTTP with OAuth and dynamic client registration. We have setup steps for Claude (claude.ai and Claude Desktop), Claude Code, ChatGPT, Cursor, Codex, Lovable, Bolt and v0." }
       },
       {
         "@type": "Question",
@@ -180,7 +180,13 @@
 codex mcp login ezlogs</code></pre>
 
     <h3>Lovable</h3>
-    <p>Open <strong>Connectors &rarr; Add custom &rarr; MCP server</strong>, paste the URL, keep OAuth, then add and authorize. If MCP server is greyed out, a workspace admin has turned custom servers off.</p>
+    <p>Open <strong>Connectors &rarr; Add custom &rarr; MCP server</strong>, paste the URL, keep OAuth, then <strong>Add &amp; authorize</strong>. Available on every plan. If MCP server is greyed out, a workspace admin has turned custom servers off. Lovable&rsquo;s AI can then ask EZLogs what really happened in your app while it fixes a bug.</p>
+
+    <h3>Bolt</h3>
+    <p>Click the <strong>+</strong> in the chat box, then <strong>Connectors &rarr; Manage connectors &rarr; Custom MCP server</strong>. Paste the URL, choose transport <strong>HTTP</strong> and authentication <strong>MCP OAuth</strong>, then <strong>Connect</strong>. Turn it on for your project from the same <strong>+</strong> menu.</p>
+
+    <h3>v0</h3>
+    <p>Click the <strong>+</strong> in the prompt box, then <strong>MCPs</strong>, and add a custom server with the URL and <strong>OAuth</strong>.</p>
 
     <h2>Tools (all read-only)</h2>
     <p>Every tool is marked <code>readOnlyHint: true</code>. None of them can create, change or delete anything, in EZLogs or in your app.</p>
@@ -211,7 +217,7 @@ codex mcp login ezlogs</code></pre>
     <h3>Do I need an EZLogs account?</h3>
     <p>Yes. The MCP server reads the activity log EZLogs collects from your app, so you need an EZLogs account (free during the beta) with the agent installed in a <a href="/rails/">Rails</a> or <a href="/nextjs/">Next.js</a> app. Without it there is nothing to query.</p>
     <h3>Which AI clients work?</h3>
-    <p>Any client that supports remote MCP servers over HTTP with OAuth and dynamic client registration. We have setup steps above for Claude (claude.ai and Claude Desktop), Claude Code, ChatGPT, Cursor, Codex and Lovable.</p>
+    <p>Any client that supports remote MCP servers over HTTP with OAuth and dynamic client registration. We have setup steps above for Claude (claude.ai and Claude Desktop), Claude Code, ChatGPT, Cursor, Codex, Lovable, Bolt and v0.</p>
     <h3>Who can see my data?</h3>
     <p>Only people in your EZLogs company, the AI clients they sign in, and the subprocessors on our Subprocessors page (hosting in Finland, and the AI providers used for optional explanations). Each connection is tied to one user, can be revoked from Settings &rarr; Connectors &rarr; MCP, and uses short-lived access tokens. Data is stored in Finland (EU), with encrypted backups in the Netherlands (EU).</p>
     <h3>Does EZLogs use AI to make up the answers?</h3>
@@ -243,6 +249,10 @@ codex mcp login ezlogs</code></pre>
       <a href="/rails/">Rails</a>
       <span style="color:var(--faint);">&middot;</span>
       <a href="/nextjs/">Next.js</a>
+      <span style="color:var(--faint);">&middot;</span>
+      <a href="/lovable/">Lovable, Bolt, v0</a>
+      <span style="color:var(--faint);">&middot;</span>
+      <a href="/supabase/">Supabase</a>
       <span style="color:var(--faint);">&middot;</span>
       <a href="/mcp/">MCP server</a>
       <span style="color:var(--faint);">&middot;</span>

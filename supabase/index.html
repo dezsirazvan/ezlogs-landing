@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Supabase Activity Log &amp; Audit Log &mdash; EZLogs</title>
+  <meta name="description" content="A plain-English activity log and audit log for Supabase: row changes in your public tables with before and after values, sign-ups, sign-ins, Storage files, and who did each one, from the JWT Supabase already verified. One SQL migration, open source, read-only.">
+  <meta name="keywords" content="supabase activity log, supabase audit log, supabase audit trail, postgres audit log supabase, supabase auth logs, supabase storage logs, who changed this row supabase">
+  <link rel="canonical" href="https://ezlogs.io/supabase/">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#0A0A0A">
+  <meta name="color-scheme" content="dark">
+  <link rel="icon" type="image/x-icon" href="/assets/favicon/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+  <link rel="manifest" href="/assets/favicon/site.webmanifest">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="EZLogs">
+  <meta property="og:title" content="A Supabase activity log anyone on your team can read.">
+  <meta property="og:description" content="Row changes, sign-ups, sign-ins and files, with who did each one, as plain-English actions. One SQL migration, open source, read-only.">
+  <meta property="og:url" content="https://ezlogs.io/supabase/">
+  <meta property="og:image" content="https://ezlogs.io/assets/og-image.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="/assets/css/subpage.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "EZLogs for Supabase",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Web",
+    "description": "A plain-English activity log and audit log for Supabase: row changes, Auth events and Storage files with who did each one, captured by database triggers and an outbox.",
+    "url": "https://ezlogs.io/supabase/",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "EUR",
+      "description": "Free during beta. No card required."
+    }
+  }
+  </script>
+</head>
+<body>
+
+  <nav class="nav">
+    <a class="nav__brand" href="/">
+      <img src="/assets/EZLogo-mark.svg" alt="" width="28" height="28">
+      EZLogs
+    </a>
+    <div class="nav__links">
+      <a href="/#install">Install</a>
+      <a href="/#faq">FAQ</a>
+      <a href="https://github.com/dezsirazvan/ez_logs_supabase" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://app.ezlogs.io/users/sign_in" target="_blank" rel="noopener">Sign in</a>
+      <a href="https://app.ezlogs.io/users/sign_up" class="nav__cta" target="_blank" rel="noopener">Start free</a>
+    </div>
+  </nav>
+
+  <main class="doc">
+    <p class="doc__eyebrow">EZLogs for Supabase</p>
+    <h1>A Supabase activity log anyone on your team can read.</h1>
+    <p class="doc__lead">EZLogs records every row change in your <code>public</code> tables, every sign-up, sign-in and Storage file, with who did it, and turns them into one plain-English action each: &ldquo;Dana marked task &lsquo;Launch plan&rsquo; as done&rdquo;. It runs inside your database: triggers, an outbox, and a scheduled flush. One SQL migration, open source, read-only.</p>
+
+    <h2>What gets recorded</h2>
+    <ul>
+      <li><strong>Row changes</strong> in the tables in <code>public</code>, new tables included: insert, update, delete, each column before and after. Tables named like secrets (<code>api_keys</code>, <code>payment_tokens</code>) and framework bookkeeping tables are left out, and very large values show their size.</li>
+      <li><strong>Auth:</strong> sign-ups, email confirmations, sign-ins and deleted accounts, from <code>auth.users</code> as a fixed list of fields (never password hashes or tokens).</li>
+      <li><strong>Storage:</strong> files uploaded, replaced and deleted, with bucket, name, size and owner (never the file).</li>
+      <li><strong>Who did it</strong>, from the JWT claims Supabase already verified for the request: the signed-in person, an anonymous visitor, your server&rsquo;s service key, or an AI connected through Supabase&rsquo;s OAuth.</li>
+      <li><strong>Optional, in the browser:</strong> calls that failed for people (with the reason) and sign-outs, through the open-source <code>@ezlogs/browser</code> package. It never sends a login token, an email or a message.</li>
+    </ul>
+
+    <h2>Install</h2>
+    <ol>
+      <li><strong><a href="https://app.ezlogs.io/users/sign_up" target="_blank" rel="noopener">Sign up</a></strong>, open <strong>Settings &rarr; API keys &rarr; Lovable &middot; Bolt &middot; v0</strong>, and click <strong>Create install code</strong>.</li>
+      <li><strong>Run it in the SQL editor</strong> of your Supabase project. It installs the <code>ezlogs</code> schema and connects with your database key. Running it again later upgrades in place.</li>
+    </ol>
+    <p><strong>Keeping it in your migrations?</strong> Add <a href="https://app.ezlogs.io/install/supabase.sql" target="_blank" rel="noopener">the install SQL</a> (key-free) as a migration, then run the connect line once in the SQL editor, never in a migration, so the key stays out of git:</p>
+    <pre><code>select ezlogs.connect('ezldb_your_database_key');</code></pre>
+
+    <h2>How it works</h2>
+    <ul>
+      <li><strong>Inside your write, cheaply:</strong> an <code>AFTER</code> trigger adds one row to <code>ezlogs.outbox</code>. No network call inside your write, and a capture error never fails it. If EZLogs can&rsquo;t be reached, rows wait up to 7 days.</li>
+      <li><strong>Shipped later:</strong> <code>pg_cron</code> sends waiting rows with <code>pg_net</code> in small batches, and does nothing while your project is idle.</li>
+      <li><strong>Private:</strong> the <code>ezlogs</code> schema is not reachable through Supabase&rsquo;s API, and nothing in it is granted to <code>anon</code> or <code>authenticated</code>.</li>
+      <li><strong>Sensitive columns stay home:</strong> columns named like passwords, tokens, secrets, API keys or card numbers are removed inside the database, in nested JSON too. Leave out a whole table with <code>select ezlogs.untrack('table');</code>.</li>
+      <li><strong>Read-only:</strong> EZLogs never connects to your database and holds no credentials for it. Your database sends; EZLogs only receives.</li>
+      <li><strong>Remove it</strong> with <code>select ezlogs.uninstall();</code> (and, if you added the browser package, remove <code>@ezlogs/browser</code> from the app).</li>
+    </ul>
+    <p>Read every line first: <a href="https://github.com/dezsirazvan/ez_logs_supabase" target="_blank" rel="noopener">github.com/dezsirazvan/ez_logs_supabase</a>.</p>
+
+    <h2>Built with Lovable, Bolt or v0?</h2>
+    <p>The same install works for Lovable Cloud, Bolt Database (claimed into your Supabase account first: Bolt &rarr; Database &rarr; Claim) and v0 on Supabase, and a prompt for your AI builder adds the browser part. <a href="/lovable/">The guide for AI-built apps &rarr;</a></p>
+
+    <h2>How is this different from a Postgres audit table?</h2>
+    <p>An audit table stores raw rows for engineers to query. EZLogs groups each person&rsquo;s changes into actions, names the person and the record, and writes the sentence your support, product and operations people can read, with alerts and an MCP connector for your AI.</p>
+
+    <div class="doc__callout" style="text-align:center;">
+      <a href="https://app.ezlogs.io/users/sign_up" target="_blank" rel="noopener" style="display:inline-block; padding:12px 22px; background:var(--green); color:#000; font-weight:600; border-radius:10px; text-decoration:none;">Start free &rarr;</a>
+      <p style="margin:14px 0 0; font-size:13px; color:var(--muted);">No card required &middot; Read-only by design</p>
+    </div>
+
+    <a class="doc__back" href="/">&larr; Back to home</a>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__brand">
+      <img src="/assets/EZLogo-mark.svg" alt="" width="24" height="24">
+      EZLogs
+    </div>
+    <p class="footer__tagline">Plain-English activity logs for every action in your app.</p>
+    <div class="footer__links">
+      <a href="https://github.com/dezsirazvan/ez_logs_agent" target="_blank" rel="noopener">GitHub</a>
+      <span style="color:var(--faint);">&middot;</span>
+      <a href="https://app.ezlogs.io/users/sign_in" target="_blank" rel="noopener">Sign in</a>
+      <span style="color:var(--faint);">&middot;</span>
+      <a href="mailto:hello@ezlogs.io">Contact</a>
+    </div>
+    <div class="footer__product">
+      <span class="footer__product__label">Product</span>
+      <a href="/rails/">Rails</a>
+      <span style="color:var(--faint);">&middot;</span>
+      <a href="/nextjs/">Next.js</a>
+      <span style="color:var(--faint);">&middot;</span>
+      <a href="/lovable/">Lovable, Bolt, v0</a>
+      <span style="color:var(--faint);">&middot;</span>
+      <a href="/supabase/">Supabase</a>
+      <span style="color:var(--faint);">&middot;</span>
+      <a href="/ai-agent-activity-log/">AI agent activity log</a>
+    </div>
+    <div class="footer__legal">
+      <a href="/privacy/">Privacy</a>
+      <a href="/terms/">Terms</a>
+      <a href="/security/">Security</a>
+      <a href="/subprocessors/">Subprocessors</a>
+      <a href="/dpa/">DPA</a>
+    </div>
+    <p class="footer__copy">&copy; 2026 EZLogs. Activity logs everyone can read.</p>
+  </footer>
+
+  <div id="cookie-banner" class="cookie-banner" data-ga-id="G-YJ8DP8VLSS">
+    <div class="cookie-banner__text">
+      We use one strictly-necessary cookie to keep you signed in. With your consent we also load <strong>Google Analytics</strong> to measure aggregate site usage. See our <a href="/privacy/#cookies">cookie policy</a>.
+    </div>
+    <div class="cookie-banner__actions">
+      <button type="button" data-action="decline">Decline</button>
+      <button type="button" class="is-primary" data-action="accept">Accept</button>
+    </div>
+  </div>
+  <script src="/assets/js/cookie-banner.js" defer></script>
+</body>
+</html>

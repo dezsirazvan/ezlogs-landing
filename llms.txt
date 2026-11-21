@@ -1,20 +1,20 @@
 # EZLogs
 
-> EZLogs is a plain-English activity log for Rails and Next.js apps. It captures requests, background jobs and database changes, links them into one card per action ("Refund failed: card expired"), and shows who did it (a person, an AI agent or the system) and which records it touched. Anyone on a team can read it, and AI assistants can query it read-only over MCP.
+> EZLogs is a plain-English activity log for Rails, Next.js and Supabase apps (including apps built with Lovable, Bolt and v0). It captures requests, background jobs and database changes, links them into one card per action ("Refund failed: card expired"), and shows who did it (a person, an AI agent or the system) and which records it touched. Anyone on a team can read it, and AI assistants can query it read-only over MCP.
 
 Key facts:
 
-- Frameworks: Ruby on Rails (gem `ez_logs_agent`) and Next.js (npm package `ezlogs-nextjs`). No other frameworks yet.
+- Stacks: Ruby on Rails (gem `ez_logs_agent`), Next.js (npm package `ezlogs-nextjs`), and Supabase apps, including Lovable, Bolt and v0 (a SQL install `ez_logs_supabase` that runs in the database, plus the optional browser package `@ezlogs/browser` for failed calls and sign-outs).
 - Captures: HTTP requests, background jobs (Sidekiq / ActiveJob on Rails; BullMQ, Inngest, Trigger.dev, Upstash, Supabase Queues on Next.js), per-row database changes and bulk SQL.
 - Card titles and timelines are built from the real events your app sends by fixed rules, not by AI. AI is optional: it can add an explanation or answer chat questions from those events.
 - Alerts: ask in plain English ("tell me when a refund fails"); EZLogs maps it to a fixed check you confirm and tells you when the answer changes, in the app, by email or in Slack. Something happening or failing is checked every 5 minutes; a quiet account or a week-over-week change daily or weekly.
 - Read-only by design: EZLogs never writes back into the customer's app. No webhooks into the app, no write tools. Alert emails and Slack messages only inform people.
-- MCP server: `https://app.ezlogs.io/mcp` (streamable HTTP, OAuth sign-in). Six read-only tools: find_actions, get_action, actor_timeline, entity_timeline, top_lists, compare_actions. Works with Claude, Claude Code, ChatGPT, Cursor, Codex and Lovable.
+- MCP server: `https://app.ezlogs.io/mcp` (streamable HTTP, OAuth sign-in). Six read-only tools: find_actions, get_action, actor_timeline, entity_timeline, top_lists, compare_actions. Works with Claude, Claude Code, ChatGPT, Cursor, Codex, Lovable, Bolt and v0.
 - Requires an EZLogs account with the agent installed in the app.
 - Pricing: free during the beta, no card required. 90 days of history during the beta.
 - Hosting: Hetzner, Finland (EU). Encrypted backups: Backblaze, Netherlands (EU), kept 14 days. Sensitive fields (passwords, tokens, secrets, API keys, card numbers) are masked inside the app before sending.
 - Not a monitoring, metrics or APM tool (not a Datadog, Sentry or New Relic replacement). Not self-hostable yet.
-- Agents are open source: https://github.com/dezsirazvan/ez_logs_agent (Rails) and https://github.com/dezsirazvan/ez_logs_agent_nextjs (Next.js).
+- Agents are open source: https://github.com/dezsirazvan/ez_logs_agent (Rails), https://github.com/dezsirazvan/ez_logs_agent_nextjs (Next.js), https://github.com/dezsirazvan/ez_logs_supabase (Supabase SQL) and https://github.com/dezsirazvan/ez_logs_browser (browser package).
 - Contact: hello@ezlogs.io
 
 ## Product
@@ -22,13 +22,16 @@ Key facts:
 - [Home](https://ezlogs.io/): what EZLogs is, with screens from a demo account
 - [EZLogs for Rails](https://ezlogs.io/rails/): what the gem captures, install, supported versions
 - [EZLogs for Next.js](https://ezlogs.io/nextjs/): what the package captures, install, supported stack
-- [MCP server](https://ezlogs.io/mcp/): connect Claude, ChatGPT, Cursor, Codex or Lovable; tools and security
+- [EZLogs for Lovable, Bolt and v0](https://ezlogs.io/lovable/): what people did in an AI-built app, install in the SQL editor and the chat
+- [EZLogs for Supabase](https://ezlogs.io/supabase/): row changes, Auth and Storage with who did each, how the triggers work
+- [MCP server](https://ezlogs.io/mcp/): connect Claude, ChatGPT, Cursor, Codex, Lovable, Bolt or v0; tools and security
 - [AI agent activity log](https://ezlogs.io/ai-agent-activity-log/): seeing what AI agents did inside your app
 
 ## Install guides (for coding assistants)
 
 - [Rails install prompt](https://app.ezlogs.io/install/rails.md): step-by-step install of `ez_logs_agent`, as markdown
 - [Next.js install prompt](https://app.ezlogs.io/install/nextjs.md): step-by-step install of `ezlogs-nextjs`, as markdown
+- [Supabase install SQL](https://app.ezlogs.io/install/supabase.sql): the key-free install, for keeping in migrations
 
 ## Comparisons
 
