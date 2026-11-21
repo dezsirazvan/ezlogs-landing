@@ -94,7 +94,7 @@
       <li><strong>Never changes your data.</strong> The install adds its own <code>ezlogs</code> schema to your database; EZLogs itself never connects to your app or your database. It only receives what your database sends.</li>
       <li><strong>No secrets.</strong> Columns named like passwords, tokens, secrets, API keys or card numbers never leave your database. Password hashes and login tokens stay out.</li>
       <li><strong>Light, and never breaks your app.</strong> Each change adds a small write inside your database and never makes a save fail. If EZLogs can&rsquo;t be reached, your app works the same and changes wait in your database (up to 7 days) until they can be sent. Nothing runs while your app is idle, so a Lovable project still pauses.</li>
-      <li><strong>No tracking.</strong> It doesn&rsquo;t record what people look at or click.</li>
+      <li><strong>No tracking by default.</strong> It records what people do, not what they look at. Page views are a switch you turn on per app: only for signed-in people, named by your app&rsquo;s own routes, never the address as typed.</li>
     </ul>
     <p>Both parts are open source, so you (or your AI) can read every line first: <a href="https://github.com/dezsirazvan/ez_logs_supabase" target="_blank" rel="noopener">the database install</a> and <a href="https://github.com/dezsirazvan/ez_logs_browser" target="_blank" rel="noopener">the browser package</a>. To remove it: run <code>select ezlogs.uninstall();</code> in the SQL editor, and ask your AI builder to remove <code>@ezlogs/browser</code> and the EZLogs section of <code>AGENTS.md</code>.</p>
 
