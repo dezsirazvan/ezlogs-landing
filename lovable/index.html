@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Activity Log for Lovable, Bolt and v0 Apps &mdash; EZLogs</title>
-  <meta name="description" content="See what people do in your Lovable, Bolt or v0 app, in plain English: every change, sign-up, sign-in and file, who did it, and what failed for them. One paste into the SQL editor, one prompt in the chat. No login token, email or password ever leaves the browser.">
+  <meta name="description" content="See what people do in your Lovable, Bolt or v0 app, in plain English: every change, sign-up, sign-in and file, who did it, and what failed for them. One paste into the SQL editor, one prompt in the chat. No login token or password ever leaves the browser.">
   <meta name="keywords" content="lovable activity log, lovable audit log, bolt activity log, v0 activity log, lovable cloud logs, supabase activity log, see what users do in lovable app">
   <link rel="canonical" href="https://ezlogs.io/lovable/">
   <meta name="robots" content="index, follow">
@@ -90,7 +90,7 @@
 
     <h2>What it never does</h2>
     <ul>
-      <li><strong>No login token, email or password leaves the browser.</strong> The browser package never sends those, an error message or what someone typed. It sends a failed call&rsquo;s method, table, status and error code, and the session id that lets EZLogs name the person from your own database.</li>
+      <li><strong>No login token or password leaves the browser.</strong> The browser package never sends those, an error message or what someone typed, with one exception: for a failed sign-in, sign-up, sign-in link or password reset it sends the email typed, so you see which account was tried. Otherwise it sends a failed call&rsquo;s method, table, status and error code, and the session id that lets EZLogs name the person from your own database.</li>
       <li><strong>Never changes your data.</strong> The install adds its own <code>ezlogs</code> schema to your database; EZLogs itself never connects to your app or your database. It only receives what your database sends.</li>
       <li><strong>No secrets.</strong> Columns named like passwords, tokens, secrets, API keys or card numbers never leave your database. Password hashes and login tokens stay out.</li>
       <li><strong>Light, and never breaks your app.</strong> Each change adds a small write inside your database and never makes a save fail. If EZLogs can&rsquo;t be reached, your app works the same and changes wait in your database (up to 7 days) until they can be sent. Nothing runs while your app is idle, so a Lovable project still pauses.</li>

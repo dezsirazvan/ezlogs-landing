@@ -71,7 +71,7 @@
       <li><strong>Auth:</strong> sign-ups, email confirmations, sign-ins and deleted accounts, from <code>auth.users</code> as a fixed list of fields (never password hashes or tokens).</li>
       <li><strong>Storage:</strong> files uploaded, replaced and deleted, with bucket, name, size and owner (never the file).</li>
       <li><strong>Who did it</strong>, from the JWT claims Supabase already verified for the request: the signed-in person, an anonymous visitor, your server&rsquo;s service key, or an AI connected through Supabase&rsquo;s OAuth.</li>
-      <li><strong>Optional, in the browser:</strong> calls that failed for people (with the reason) and sign-outs, through the open-source <code>@ezlogs/browser</code> package. It never sends a login token, an email or a message.</li>
+      <li><strong>Optional, in the browser:</strong> calls that failed for people (with the reason) and sign-outs, through the open-source <code>@ezlogs/browser</code> package. It never sends a login token, a password or a message; for a failed sign-in or sign-up it sends the email typed, so you see which account was tried.</li>
     </ul>
 
     <h2>Install</h2>
