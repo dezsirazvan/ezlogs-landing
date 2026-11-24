@@ -71,6 +71,7 @@
       <li><strong>Auth:</strong> sign-ups, email confirmations, sign-ins and deleted accounts, from <code>auth.users</code> as a fixed list of fields (never password hashes or tokens).</li>
       <li><strong>Storage:</strong> files uploaded, replaced and deleted, with bucket, name, size and owner (never the file).</li>
       <li><strong>Names of what already exists</strong>, once, when you connect: the id and name of rows of tables other tables point to (a class a booking belongs to), so a new booking reads &ldquo;for class &lsquo;Power Hour&rsquo;&rdquo;. Nothing else from those rows. Never a table with one row per sign-in account (a profile tied to one <code>auth.users</code> id), named like people or accounts (<code>members</code>, <code>customers</code>, <code>companies</code>), or with a column for a person&rsquo;s name, email or phone. Leave any other table out with <code>select ezlogs.untrack('public.&lt;table&gt;');</code> Activity older than 90 days is deleted automatically; these names are kept until you delete your account.</li>
+      <li><strong>Page views</strong>, with the browser package and only if you turn them on per app: for signed-in people, named by your app&rsquo;s own routes.</li>
       <li><strong>Who did it</strong>, from the JWT claims Supabase already verified for the request: the signed-in person, an anonymous visitor, your server&rsquo;s service key, or an AI connected through Supabase&rsquo;s OAuth.</li>
       <li><strong>Optional, in the browser:</strong> calls that failed for people (with the reason) and sign-outs, through the open-source <code>@ezlogs/browser</code> package. It never sends a login token, a password or a message; for a failed sign-in or sign-up it sends the email typed, so you see which account was tried.</li>
     </ul>
@@ -79,6 +80,7 @@
     <ol>
       <li><strong><a href="https://app.ezlogs.io/users/sign_up" target="_blank" rel="noopener">Sign up</a></strong>, open <strong>Settings &rarr; API Keys</strong>, choose <strong>Lovable &middot; Bolt &middot; v0</strong> under <strong>Install EZLogs</strong>, and click <strong>Create install code</strong>.</li>
       <li><strong>Run it in the SQL editor</strong> of your Supabase project. It installs the <code>ezlogs</code> schema and connects with your database key. Running it again later upgrades in place.</li>
+      <li><strong>Optional:</strong> paste the prompt from the same page into your AI builder&rsquo;s chat (or follow it by hand) to add the browser package: the calls that fail for people, and sign-outs.</li>
     </ol>
     <p><strong>Keeping it in your migrations?</strong> Add <a href="https://app.ezlogs.io/install/supabase.sql" target="_blank" rel="noopener">the install SQL</a> (key-free) as a migration, then run the connect line once in the SQL editor, never in a migration, so the key stays out of git:</p>
     <pre><code>select ezlogs.connect('ezldb_your_database_key');</code></pre>
@@ -121,9 +123,9 @@
       <img src="/assets/EZLogo-mark.svg" alt="" width="24" height="24">
       EZLogs
     </div>
-    <p class="footer__tagline">Plain-English activity logs for every action in your app.</p>
+    <p class="footer__tagline">Plain-English activity logs for Rails, Next.js and Supabase apps.</p>
     <div class="footer__links">
-      <a href="https://github.com/dezsirazvan/ez_logs_agent" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://github.com/dezsirazvan/ez_logs_supabase" target="_blank" rel="noopener">GitHub</a>
       <span style="color:var(--faint);">&middot;</span>
       <a href="https://app.ezlogs.io/users/sign_in" target="_blank" rel="noopener">Sign in</a>
       <span style="color:var(--faint);">&middot;</span>
@@ -138,6 +140,8 @@
       <a href="/lovable/">Lovable</a>
       <span style="color:var(--faint);">&middot;</span>
       <a href="/supabase/">Supabase</a>
+      <span style="color:var(--faint);">&middot;</span>
+      <a href="/mcp/">MCP server</a>
       <span style="color:var(--faint);">&middot;</span>
       <a href="/ai-agent-activity-log/">AI agent activity log</a>
     </div>

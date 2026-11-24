@@ -73,11 +73,12 @@
       <li><strong>Operational access:</strong> only the founder has production database access. All access is via SSH key (no passwords), from named machines.</li>
     </ul>
 
-    <h2>The agent is built to be safe</h2>
+    <h2>Built to be safe in your app</h2>
     <ul>
       <li><strong>Out-of-band:</strong> events are buffered in memory and shipped over a separate connection. Your customer&rsquo;s request never waits on us.</li>
-      <li><strong>Fails open:</strong> if EZLogs is unreachable, the agent buffers up to 10,000 events and retries with exponential backoff. If the buffer overflows, the oldest events are dropped. The agent never raises into your request path.</li>
-      <li><strong>Open source:</strong> the agents (<code>ez_logs_agent</code>, <code>ezlogs-nextjs</code>) are open-source and auditable. You can pin to a known SHA.</li>
+      <li><strong>Fails open:</strong> if EZLogs is unreachable, the agent buffers up to 10,000 events and retries with exponential backoff. If the buffer overflows, the oldest events are dropped. The gem and the package never raise into your request path.</li>
+      <li><strong>Supabase install:</strong> a trigger adds one row to <code>ezlogs.outbox</code> inside your write, and <code>pg_cron</code> sends waiting rows afterwards with <code>pg_net</code>; a capture error never fails the write. If EZLogs is unreachable, rows wait up to 7 days (within a size limit). The <code>ezlogs</code> schema is not reachable through Supabase&rsquo;s API.</li>
+      <li><strong>Open source:</strong> the Rails gem (<code>ez_logs_agent</code>), the Next.js package (<code>ezlogs-nextjs</code>), the Supabase install (<code>ez_logs_supabase</code>) and the browser package (<code>@ezlogs/browser</code>) are open source and auditable. You can pin to a known SHA.</li>
     </ul>
 
     <h2>AI and your data</h2>
@@ -105,7 +106,7 @@
       <img src="/assets/EZLogo-mark.svg" alt="" width="24" height="24">
       EZLogs
     </div>
-    <p class="footer__tagline">Plain-English activity logs for every action in your app.</p>
+    <p class="footer__tagline">Plain-English activity logs for Rails, Next.js and Supabase apps.</p>
     <div class="footer__links">
       <a href="https://github.com/dezsirazvan/ez_logs_agent" target="_blank" rel="noopener">GitHub</a>
       <span style="color:var(--faint);">&middot;</span>
@@ -122,6 +123,8 @@
       <a href="/lovable/">Lovable</a>
       <span style="color:var(--faint);">&middot;</span>
       <a href="/supabase/">Supabase</a>
+      <span style="color:var(--faint);">&middot;</span>
+      <a href="/mcp/">MCP server</a>
       <span style="color:var(--faint);">&middot;</span>
       <a href="/ai-agent-activity-log/">AI agent activity log</a>
     </div>

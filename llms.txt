@@ -10,7 +10,7 @@ Key facts:
 - Alerts: ask in plain English ("tell me when a refund fails"); EZLogs maps it to a fixed check you confirm and tells you when the answer changes, in the app, by email or in Slack. Something happening or failing is checked every 5 minutes; a quiet account or a week-over-week change daily or weekly.
 - Read-only by design: EZLogs never writes back into the customer's app. No webhooks into the app, no write tools. Alert emails and Slack messages only inform people.
 - MCP server: `https://app.ezlogs.io/mcp` (streamable HTTP, OAuth sign-in). Six read-only tools: find_actions, get_action, actor_timeline, entity_timeline, top_lists, compare_actions. Works with Claude, Claude Code, ChatGPT, Cursor, Codex, Lovable, Bolt and v0.
-- Requires an EZLogs account with the agent installed in the app.
+- Requires an EZLogs account with EZLogs installed in the app (Rails gem, Next.js package or Supabase SQL install).
 - Pricing: free during the beta, no card required. 90 days of history during the beta.
 - Hosting: Hetzner, Finland (EU). Encrypted backups: Backblaze, Netherlands (EU), kept 14 days. Sensitive fields (passwords, tokens, secrets, API keys, card numbers) are masked inside the app before sending.
 - Not a monitoring, metrics or APM tool (not a Datadog, Sentry or New Relic replacement). Not self-hostable yet.

@@ -41,7 +41,7 @@
     "name": "EZLogs MCP server",
     "applicationCategory": "DeveloperApplication",
     "operatingSystem": "Web",
-    "description": "A remote, read-only MCP server that lets AI assistants such as Claude, ChatGPT, Cursor and Codex query the plain-English activity log of a Rails or Next.js app: actions, actors, entities and failures. OAuth sign-in.",
+    "description": "A remote, read-only MCP server that lets AI assistants such as Claude, ChatGPT, Cursor and Codex query the plain-English activity log of a Rails, Next.js or Supabase app: actions, actors, entities and failures. OAuth sign-in.",
     "url": "https://ezlogs.io/mcp/",
     "offers": {
       "@type": "Offer",
@@ -70,7 +70,7 @@
       {
         "@type": "Question",
         "name": "Do I need an EZLogs account?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Yes. The MCP server reads the activity log EZLogs collects from your app, so you need an EZLogs account (free during the beta) with the agent installed in a Rails or Next.js app. Without it there is nothing to query." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. The MCP server reads the activity log EZLogs collects from your app, so you need an EZLogs account (free during the beta) with EZLogs installed in your app (Rails, Next.js or Supabase). Without it there is nothing to query." }
       },
       {
         "@type": "Question",
@@ -109,11 +109,11 @@
   <main class="doc">
     <p class="doc__eyebrow">EZLogs over MCP</p>
     <h1>Ask Claude, ChatGPT or Cursor what happened in your app</h1>
-    <p class="doc__lead">EZLogs turns the requests, background jobs and database changes in your Rails or Next.js app into plain-English actions. The EZLogs MCP server lets the AI assistant you already use read that log, so you can ask it what happened, who did it and what failed. It can only read. It cannot change anything in your app.</p>
+    <p class="doc__lead">EZLogs turns what happens in your Rails, Next.js or Supabase app into plain-English actions. The EZLogs MCP server lets the AI assistant you already use read that log, so you can ask it what happened, who did it and what failed. It can only read. It cannot change anything in your app.</p>
 
     <div class="doc__callout">
       <strong>Server URL:</strong> <code>https://app.ezlogs.io/mcp</code><br>
-      Sign in with your EZLogs account (OAuth). Requires the EZLogs agent installed in a <a href="/rails/">Rails</a> or <a href="/nextjs/">Next.js</a> app. Free during the beta.
+      Sign in with your EZLogs account (OAuth). Requires EZLogs installed in your app: <a href="/rails/">Rails</a>, <a href="/nextjs/">Next.js</a> or <a href="/supabase/">Supabase</a> (including <a href="/lovable/">Lovable</a>, Bolt and v0). Free during the beta.
     </div>
 
     <h2>What your AI can see</h2>
@@ -215,7 +215,7 @@ codex mcp login ezlogs</code></pre>
     <h3>Can my AI assistant change anything in my app through EZLogs?</h3>
     <p>No. All six tools only read your activity log. EZLogs has no write access to your app, and the MCP server has no tools that create, update or delete anything.</p>
     <h3>Do I need an EZLogs account?</h3>
-    <p>Yes. The MCP server reads the activity log EZLogs collects from your app, so you need an EZLogs account (free during the beta) with the agent installed in a <a href="/rails/">Rails</a> or <a href="/nextjs/">Next.js</a> app. Without it there is nothing to query.</p>
+    <p>Yes. The MCP server reads the activity log EZLogs collects from your app, so you need an EZLogs account (free during the beta) with EZLogs installed in your app: <a href="/rails/">Rails</a>, <a href="/nextjs/">Next.js</a> or <a href="/supabase/">Supabase</a>. Without it there is nothing to query.</p>
     <h3>Which AI clients work?</h3>
     <p>Any client that supports remote MCP servers over HTTP with OAuth and dynamic client registration. We have setup steps above for Claude (claude.ai and Claude Desktop), Claude Code, ChatGPT, Cursor, Codex, Lovable, Bolt and v0.</p>
     <h3>Who can see my data?</h3>
@@ -236,7 +236,7 @@ codex mcp login ezlogs</code></pre>
       <img src="/assets/EZLogo-mark.svg" alt="" width="24" height="24">
       EZLogs
     </div>
-    <p class="footer__tagline">Plain-English activity logs for every action in your app.</p>
+    <p class="footer__tagline">Plain-English activity logs for Rails, Next.js and Supabase apps.</p>
     <div class="footer__links">
       <a href="https://github.com/dezsirazvan/ez_logs_agent" target="_blank" rel="noopener">GitHub: Rails agent</a>
       <span style="color:var(--faint);">&middot;</span>

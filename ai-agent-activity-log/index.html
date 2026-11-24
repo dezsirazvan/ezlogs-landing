@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AI Agent Activity Log: See What Your Agents Did, Step by Step | EZLogs</title>
-  <meta name="description" content="An activity and execution log for the AI agents working inside your Rails or Next.js app: every request, job and database change an agent made, as one plain-English card per action. Plus an MCP server so your AI can query its own history.">
+  <meta name="description" content="An activity and execution log for the AI agents working inside your Rails, Next.js or Supabase app: every request, job and database change an agent made, as one plain-English card per action. Plus an MCP server so your AI can query its own history.">
   <meta name="keywords" content="ai agent activity log, ai agent execution log, agent activity logger, ai agent audit log, track ai agent actions, mcp server activity, ai agent observability, claude audit log, gpt audit log">
   <link rel="canonical" href="https://ezlogs.io/ai-agent-activity-log/">
   <meta name="robots" content="index, follow">
@@ -33,7 +33,7 @@
     "name": "EZLogs",
     "applicationCategory": "DeveloperApplication",
     "operatingSystem": "Web, Linux, macOS",
-    "description": "The activity log for AI work inside your app. Captures every request, background job, and database change in Rails or Next.js apps and turns each AI action into a plain-English card readable by humans and queryable by AI agents via MCP.",
+    "description": "The activity log for AI work inside your app. Captures every request, background job, and database change in Rails, Next.js and Supabase apps and turns each AI action into a plain-English card readable by humans and queryable by AI agents via MCP.",
     "url": "https://ezlogs.io/ai-agent-activity-log/",
     "offers": {
       "@type": "Offer",
@@ -67,7 +67,7 @@
     <p class="doc__lead">AI agents now do real work inside production apps. Nobody has a clean way to see that work happening, explain it to non-technical colleagues, or let the AI itself answer "what did I do yesterday?". EZLogs is built for exactly that.</p>
 
     <h2>What it does</h2>
-    <p>The EZLogs agent drops into your Rails or Next.js app and captures every HTTP request, every background job, and every database change &mdash; whether the actor is a human user, a system process, or an AI agent. EZLogs correlates those events into a single &ldquo;action&rdquo; per business event, then renders each action as a plain-English card. Think of it as an execution log for every agent, written so anyone on the team can read it:</p>
+    <p>EZLogs drops into your Rails or Next.js app and captures every HTTP request, every background job, and every database change (in a Supabase app, every database change and the calls that fail in the browser) &mdash; whether the actor is a human user, a system process, or an AI agent. EZLogs correlates those events into a single &ldquo;action&rdquo; per business event, then renders each action as a plain-English card. Think of it as an execution log for every agent, written so anyone on the team can read it:</p>
 
     <div class="doc__callout">
       <strong>&ldquo;Refund &rsquo;RF-M9PM&rsquo; failed&rdquo;</strong> &middot; status pending &rarr; failed (64.20 EUR), booking 'BRK-M9PM' marked as refund failed and failure reason set to 'card expired' &middot; <em>Agent &middot; Rebooking assistant</em>
@@ -133,7 +133,7 @@ EZLOGS_PROJECT_TOKEN=ezl_your_api_key_here</code></pre>
       <img src="/assets/EZLogo-mark.svg" alt="" width="24" height="24">
       EZLogs
     </div>
-    <p class="footer__tagline">Plain-English activity logs for every action in your app.</p>
+    <p class="footer__tagline">Plain-English activity logs for Rails, Next.js and Supabase apps.</p>
     <div class="footer__links">
       <a href="https://github.com/dezsirazvan/ez_logs_agent" target="_blank" rel="noopener">GitHub</a>
       <span style="color:var(--faint);">&middot;</span>
@@ -150,6 +150,8 @@ EZLOGS_PROJECT_TOKEN=ezl_your_api_key_here</code></pre>
       <a href="/lovable/">Lovable</a>
       <span style="color:var(--faint);">&middot;</span>
       <a href="/supabase/">Supabase</a>
+      <span style="color:var(--faint);">&middot;</span>
+      <a href="/mcp/">MCP server</a>
       <span style="color:var(--faint);">&middot;</span>
       <a href="/ai-agent-activity-log/">AI agent activity log</a>
     </div>
