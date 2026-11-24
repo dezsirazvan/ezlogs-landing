@@ -178,6 +178,19 @@ a:hover { text-decoration: underline; }
   font-size: 14.5px;
   color: var(--text);
 }
+/* Media, buttons and questions on the product sub-pages (/lovable/). */
+.doc figure { margin: 24px 0; }
+.doc figure img, .doc figure video { display: block; width: 100%; height: auto; border-radius: 10px; border: 1px solid var(--line-strong); background: var(--bg-1); }
+.doc figcaption { margin-top: 8px; font-size: 13px; color: var(--faint); }
+.doc__video { margin: 28px 0 12px; }
+.doc__actions { display: flex; flex-wrap: wrap; gap: 12px; margin: 8px 0 0; }
+.doc__button { display: inline-block; padding: 12px 20px; border-radius: 10px; border: 1px solid var(--line-strong); color: var(--text); font-weight: 600; text-decoration: none; }
+.doc__button--primary { background: var(--green); border-color: var(--green); color: #000; }
+.doc__trust { font-size: 14px; color: var(--muted); text-align: center; }
+.doc blockquote { margin: 16px 0; padding: 4px 18px; border-left: 3px solid var(--green); }
+.doc details { border-bottom: 1px solid var(--line); padding: 12px 0; }
+.doc summary { cursor: pointer; color: var(--text); font-weight: 600; }
+.doc details p { margin: 10px 0 0; }
 .doc__back {
   display: inline-block;
   margin-top: 32px;

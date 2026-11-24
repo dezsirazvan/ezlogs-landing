@@ -22,7 +22,7 @@ Key facts:
 - [Home](https://ezlogs.io/): what EZLogs is, with screens from a demo account
 - [EZLogs for Rails](https://ezlogs.io/rails/): what the gem captures, install, supported versions
 - [EZLogs for Next.js](https://ezlogs.io/nextjs/): what the package captures, install, supported stack
-- [EZLogs for Lovable, Bolt and v0](https://ezlogs.io/lovable/): what people did in an AI-built app, install in the SQL editor and the chat
+- [EZLogs for Lovable](https://ezlogs.io/lovable/): what happened to the users of a Lovable app, alerts in Slack or by email, and Lovable reading it over MCP to fix problems
 - [EZLogs for Supabase](https://ezlogs.io/supabase/): row changes, Auth and Storage with who did each, how the triggers work
 - [MCP server](https://ezlogs.io/mcp/): connect Claude, ChatGPT, Cursor, Codex, Lovable, Bolt or v0; tools and security
 - [AI agent activity log](https://ezlogs.io/ai-agent-activity-log/): seeing what AI agents did inside your app

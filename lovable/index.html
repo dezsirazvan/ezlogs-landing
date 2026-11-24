@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Activity Log for Lovable, Bolt and v0 Apps &mdash; EZLogs</title>
-  <meta name="description" content="See what people do in your Lovable, Bolt or v0 app, in plain English: every change, sign-up, sign-in and file, who did it, and what failed for them. One paste into the SQL editor, one prompt in the chat. No login token or password ever leaves the browser.">
-  <meta name="keywords" content="lovable activity log, lovable audit log, bolt activity log, v0 activity log, lovable cloud logs, supabase activity log, see what users do in lovable app">
+  <title>See What Happened to Your Users in Your Lovable App | EZLogs</title>
+  <meta name="description" content="Every sign-up, change and error in your Lovable app as a plain sentence: who did it and why it failed. An alert in Slack or by email when something fails, and Lovable can read it too. Free in beta.">
+  <meta name="keywords" content="lovable app logs, see what users do in my lovable app, lovable activity log, lovable audit log, lovable error, lovable cloud logs, lovable connector, supabase activity log">
   <link rel="canonical" href="https://ezlogs.io/lovable/">
   <meta name="robots" content="index, follow">
   <meta name="theme-color" content="#0A0A0A">
@@ -13,13 +13,15 @@
   <link rel="icon" type="image/x-icon" href="/assets/favicon/favicon.ico">
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
   <link rel="manifest" href="/assets/favicon/site.webmanifest">
-
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="EZLogs">
-  <meta property="og:title" content="See what people do in your Lovable app, in plain English.">
-  <meta property="og:description" content="Every change, sign-up, sign-in and file, who did it, and what failed for them. Built for apps made with Lovable, Bolt and v0.">
+  <meta property="og:title" content="Know what happened to your users. Before they tell you.">
+  <meta property="og:description" content="Every sign-up, change and error in your Lovable app as a plain sentence. An alert in Slack or by email when something fails, and Lovable can read it and fix the problem.">
   <meta property="og:url" content="https://ezlogs.io/lovable/">
-  <meta property="og:image" content="https://ezlogs.io/assets/og-image.png">
+  <meta property="og:image" content="https://ezlogs.io/assets/video/ezlogs-lovable-poster.jpg">
+  <meta property="og:video" content="https://ezlogs.io/assets/video/ezlogs-lovable.mp4">
+  <meta property="og:video:type" content="video/mp4">
+  <meta name="twitter:card" content="summary_large_image">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -30,17 +32,33 @@
   {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    "name": "EZLogs for Lovable, Bolt and v0",
+    "name": "EZLogs for Lovable",
     "applicationCategory": "DeveloperApplication",
     "operatingSystem": "Web",
-    "description": "A plain-English activity log for apps built with Lovable, Bolt and v0 on Supabase: database changes, sign-ups, sign-ins, files, and the calls that failed in the browser, with who did each one.",
     "url": "https://ezlogs.io/lovable/",
+    "description": "A plain-English activity log for apps built with Lovable: sign-ups, changes to your data, files people upload and the calls that failed in the browser, with who did each one and why it failed. Alerts in Slack or by email, and a read-only connector so Lovable can read it.",
     "offers": {
       "@type": "Offer",
       "price": "0",
       "priceCurrency": "EUR",
       "description": "Free during beta. No card required."
     }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "Is it safe to paste this into my live database?", "acceptedAnswer": { "@type": "Answer", "text": "It is open source, adds its own ezlogs schema and triggers (and turns on two standard Supabase extensions, pg_net and pg_cron), never changes your rows and cannot make a save fail; one line removes it from your database. You can try it on a test project first, or ask Lovable's chat to check it." } },
+      { "@type": "Question", "name": "Why does Lovable warn that the install contains a DELETE?", "acceptedAnswer": { "@type": "Answer", "text": "Every delete in the install removes only EZLogs' own data (its own tables, the history of its own scheduled job, and its key when you uninstall), never yours. Click Run anyway." } },
+      { "@type": "Question", "name": "What exactly leaves my database?", "acceptedAnswer": { "@type": "Answer", "text": "For each change: the table, the values before and after, and who made it. Columns named like passwords, tokens, secrets, API keys or card numbers never leave. From the browser, a failed sign-in sends the email that was tried, never the password. You can leave out any table." } },
+      { "@type": "Question", "name": "Where is it stored, and for how long?", "acceptedAnswer": { "@type": "Answer", "text": "In the EU (Hetzner, Helsinki), with encrypted backups in the EU. Activity is kept 90 days during the beta. The names of your existing records, sent once when you connect, are kept until you delete your account." } },
+      { "@type": "Question", "name": "When I connect Lovable, what can it see?", "acceptedAnswer": { "@type": "Answer", "text": "The same sentences you see in EZLogs, through a read-only connection you approve once. They include your users' names and emails, and Lovable's AI reads them to answer you." } },
+      { "@type": "Question", "name": "Does it use Lovable credits?", "acceptedAnswer": { "@type": "Answer", "text": "The prompt that adds the browser package is one Lovable message, about 2 to 3 credits (measured November 2026). The SQL install runs in the SQL editor, not in Lovable's chat. Asking Lovable about what happened is a normal chat message." } },
+      { "@type": "Question", "name": "What happens after the beta?", "acceptedAnswer": { "@type": "Answer", "text": "It is free during the beta. Account owners get at least 30 days' notice by email before any paid plan, and nobody is charged without choosing a plan." } },
+      { "@type": "Question", "name": "I built my app with Bolt or v0. Does it work?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, if the app runs on Supabase: the same install runs in the Supabase SQL editor. The steps are on the Supabase page." } }
+    ]
   }
   </script>
 </head>
@@ -52,8 +70,8 @@
       EZLogs
     </a>
     <div class="nav__links">
-      <a href="/#install">Install</a>
-      <a href="/#faq">FAQ</a>
+      <a href="#setup">Set up</a>
+      <a href="#questions">FAQ</a>
       <a href="https://github.com/dezsirazvan/ez_logs_supabase" target="_blank" rel="noopener">GitHub</a>
       <a href="https://app.ezlogs.io/users/sign_in" target="_blank" rel="noopener">Sign in</a>
       <a href="https://app.ezlogs.io/users/sign_up" class="nav__cta" target="_blank" rel="noopener">Start free</a>
@@ -61,56 +79,133 @@
   </nav>
 
   <main class="doc">
-    <p class="doc__eyebrow">EZLogs for Lovable, Bolt and v0</p>
-    <h1>See what people do in your Lovable app, in plain English.</h1>
-    <p class="doc__lead">You built the app with an AI. Now people use it, and you can&rsquo;t see what they do. EZLogs shows every change, sign-up, sign-in and file, who did it, and what failed for them, as one sentence per action: &ldquo;Dana created the task &lsquo;Launch plan&rsquo;&rdquo;, &ldquo;Someone tried to sign in but it failed (wrong email or password)&rdquo;. Anyone on your team can read it.</p>
+    <p class="doc__eyebrow">For apps built with Lovable</p>
+    <h1>Know what happened to your users. Before they tell you.</h1>
+    <p class="doc__lead">Every sign-up, change and error in your app becomes a plain sentence: who did it, to what, and why it failed. An alert tells you in Slack or by email when something fails. Lovable can read it too, and fix the problem.</p>
+
+    <div class="doc__actions">
+      <a class="doc__button doc__button--primary" href="https://app.ezlogs.io/users/sign_up" target="_blank" rel="noopener">Start free &rarr;</a>
+      <a class="doc__button" href="https://app.ezlogs.io/demo" target="_blank" rel="noopener">See a live demo, no install</a>
+    </div>
+
+    <figure class="doc__video">
+      <video src="/assets/video/ezlogs-lovable.mp4" poster="/assets/video/ezlogs-lovable-poster.jpg" controls playsinline preload="metadata" width="1600" height="900" aria-label="A 49-second video: a Lovable app shows a user the wrong error, EZLogs shows the real reason and alerts in Slack, and Lovable reads EZLogs and fixes the bug."></video>
+      <figcaption>49 seconds, with captions. A demo app with a booking rule broken on purpose; the app, the alert and Lovable&rsquo;s answers are real.</figcaption>
+    </figure>
+
+    <p class="doc__trust">Free in beta &middot; No card &middot; A few minutes to set up &middot; Open source &middot; Read-only</p>
 
     <h2>What you see</h2>
+    <p>Maya tried to book a class. Her screen said her session had ended. EZLogs showed what really happened: the database had refused her booking. After the fix, her next booking went through:</p>
+    <figure>
+      <img src="/assets/screenshots/lovable-timeline-maya.png" alt="Two EZLogs Timeline entries for Maya Chen. 07:27: Created booking for class 'Vinyasa Basics'. 06:36: Booking creation not allowed. Tried to create a booking but was not allowed. Reason: not allowed by the table's access rules." width="660" height="348" loading="lazy">
+      <figcaption>The EZLogs Timeline of the demo app, newest first.</figcaption>
+    </figure>
+    <p>What it records:</p>
     <ul>
-      <li><strong>Every change to your data</strong>, with who made it: a task created, a status moved from &ldquo;doing&rdquo; to &ldquo;done&rdquo;, a record deleted, each value before and after. Tables named like secrets (<code>api_keys</code>, <code>payment_tokens</code>) are left out, and very large values show their size.</li>
       <li><strong>Sign-ups, email confirmations and sign-ins.</strong></li>
-      <li><strong>Files</strong> uploaded, replaced and deleted (never the file itself).</li>
-      <li><strong>Background work</strong> your database runs on a schedule, marked as the system.</li>
+      <li><strong>Every change to your data</strong>, with who made it: a booking created, a status moved from &ldquo;doing&rdquo; to &ldquo;done&rdquo;, a record deleted, each value before and after.</li>
+      <li><strong>Files people upload</strong>, replace and delete (the name and size, never the file itself).</li>
+      <li><strong>What failed for people</strong>, with the reason: a save the database refused, a wrong password, a file too large, a password too weak. And sign-outs. (These two come from step 2 below.)</li>
+      <li><strong>Names of what already exists</strong>, once, when you connect: the id and name of the things your records point to (the class a booking is for), so every sentence names them. Never tables tied to sign-in accounts or named like people (members, customers).</li>
     </ul>
-    <p>With the browser part (step 3 below), also:</p>
-    <ul>
-      <li><strong>What failed for people</strong>, with the reason: a save refused because it already exists, a wrong password, a file too large, a password too weak.</li>
-      <li><strong>Sign-outs.</strong></li>
-      <li><strong>One action per click</strong>: everything one click changed reads as one action.</li>
-    </ul>
+    <p>What it doesn&rsquo;t: a click that changes nothing. Page views are a switch you can turn on per app, only for signed-in people.</p>
 
-    <h2>Install in a few minutes</h2>
+    <h2>Hear about it first</h2>
+    <p>Pin a question once, in plain words: &ldquo;tell me when a booking fails&rdquo;. Set to &ldquo;as it happens&rdquo;, EZLogs checks it every 5 minutes and tells you in Slack or by email, with the same words and link as the alert in EZLogs. Alerts only inform: they never change anything in your app.</p>
+    <figure>
+      <img src="/assets/screenshots/lovable-slack-alert.png" alt="A Slack notification from EZLogs in #bookings: Booking failed 3 times: 3 since the last check, the latest by Maya Chen. 9 total so far." width="1014" height="234" loading="lazy">
+      <figcaption>The alert from the demo app, on the founder&rsquo;s phone.</figcaption>
+    </figure>
+
+    <h2>Let Lovable read it</h2>
+    <p>Connect EZLogs in Lovable once: <strong>Connectors &rarr; Add custom &rarr; MCP server</strong>, paste <code>https://app.ezlogs.io/mcp</code>, keep OAuth, then <strong>Add &amp; authorize</strong>. Then ask in Lovable&rsquo;s chat:</p>
+    <blockquote><p><strong>&ldquo;What went wrong for my users today? Fix it.&rdquo;</strong></p></blockquote>
+    <p>Lovable looks up what happened in EZLogs, finds the cause and fixes it. In the demo it found the broken booking rule and answered: &ldquo;Members can book classes again, but still can&rsquo;t book for someone else.&rdquo; EZLogs only answers questions: it never changes your app.</p>
+    <figure>
+      <img src="/assets/screenshots/lovable-reads-ezlogs.png" alt="Lovable's chat: Looking at the app's saved database changes and project rules, then two calls: EZLogs find_actions." width="1152" height="648" loading="lazy">
+      <figcaption>Lovable reading EZLogs before it answered.</figcaption>
+    </figure>
+
+    <h2 id="setup">Set it up in 3 steps</h2>
     <ol>
-      <li><strong><a href="https://app.ezlogs.io/users/sign_up" target="_blank" rel="noopener">Sign up</a></strong>, then open <strong>Settings &rarr; API keys &rarr; Lovable &middot; Bolt &middot; v0</strong> and click <strong>Create install code</strong>.</li>
-      <li><strong>Paste the install code into your project&rsquo;s SQL editor and press Run.</strong> In Lovable: <strong>More &rarr; Database &rarr; Manage &rarr; SQL editor</strong>. In Bolt or v0: the Supabase dashboard &rarr; <strong>SQL Editor</strong> (a Bolt Database is first claimed into your Supabase account: <strong>Bolt &rarr; Database &rarr; Claim</strong>). From then on, your database records every change and sends it to EZLogs.</li>
-      <li><strong>Paste the prompt from the same page into your AI builder&rsquo;s chat, then publish.</strong> It adds a small open-source package that reports the calls that fail in people&rsquo;s browsers.</li>
-      <li><strong>Use your app.</strong> Actions appear in your Timeline within seconds.</li>
+      <li><strong>Paste the install code into your SQL editor.</strong> <a href="https://app.ezlogs.io/users/sign_up" target="_blank" rel="noopener">Sign up</a>, open <strong>Settings &rarr; API Keys</strong>, choose <strong>Lovable &middot; Bolt &middot; v0</strong> under <strong>Install EZLogs</strong>, and click <strong>Create install code</strong>. In Lovable: <strong>More &rarr; Database &rarr; Manage &rarr; SQL editor</strong>, paste, <strong>Run</strong>. Lovable will warn that it contains a DELETE: every delete in it removes only EZLogs&rsquo; own data, never yours, so click <strong>Run anyway</strong>. Not sure? Ask Lovable&rsquo;s chat whether it&rsquo;s safe, leaving out the line with your key (<code>ezldb_&hellip;</code>).</li>
+      <li><strong>Paste the prompt from the same page into Lovable&rsquo;s chat, then publish.</strong> It adds small open-source packages that report the calls that fail in your users&rsquo; browsers (and link your server code, if your app has any, to the click that started it), plus a migration that names your records. One Lovable message, about 2 to 3 credits.</li>
+      <li><strong>Connect EZLogs in Lovable</strong> (Connectors &rarr; Add custom &rarr; MCP server, as above), so Lovable can read what happened.</li>
     </ol>
-    <p>Building several apps? Add each one on the same page: every app gets its own code and prompt, and its own project in your Timeline.</p>
+    <figure>
+      <img src="/assets/screenshots/lovable-delete-warning.png" alt="Lovable's dialog: Confirm destructive operation. This query contains a DELETE statement which can modify or delete data. Are you sure you want to run it? Buttons: Cancel, Run anyway." width="1060" height="360" loading="lazy">
+      <figcaption>The warning you&rsquo;ll see in step 1. The deletes only clean up EZLogs&rsquo; own data.</figcaption>
+    </figure>
+    <p>Then use your app: sign-ups and changes appear in your Timeline within seconds. Building several apps? Add each one on the same settings page; every app gets its own code and prompt.</p>
+    <p>To remove it: run <code>select ezlogs.uninstall();</code> in the SQL editor, then ask Lovable to remove everything the EZLogs section of <code>AGENTS.md</code> lists (the <code>@ezlogs</code> packages and the files they added), and that section itself.</p>
+
+    <h2>One person&rsquo;s problem, not a chart</h2>
+    <p>Analytics counts people: &ldquo;120 people opened the booking page&rdquo;. EZLogs explains one person&rsquo;s problem: &ldquo;Maya tried to book a class at 6:36 and the database refused it&rdquo;. It comes from your database, not from guesses. Many teams use both.</p>
 
     <h2>What it never does</h2>
     <ul>
-      <li><strong>No login token or password leaves the browser.</strong> The browser package never sends those, an error message or what someone typed, with one exception: for a failed sign-in, sign-up, sign-in link or password reset it sends the email typed, so you see which account was tried. Otherwise it sends a failed call&rsquo;s method, table, status and error code, and the session id that lets EZLogs name the person from your own database.</li>
-      <li><strong>Never changes your data.</strong> The install adds its own <code>ezlogs</code> schema to your database; EZLogs itself never connects to your app or your database. It only receives what your database sends.</li>
-      <li><strong>No secrets.</strong> Columns named like passwords, tokens, secrets, API keys or card numbers never leave your database. Password hashes and login tokens stay out.</li>
-      <li><strong>Light, and never breaks your app.</strong> Each change adds a small write inside your database and never makes a save fail. If EZLogs can&rsquo;t be reached, your app works the same and changes wait in your database (up to 7 days) until they can be sent. Nothing runs while your app is idle, so a Lovable project still pauses.</li>
-      <li><strong>No tracking by default.</strong> It records what people do, not what they look at. Page views are a switch you turn on per app: only for signed-in people, named by your app&rsquo;s own routes, never the address as typed.</li>
+      <li><strong>Never changes your data.</strong> The install adds its own <code>ezlogs</code> schema and triggers and never changes your rows. EZLogs itself never connects to your app or your database; it only receives what your database and the browser package send.</li>
+      <li><strong>Never breaks your app.</strong> Each change adds one small write inside your database and can never make a save fail. If EZLogs can&rsquo;t be reached, your app works the same and changes wait in your database (up to 7 days, within a size limit) until they can be sent. Nothing runs while your app is idle.</li>
+      <li><strong>No passwords or login tokens.</strong> Columns named like passwords, tokens, secrets, API keys or card numbers never leave your database. The browser package never sends a login token, a password or what someone typed; for a failed sign-in, sign-up, sign-in link or password reset it sends the email that was tried, so you see which account it was. Names and emails are sent, so you can see who had the problem.</li>
+      <li><strong>Your data stays in the EU.</strong> Stored in Helsinki (Hetzner), activity kept 90 days during the beta, encrypted backups in the EU. <a href="/privacy/">Privacy policy</a> &middot; <a href="/dpa/">DPA</a> &middot; <a href="/subprocessors/">Subprocessors</a></li>
+      <li><strong>Open source.</strong> You, or Lovable, can read every line first: <a href="https://github.com/dezsirazvan/ez_logs_supabase" target="_blank" rel="noopener">the database install</a> and <a href="https://github.com/dezsirazvan/ez_logs_browser" target="_blank" rel="noopener">the browser package</a>.</li>
     </ul>
-    <p>Both parts are open source, so you (or your AI) can read every line first: <a href="https://github.com/dezsirazvan/ez_logs_supabase" target="_blank" rel="noopener">the database install</a> and <a href="https://github.com/dezsirazvan/ez_logs_browser" target="_blank" rel="noopener">the browser package</a>. To remove it: run <code>select ezlogs.uninstall();</code> in the SQL editor, and ask your AI builder to remove <code>@ezlogs/browser</code> and the EZLogs section of <code>AGENTS.md</code>.</p>
 
-    <h2>Ask your AI what happened</h2>
-    <p>Connect EZLogs to Lovable, Bolt or v0 as an MCP server and their AI can look up what really happened while it fixes a bug: &ldquo;why did Ana&rsquo;s save fail yesterday?&rdquo; <a href="/mcp/">How to connect &rarr;</a></p>
-
-    <h2>Works with</h2>
-    <ul>
-      <li><strong>Lovable</strong> with Lovable Cloud, <strong>Bolt</strong> with Bolt Database, <strong>v0</strong> on Supabase, and any app on Supabase.</li>
-      <li>Supabase Auth (email, magic link, OAuth), Storage, and your own tables.</li>
-      <li>A v0 app on Neon or another database: use the <a href="/nextjs/">Next.js</a> install instead.</li>
-    </ul>
+    <h2 id="questions">Questions</h2>
+    <details>
+      <summary>Is it safe to paste this into my live database?</summary>
+      <p>It&rsquo;s open source, adds its own <code>ezlogs</code> schema and triggers (and turns on two standard Supabase extensions, <code>pg_net</code> and <code>pg_cron</code>), never changes your rows and can&rsquo;t make a save fail; one line removes it from your database. You can try it on a test project first, or ask Lovable&rsquo;s chat to check it.</p>
+    </details>
+    <details>
+      <summary>Why does Lovable warn &ldquo;contains a DELETE&rdquo;?</summary>
+      <p>Every delete in the install removes only EZLogs&rsquo; own data (its own tables, the history of its own scheduled job, and its key when you uninstall), never yours. Click <strong>Run anyway</strong>.</p>
+    </details>
+    <details>
+      <summary>What exactly leaves my database?</summary>
+      <p>For each change: the table, the values before and after, and who made it. Columns named like passwords, tokens, secrets, API keys or card numbers never leave. From the browser, a failed sign-in sends the email that was tried, never the password. You can leave out any table with <code>select ezlogs.untrack('table');</code>.</p>
+    </details>
+    <details>
+      <summary>Where is it stored, and for how long?</summary>
+      <p>In the EU (Helsinki), with encrypted backups in the EU. Activity is kept 90 days during the beta. The names of your existing records, sent once when you connect, are kept until you delete your account, so later actions can name them.</p>
+    </details>
+    <details>
+      <summary>Do I need to mention it in my privacy policy?</summary>
+      <p>Yes, as a service that processes your users&rsquo; data on your behalf. <a href="/dpa/">Our DPA is here.</a></p>
+    </details>
+    <details>
+      <summary>When I connect Lovable, what can it see?</summary>
+      <p>The same sentences you see in EZLogs, through a read-only connection you approve once. They include your users&rsquo; names and emails, and Lovable&rsquo;s AI reads them to answer you.</p>
+    </details>
+    <details>
+      <summary>Does it use Lovable credits?</summary>
+      <p>The prompt in step 2 is one Lovable message, about 2 to 3 credits (measured November 2026; on the free plan, do it on a day you haven&rsquo;t built much). The SQL install runs in the SQL editor, not in Lovable&rsquo;s chat. Asking Lovable about what happened is a normal chat message.</p>
+    </details>
+    <details>
+      <summary>Does it slow my app down?</summary>
+      <p>Each change adds one small write inside your database. Sending happens later, in the background, and never inside your user&rsquo;s save.</p>
+    </details>
+    <details>
+      <summary>What happens after the beta?</summary>
+      <p>It&rsquo;s free during the beta. You&rsquo;ll get at least 30 days&rsquo; notice by email before any paid plan, and nobody is charged without choosing a plan.</p>
+    </details>
+    <details>
+      <summary>What if EZLogs goes down?</summary>
+      <p>Your app never notices. Changes wait in your database (up to 7 days, within a size limit) and are sent when EZLogs is back.</p>
+    </details>
+    <details>
+      <summary>I built my app with Bolt or v0. Does it work?</summary>
+      <p>Yes, if the app runs on Supabase: the same install runs in the Supabase SQL editor. <a href="/supabase/#ai-builders">The steps for Bolt and v0 are here.</a></p>
+    </details>
+    <details>
+      <summary>Is the voice in the video AI?</summary>
+      <p>Yes: an AI copy of the founder&rsquo;s own voice, reading the founder&rsquo;s script.</p>
+    </details>
 
     <div class="doc__callout" style="text-align:center;">
-      <a href="https://app.ezlogs.io/users/sign_up" target="_blank" rel="noopener" style="display:inline-block; padding:12px 22px; background:var(--green); color:#000; font-weight:600; border-radius:10px; text-decoration:none;">Start free &rarr;</a>
-      <p style="margin:14px 0 0; font-size:13px; color:var(--muted);">No card required &middot; Read-only by design</p>
+      <p style="margin:0 0 14px; font-size:20px; font-weight:600; color:var(--text);">See what happened to your users today.</p>
+      <a class="doc__button doc__button--primary" href="https://app.ezlogs.io/users/sign_up" target="_blank" rel="noopener">Start free &rarr;</a>
+      <p style="margin:14px 0 0; font-size:13px; color:var(--muted);">Free in beta &middot; No card &middot; Read-only by design</p>
     </div>
 
     <a class="doc__back" href="/">&larr; Back to home</a>
@@ -123,7 +218,7 @@
     </div>
     <p class="footer__tagline">Plain-English activity logs for every action in your app.</p>
     <div class="footer__links">
-      <a href="https://github.com/dezsirazvan/ez_logs_agent" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://github.com/dezsirazvan/ez_logs_supabase" target="_blank" rel="noopener">GitHub</a>
       <span style="color:var(--faint);">&middot;</span>
       <a href="https://app.ezlogs.io/users/sign_in" target="_blank" rel="noopener">Sign in</a>
       <span style="color:var(--faint);">&middot;</span>
@@ -135,7 +230,7 @@
       <span style="color:var(--faint);">&middot;</span>
       <a href="/nextjs/">Next.js</a>
       <span style="color:var(--faint);">&middot;</span>
-      <a href="/lovable/">Lovable, Bolt, v0</a>
+      <a href="/lovable/">Lovable</a>
       <span style="color:var(--faint);">&middot;</span>
       <a href="/supabase/">Supabase</a>
       <span style="color:var(--faint);">&middot;</span>
