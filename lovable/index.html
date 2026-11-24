@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>See What Happened to Your Users in Your Lovable App | EZLogs</title>
-  <meta name="description" content="Every sign-up, change and error in your Lovable app as a plain sentence: who did it and why it failed. An alert in Slack or by email when something fails, and Lovable can read it too. Free in beta.">
+  <title>See What Your Users Do in Your Lovable App, in Plain English | EZLogs</title>
+  <meta name="description" content="Every sign-up, booking and failed action in your Lovable app as a plain sentence: who did it and why. Lovable reads it too, so you can ask it how your users are doing. Free in beta.">
   <meta name="keywords" content="lovable app logs, see what users do in my lovable app, lovable activity log, lovable audit log, lovable error, lovable cloud logs, lovable connector, supabase activity log">
   <link rel="canonical" href="https://ezlogs.io/lovable/">
   <meta name="robots" content="index, follow">
@@ -15,11 +15,11 @@
   <link rel="manifest" href="/assets/favicon/site.webmanifest">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="EZLogs">
-  <meta property="og:title" content="Know what happened to your users. Before they tell you.">
-  <meta property="og:description" content="Every sign-up, change and error in your Lovable app as a plain sentence. An alert in Slack or by email when something fails, and Lovable can read it to find and fix the cause.">
+  <meta property="og:title" content="Your Lovable app, in plain English. And Lovable can read it too.">
+  <meta property="og:description" content="See what your users do in your Lovable app, in plain English. Lovable reads the same story, so you can ask it how your users are doing, and it fixes the real cause when something breaks.">
   <meta property="og:url" content="https://ezlogs.io/lovable/">
-  <meta property="og:image" content="https://ezlogs.io/assets/video/ezlogs-lovable-poster.jpg">
-  <meta property="og:video" content="https://ezlogs.io/assets/video/ezlogs-lovable.mp4">
+  <meta property="og:image" content="https://ezlogs.io/assets/video/ezlogs-lovable-v2-poster.jpg">
+  <meta property="og:video" content="https://ezlogs.io/assets/video/ezlogs-lovable-v2.mp4">
   <meta property="og:video:type" content="video/mp4">
   <meta name="twitter:card" content="summary_large_image">
 
@@ -80,8 +80,8 @@
 
   <main class="doc">
     <p class="doc__eyebrow">For apps built with Lovable</p>
-    <h1>Know what happened to your users. Before they tell you.</h1>
-    <p class="doc__lead">Every sign-up, change and error in your app becomes a plain sentence: who did it, to what, and why it failed. An alert tells you in Slack or by email when something fails. Connect it to Lovable, and Lovable can read it to find and fix the cause.</p>
+    <h1>Your Lovable app, in plain English. And Lovable can read it too.</h1>
+    <p class="doc__lead">See what your users actually do: every sign-up, booking and failed action becomes one plain sentence, with who did it and why. No tech skills needed. Lovable reads the same story, so you can ask it &ldquo;how are my users doing?&rdquo; and it answers from what really happened, then helps you fix and improve your app.</p>
 
     <div class="doc__actions">
       <a class="doc__button doc__button--primary" href="https://app.ezlogs.io/users/sign_up" target="_blank" rel="noopener">Start free &rarr;</a>
@@ -89,14 +89,14 @@
     </div>
 
     <figure class="doc__video">
-      <video src="/assets/video/ezlogs-lovable.mp4" poster="/assets/video/ezlogs-lovable-poster.jpg" controls playsinline preload="metadata" width="1600" height="900" aria-label="A one-minute video: a Lovable app in plain English. Lovable reads EZLogs, fixes a broken booking rule, and tells the founder how the users are doing, including one who got stuck."></video>
+      <video src="/assets/video/ezlogs-lovable-v2.mp4" poster="/assets/video/ezlogs-lovable-v2-poster.jpg" controls playsinline preload="metadata" width="1600" height="900" aria-label="A one-minute video: a Lovable app in plain English. Lovable reads EZLogs, fixes a broken booking rule, and tells the founder how the users are doing, including one who got stuck."></video>
       <figcaption>One minute, with captions. A demo app with a booking rule broken on purpose; the app, the alert and Lovable&rsquo;s answers are real.</figcaption>
     </figure>
 
     <p class="doc__trust">Free in beta &middot; No card &middot; A few minutes to set up &middot; Open source &middot; Read-only</p>
 
     <h2>What you see</h2>
-    <p>Maya tried to book a class. Her screen said her session had ended. EZLogs showed what really happened: the database had refused her booking. After the fix, her next booking went through:</p>
+    <p>Every action in your app, as a sentence anyone can read. For example, Maya tried to book a class and her screen said her session had ended. EZLogs showed what really happened: the database had refused her booking. After the fix, her next booking went through:</p>
     <figure>
       <img src="/assets/screenshots/lovable-timeline-maya.png" alt="Two EZLogs Timeline entries for Maya Chen. 07:27: Created booking for class 'Vinyasa Basics'. 06:36: Booking creation not allowed. Tried to create a booking but was not allowed. Reason: not allowed by the table's access rules." width="660" height="348" loading="lazy">
       <figcaption>The EZLogs Timeline of the demo app, newest first.</figcaption>
@@ -111,20 +111,25 @@
     </ul>
     <p>What it doesn&rsquo;t: a click that changes nothing. Page views are a switch you can turn on per app, only for signed-in people.</p>
 
+    <h2>Ask Lovable how your users are doing</h2>
+    <p>Connect EZLogs in Lovable once: <strong>Connectors &rarr; Add custom &rarr; MCP server</strong>, paste <code>https://app.ezlogs.io/mcp</code>, leave sign-in set to OAuth, then <strong>Add &amp; authorize</strong>. Lovable can then read what happened in your app, and you can just ask it:</p>
+    <blockquote><p><strong>&ldquo;How are my users doing? Tell me who signed up, what they booked, and where anyone got stuck.&rdquo;</strong></p></blockquote>
+    <p>In the demo, Lovable read EZLogs and told me who signed up and what they booked, found who got stuck, and noticed one user never came back. Then it offered to invite him back:</p>
+    <figure>
+      <img src="/assets/screenshots/lovable-ask-users.png" alt="Lovable, reading EZLogs: Alex Rivera attempted to book 3 times. All 3 attempts were blocked. Alex left without being able to book. Lovable: Would you like help sending a quick notification or email to Alex Rivera to let them know the issue is resolved and invite them back to book?" width="1340" height="560" loading="lazy">
+      <figcaption>Lovable&rsquo;s answers in the demo, quoted word for word.</figcaption>
+    </figure>
+    <p>It also fixes the real cause when something breaks. Asked &ldquo;What went wrong for my users today? Fix it.&rdquo;, it looked up what happened in EZLogs, found the broken booking rule and fixed it: &ldquo;Members can book classes again, but still can&rsquo;t book for someone else.&rdquo; EZLogs only answers questions: it never changes your app.</p>
+    <figure>
+      <img src="/assets/screenshots/lovable-reads-ezlogs.png" alt="Lovable's chat: Looking at the app's saved database changes and project rules, then two calls: EZLogs find_actions." width="1152" height="648" loading="lazy">
+      <figcaption>Lovable reading EZLogs before it answered.</figcaption>
+    </figure>
+
     <h2>Hear about it first</h2>
     <p>Pin a question once, in plain words: &ldquo;tell me when a booking fails&rdquo;. Set to &ldquo;as it happens&rdquo;, EZLogs checks it every 5 minutes and tells you in Slack or by email, with the same words and link as the alert in EZLogs. Alerts only inform: they never change anything in your app.</p>
     <figure>
       <img src="/assets/screenshots/lovable-slack-alert.png" alt="A Slack notification from EZLogs in #bookings: Booking failed 3 times: 3 since the last check, the latest by Maya Chen. 9 total so far." width="1014" height="234" loading="lazy">
       <figcaption>The alert from the demo app, on the founder&rsquo;s phone.</figcaption>
-    </figure>
-
-    <h2>Let Lovable read it</h2>
-    <p>Connect EZLogs in Lovable once: <strong>Connectors &rarr; Add custom &rarr; MCP server</strong>, paste <code>https://app.ezlogs.io/mcp</code>, leave sign-in set to OAuth, then <strong>Add &amp; authorize</strong>. Then ask in Lovable&rsquo;s chat:</p>
-    <blockquote><p><strong>&ldquo;What went wrong for my users today? Fix it.&rdquo;</strong></p></blockquote>
-    <p>Lovable looks up what happened in EZLogs, finds the cause and fixes it. In the demo it found the broken booking rule and answered: &ldquo;Members can book classes again, but still can&rsquo;t book for someone else.&rdquo; EZLogs only answers questions: it never changes your app.</p>
-    <figure>
-      <img src="/assets/screenshots/lovable-reads-ezlogs.png" alt="Lovable's chat: Looking at the app's saved database changes and project rules, then two calls: EZLogs find_actions." width="1152" height="648" loading="lazy">
-      <figcaption>Lovable reading EZLogs before it answered.</figcaption>
     </figure>
 
     <h2 id="setup">Set it up in 3 steps</h2>
