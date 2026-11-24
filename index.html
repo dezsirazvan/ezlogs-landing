@@ -403,6 +403,7 @@
       color: var(--text); font-size: 14px; font-weight: 500; text-decoration: none;
     }
     .hero__band a:hover { border-color: rgba(1, 230, 62, 0.55); }
+    @media (max-width: 480px) { .hero__band-long { display: none; } }
     .hero__ctas {
       display: flex; gap: 14px; justify-content: center; align-items: center; flex-wrap: wrap;
       margin-bottom: 18px;
@@ -704,7 +705,7 @@
   <!-- Hero -->
   <section class="hero">
     <div class="hero__inner">
-      <p class="hero__band"><a href="/lovable/">Built with Lovable? See what happened to your users &rarr;</a></p>
+      <p class="hero__band"><a href="/lovable/">Built with Lovable? See <span class="hero__band-long">what happened to </span>your users &rarr;</a></p>
       <h1 class="hero__title">Know what your app and its AI agents did, in plain English.</h1>
       <p class="hero__sub">EZLogs turns the requests, background jobs and database changes in your Rails or Next.js app into one readable card per action, for your whole team. The cards are built from real events, not written by AI, and EZLogs never writes back into your app.</p>
       <div class="hero__ctas">
