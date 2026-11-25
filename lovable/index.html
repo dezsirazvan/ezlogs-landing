@@ -48,6 +48,19 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "name": "I asked Lovable how my users are doing. It noticed one never came back",
+    "description": "A Lovable app in plain English with EZLogs. Lovable reads the log through a read-only connector, finds the real reason a booking failed and fixes the rule, then tells the founder how the users are doing, including one who never came back.",
+    "thumbnailUrl": "https://ezlogs.io/assets/video/ezlogs-lovable-v2-poster.jpg",
+    "uploadDate": "2026-11-25T15:15:00+01:00",
+    "duration": "PT58S",
+    "contentUrl": "https://ezlogs.io/assets/video/ezlogs-lovable-v2.mp4",
+    "embedUrl": "https://www.youtube.com/embed/d5ZX90w6Apk"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
     "@type": "FAQPage",
     "mainEntity": [
       { "@type": "Question", "name": "Is it safe to paste this into my live database?", "acceptedAnswer": { "@type": "Answer", "text": "It is open source, adds its own ezlogs schema and triggers (and turns on two standard Supabase extensions, pg_net and pg_cron), never changes your rows and cannot make a save fail; one line removes it from your database. You can try it on a test project first, or ask Lovable's chat to check it." } },
@@ -90,7 +103,7 @@
 
     <figure class="doc__video">
       <video src="/assets/video/ezlogs-lovable-v2.mp4" poster="/assets/video/ezlogs-lovable-v2-poster.jpg" controls playsinline preload="metadata" width="1600" height="900" aria-label="A one-minute video: a Lovable app in plain English. Lovable reads EZLogs, fixes a broken booking rule, and tells the founder how the users are doing, including one who got stuck."></video>
-      <figcaption>One minute, with captions. A demo app with a booking rule broken on purpose; the app, the alert and Lovable&rsquo;s answers are real.</figcaption>
+      <figcaption>One minute, with captions. A demo app with a booking rule broken on purpose; the app, the alert and Lovable&rsquo;s answers are real. <a href="https://www.youtube.com/watch?v=d5ZX90w6Apk" target="_blank" rel="noopener">Watch on YouTube</a></figcaption>
     </figure>
 
     <p class="doc__trust">Free in beta &middot; No card &middot; A few minutes to set up &middot; Open source &middot; Read-only</p>
