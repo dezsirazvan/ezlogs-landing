@@ -68,6 +68,7 @@
     "thumbnailUrl": "https://ezlogs.io/assets/video-poster.jpg",
     "uploadDate": "2026-11-17T08:11:27-08:00",
     "duration": "PT1M17S",
+    "contentUrl": "https://ezlogs.io/assets/video/ezlogs-overnight-demo.mp4",
     "embedUrl": "https://www.youtube.com/embed/xBzMipWUdEQ"
   }
   </script>
@@ -432,14 +433,14 @@
       font-size: 14px;
       color: var(--muted);
     }
-    /* Demo video: a poster + play button; the YouTube player only loads on click (no third-party request before that) */
+    /* Demo video: a poster + play button; the self-hosted video only loads on click (no bytes, no third party before that) */
     .hero__video {
       position: relative; display: block; width: 100%; max-width: 880px; margin: 0 auto; aspect-ratio: 16 / 9;
       border-radius: 16px; overflow: hidden; border: 1px solid rgba(255,255,255,0.10); background: #000; padding: 0; cursor: pointer;
       box-shadow: 0 30px 90px rgba(0,0,0,0.55), 0 0 80px rgba(1,230,62,0.08);
     }
     .hero__video img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .hero__video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+    .hero__video video { position: absolute; inset: 0; width: 100%; height: 100%; background: #000; }
     .hero__play {
       position: absolute; left: 50%; bottom: 22px; transform: translateX(-50%); white-space: nowrap;
       display: inline-flex; align-items: center; gap: 10px; padding: 14px 22px; border-radius: 999px;
@@ -736,11 +737,11 @@
       <p class="hero__stacks"><span>Works with</span>
         <a href="/rails/">Rails</a><a href="/nextjs/">Next.js</a><a href="/supabase/">Supabase</a><a href="/lovable/">Lovable</a><a href="/supabase/#ai-builders">Bolt</a><a href="/supabase/#ai-builders">v0</a>
       </p>
-      <button type="button" class="hero__video" id="demo-video" data-yt="xBzMipWUdEQ" aria-label="Play the 77-second EZLogs demo video">
+      <button type="button" class="hero__video" id="demo-video" data-src="/assets/video/ezlogs-overnight-demo.mp4" aria-label="Play the 77-second EZLogs demo video">
         <img src="/assets/video-poster.jpg" alt="04:26, gale warning. What did your AI agent do last night?" width="1280" height="720" loading="eager">
         <span class="hero__play"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5v11l9-5.5z" fill="currentColor"/></svg>Watch the demo &middot; 77s</span>
       </button>
-      <p class="hero__video-caption">At 04:26 a gale cancels two ferry sailings and strands 48 passengers. An AI assistant rebooks or refunds them overnight. This is what the team sees in EZLogs the next morning. <a href="https://app.ezlogs.io/demo" target="_blank" rel="noopener">Open that morning yourself</a>, no sign-up.</p>
+      <p class="hero__video-caption">At 04:26 a gale cancels two ferry sailings and strands 48 passengers. An AI assistant rebooks or refunds them overnight. This is what the team sees in EZLogs the next morning. <a href="https://app.ezlogs.io/demo" target="_blank" rel="noopener">Open that morning yourself</a>, no sign-up. <a href="https://www.youtube.com/watch?v=xBzMipWUdEQ" target="_blank" rel="noopener">Watch on YouTube</a></p>
     </div>
   </section>
 
@@ -1917,18 +1918,21 @@
       var v = document.getElementById("demo-video");
       if (!v) return;
       function play() {
-        // swap the button for a plain box: an iframe must not live inside a <button> (Firefox swallows its clicks)
+        // swap the button for a plain box: a player must not live inside a <button> (its controls would not get clicks)
         var box = document.createElement("div");
         box.className = "hero__video";
         box.id = "demo-video";
         box.style.cursor = "default";
-        var f = document.createElement("iframe");
-        f.src = "https://www.youtube-nocookie.com/embed/" + v.dataset.yt + "?autoplay=1&rel=0&modestbranding=1";
-        f.title = "EZLogs demo";
-        f.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen";
+        var f = document.createElement("video");
+        f.src = v.dataset.src;
+        f.poster = v.querySelector("img").src;
+        f.controls = true;
+        f.playsInline = true;
+        f.setAttribute("aria-label", "EZLogs demo video, 77 seconds");
         box.appendChild(f);
         v.replaceWith(box);
         f.focus();
+        f.play().catch(function () {}); // autoplay refused: the controls are there
       }
       v.addEventListener("click", play, { once: true });
       // "Watch the 77s demo": scroll the video into view and start it
