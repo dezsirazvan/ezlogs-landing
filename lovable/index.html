@@ -144,7 +144,7 @@
 
     <h2 id="setup">Set it up in 3 steps</h2>
     <ol>
-      <li><strong>Paste the install code into your SQL editor.</strong> <a href="https://app.ezlogs.io/users/sign_up" target="_blank" rel="noopener">Sign up</a>, open <strong>Settings &rarr; API Keys</strong>, choose <strong>Lovable &middot; Bolt &middot; v0</strong> under <strong>Install EZLogs</strong>, and click <strong>Create install code</strong>. In Lovable: <strong>More &rarr; Database &rarr; Manage &rarr; SQL editor</strong>, paste, <strong>Run</strong>. Lovable will warn that it contains a DELETE: every delete in it removes only EZLogs&rsquo; own data, never yours, so click <strong>Run anyway</strong>. Not sure? Ask Lovable&rsquo;s chat whether it&rsquo;s safe, leaving out the line with your key (<code>ezldb_&hellip;</code>).</li>
+      <li><strong>Paste the install code into your SQL editor.</strong> <a href="https://app.ezlogs.io/users/sign_up" target="_blank" rel="noopener">Sign up</a>, open <strong>Install &amp; keys</strong> (the menu behind your initials, top right), choose <strong>Lovable &middot; Bolt &middot; v0</strong> under <strong>Install EZLogs</strong>, and click <strong>Create install code</strong>. In Lovable: <strong>More &rarr; Database &rarr; Manage &rarr; SQL editor</strong>, paste, <strong>Run</strong>. Lovable will warn that it contains a DELETE: every delete in it removes only EZLogs&rsquo; own data, never yours, so click <strong>Run anyway</strong>. Not sure? Ask Lovable&rsquo;s chat whether it&rsquo;s safe, leaving out the line with your key (<code>ezldb_&hellip;</code>).</li>
       <li><strong>Paste the prompt from the same page into Lovable&rsquo;s chat, then publish.</strong> It adds small open-source packages that report the calls that fail in your users&rsquo; browsers (and link your server code, if your app has any, to the click that started it), plus a small database change so EZLogs can show your records by name. One Lovable message, about 2 to 3 credits.</li>
       <li><strong>Connect EZLogs in Lovable</strong> (Connectors &rarr; Add custom &rarr; MCP server, as above), so Lovable can read what happened. Optional: steps 1 and 2 already record everything.</li>
     </ol>
@@ -153,7 +153,7 @@
       <figcaption>The warning you&rsquo;ll see in step 1. The deletes only clean up EZLogs&rsquo; own data.</figcaption>
     </figure>
     <p>Then use your app: sign-ups and changes appear in your Timeline within seconds. Building several apps? Add each one on the same settings page; every app gets its own code and prompt.</p>
-    <p>To remove it: run <code>select ezlogs.uninstall();</code> in the SQL editor, then ask Lovable to remove everything the EZLogs section of <code>AGENTS.md</code> lists (the <code>@ezlogs</code> packages and the files they added), and that section itself.</p>
+    <p>To remove it: run <code>select ezlogs.uninstall();</code> in the SQL editor, then ask Lovable to remove everything the EZLogs section of <code>AGENTS.md</code> lists (the <code>@ezlogs</code> packages and the files they added), and that section itself. Last, revoke the app&rsquo;s keys in EZLogs (<strong>Install &amp; keys</strong>).</p>
 
     <h2>One person&rsquo;s problem, not a chart</h2>
     <p>Analytics counts people: &ldquo;120 people opened the booking page&rdquo;. EZLogs explains one person&rsquo;s problem: &ldquo;Maya tried to book a class at 6:36 and the database refused it&rdquo;. It comes from your database, not from guesses. Many teams use both.</p>

@@ -78,13 +78,13 @@
 
     <h2>Install</h2>
     <ol>
-      <li><strong><a href="https://app.ezlogs.io/users/sign_up" target="_blank" rel="noopener">Sign up</a></strong>, open <strong>Settings &rarr; API Keys</strong>, choose <strong>Lovable &middot; Bolt &middot; v0</strong> under <strong>Install EZLogs</strong>, and click <strong>Create install code</strong>.</li>
+      <li><strong><a href="https://app.ezlogs.io/users/sign_up" target="_blank" rel="noopener">Sign up</a></strong>, open <strong>Install &amp; keys</strong> (the menu behind your initials, top right), choose <strong>Lovable &middot; Bolt &middot; v0</strong> under <strong>Install EZLogs</strong>, and click <strong>Create install code</strong>.</li>
       <li><strong>Run it in the SQL editor</strong> of your Supabase project. It installs the <code>ezlogs</code> schema and connects with your database key. Running it again later upgrades in place.</li>
       <li><strong>Optional:</strong> paste the prompt from the same page into your AI builder&rsquo;s chat (or follow it by hand) to add the browser package: the calls that fail for people, and sign-outs.</li>
     </ol>
     <p><strong>Keeping it in your migrations?</strong> Add <a href="https://app.ezlogs.io/install/supabase.sql" target="_blank" rel="noopener">the install SQL</a> (key-free) as a migration, then run the connect line once in the SQL editor, never in a migration, so the key stays out of git:</p>
     <pre><code>select ezlogs.connect('ezldb_your_database_key');</code></pre>
-    <p>Your database key (<code>ezldb_&hellip;</code>) is on <strong>Settings &rarr; API Keys</strong>, under <strong>Install EZLogs &rarr; Lovable &middot; Bolt &middot; v0</strong>, after <strong>Create install code</strong>. It can only send to EZLogs, never read anything.</p>
+    <p>Your database key (<code>ezldb_&hellip;</code>) is on <strong>Install &amp; keys</strong>, under <strong>Install EZLogs &rarr; Lovable &middot; Bolt &middot; v0</strong>, after <strong>Create install code</strong>. It can only send to EZLogs, never read anything.</p>
 
     <h2>How it works</h2>
     <ul>
@@ -94,7 +94,7 @@
       <li><strong>Sensitive columns stay home:</strong> columns named like passwords, tokens, secrets, API keys or card numbers are removed inside the database, in nested JSON too. Leave out a whole table with <code>select ezlogs.untrack('table');</code>.</li>
       <li><strong>Records by name:</strong> a row is named by its <code>name</code>, <code>title</code>, <code>number</code> or <code>label</code> column. Name any other table&rsquo;s rows by one of its columns with <code>select ezlogs.name_records('public.&lt;table&gt;', '&lt;column&gt;');</code> (for example <code>('public.invoices', 'reference')</code> shows &ldquo;Updated invoice &lsquo;INV-0042&rsquo;&rdquo;). The prompt for your AI builder proposes them and asks you first.</li>
       <li><strong>Read-only:</strong> EZLogs never connects to your database and holds no credentials for it. Your database sends; EZLogs only receives.</li>
-      <li><strong>Remove it</strong> with <code>select ezlogs.uninstall();</code> (and, if you used the prompt for your AI builder, ask it to remove everything the EZLogs section of <code>AGENTS.md</code> lists, and that section itself).</li>
+      <li><strong>Remove it</strong> with <code>select ezlogs.uninstall();</code> (and, if you used the prompt for your AI builder, ask it to remove everything the EZLogs section of <code>AGENTS.md</code> lists, and that section itself; then revoke the app&rsquo;s keys in EZLogs, <strong>Install &amp; keys</strong>).</li>
     </ul>
     <p>Read every line first: <a href="https://github.com/dezsirazvan/ez_logs_supabase" target="_blank" rel="noopener">github.com/dezsirazvan/ez_logs_supabase</a>.</p>
 
