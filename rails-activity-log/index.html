@@ -79,7 +79,7 @@
     <p><a href="/rails/">EZLogs</a> is a hosted activity log. The <code>ez_logs_agent</code> gem captures your requests, Sidekiq and ActiveJob runs, ActiveRecord changes and bulk SQL like <code>update_all</code>, with no per-model or per-controller code. EZLogs links them by request and record, then shows one plain-English card per action: &ldquo;Refund failed: card expired&rdquo;, with who did it (a person, an AI agent or the system) and which records it touched. Support, product and founders can read it without asking an engineer. You can also connect <a href="/mcp/">Claude, ChatGPT or Cursor over MCP</a> and ask what happened.</p>
     <p><strong>Trade-offs, honestly:</strong></p>
     <ul>
-      <li>Data leaves your app. It is sent to EZLogs servers in Finland (EU), after the agent masks fields like passwords, tokens and card numbers. PaperTrail, Audited, public_activity and Ahoy keep everything in your own database.</li>
+      <li>Data leaves your app. It is sent to EZLogs servers in Finland (EU), after the agent masks fields like passwords, tokens and card numbers. Phone numbers, addresses, birth dates and IP addresses are never stored. PaperTrail, Audited, public_activity and Ahoy keep everything in your own database.</li>
       <li>EZLogs is read-only. It cannot restore an old version of a record. Keep PaperTrail if you need undo.</li>
       <li>History is kept for 90 days during the beta. For a long-term compliance trail, keep an audit gem in your own database.</li>
       <li>It is a hosted service. It is free during the beta, and the agent is open source; the server is not self-hostable yet.</li>

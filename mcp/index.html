@@ -207,7 +207,7 @@ codex mcp login ezlogs</code></pre>
       <li><strong>Read-only by design.</strong> EZLogs holds no write credentials into your app. The MCP server can only answer questions. See <a href="/security/">Security</a>.</li>
       <li><strong>OAuth sign-in.</strong> Each connection belongs to one user and one EZLogs company. Access tokens are short-lived, and you can revoke a connected app any time from <strong>Settings &rarr; Connectors &rarr; MCP</strong>.</li>
       <li><strong>Hosted in the EU.</strong> Data is stored on Hetzner servers in Finland, with encrypted backups in the Netherlands (EU).</li>
-      <li><strong>Masked at the source.</strong> The agent masks fields named like passwords, tokens, secrets, API keys and card numbers inside your app before anything is sent. Raw request and response bodies are never sent.</li>
+      <li><strong>Masked at the source.</strong> The agent masks fields named like passwords, tokens, secrets, API keys and card numbers inside your app before anything is sent. Raw request and response bodies are never sent. Phone numbers, addresses, birth dates and IP addresses are never stored: EZLogs keeps that one changed (&ldquo;changed the phone&rdquo;), never the value.</li>
       <li><strong>One redaction layer.</strong> Everything that leaves EZLogs (MCP, share links, embeds, exports) passes through the same redaction step. Over MCP you see your own data in full, because it is your AI reading your log.</li>
     </ul>
 

@@ -130,7 +130,7 @@ npx ezlogs-nextjs install-triggers</code></pre>
       <li><strong>Edge-compatible:</strong> works in Edge runtime + Node runtime.</li>
       <li><strong>Out-of-band:</strong> events buffered in memory, shipped asynchronously.</li>
       <li><strong>Fails open:</strong> if EZLogs is unreachable, the agent buffers and retries. The agent <em>never</em> throws into your request path.</li>
-      <li><strong>Field-level redaction</strong> on by default: parameters named like passwords, tokens, secrets, API keys or card numbers are sent as <code>[FILTERED]</code>, and sensitive columns are removed by the trigger before anything is sent.</li>
+      <li><strong>Field-level redaction</strong> on by default: parameters named like passwords, tokens, secrets, API keys or card numbers are sent as <code>[FILTERED]</code>, and sensitive columns are removed by the trigger before anything is sent. Phone numbers, addresses, birth dates and IP addresses are never stored: EZLogs keeps that one changed (&ldquo;changed the phone&rdquo;), never the value.</li>
       <li><strong>Open source</strong> at <a href="https://github.com/dezsirazvan/ez_logs_agent_nextjs" target="_blank" rel="noopener">github.com/dezsirazvan/ez_logs_agent_nextjs</a>.</li>
     </ul>
 
