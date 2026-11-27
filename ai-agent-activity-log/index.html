@@ -3,9 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI Agent Activity Log: See What Your Agents Did, Step by Step | EZLogs</title>
-  <meta name="description" content="An activity and execution log for the AI agents working inside your Rails, Next.js or Supabase app: every request, job and database change an agent made, as one plain-English card per action. Plus an MCP server so your AI can query its own history.">
-  <meta name="keywords" content="ai agent activity log, ai agent execution log, agent activity logger, ai agent audit log, track ai agent actions, mcp server activity, ai agent observability, claude audit log, gpt audit log">
+  <title>AI Agent Activity Log: See What Your Agents Did | EZLogs</title>
+  <meta name="description" content="See every action your AI agents take inside your app, in plain English: what they changed, what failed and why. For Rails, Next.js and Supabase apps. Free in beta.">
   <link rel="canonical" href="https://ezlogs.io/ai-agent-activity-log/">
   <meta name="robots" content="index, follow">
   <meta name="theme-color" content="#0A0A0A">
@@ -16,10 +15,17 @@
 
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="EZLogs">
-  <meta property="og:title" content="The activity log for AI work inside your app.">
-  <meta property="og:description" content="See what your AI agents actually did, in plain English, with citations. Plus an MCP server so your AI can query its own history.">
+  <meta property="og:title" content="What did your AI agent do last night?">
+  <meta property="og:description" content="Every action your AI agents take inside your app, in plain English: what they changed, what failed and why, for your whole team and for your own AI.">
   <meta property="og:url" content="https://ezlogs.io/ai-agent-activity-log/">
-  <meta property="og:image" content="https://ezlogs.io/assets/og-image.png?v=20261126">
+  <meta property="og:image" content="https://ezlogs.io/assets/screenshots/pulse-agent-ferry.png">
+  <meta property="og:image:width" content="2000">
+  <meta property="og:image:height" content="1188">
+  <meta property="og:image:alt" content="An AI agent's page in EZLogs: 50 actions since 00:27 today, 5 failed, 48 bookings and 8 refunds touched">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="What did your AI agent do last night?">
+  <meta name="twitter:description" content="Every action your AI agents take inside your app, in plain English: what they changed, what failed and why.">
+  <meta name="twitter:image" content="https://ezlogs.io/assets/screenshots/pulse-agent-ferry.png">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -32,16 +38,23 @@
     "@type": "SoftwareApplication",
     "name": "EZLogs",
     "applicationCategory": "DeveloperApplication",
-    "operatingSystem": "Web, Linux, macOS",
-    "description": "The activity log for AI work inside your app. Captures every request, background job, and database change in Rails, Next.js and Supabase apps and turns each AI action into a plain-English card readable by humans and queryable by AI agents via MCP.",
+    "operatingSystem": "Web",
+    "description": "An activity log for the AI agents working inside your app: every action an agent takes, as one plain-English card with what changed, what failed and why. For Rails, Next.js and Supabase apps, readable by your team and queryable by your own AI over MCP.",
     "url": "https://ezlogs.io/ai-agent-activity-log/",
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "EUR",
-      "description": "Free during beta. No card required.",
-      "url": "https://app.ezlogs.io/users/sign_up"
-    }
+    "screenshot": "https://ezlogs.io/assets/screenshots/pulse-agent-ferry.png",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR", "description": "Free during beta. No card required.", "url": "https://app.ezlogs.io/users/sign_up" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "How does EZLogs know an action was done by an AI agent?", "acceptedAnswer": { "@type": "Answer", "text": "From who made the request: calls from Claude, ChatGPT, Cursor or Windsurf are recognised from the client name they send, and your own assistant shows as an agent when your app tells EZLogs who is acting. A person or the system is labelled as such. EZLogs never guesses: an actor it cannot tell stays unnamed." } },
+      { "@type": "Question", "name": "Does AI write the activity log?", "acceptedAnswer": { "@type": "Answer", "text": "No. Every card is built from the events your app sent, by fixed rules, so the same events always give the same card. AI is optional on top: a labelled explanation or summary, and your own AI asking questions over MCP." } },
+      { "@type": "Question", "name": "Can EZLogs stop or change what an agent does?", "acceptedAnswer": { "@type": "Answer", "text": "No. EZLogs is read-only by design: it never writes back into your app, and its MCP tools only answer questions. It tells your team what happened and alerts them when something fails." } },
+      { "@type": "Question", "name": "How is this different from LangSmith, Langfuse or Braintrust?", "acceptedAnswer": { "@type": "Answer", "text": "Those tools show an engineer the agent's prompts, tokens and traces. EZLogs shows the whole team what the agent did to your business: which bookings it changed, which refunds failed and why. Many teams use both." } }
+    ]
   }
   </script>
 </head>
@@ -63,66 +76,85 @@
 
   <main class="doc">
     <p class="doc__eyebrow">AI agent activity log</p>
-    <h1>The activity log for AI work inside your app.</h1>
-    <p class="doc__lead">AI agents now do real work inside production apps. Nobody has a clean way to see that work happening, explain it to non-technical colleagues, or let the AI itself answer "what did I do yesterday?". EZLogs is built for exactly that.</p>
+    <h1>See what your AI agents did in your app, in plain English.</h1>
+    <p class="doc__lead">AI agents now change real data: they rebook customers, issue refunds, update orders. EZLogs records every action they take inside your app and writes it as one sentence anyone on your team can read, with what changed, what failed and why.</p>
 
-    <h2>What it does</h2>
-    <p>EZLogs drops into your Rails or Next.js app and captures every HTTP request, every background job, and every database change (in a Supabase app, every database change and the calls that fail in the browser) &mdash; whether the actor is a human user, a system process, or an AI agent. EZLogs correlates those events into a single &ldquo;action&rdquo; per business event, then renders each action as a plain-English card. Think of it as an execution log for every agent, written so anyone on the team can read it:</p>
-
-    <div class="doc__callout">
-      <strong>&ldquo;Refund &rsquo;RF-M9PM&rsquo; failed&rdquo;</strong> &middot; status pending &rarr; failed (64.20 EUR), booking 'BRK-M9PM' marked as refund failed and failure reason set to 'card expired' &middot; <em>Agent &middot; Rebooking assistant</em>
+    <div class="doc__actions">
+      <a class="doc__button doc__button--primary" href="https://app.ezlogs.io/users/sign_up" target="_blank" rel="noopener">Start free &rarr;</a>
+      <a class="doc__button" href="https://app.ezlogs.io/demo" target="_blank" rel="noopener">Try the live demo, no sign-up</a>
     </div>
+    <p class="doc__trust">Free in beta &middot; No card &middot; Rails, Next.js and Supabase &middot; Read-only by design</p>
 
-    <p>That card is built from the six events behind it (one request, four data changes, one failed background job) by fixed rules, not by AI, so the same events always give the same card. AI is optional: it can add an explanation or answer questions, and it only works from events your app actually sent.</p>
+    <h2>Every agent gets its own page</h2>
+    <p>Open an agent and see what it did: how many actions, since when, how many failed, and which records it touched. Below, every action as a sentence, newest first. Here, the demo&rsquo;s Rebooking assistant on the night a gale cancelled two ferry sailings:</p>
+    <figure>
+      <img src="/assets/screenshots/pulse-agent-ferry.png" alt="EZLogs Pulse page for the AI agent Rebooking assistant: 50 actions since 00:27 today, 5 failed; touched 48 bookings and 8 refunds; its latest actions: marked booking BRK-Y4CZ as rebooked, a rebooking rejected because the sailing was full" width="2000" height="1188" loading="lazy">
+      <figcaption>50 actions overnight, 5 failed. One click on &ldquo;5 failed&rdquo; lists only those.</figcaption>
+    </figure>
 
-    <h2>Two readers, one source of truth</h2>
-    <h3>For your team &mdash; Pulse pages, in plain English</h3>
-    <p>Open <code>/actors/agent:claude</code> or <code>/entities/Order/4471</code>. Live state. Sentence-level summaries. Citations on every value. The same screen support uses to answer &ldquo;what happened to this order?&rdquo; and product uses to ask &ldquo;what is this agent doing?&rdquo;</p>
+    <h2>When it fails, you see what and why</h2>
+    <p>Each action opens to the full story: the sentence, the reason it failed, who triggered it, and every request, data change, background task and outside call in order. No log files, no guessing.</p>
+    <figure>
+      <img src="/assets/screenshots/action-failed-ferry.png" alt="EZLogs action page: Refund RF-9LDK failed. Changed the status from pending to failed (card expired, 55.70 EUR) and marked the booking BRK-9LDK as refund failed. What went wrong: Process refund, card expired (card ending 0069). Triggered by the agent Rebooking assistant; outcome: a step failed" width="2000" height="1563" loading="lazy">
+      <figcaption>The agent&rsquo;s refund failed because the card had expired, and the booking was marked refund failed.</figcaption>
+    </figure>
 
-    <h3>For your AI &mdash; MCP server + in-app chat</h3>
-    <p>Six query-only MCP tools at <code>https://app.ezlogs.io/mcp</code> for Claude Desktop, Claude Code, Cursor, Codex and ChatGPT. Plus an in-app &ldquo;Ask EZLogs&rdquo; chat sidebar that runs the same tools in-process. Your AI finally has memory of what your app did, and answers your team in their own words with citations they can click through. <a href="/mcp/">MCP setup guide &rarr;</a></p>
+    <h2>Agents, people and the system, side by side</h2>
+    <p>Calls from Claude, ChatGPT, Cursor or Windsurf are recognised as agents from the client name they send, and your own assistant shows as one when your app tells EZLogs who is acting. They are labelled in purple everywhere, next to the people and background jobs working on the same records, so you can see who changed what:</p>
+    <figure>
+      <img src="/assets/screenshots/pulse-booking-ferry.png" alt="EZLogs Pulse page for the booking BRK-9LDK: needs attention, 3 actions, 1 failed; touched by the agent Rebooking assistant and the people Tomás Rivera and Ilse Danner" width="2000" height="1094" loading="lazy">
+      <figcaption>One booking: created by a customer, disrupted by a staff member, refund attempted by the agent.</figcaption>
+    </figure>
 
-    <h2>Read-only by design</h2>
-    <p>EZLogs <strong>reads</strong> activity from your app. It never writes back. There are no &ldquo;pause agent&rdquo; toggles that throttle your code, no approval queues that send anything anywhere, no MCP tools that perform actions. The MCP layer is for <em>asking what happened</em>, not <em>making something happen</em>. If you compromise an EZLogs account, the blast radius is read-only.</p>
+    <h2>Your team reads it. Your own AI can too.</h2>
+    <ul>
+      <li><strong>Your team:</strong> support, ops and founders read the same sentences, no logs, no SQL. Share any record or agent with a signed, redacted link, or export a signed audit trail.</li>
+      <li><strong>Alerts:</strong> write &ldquo;tell me when a refund fails&rdquo; and get told in the app, by email or in Slack.</li>
+      <li><strong>Your own AI:</strong> connect Claude, ChatGPT, Cursor, Codex or Lovable to the EZLogs MCP server and ask &ldquo;what did the rebooking assistant do last night?&rdquo; or &ldquo;how many refunds failed per day this week?&rdquo;. It answers from the real events, read-only. <a href="/mcp/">MCP setup guide &rarr;</a></li>
+    </ul>
+    <figure>
+      <img src="/assets/screenshots/mcp-claude-ferry.png" alt="Claude Desktop answering 'what did the rebooking assistant do last night?' from EZLogs: 48 bookings disrupted, 40 rebooked, 5 refunds issued, and the failures with their reasons" width="1400" height="1225" loading="lazy">
+      <figcaption>Claude, reading EZLogs over MCP.</figcaption>
+    </figure>
 
-    <h2>How is this different from agent observability tools?</h2>
-    <p>Tools like LangSmith, Langfuse, Arize, Braintrust are built for the engineer debugging the agent &mdash; token counts, latencies, eval scores, trace inspection. EZLogs is built for the rest of the company watching the agent do work in production. We don&rsquo;t compete with those tools. We&rsquo;re the layer above them &mdash; the activity log your PM, founder, and support team can read.</p>
+    <h2>Facts first, AI optional</h2>
+    <p>Every card is built from the events your app sent, by fixed rules: the same events always give the same card, and nothing is invented. AI only sits on top, clearly labelled: an explanation of one action, a short story of an agent&rsquo;s day, and your own AI asking questions.</p>
 
-    <h2>Drop-in install</h2>
-    <p>One gem (Rails) or one npm package (Next.js). Zero per-route code, zero per-agent instrumentation.</p>
+    <h2>It watches. It never acts.</h2>
+    <p>EZLogs is read-only by design. It never writes back into your app: no pause buttons, no approval queues, no MCP tools that make anything happen. Phone numbers, addresses, birth dates, IPs and document numbers are never stored, passwords and tokens are masked inside your app before anything is sent, and data is hosted in Finland (EU).</p>
 
-    <h3>Rails</h3>
-    <pre><code>bundle add ez_logs_agent
-rails generate ez_logs_agent:install</code></pre>
-    <pre><code># config/initializers/ez_logs_agent.rb
-EzLogsAgent.configure do |config|
-  config.project_token = ENV["EZLOGS_API_KEY"]
-end</code></pre>
+    <h2>How it differs from agent tracing tools</h2>
+    <p>LangSmith, Langfuse and Braintrust show an engineer the agent&rsquo;s prompts, tokens and traces. EZLogs shows the whole company what the agent did to your business: which bookings it changed, which refunds failed, and why. Many teams use both.</p>
 
-    <h3>Next.js</h3>
-    <pre><code>npm install ezlogs-nextjs@^0.4.8</code></pre>
-    <pre><code>// instrumentation.ts
-import { ezlogs } from "ezlogs-nextjs";
+    <h2>Set it up in a few minutes</h2>
+    <p>One gem for Rails, one npm package for Next.js, or two pastes for a Supabase app (including apps built with Lovable, Bolt or v0). No per-route code and no per-agent setup. The fastest way: sign up, copy the install prompt from <strong>Install &amp; keys</strong>, and paste it into your coding AI.</p>
+    <ul>
+      <li><a href="/rails/">Rails setup guide &rarr;</a></li>
+      <li><a href="/nextjs/">Next.js setup guide &rarr;</a></li>
+      <li><a href="/supabase/">Supabase setup guide &rarr;</a> &middot; <a href="/lovable/">Lovable &rarr;</a></li>
+    </ul>
 
-export async function register() {
-  if (process.env.NEXT_RUNTIME === "nodejs") {
-    ezlogs.init({
-      projectToken: process.env.EZLOGS_PROJECT_TOKEN!,
-    });
-  }
-}</code></pre>
-    <pre><code>// next.config.mjs
-import { withEzlogsConfig } from "ezlogs-nextjs/plugin";
-const nextConfig = { /* your options */ };
-export default withEzlogsConfig(nextConfig);</code></pre>
-    <pre><code># .env.local
-EZLOGS_PROJECT_TOKEN=ezl_your_api_key_here</code></pre>
+    <h2>Questions</h2>
+    <details>
+      <summary>How does EZLogs know an action was done by an AI agent?</summary>
+      <p>From who made the request: calls from Claude, ChatGPT, Cursor or Windsurf are recognised from the client name they send, and your own assistant shows as an agent when your app tells EZLogs who is acting. A person or the system is labelled as such. EZLogs never guesses: an actor it cannot tell stays unnamed.</p>
+    </details>
+    <details>
+      <summary>Does AI write the activity log?</summary>
+      <p>No. Every card is built from the events your app sent, by fixed rules, so the same events always give the same card. AI is optional on top: a labelled explanation or summary, and your own AI asking questions over MCP.</p>
+    </details>
+    <details>
+      <summary>Can EZLogs stop or change what an agent does?</summary>
+      <p>No. EZLogs is read-only by design: it never writes back into your app, and its MCP tools only answer questions. It tells your team what happened and alerts them when something fails.</p>
+    </details>
+    <details>
+      <summary>How is this different from LangSmith, Langfuse or Braintrust?</summary>
+      <p>Those tools show an engineer the agent&rsquo;s prompts, tokens and traces. EZLogs shows the whole team what the agent did to your business: which bookings it changed, which refunds failed and why. Many teams use both.</p>
+    </details>
 
-    <p>Restart. On Rails, requests, jobs and database changes &mdash; including everything your AI agents do &mdash; start flowing in right away. On Next.js, routes and Server Actions do; database changes need <code>npx ezlogs-nextjs install-triggers</code> once, and each job queue needs its one-line wrapper (see the <a href="/nextjs/">Next.js guide</a>).</p>
-
-    <div class="doc__callout" style="text-align:center;">
-      <a href="https://app.ezlogs.io/users/sign_up" target="_blank" rel="noopener" style="display:inline-block; padding:12px 22px; background:var(--green); color:#000; font-weight:600; border-radius:10px; text-decoration:none;">Start free &rarr;</a>
-      <p style="margin:14px 0 0; font-size:13px; color:var(--muted);">No card required &middot; Read-only by design</p>
+    <div class="doc__actions">
+      <a class="doc__button doc__button--primary" href="https://app.ezlogs.io/users/sign_up" target="_blank" rel="noopener">Start free &rarr;</a>
+      <a class="doc__button" href="https://app.ezlogs.io/demo" target="_blank" rel="noopener">Try the live demo</a>
     </div>
 
     <a class="doc__back" href="/">&larr; Back to home</a>

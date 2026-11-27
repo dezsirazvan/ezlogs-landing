@@ -3,10 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Activity Logs for Next.js &mdash; EZLogs</title>
-  <meta name="description" content="EZLogs is a Next.js activity log: routes and Server Actions out of the box, page views with middleware, plus Postgres changes and background jobs with a short setup. Works with App Router, Pages Router, Prisma, Drizzle, Inngest, Trigger.dev. Plain-English cards your team can read.">
+  <title>Next.js Activity Log in Plain English | EZLogs</title>
+  <meta name="description" content="A Next.js activity log: routes, Server Actions, Postgres changes, jobs and outside calls become plain-English cards your team can read. App and Pages Router.">
   <meta name="keywords" content="next.js activity log, next.js audit log, nextjs activity log, ezlogs nextjs, server actions logging, prisma audit log, drizzle audit log, app router activity log">
   <link rel="canonical" href="https://ezlogs.io/nextjs/">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Activity logs for Next.js — App Router, Server Actions, Postgres.">
+  <meta name="twitter:description" content="Captures routes, Server Actions, database changes and background jobs, and turns each customer or agent action into a plain-English card your whole team can read.">
+  <meta name="twitter:image" content="https://ezlogs.io/assets/og-image.png?v=20261126">
   <meta name="robots" content="index, follow">
   <meta name="theme-color" content="#0A0A0A">
   <meta name="color-scheme" content="dark">
@@ -73,6 +77,7 @@
       <li><strong>Page views</strong> &mdash; page loads, via your <code>middleware.ts</code> / <code>proxy.ts</code>.</li>
       <li><strong>Postgres changes</strong> after one command, <code>npx ezlogs-nextjs install-triggers</code> &mdash; table, operation, before/after column values with sensitive columns removed. Works with supabase-js, Drizzle and raw <code>pg</code> as is; Prisma and postgres.js need a one-line wrapper.</li>
       <li><strong>Background jobs:</strong> BullMQ and Upstash Workflow / QStash on their own; Inngest v4 too; Inngest v3, Trigger.dev and Supabase Queues with a short addition.</li>
+      <li><strong>Calls to outside services</strong> (Stripe, Resend, OpenAI and others) as steps of the action that made them &mdash; the service, method, path pattern, status and time. Never a body, a query string or a header.</li>
     </ul>
 
     <h2>Install: paste the prompt into your coding AI, or do it by hand</h2>
@@ -83,7 +88,7 @@
     <h3>2. By hand</h3>
     <ol>
       <li><strong>Install the package.</strong>
-        <pre><code>npm install ezlogs-nextjs@^0.4.8</code></pre>
+        <pre><code>npm install ezlogs-nextjs</code></pre>
       </li>
       <li><strong>Start the agent</strong> in <code>instrumentation.ts</code> at your project root (or in <code>src/</code>).
         <pre><code>import { ezlogs } from "ezlogs-nextjs";

@@ -23,8 +23,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EZLogs &mdash; Know what your app and its AI agents did, in plain English</title>
-  <meta name="description" content="EZLogs turns what happens in your app (Rails, Next.js, or a Supabase app built with Lovable, Bolt or v0) into one plain-English card per action that your whole team can read. Cards are built from real events, not written by AI. Read-only. Free during beta.">
+  <title>EZLogs: Plain-English Activity Log for Your App and AI Agents</title>
+  <meta name="description" content="See what people and AI agents did in your app, in plain English. One card per action for Rails, Next.js and Supabase apps (Lovable, Bolt, v0). Free in beta.">
   <meta name="keywords" content="activity log, audit log, rails activity log, next.js activity log, ai agent activity log, mcp server, plain english logs, ezlogs">
 
   <!-- Canonical + theme -->
@@ -156,7 +156,7 @@
         "name": "Does AI write the logs?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "No. Cards, titles and timelines are built from your events by fixed rules, so the same events always give the same card. AI is optional: it can add a plain-English explanation to an action, answer chat questions, and match a pinned question to a check you confirm. It only works from events your app actually sent, and you never need it to read a card."
+          "text": "No. Cards, titles and timelines are built from your events by fixed rules, so the same events always give the same card. AI is optional: it can add a plain-English explanation to an action, write a short story of what an agent, a person or a record has been through, answer chat questions, and match a pinned question to a check you confirm. It only works from events your app actually sent, and you never need it to read a card."
         }
       },
       {
@@ -969,7 +969,7 @@
           <span class="ez-ba__dot" aria-hidden="true"></span>
           <div style="flex:1; min-width:0;">
             <h3 class="ez-ba__title">Refund &rsquo;RF-M9PM&rsquo; failed</h3>
-            <p class="ez-ba__sentence">status pending &rarr; failed (64.20 EUR), booking 'BRK-M9PM' marked as refund failed and failure reason set to 'card expired'</p>
+            <p class="ez-ba__sentence">Changed the status from pending to failed (card expired, 64.20 EUR) and marked the booking 'BRK-M9PM' as refund failed</p>
           </div>
         </header>
 
@@ -1012,7 +1012,7 @@
       <div class="proof">
         <article class="proof__item">
           <figure class="proof__shot">
-            <img src="assets/screenshots/dashboard-ferry.png" alt="EZLogs dashboard: 149 actions today and 5 failed, a last-7-days bar chart, What failed today listing refunds that failed on an expired card and rebookings refused because the sailing was full, the latest actions by the Rebooking assistant agent, and the most active actors and bookings this week" width="2000" height="1589" loading="lazy">
+            <img src="assets/screenshots/dashboard-ferry.png" alt="EZLogs dashboard: 149 actions today and 5 failed, a last-7-days bar chart, What failed today listing three refunds that failed on an expired card and two rebookings refused because the sailing was full, the latest actions by the Rebooking assistant agent, and the most active actors and bookings this week" width="2000" height="1594" loading="lazy">
           </figure>
           <div class="proof__text">
             <span class="proof__caption">Dashboard</span>
@@ -1020,10 +1020,19 @@
             <p class="proof__body">How busy the day was, what went wrong, and who did the most work. Here: 149 actions and 5 failed (three refunds on an expired card, two rebookings onto a full sailing), with the Rebooking assistant at the top of the list. Every line reads like a sentence, not a log entry.</p>
           </div>
         </article>
-
         <article class="proof__item proof__item--flip">
           <figure class="proof__shot">
-            <img src="assets/screenshots/timeline-ferry.png" alt="Timeline filtered to refunds: eight actions by the Rebooking assistant, five refunds issued and three marked failed in amber because the card expired, each with its amount" width="2000" height="2298" loading="lazy">
+            <img src="assets/screenshots/pulse-agent-ferry.png" alt="Pulse page for the AI agent Rebooking assistant: 50 actions since 00:27 today, 5 failed; it touched 48 bookings and 8 refunds; its latest actions, each a sentence: marked booking BRK-Y4CZ as rebooked, a rebooking rejected because the sailing was full" width="2000" height="1188" loading="lazy">
+          </figure>
+          <div class="proof__text">
+            <span class="proof__caption">Your AI agents</span>
+            <h3 class="proof__title">See what each AI agent did overnight.</h3>
+            <p class="proof__body">The Rebooking assistant took 50 actions while everyone slept: 48 bookings and 8 refunds touched, 5 failed. Click &ldquo;5 failed&rdquo; and only those are listed; click a card to see every step. Agents are recognised on their own (Claude, ChatGPT, Cursor, your in-house assistant) and labelled in purple everywhere.</p>
+          </div>
+        </article>
+        <article class="proof__item">
+          <figure class="proof__shot">
+            <img src="assets/screenshots/timeline-ferry.png" alt="Timeline filtered to refunds: eight actions by the Rebooking assistant, five refunds issued and three failed in amber, each sentence naming the amount and the booking, with the reason: card expired (card ending 0069)" width="2000" height="1798" loading="lazy">
           </figure>
           <div class="proof__text">
             <span class="proof__caption">Timeline</span>
@@ -1031,26 +1040,24 @@
             <p class="proof__body">People, AI agents and background jobs side by side. Filter to refunds: five issued, and the three that failed stand out in amber, each with its amount and reason.</p>
           </div>
         </article>
-
-        <article class="proof__item">
+        <article class="proof__item proof__item--flip">
           <figure class="proof__shot">
-            <img src="assets/screenshots/action-failed-ferry.png" alt="Action page for Refund RF-9LDK failed: What went wrong says Process refund, card expired (card ending 0069); triggered by the Rebooking assistant, outcome A step failed; then the refund and booking it touched and each step in order, the failed background task showing its error" width="2000" height="2088" loading="lazy">
+            <img src="assets/screenshots/action-failed-ferry.png" alt="Action page for Refund RF-9LDK failed: changed the status from pending to failed (card expired, 55.70 EUR) and marked the booking BRK-9LDK as refund failed; What went wrong says Process refund, card expired (card ending 0069); triggered by the Rebooking assistant agent, outcome A step failed; then the refund and booking it touched and each step in order" width="2000" height="1563" loading="lazy">
           </figure>
           <div class="proof__text">
             <span class="proof__caption">One action, end to end</span>
             <h3 class="proof__title">When something fails, the page says what and why.</h3>
-            <p class="proof__body">Refund RF-9LDK: status pending &rarr; failed, because the card ending 0069 had expired. Below it, every request, data change and background task in order. An optional AI explanation can sit on top, clearly labelled; the facts never depend on it.</p>
+            <p class="proof__body">Refund RF-9LDK went from pending to failed because the card ending 0069 had expired, and the booking was marked refund failed. Below it, every request, data change, background task and outside call, in order. An optional AI explanation can sit on top, clearly labelled; the facts never depend on it.</p>
           </div>
         </article>
-
-        <article class="proof__item proof__item--flip">
+        <article class="proof__item">
           <figure class="proof__shot">
-            <img src="assets/screenshots/pulse-booking-ferry.png" alt="Pulse page for booking BRK-M9PM: latest, refund RF-M9PM failed; touched by the Rebooking assistant, Tomás Rivera and Lena Marsh, with its three actions from creation to cancelled sailing to failed refund" width="2000" height="1094" loading="lazy">
+            <img src="assets/screenshots/pulse-booking-ferry.png" alt="Pulse page for the booking BRK-9LDK: Needs attention, 3 actions since 00:24 today, 1 failed; touched by the Rebooking assistant agent and the people Tomás Rivera and Ilse Danner; its actions from creation to the cancelled sailing to the failed refund" width="2000" height="1094" loading="lazy">
           </figure>
           <div class="proof__text">
             <span class="proof__caption">Pulse</span>
             <h3 class="proof__title">Every booking, customer and agent gets its own live page, and Pulse lists the ones that need attention first.</h3>
-            <p class="proof__body">BRK-M9PM&rsquo;s whole story: booked by Lena Marsh, disrupted when Tomás Rivera cancelled the sailing, refund failed under the Rebooking assistant. It updates as things happen, and you can share it with a signed, redacted link.</p>
+            <p class="proof__body">BRK-9LDK&rsquo;s whole story: booked by Ilse Danner, disrupted when Tomás Rivera cancelled the sailing, refund failed under the Rebooking assistant, so it needs attention. Who touched it, how many actions, how many failed. It updates as things happen, an AI Story can sum it up, and you can share it with a signed, redacted link.</p>
           </div>
         </article>
       </div>
@@ -1613,7 +1620,7 @@
     <p class="ez-ai__or"><span class="ez-ai__pick">Option 2</span> Or do it by hand:</p>
     <div class="ez-codeblock">
       <div class="ez-codeblock__head"><span>1 &middot; terminal</span><span>1 line</span></div>
-<pre><span class="o">$</span> <span class="k">npm</span> <span class="p">install</span> <span class="v">ezlogs-nextjs@^0.4.8</span></pre>
+<pre><span class="o">$</span> <span class="k">npm</span> <span class="p">install</span> <span class="v">ezlogs-nextjs</span></pre>
     </div>
     <div class="ez-codeblock">
       <div class="ez-codeblock__head"><span>2 &middot; instrumentation.ts</span><span>9 lines</span></div>
@@ -1830,7 +1837,7 @@
 
   <details>
     <summary>Does AI write the logs? <span class="ez-faq__plus" aria-hidden="true"></span></summary>
-    <p class="ez-faq__answer">No. Cards, titles and timelines are built from your events by fixed rules, so the same events always give the same card. AI is optional: it can add a plain-English explanation to an action, answer chat questions, and match a pinned question to a check you confirm. It only works from events your app actually sent, and you never need it to read a card.</p>
+    <p class="ez-faq__answer">No. Cards, titles and timelines are built from your events by fixed rules, so the same events always give the same card. AI is optional: it can add a plain-English explanation to an action, write a short story of what an agent, a person or a record has been through, answer chat questions, and match a pinned question to a check you confirm. It only works from events your app actually sent, and you never need it to read a card.</p>
   </details>
 
   <details>

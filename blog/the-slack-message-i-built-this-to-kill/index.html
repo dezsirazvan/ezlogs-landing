@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Slack message I built EZLogs to kill &mdash; EZLogs Blog</title>
-  <meta name="description" content="A Rails activity log gem so the engineering channel stops getting Slacked &lsquo;hey can someone check what this user did yesterday?&rsquo; The story behind why I built EZLogs and what the first week of having real users taught me.">
+  <meta name="description" content="Why I built EZLogs: so the engineering channel stops getting “can someone check what this user did yesterday?”, and what the first week with real users taught me.">
   <meta name="keywords" content="rails activity log, rails audit log gem, plain english logs, ezlogs blog, sidekiq audit, activerecord audit">
   <link rel="canonical" href="https://ezlogs.io/blog/the-slack-message-i-built-this-to-kill/">
   <meta name="robots" content="index, follow">
@@ -109,13 +109,13 @@ rails generate ez_logs_agent:install</code></pre>
 
     <p>The server is where the magic happens, and the magic is boring on purpose. Every event from one user&rsquo;s action shares a correlation ID. That ID travels from the HTTP request into the jobs the request enqueued, into the DB writes those jobs make, and out the other side. The server stitches the three streams together and produces <strong>one card per user action</strong> &mdash; not one per request.</p>
 
-    <p>The card looks like this:</p>
+    <p>The card looks like this today (from the demo account, a ferry company whose AI assistant rebooks passengers when a sailing is cancelled):</p>
 
     <p style="margin:32px 0; text-align:center;">
-      <img src="/assets/screenshots/action-success-ferry.png" alt="Screenshot of an EZLogs action card: &lsquo;Created order #4300&rsquo; triggered by Sarah at acme.com on May 13 at 12:00. Duration 0.7 seconds. Success. A plain-English explanation section, business entities (1 order), and a &lsquo;what happened behind the scenes&rsquo; timeline showing the HTTP request and the database change underneath." style="max-width:100%; border-radius:12px; border:1px solid var(--line);">
+      <img src="/assets/screenshots/action-success-ferry.png" alt="Screenshot of an EZLogs action page: Marked booking BRK-FQYA as rebooked. Changed the status from disrupted to rebooked and changed the sailing to another sailing; then ran Send rebooking email. Triggered by the agent Rebooking assistant, 67ms, success. Below: the booking it touched and each step in order, the request and the data change." width="2000" height="1406" loading="lazy" style="max-width:100%; height:auto; border-radius:12px; border:1px solid var(--line);">
     </p>
 
-    <p>The title is a sentence. <em>Created order #4300. Triggered by Sarah.</em> The body has the entities the action touched, the outcome, when it started, and how long it took. The <em>What happened behind the scenes</em> section is collapsed by default and contains the underlying events &mdash; the HTTP POST to <code>/orders</code>, the database change that created the row, every job and email that fired afterward.</p>
+    <p>The title is a sentence: <em>Marked booking &lsquo;BRK-FQYA&rsquo; as rebooked</em>, triggered by the Rebooking assistant. Under it, what changed and what ran after, the records it touched, the outcome, when it started and how long it took. The <em>Step by step</em> section lists the underlying events in order: the request, the database change, every job and outside call that fired afterward.</p>
 
     <p>That&rsquo;s the part the support team opens to answer &ldquo;what happened to this order?&rdquo; That&rsquo;s the part the product team reads when they want to understand a flow. That&rsquo;s the part you can paste into a Notion doc when you&rsquo;re explaining a bug to the CEO.</p>
 

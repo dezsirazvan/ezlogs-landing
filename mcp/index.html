@@ -4,8 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>EZLogs MCP Server &mdash; Ask your AI what happened in your app</title>
-  <meta name="description" content="Connect Claude, ChatGPT, Cursor, Codex, Lovable, Bolt or v0 to EZLogs over MCP and ask what happened in your Rails, Next.js or Supabase app. One URL, OAuth sign-in, six read-only tools.">
+  <meta name="description" content="Connect Claude, ChatGPT, Cursor, Codex or Lovable to EZLogs over MCP and ask what happened in your Rails, Next.js or Supabase app. OAuth, seven read-only tools.">
   <link rel="canonical" href="https://ezlogs.io/mcp/">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Ask Claude, ChatGPT or Cursor what happened in your app">
+  <meta name="twitter:description" content="The EZLogs MCP server gives your AI assistant read-only access to your app&rsquo;s activity log: requests, jobs and database changes as plain-English actions.">
+  <meta name="twitter:image" content="https://ezlogs.io/assets/og-image.png?v=20261126">
   <meta name="robots" content="index, follow">
   <meta name="theme-color" content="#0A0A0A">
   <meta name="color-scheme" content="dark">
@@ -65,7 +69,7 @@
       {
         "@type": "Question",
         "name": "Can my AI assistant change anything in my app through EZLogs?",
-        "acceptedAnswer": { "@type": "Answer", "text": "No. All six tools only read your activity log. EZLogs has no write access to your app, and the MCP server has no tools that create, update or delete anything." }
+        "acceptedAnswer": { "@type": "Answer", "text": "No. All seven tools only read your activity log. EZLogs has no write access to your app, and the MCP server has no tools that create, update or delete anything." }
       },
       {
         "@type": "Question",
@@ -194,6 +198,7 @@ codex mcp login ezlogs</code></pre>
       <thead><tr><th>Tool</th><th>What it does</th></tr></thead>
       <tbody>
         <tr><td><code>find_actions</code></td><td>Search actions by text, actor, entity, outcome (success, failure, partial failure), intent and date. Answers &ldquo;what happened&rdquo; questions.</td></tr>
+        <tr><td><code>count_actions</code></td><td>Count the same actions per day, week or month, per actor, per kind of work, per entity type or by outcome. Answers &ldquo;how many&rdquo; and &ldquo;per day&rdquo; questions.</td></tr>
         <tr><td><code>get_action</code></td><td>Open one action with its full list of events (requests, jobs, database changes).</td></tr>
         <tr><td><code>actor_timeline</code></td><td>One person&rsquo;s or agent&rsquo;s recent actions, plus their current state with links to the actions behind each value.</td></tr>
         <tr><td><code>entity_timeline</code></td><td>One record&rsquo;s recent actions (an order, a booking, a project), plus its current state.</td></tr>
@@ -213,7 +218,7 @@ codex mcp login ezlogs</code></pre>
 
     <h2>FAQ</h2>
     <h3>Can my AI assistant change anything in my app through EZLogs?</h3>
-    <p>No. All six tools only read your activity log. EZLogs has no write access to your app, and the MCP server has no tools that create, update or delete anything.</p>
+    <p>No. All seven tools only read your activity log. EZLogs has no write access to your app, and the MCP server has no tools that create, update or delete anything.</p>
     <h3>Do I need an EZLogs account?</h3>
     <p>Yes. The MCP server reads the activity log EZLogs collects from your app, so you need an EZLogs account (free during the beta) with EZLogs installed in your app: <a href="/rails/">Rails</a>, <a href="/nextjs/">Next.js</a> or <a href="/supabase/">Supabase</a>. Without it there is nothing to query.</p>
     <h3>Which AI clients work?</h3>

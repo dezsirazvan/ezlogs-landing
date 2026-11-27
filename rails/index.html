@@ -3,10 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Activity Logs for Rails &mdash; EZLogs</title>
-  <meta name="description" content="EZLogs is a Rails activity log that captures every HTTP request, Sidekiq job, and ActiveRecord change in your app and turns each customer action into a plain-English card. Zero per-controller code.">
+  <title>Rails Activity Log Gem in Plain English | EZLogs</title>
+  <meta name="description" content="A Rails activity log gem: every request, Sidekiq and ActiveJob run, ActiveRecord change and outside call becomes one plain-English card. No per-controller code.">
   <meta name="keywords" content="rails activity log, rails activity log gem, rails audit log gem, ezlogs rails, sidekiq activity log, activerecord audit log, paper trail alternative">
   <link rel="canonical" href="https://ezlogs.io/rails/">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Activity logs for Rails — plain English, zero per-controller code.">
+  <meta name="twitter:description" content="Captures every HTTP request, Sidekiq job, and ActiveRecord change. Turns each customer action into a plain-English card your whole team can read.">
+  <meta name="twitter:image" content="https://ezlogs.io/assets/og-image.png?v=20261126">
   <meta name="robots" content="index, follow">
   <meta name="theme-color" content="#0A0A0A">
   <meta name="color-scheme" content="dark">
@@ -70,6 +74,7 @@
     <ul>
       <li><strong>HTTP requests</strong> via Rack middleware &mdash; controller, action, path, status, duration, current_user if your app sets one.</li>
       <li><strong>Background jobs</strong> via ActiveJob / Sidekiq instrumentation &mdash; class, queue, arguments, result, duration.</li>
+      <li><strong>Calls to outside services</strong> (Stripe, email, AI APIs) as steps of the action that made them &mdash; the service, method, path pattern, status and time. Never a body, a query string or a header.</li>
       <li><strong>Database changes</strong> via ActiveRecord callbacks &mdash; table, primary key, operation, redacted before/after column values.</li>
       <li><strong>Bulk SQL</strong> that skips callbacks &mdash; <code>update_all</code>, <code>delete_all</code>, <code>insert_all</code>, <code>upsert_all</code>, and <code>dependent: :delete_all</code> cascades.</li>
       <li><strong>Changes made by hand or on a schedule</strong> &mdash; each <code>rails console</code> line, rake task and <code>rails runner</code> script that changes data is one card, named after what ran it (&ldquo;Rails console (deploy)&rdquo;, &ldquo;rake orders:backfill&rdquo;).</li>
